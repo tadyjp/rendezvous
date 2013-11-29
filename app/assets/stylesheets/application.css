@@ -8,18 +8,20 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
  *= require_tree .
  *= require twitter/bootstrap
+ *= require_self
  */
 
 body {
   padding-top: 70px;
 }
 
-.navbar-brand{
-  background-color: #00FF7F;
+.navbar-default .navbar-brand{
+  background-color: #428bca;
+  color: #fff;
 }
+
 .box-text {
   padding: 9px 14px;
   margin-left: 0;
@@ -31,6 +33,7 @@ body {
   border-radius: 4px 4px 0 0;
   box-shadow: none;
 }
+
 .box-highlight {
   padding: 9px 14px;
   margin-bottom: 14px;
@@ -39,8 +42,8 @@ body {
   border-radius: 4px;
 }
 
-
 .box-text + .box-highlight{
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
 }
+
