@@ -59,3 +59,13 @@ $(document).ready(function(){
       })
   })
 });
+
+// search form
+$(document).ready(function(){
+  $('#app-search-form input').on('focus', function(e){
+    $(this).parents('#app-search-form').animate({width: '600px'});
+  }).on('blur', function(e){
+    $(this).parents('#app-search-form').animate({width: '200px'});
+  })
+});
+
