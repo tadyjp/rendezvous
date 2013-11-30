@@ -1,0 +1,133 @@
+
+<div class="app">
+
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Rendezvous</a>
+      </div>
+
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="" class="btn btn-primary">Post</a></li>
+          <li><a href="<%= user_omniauth_authorize_path(:google_oauth2) %>">Login</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="<%= current_user.image_url %>" width="25" height="25">
+              <%= current_user.name %> <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+  </nav>
+
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-xs-6 col-md-4" id="sidebar" role="navigation">
+
+        <div class="input-group">
+          <input type="text" class="form-control">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">
+              <span class="glyphicon glyphicon-filter"></span>
+            </button>
+          </span>
+        </div><!-- /input-group -->
+
+        <div class="list-group">
+          <a href="#" class="list-group-item active">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+        </div>
+      </div><!--/span-->
+
+      <div class="col-xs-12 col-sm-6 col-md-8">
+
+        <h2>最新の投稿</h2>
+
+        <div class="box-text">
+          <h3>Railsで簡単にページングする方法</h3>
+        </div>
+        <div class="box-highlight">
+          <span class="label label-primary">Rails (4.x.x)</span>
+          <span class="label label-primary">日報</span>
+          <a href="#">@tady</a>
+          <span>2013/11/29 17:31:18</span>
+        </div>
+
+        <div class="box-text">
+          <h3>Railsで簡単にページングする方法</h3>
+        </div>
+        <div class="box-highlight">
+          <span class="label label-primary">Rails (4.x.x)</span>
+          <span class="label label-primary">日報</span>
+        </div>
+
+        <div class="box-text">
+          <h3>Railsで簡単にページングする方法</h3>
+        </div>
+        <div class="box-highlight">
+          <span class="label label-primary">Rails (4.x.x)</span>
+          <span class="label label-primary">日報</span>
+        </div>
+
+
+        <h2>人気の投稿</h2>
+
+        <div class="box-text">
+          <h3>Railsで簡単にページングする方法</h3>
+        </div>
+        <div class="box-highlight">
+          <span class="label label-primary">Rails (4.x.x)</span>
+          <span class="label label-primary">日報</span>
+          <a href="#">@tady</a>
+          <span>2013/11/29 17:31:18</span>
+        </div>
+
+      </div><!--/span-->
+
+    </div><!--/row-->
+
+    <hr>
+
+    <footer>
+      <p>&copy; tady</p>
+    </footer>
+
+  </div><!--/.container-->
+
+</div>

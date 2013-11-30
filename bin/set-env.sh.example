@@ -1,0 +1,4 @@
+#!/bin/sh
+
+export GOOGLE_KEY="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com"
+export GOOGLE_SECRET="xxxxxxxxxxxxxxxxxxxxxxxx"

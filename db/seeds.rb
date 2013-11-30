@@ -9,5 +9,7 @@
 
 %w(JavaScript HTML CSS iPhone PHP Ruby Android Qiita Java Objective-C Vim Python ShellScript C++ C CoffeeScript Emacs git Perl jQuery
    ).each do |tag|
+  puts "[Seed Tag] #{tag}"
   Tag.find_or_create_by(name: tag)
 end
+

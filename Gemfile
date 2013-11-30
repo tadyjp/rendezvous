@@ -45,3 +45,6 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'bootstrap-sass-rails'
+
+gem 'devise'
+gem 'omniauth-google-oauth2'
