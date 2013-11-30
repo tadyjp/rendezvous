@@ -13,3 +13,11 @@
   Tag.find_or_create_by(name: tag)
 end
 
+
+Dir.glob(Rails.root.join('db', 'seeds').to_s + '/*').each do |file_name|
+  puts "[Post Tag] #{file_name}"
+  title = file_name.split('/').last
+  Post.find_or_create_by(title: title) do |post|
+    post.body = File.read(file_name)
+  end
+end

@@ -1,0 +1,11 @@
+<div class="text-box title"><%= @post.title %></div>
+<div class="text-box meta">
+  <span class="label label-info">#Rails (4.x.x)</span>
+  <span class="label label-info">#ruby</span>
+  <span class="label label-info">#日報</span>
+  <span class="label label-success">@tady</span>
+  <span class="label label-danger"><%= @post.updated_at.strftime('%Y-%m-%d') %></span>
+</div>
+<div class="text-box body"><%= h_application_format_markdown(@post.body) %></div>
+
+

@@ -3,13 +3,20 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .app {
+
   padding-top: 70px;
 
-  .navbar-default .navbar-brand{
+  .navbar-default .navbar-brand {
     background-color: #428bca;
     color: #fff;
   }
 
+/*  .navbar-default a.btn, .navbar-default a.btn:hover{
+    padding: 10px 20px;
+    color: #fff;
+    margin-top: 6px;
+  }
+*/
   .box-text {
     padding: 9px 14px;
     margin-left: 0;
@@ -30,9 +37,63 @@
     border-radius: 4px;
   }
 
-  .box-text + .box-highlight{
+  .box-text + .box-highlight {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
   }
 
+  /* home#show
+  -------------------------------------------------- */
+  .text-box {
+    padding: 9px 14px;
+    border: 1px solid #e1e1e8;
+    border-radius: 4px;
+  }
+
+  .text-box.title {
+    background-color: #fff;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    font-weight: bold;
+    font-size: 12pt;
+  }
+
+  .text-box.meta {
+    background-color: #f7f7f9;
+    border-radius: 0;
+  }
+
+  .text-box.body {
+    background-color: #fff;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+
+
+  /* posts#new
+  -------------------------------------------------- */
+  #post_title {
+    width: 95%;
+    height: 40px;
+    font-weight: bold;
+    font-size: 25px;
+  }
+  .input-group-addon label {
+    margin: 0;
+  }
+
+  #post_body {
+    width: 100%;
+    min-height: 400px;
+    font-size: 9pt;
+    padding: 3px;
+  }
+
+  #post_preview {
+
+  }
+
+  .editor {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', 'Ricty', monospace;
+  }
 }

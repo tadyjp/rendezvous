@@ -1,6 +1,17 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
+  include ApplicationHelper
+
+  def preview
+    render text: h_application_format_markdown(params[:text])
+  end
+
+  def show_fragment
+    @post = Post.find(params[:id])
+    render layout: false
+  end
+
   # GET /posts
   # GET /posts.json
   def index

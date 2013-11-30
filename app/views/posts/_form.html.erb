@@ -1,25 +1,70 @@
+
 <%= form_for(@post) do |f| %>
-  <% if @post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-      <ul>
-      <% @post.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <div class="container">
+
+    <% if @post.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+        <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row">
+
+      <div class="col-md-10">
+        <div class="field">
+          <div class="input-group">
+            <span class="input-group-addon"><%= f.label :title %></span>
+            <%= f.text_field :title, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="actions">
+          <%= f.submit class: 'btn btn-primary' %>
+        </div>
+      </div>
+
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <br>
+
+    <div class="row">
+
+      <div class="col-xs-6 col-md-6">
+
+        <div class="field">
+          <!-- <%= f.label :body %><br> -->
+          <%= f.text_area :body, class: 'autosize editor', value: sample_body %>
+        </div>
+
+      </div><!--/span-->
+
+      <div class="col-xs-12 col-sm-6 col-md-6">
+
+        <div class="box-text">
+          <div id="post_preview">
+            <%#= h_application_format_markdown(sample_body).html_safe %>
+          </div>
+        </div>
+
+      </div><!--/span-->
+
+    </div><!--/row-->
+
+    <hr>
+
+    <footer>
+      <p>&copy; tady</p>
+    </footer>
+
+  </div><!--/.container-->
+
 <% end %>

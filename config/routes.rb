@@ -1,6 +1,9 @@
 Rendezvous::Application.routes.draw do
 
   root 'home#show'
+
+  post 'posts/preview' => 'posts#preview'
+  get 'posts/show_fragment' => 'posts#show_fragment'
   resources :posts
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }

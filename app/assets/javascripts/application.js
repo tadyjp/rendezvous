@@ -13,4 +13,49 @@
 // require jquery
 // require jquery_ujs
 //= require turbolinks
+//= require_tree ./lib
 //= require_tree .
+
+
+
+
+// Automaticaly change textarea height.
+$(document).ready(function(){
+  $('textarea.autosize').autosize();
+});
+
+// Preview post.
+$(document).ready(function(){
+  var load_preview = function(){
+    var text = $('#post_body').val();
+    var csrfToken = $('meta[name="csrf-token"]').attr('content');
+    $.post('/posts/preview.api', {
+      "text": text,
+      "authenticity_token": csrfToken
+      })
+      .done(function(data){
+        $('#post_preview').html(data);
+      })
+  };
+  $('#post_body').on('keyup mouseup', load_preview);
+
+  load_preview();
+});
+
+// post list
+$(document).ready(function(){
+  $('.post-list').on('click', function(e){
+    e.preventDefault();
+    $this = $(this);
+
+    $this.siblings().removeClass('active');
+    $this.addClass('active');
+    var id = $this.data('postId');
+    $.get('/posts/show_fragment', {
+      "id": id,
+      })
+      .done(function(data){
+        $('#list_post').html(data);
+      })
+  })
+});
