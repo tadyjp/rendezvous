@@ -10,7 +10,6 @@
  *
  *= require normalize
  *= require_tree .
- *= require twitter/bootstrap
  *= require_self
  */
 
