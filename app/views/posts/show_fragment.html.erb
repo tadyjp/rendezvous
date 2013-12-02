@@ -1,11 +1,24 @@
-<div class="text-box title"><%= @post.title %></div>
+<div class="text-box title" style="position:relative;">
+  <%= @post.title %>
+  <a href="<%= edit_post_path(@post) %>" class="btn btn-primary navbar-btn" style="position:absolute;right:0;top:0;margin-top:2px;margin-top:3px;margin-right:3px;">
+    <span class="glyphicon glyphicon-pencil"></span>
+  </a>
+</div>
 <div class="text-box meta">
   <% @post.tags.each do |tag| %>
-    <span class="label label-info">#<%= tag.name %></span>
+    <span class="label label-info">
+      <a href="<%= root_path(q: "##{tag.name}") %>">#<%= tag.name %></a>
+    </span>
   <% end %>
-  <span class="label label-success">@<%= @post.author.name %></span>
-  <span class="label label-danger"><%= @post.updated_at.strftime('%Y-%m-%d') %></span>
+  <span class="label label-success">
+    <a href="<%= root_path(q: "@#{@post.author.name}") %>">@<%= @post.author.name %></a>
+  </span>
+  <span class="label label-danger">
+    <a href="<%= root_path(q: "date:#{@post.updated_at.strftime('%Y-%m-%d')}") %>"><%= @post.updated_at.strftime('%Y-%m-%d') %></a>
+  </span>
 </div>
-<div class="text-box body"><%= h_application_format_markdown(@post.body) %></div>
+<div class="text-box body viewer github">
+  <%= h_application_format_markdown(@post.body) %>
+</div>
 
 

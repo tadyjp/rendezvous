@@ -1,6 +1,18 @@
-<h1>Editing post</h1>
+<div class="app">
 
-<%= render 'form' %>
+  <%= render partial: 'partials/app_header' %>
 
-<%= link_to 'Show', @post %> |
-<%= link_to 'Back', posts_path %>
+  <div class="container">
+    <h1>新しい投稿</h1>
+
+    <%= render 'form' %>
+  </div><!--/.container-->
+
+  <hr>
+
+  <footer>
+    <p>&copy; tady</p>
+  </footer>
+
+</div>
+
