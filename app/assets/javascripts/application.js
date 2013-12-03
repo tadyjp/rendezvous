@@ -91,3 +91,13 @@ $(document).ready(function(){
     }
   });
 });
+
+
+// new post tags
+$(document).ready(function(){
+  $("#post_tags").select2();
+});
+
+
+
+

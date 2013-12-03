@@ -21,6 +21,21 @@
           <%= f.text_field :title, class: 'form-control' %>
         </div>
       </div>
+
+      <div class="field">
+        <div class="input-group">
+          <span class="input-group-addon"><%= f.label :tags %></span>
+          <select id="post_tags" multiple>
+            <% Tag.all.each do |tag| %>
+              <% if @post.tag_ids.include?(tag.id) %>
+                <option value="<%= tag.name %>" selected><%= tag.name %></option>
+              <% else %>
+                <option value="<%= tag.name %>"><%= tag.name %></option>
+              <% end %>
+            <% end %>
+          </select>
+        </div>
+      </div>
     </div>
 
     <div class="col-md-2">
