@@ -20,84 +20,72 @@
 
 
 // Automaticaly change textarea height.
-$(document).ready(function(){
-  $('textarea.autosize').autosize();
-});
+$(function(){
+  'use strict';
 
-// Preview post.
-$(document).ready(function(){
+  $('textarea.autosize').autosize();
+
+  // Preview post.
   var load_preview = function(){
     var text = $('#post_body').val();
-    var csrfToken = $('meta[name="csrf-token"]').attr('content');
+    var csrfToken = $("meta[name='csrf-token']").attr('content');
     $.post('/posts/preview.api', {
-      "text": text,
-      "authenticity_token": csrfToken
-      })
-      .done(function(data){
-        $('#post_preview').html(data);
-      })
+      'text': text,
+      'authenticity_token': csrfToken
+    })
+    .done(function(data){
+      $('#post_preview').html(data);
+    });
   };
   $('#post_body').on('keyup mouseup', load_preview);
 
   load_preview();
-});
 
-// post list
-$(document).ready(function(){
+  // post list
   $('.post-list').on('click', function(e){
     e.preventDefault();
-    $this = $(this);
+    var $this = $(this);
 
     $this.siblings().removeClass('active');
     $this.addClass('active');
     var id = $this.data('postId');
     $.get('/posts/show_fragment', {
-      "id": id,
-      })
-      .done(function(data){
-        $('#list_post').html(data);
-      })
-  })
-});
+      'id': id,
+    })
+    .done(function(data){
+      $('#list_post').html(data);
+    });
+  });
 
-// search form
-$(document).ready(function(){
-  $('#app-search-form input').on('focus', function(e){
+  // search form
+  $('#app-search-form input').on('focus', function(){
     $(this).parents('#app-search-form').animate({width: '600px'});
-  }).on('blur', function(e){
+  }).on('blur', function(){
     $(this).parents('#app-search-form').animate({width: '200px'});
-  })
-});
+  });
 
-
-// disable tab key
-$(document).ready(function(){
+  // disable tab key
   $('.disable-tab').on('keydown', function(e) {
     var keyCode = e.keyCode || e.which;
 
-    if (keyCode == 9) {
+    if (keyCode === 9) {
       e.preventDefault();
       var start = $(this).get(0).selectionStart;
       var end = $(this).get(0).selectionEnd;
 
       // set textarea value to: text before caret + tab + text after caret
-      $(this).val($(this).val().substring(0, start)
-                  + "\t"
-                  + $(this).val().substring(end));
+      $(this).val($(this).val().substring(0, start) +
+                  '\t' +
+                  $(this).val().substring(end));
 
       // put caret at right position again
       $(this).get(0).selectionStart =
       $(this).get(0).selectionEnd = start + 1;
     }
   });
+
+  // new post tags
+  $('#post_tags').select2();
 });
-
-
-// new post tags
-$(document).ready(function(){
-  $("#post_tags").select2();
-});
-
-
 
 
