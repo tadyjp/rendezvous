@@ -29,9 +29,83 @@
     <hr>
 
     <footer>
-      <p>&copy; tady</p>
     </footer>
 
   </div><!--/.container-->
 
 </div>
+
+<% content_for :footer_js do %>
+<script type="text/javascript">
+
+  $(function(){
+    'use strict';
+
+    // Preview post.
+    var load_preview = function(){
+      var text = $('#post_body').val();
+      var csrfToken = $("meta[name='csrf-token']").attr('content');
+      $.post('/posts/preview.api', {
+        'text': text,
+        'authenticity_token': csrfToken
+      })
+      .done(function(data){
+        $('#post_preview').html(data);
+      });
+    };
+    $('#post_body').on('keyup mouseup', load_preview);
+
+    // load_preview();
+
+    // post list
+    $('.post-list').on('click', function(e){
+      e.preventDefault();
+      var $this = $(this);
+
+      $this.siblings().removeClass('active');
+      $this.addClass('active');
+      var id = $this.data('postId');
+      $.get('/posts/show_fragment', {
+        'id': id,
+      })
+      .done(function(data){
+        $('#list_post').html(data);
+      });
+    });
+
+    // initial post selection.
+    (function(){
+      // open post when `id` parameter set.
+      // /?a=b&c=123  ==>  {"a": "b", "c": "123"}
+      var getQueryParams = function() {
+        var query = location.search.split("+").join(" "),
+            params = {},
+            tokens,
+            re = /[?&]?([^=]+)=([^&]*)/g;
+        while (tokens = re.exec(query)) {
+          params[decodeURIComponent(tokens[1])]
+            = decodeURIComponent(tokens[2]);
+        }
+        return params;
+      }
+      var id_param = getQueryParams()["id"];
+      if(id_param) {
+        $(".post-list[data-post-id='" + id_param + "']").addClass('active');
+        $.get('/posts/show_fragment', {
+          'id': id_param,
+        })
+        .done(function(data){
+          $('#list_post').html(data);
+        });
+      }
+    })();
+
+    // search form
+    $('#app-search-form input').on('focus', function(){
+      $(this).parents('#app-search-form').animate({width: '600px'});
+    }).on('blur', function(){
+      $(this).parents('#app-search-form').animate({width: '200px'});
+    });
+  });
+</script>
+<% end %>

@@ -25,15 +25,7 @@
       <div class="field">
         <div class="input-group">
           <span class="input-group-addon"><%= f.label :tags %></span>
-          <select id="post_tags" multiple>
-            <% Tag.all.each do |tag| %>
-              <% if @post.tag_ids.include?(tag.id) %>
-                <option value="<%= tag.name %>" selected><%= tag.name %></option>
-              <% else %>
-                <option value="<%= tag.name %>"><%= tag.name %></option>
-              <% end %>
-            <% end %>
-          </select>
+          <%= hidden_field :post, :tags, id: 'post_tags', style: 'width:300px', value: @post.tags.pluck(:name).join(',') %>
         </div>
       </div>
     </div>
@@ -71,5 +63,41 @@
 
   </div><!--/row-->
 
+<% end %>
 
+<% content_for :footer_js do %>
+<script type="text/javascript">
+
+  $(function(){
+    'use strict';
+
+    // Automaticaly change textarea height.
+    $('textarea.autosize').autosize();
+
+    // disable tab key
+    $('.disable-tab').on('keydown', function(e) {
+      var keyCode = e.keyCode || e.which;
+
+      if (keyCode === 9) {
+        e.preventDefault();
+        var start = $(this).get(0).selectionStart;
+        var end = $(this).get(0).selectionEnd;
+
+        // set textarea value to: text before caret + tab + text after caret
+        $(this).val($(this).val().substring(0, start) +
+                    '\t' +
+                    $(this).val().substring(end));
+
+        // put caret at right position again
+        $(this).get(0).selectionStart =
+        $(this).get(0).selectionEnd = start + 1;
+      }
+    });
+
+    // new post tags
+    $('#post_tags').select2({
+      tags: <%= raw Tag.all.pluck(:name).to_json %>
+    });
+  });
+</script>
 <% end %>

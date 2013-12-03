@@ -12,80 +12,9 @@
 //
 // require jquery
 // require jquery_ujs
-//= require turbolinks
+// require turbolinks
 //= require_tree ./lib
 //= require_tree .
 
-
-
-
-// Automaticaly change textarea height.
-$(function(){
-  'use strict';
-
-  $('textarea.autosize').autosize();
-
-  // Preview post.
-  var load_preview = function(){
-    var text = $('#post_body').val();
-    var csrfToken = $("meta[name='csrf-token']").attr('content');
-    $.post('/posts/preview.api', {
-      'text': text,
-      'authenticity_token': csrfToken
-    })
-    .done(function(data){
-      $('#post_preview').html(data);
-    });
-  };
-  $('#post_body').on('keyup mouseup', load_preview);
-
-  load_preview();
-
-  // post list
-  $('.post-list').on('click', function(e){
-    e.preventDefault();
-    var $this = $(this);
-
-    $this.siblings().removeClass('active');
-    $this.addClass('active');
-    var id = $this.data('postId');
-    $.get('/posts/show_fragment', {
-      'id': id,
-    })
-    .done(function(data){
-      $('#list_post').html(data);
-    });
-  });
-
-  // search form
-  $('#app-search-form input').on('focus', function(){
-    $(this).parents('#app-search-form').animate({width: '600px'});
-  }).on('blur', function(){
-    $(this).parents('#app-search-form').animate({width: '200px'});
-  });
-
-  // disable tab key
-  $('.disable-tab').on('keydown', function(e) {
-    var keyCode = e.keyCode || e.which;
-
-    if (keyCode === 9) {
-      e.preventDefault();
-      var start = $(this).get(0).selectionStart;
-      var end = $(this).get(0).selectionEnd;
-
-      // set textarea value to: text before caret + tab + text after caret
-      $(this).val($(this).val().substring(0, start) +
-                  '\t' +
-                  $(this).val().substring(end));
-
-      // put caret at right position again
-      $(this).get(0).selectionStart =
-      $(this).get(0).selectionEnd = start + 1;
-    }
-  });
-
-  // new post tags
-  $('#post_tags').select2();
-});
 
 

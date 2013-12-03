@@ -52,6 +52,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to root_path(id: @post.id), notice: 'Post was successfully updated.' }
@@ -81,6 +82,18 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :body)
+      @post_params ||= begin
+        _param_hash = params.require(:post).permit(:title, :body, :tags).to_hash
+
+        # tags_text == 'Javascript,Ruby'
+        tags_text = _param_hash.delete('tags')
+
+        tags = tags_text.split(',').map do |_tag_name|
+          Tag.find_or_create_by(name: _tag_name)
+        end
+        _param_hash["tag_ids"] = tags.map(&:id)
+
+        _param_hash
+      end
     end
 end
