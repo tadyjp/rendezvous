@@ -52,6 +52,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    @post.author = current_user
 
     respond_to do |format|
       if @post.update(post_params)

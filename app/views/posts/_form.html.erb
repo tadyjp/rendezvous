@@ -98,6 +98,26 @@
     $('#post_tags').select2({
       tags: <%= raw Tag.all.pluck(:name).to_json %>
     });
+
+    // Preview post.
+    var load_preview = function(){
+      console.log('load_preview')
+      var text = $('#post_body').val();
+      var csrfToken = $("meta[name='csrf-token']").attr('content');
+      $.post('/posts/preview.api', {
+        'text': text,
+        'authenticity_token': csrfToken
+      })
+      .done(function(data){
+        $('#post_preview').html(data);
+      });
+    };
+    $('#post_body').on('keyup mouseup', load_preview);
+    $('#post_body').on('keyup mouseup', function(){
+      console.log('faij')
+    });
+
+    load_preview();
   });
 </script>
 <% end %>
