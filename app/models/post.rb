@@ -29,10 +29,12 @@ class Post < ActiveRecord::Base
         _date = Time.new($1, $2, $3)
         _where_list = _where_list.where('updated_at > ? AND updated_at < ?', _date, _date + 1.day)
       else
-        _where_list = _where_list.where('body LIKE ? OR body LIKE ?', "%#{$1}%", "%#{$1}%")
+        _where_list = _where_list.where('body LIKE ? OR body LIKE ?', "%#{_query}%", "%#{_query}%")
       end
     end
 
     _where_list
+
   end
+
 end
