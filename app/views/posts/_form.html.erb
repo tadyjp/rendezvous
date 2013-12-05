@@ -84,21 +84,37 @@
 
     // disable tab key
     $('.disable-tab').on('keydown', function(e) {
+      var $this = $(this);
       var keyCode = e.keyCode || e.which;
 
       if (keyCode === 9) {
         e.preventDefault();
-        var start = $(this).get(0).selectionStart;
-        var end = $(this).get(0).selectionEnd;
+        var start = $this.get(0).selectionStart;
+        var end = $this.get(0).selectionEnd;
 
         // set textarea value to: text before caret + tab + text after caret
-        $(this).val($(this).val().substring(0, start) +
+        $this.val($this.val().substring(0, start) +
                     '\t' +
-                    $(this).val().substring(end));
+                    $this.val().substring(end));
 
         // put caret at right position again
-        $(this).get(0).selectionStart =
-        $(this).get(0).selectionEnd = start + 1;
+        $this.get(0).selectionStart =
+        $this.get(0).selectionEnd = start + 1;
+      } else if (keyCode === 13) {
+        var val = $this.val();
+        var start = $this.get(0).selectionStart;
+        var bl = val.lastIndexOf("\n", start-1);
+        var line = val.substring(bl, start);
+        var lm = line.match(/^\s+/);
+        var ns = lm ? lm[0].length - 1 : 0;
+        var nv = val.substring(0, start) + "\n";
+        for (var i=0; i<ns; i++) {
+          nv += "\t";
+        }
+        $this.val(nv+val.substring(start))
+        $this.get(0).selectionStart =
+        $this.get(0).selectionEnd = start + ns + 1;
+        e.preventDefault();
       }
     });
 
