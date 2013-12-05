@@ -9,7 +9,7 @@ class PostsController < ApplicationController
 
   def show_fragment
     @post = Post.find(params[:id])
-    render layout: false
+    render layout: false, partial: 'posts/show_fragment'
   end
 
   # GET /posts
