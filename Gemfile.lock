@@ -157,6 +157,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
+  coderay
   coffee-rails (~> 4.0.0)
   devise
   jbuilder (~> 1.2)

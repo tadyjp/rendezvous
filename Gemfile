@@ -48,7 +48,11 @@ end
 gem 'devise'
 gem 'omniauth-google-oauth2'
 
+# Markdown
 gem 'redcarpet'
+
+# Syntax Highlight
+gem 'coderay'
 
 group :development do
   # Use sqlite3 as the database for Active Record
