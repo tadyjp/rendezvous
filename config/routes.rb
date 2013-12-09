@@ -1,6 +1,6 @@
 Rendezvous::Application.routes.draw do
 
-  root 'home#show',as: 'root'
+  root 'posts#index', as: 'root'
 
   post 'posts/preview' => 'posts#preview'
   get 'posts/show_fragment' => 'posts#show_fragment'

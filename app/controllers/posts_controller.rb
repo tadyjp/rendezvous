@@ -3,6 +3,23 @@ class PostsController < ApplicationController
 
   include ApplicationHelper
 
+  # GET /posts
+  # GET /posts.json
+  def index
+    if user_signed_in?
+
+      if params[:q].present?
+        @posts = Post.build_query(params).limit(10)
+      else
+        @posts = Post.order(updated_at: :desc).limit(10)
+      end
+
+      render
+    else
+      render file: 'home/login'
+    end
+  end
+
   def preview
     render text: h_application_format_markdown(params[:text])
   end
@@ -12,11 +29,6 @@ class PostsController < ApplicationController
     render layout: false, partial: 'posts/show_fragment'
   end
 
-  # GET /posts
-  # GET /posts.json
-  def index
-    @posts = Post.all
-  end
 
   # GET /posts/1
   # GET /posts/1.json
