@@ -1,4 +1,4 @@
-if window.location.pathname.match /edit/
+if window.location.pathname.match /edit|new/
 
   $ ->
 
@@ -17,6 +17,7 @@ if window.location.pathname.match /edit/
       $this = $(this)
       keyCode = e.keyCode || e.which
 
+      # tab key
       if keyCode is 9
         e.preventDefault()
         start = $this.get(0).selectionStart
@@ -31,19 +32,20 @@ if window.location.pathname.match /edit/
         $this.get(0).selectionStart =
         $this.get(0).selectionEnd = start + 1
 
+      # enter key
       else if keyCode is 13
         val = $this.val()
         start = $this.get(0).selectionStart
         bl = val.lastIndexOf("\n", start-1)
         line = val.substring(bl, start)
         lm = line.match(/^\s+/)
-        ns = lm ? lm[0].length - 1 : 0
+        ns = if lm? then lm[0].length - 1 else 0
         nv = val.substring(0, start) + "\n"
         _(ns).times ->
           nv += "\t"
         $this.val(nv + val.substring(start))
         $this.get(0).selectionStart =
-        $this.get(0).selectionEnd = start + ns + 1
+          $this.get(0).selectionEnd = start + ns + 1
         e.preventDefault()
 
     # new post tags
