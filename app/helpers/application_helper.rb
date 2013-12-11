@@ -1,25 +1,14 @@
 module ApplicationHelper
 
-  class HTMLwithCoderay < Redcarpet::Render::HTML
-    def block_code(code, language)
-      case language.to_s
-      when 'rb'
-        lang = 'ruby'
-      when 'yml'
-        lang = 'yaml'
-      when ''
-        lang = 'md'
-      else
-        lang = 'md'
-      end
-
-      CodeRay.scan(code, lang).div
+  class HtmlWithPrettyPrint < Redcarpet::Render::HTML
+    def postprocess(full_document)
+      full_document.gsub("prettyprint", "prettyprint linenums")
     end
   end
 
-
   def h_application_format_markdown(text)
-    html_render = HTMLwithCoderay.new(filter_html: true, hard_wrap: true)
+    # html_render = HTMLwithCoderay.new(filter_html: true, hard_wrap: true, prettify: true)
+    html_render = HtmlWithPrettyPrint.new(:prettify => true)
     options = {
       autolink: true,
       space_after_headers: true,

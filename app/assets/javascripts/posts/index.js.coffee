@@ -28,10 +28,3 @@ if window.location.pathname.match /^\/$/
       .done (data) ->
         $('#list_post').html(data)
 
-    #  search form animation
-    $('#app-search-form input')
-    .on 'focus', ->
-      $(this).parents('#app-search-form').animate({width: '600px'})
-    .on 'blur', ->
-      $(this).parents('#app-search-form').animate({width: '200px'})
-
