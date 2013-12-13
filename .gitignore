@@ -16,3 +16,5 @@
 /tmp
 
 /bin/set-env.sh
+
+*.bk

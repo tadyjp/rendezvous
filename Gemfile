@@ -63,6 +63,8 @@ group :development do
   gem 'binding_of_caller'
 
   gem 'thin'
+
+  # gem 'capistrano', '~> 3.0.1'
 end
 
 group :production do
