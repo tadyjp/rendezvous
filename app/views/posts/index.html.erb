@@ -14,6 +14,13 @@
             <a href="#" data-post-id="<%= post.id %>" class="list-group-item post-list"><%= post.title %></a>
           <% end %>
         </div>
+
+        <div class="list-group">
+          <% Tag.roots.each do |root| %>
+            <%= h_display_tree(root)  %>
+          <% end %>
+        </div>
+
       </div><!--/span-->
 
       <div class="col-xs-12 col-sm-6 col-md-8">

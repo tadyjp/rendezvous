@@ -1,0 +1,84 @@
+# 1行概要
+例えば社内で自分のPCに開発サーバを立てたけど、IPではなくホスト名で他のメンバーにURLを教えたいときに使う方法
+
+# 犯行動機
+- 社内DNSの再設定がめんどくさい
+- Google APIのOAuth2のredirect_urlがグローバルでないとエラーになるため、社内ローカルでの開発が面倒
+
+# 想定読者
+- Railsの開発がいくつか並行している
+- ローカルにDNSが無い OR 設定する程ではない
+- Google OAuth2の `invalid redirect url` エラーで詰まった
+
+# 方法
+## 1. xip.ioを使ったDNS解決
+外部のパブリックDNSサービス [xip.io](http://xip.io) を使います。
+![Screen Shot 2013-12-04 at 8.33.14 AM.png](https://qiita-image-store.s3.amazonaws.com/0/10272/20efc664-3921-1a34-de41-a89fec2fef55.png)
+
+アカウント登録の必要はなく、自分のPC（開発機）のローカルIP（例: 192.168.1.123）の場合、
+` some-project.192.168.1.123.xip.io `
+をブラウザに入力するだけ。
+
+すると、 `xip.io ==> 192.168.1.123` と名前解決されます。
+
+## 2. nginxのNamed virtuel Host設定
+
+xip.ioは名前解決しかしてくれないので、自分のPC（開発機）に複数のプロジェクトが走っているとポートを使い分ける必要があり、いろいろ面倒です。
+そんな時は、nginx（Apacheでも可）のNamed virtuel Host機能を使います。
+
+``` nginx.conf
+server {
+    listen       80;
+    server_name  some-project.*; # <= ここがミソ！
+
+    location / {
+        proxy_set_header  X-Real-IP  $remote_addr;
+        proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header  Host $http_host;
+        proxy_redirect    off;
+
+        if (!-f $request_filename) {
+            proxy_pass http://localhost:3000; #<= ポートをサービスごとに変える
+            break;
+        }
+    }
+}
+server {
+    listen       80;
+    server_name  another-project.*; # <= ここがミソ！
+
+    location / {
+        proxy_set_header  X-Real-IP  $remote_addr;
+        proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header  Host $http_host;
+        proxy_redirect    off;
+
+        if (!-f $request_filename) {
+            proxy_pass http://localhost:3001; #<= ポートをサービスごとに変える
+            break;
+        }
+    }
+}
+```
+
+## 3.アプリケーションの起動（Railsの場合）
+あとは、Railsのプロジェクトディレクトリで、
+
+```sh:/path/to/some-project
+bundle exec rails s -p 3000
+```
+
+```sh:/path/to/another-project
+bundle exec rails s -p 3001
+```
+
+と実行するだけ。
+
+これで、
+
+[some-project.192.168.1.123.xip.io](http://some-project.192.168.21.123.xip.io)
+[another-project.192.168.1.123.xip.io](http://another-project.192.168.21.123.xip.io)
+からアクセスできます。
+
+
+以上
