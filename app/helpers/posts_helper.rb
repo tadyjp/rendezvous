@@ -1,5 +1,17 @@
 module PostsHelper
 
+  # @param {ActiveRecord::Relation} node
+  def h_display_tree(node)
+    _html = '<ul>'
+    _html << %Q{<li><a href="#{ root_path(q: '#' + node.name) }">#{node.name}<a/></li>}
+    node.children.each do |_child|
+      _html << h_display_tree(_child)
+    end
+    _html << '</ul>'
+    _html.html_safe
+  end
+
+
   def sample_body
     text = <<-'EOF'
 昨日、[RailsでOmniauthを使ってTwitterログインする](http://qiita.com/hilotter/items/628fd54785d3c892d048)方法をまとめました。

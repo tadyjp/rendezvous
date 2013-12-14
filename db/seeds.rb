@@ -8,25 +8,57 @@
 
 
 # Tag
+
+_tag_tree = [
+  ['Language', 'JavaScript'],
+  ['Language', 'HTML'],
+  ['Language', 'CSS'],
+  ['Language', 'iPhone'],
+  ['Language', 'PHP'],
+  ['Language', 'Ruby'],
+  ['Language', 'Android'],
+  ['Language', 'Qiita'],
+  [nil, '日報'],
+  ['インフラ', 'ネットワーク'],
+  ['インフラ', 'サーバ'],
+  ['インフラ', 'OS'],
+  ['OS', 'CentOS'],
+  ['OS', 'Ubuntu'],
+  ['OS', 'MacOS'],
+  ['OS', 'Windows'],
+]
+
 tags = []
-%w(JavaScript HTML CSS iPhone PHP Ruby Android Qiita Java Objective-C Vim Python ShellScript C++ C CoffeeScript Emacs git Perl jQuery
-  ).each do |tag|
-    puts "[Seed Tag] #{tag}"
-    tags << Tag.find_or_create_by(name: tag)
+
+_tag_tree.each do |_parent, _child|
+  puts "[Seed Tag] #{_parent} => #{_child}"
+  parent = Tag.find_or_create_by(name: _parent) if _parent
+  child = Tag.find_or_initialize_by(name: _child)
+  child.parent = parent if _parent
+  child.save!
+  tags << child
 end
 
+
 # User
-user = User.find_or_initialize_by(name: '山田太郎')
-user.update_attributes!(email: "#{Devise.friendly_token[0,20]}@example.com", password: Devise.friendly_token[0,20])
+User.find_or_create_by(name: '山田太郎') do |_u|
+  _u.email = "#{Devise.friendly_token[0,20]}@example.com"
+  _u.password = Devise.friendly_token[0,20]
+end
 
-user = User.find_or_initialize_by(name: '鈴木二郎')
-user.update_attributes!(email: "#{Devise.friendly_token[0,20]}@example.com", password: Devise.friendly_token[0,20])
+User.find_or_create_by(name: '鈴木二郎') do |_u|
+  _u.email = "#{Devise.friendly_token[0,20]}@example.com"
+  _u.password = Devise.friendly_token[0,20]
+end
 
-user = User.find_or_initialize_by(name: '田中三郎')
-user.update_attributes!(email: "#{Devise.friendly_token[0,20]}@example.com", password: Devise.friendly_token[0,20])
+User.find_or_create_by(name: '田中三郎') do |_u|
+  _u.email = "#{Devise.friendly_token[0,20]}@example.com"
+  _u.password = Devise.friendly_token[0,20]
+end
 
 # Post
 users = User.all
+
 Dir.glob(Rails.root.join('db', 'seeds').to_s + '/*').each do |file_name|
   puts "[Post Tag] #{file_name}"
   title = file_name.split('/').last
