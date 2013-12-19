@@ -13,8 +13,19 @@
 </head>
 <body>
 
-  <% if notice %><p class="notice"><%= notice %></p><% end %>
-  <% if alert %><p class="alert"><%= alert %></p><% end %>
+  <% if notice %>
+    <script type="text/javascript">
+      alert('<%= notice %>');
+    </script>
+    <!--     <p class="notice"><%= notice %></p>  -->
+  <% end %>
+  <% if alert %>
+    <script type="text/javascript">
+      alert('<%= alert %>');
+    </script>
+    <!--     <p class="notice"><%= notice %></p>  -->
+    <p class="alert"><%= alert %></p>
+  <% end %>
 
   <%= yield %>
 
@@ -29,7 +40,5 @@
 
   <%= javascript_include_tag "application" %>
   <%= yield :footer_js %>
-  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-
 </body>
 </html>

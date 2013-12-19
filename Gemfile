@@ -74,3 +74,6 @@ end
 
 # tree structure
 gem 'ancestry'
+
+# profiler
+gem 'rack-mini-profiler'

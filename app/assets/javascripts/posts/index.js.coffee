@@ -14,6 +14,7 @@ if window.location.pathname.match /^\/$/
       $.get('/posts/show_fragment', { id: id })
       .done (data) ->
         $('#list_post').html(data)
+        prettyPrint()
 
     # 初期に詳細を表示
     # open post when `id` parameter set.
@@ -27,4 +28,5 @@ if window.location.pathname.match /^\/$/
       })
       .done (data) ->
         $('#list_post').html(data)
+        prettyPrint()
 
