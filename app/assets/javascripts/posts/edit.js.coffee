@@ -63,6 +63,7 @@ if window.location.pathname.match /edit|new/
       })
       .done (data) ->
         $('#post_preview').html(data)
+        prettyPrint()
 
     $('#post_body').on('keyup mouseup', load_preview)
 

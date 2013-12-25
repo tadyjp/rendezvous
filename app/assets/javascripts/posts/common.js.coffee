@@ -7,3 +7,7 @@ $ ->
   .on 'blur', ->
     $(this).parents('#app-search-form').animate({width: '200px'})
 
+
+  prettyPrint()
+
+
