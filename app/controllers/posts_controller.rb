@@ -42,6 +42,13 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
+  def fork
+    @post = set_post.clone
+    @post.title = @post.title.gsub(/%Name/, current_user.name)
+    @post.title = Time.now.strftime(@post.title) # TODO
+    render action: 'new'
+  end
+
   # GET /posts/1/edit
   def edit
   end
