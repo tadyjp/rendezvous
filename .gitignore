@@ -17,4 +17,6 @@
 
 /bin/set-env.sh
 
+/config/database.yml
+
 *.bk
