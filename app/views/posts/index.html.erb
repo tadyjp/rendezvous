@@ -15,11 +15,13 @@
           <% end %>
         </div>
 
-        <div class="list-group">
-          <% Tag.roots.each do |root| %>
-            <%= h_display_tree(root) %>
-          <% end %>
-        </div>
+        <% cache('tag-tree', :expires_in => 1.hour) do %>
+          <div class="list-group">
+            <% Tag.roots.each do |root| %>
+              <%= h_display_tree(root) %>
+            <% end %>
+          </div>
+        <% end %>
 
       </div><!--/span-->
 
