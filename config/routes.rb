@@ -4,6 +4,8 @@ Rendezvous::Application.routes.draw do
 
   post 'posts/preview' => 'posts#preview'
   get 'posts/show_fragment' => 'posts#show_fragment'
+  get 'posts/:id/fork' => 'posts#fork', as: 'fork_post'
+
   resources :posts
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
