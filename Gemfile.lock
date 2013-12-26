@@ -65,6 +65,8 @@ GEM
     execjs (2.0.2)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
+    gmail_xoauth (0.4.1)
+      oauth (>= 0.3.6)
     hashie (2.0.5)
     hike (1.2.3)
     httpauth (0.2.0)
@@ -82,6 +84,7 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.2)
     multipart-post (1.2.0)
+    oauth (0.4.7)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -183,6 +186,7 @@ DEPENDENCIES
   coderay
   coffee-rails (~> 4.0.0)
   devise
+  gmail_xoauth
   jbuilder (~> 1.2)
   omniauth-google-oauth2
   pg

@@ -1,3 +1,5 @@
+require 'nkf'
+
 class PostsController < ApplicationController
 
   before_action :set_post, only: [:show, :edit, :update, :destroy]
@@ -47,6 +49,28 @@ class PostsController < ApplicationController
     @post.title = @post.title.gsub(/%Name/, current_user.name)
     @post.title = Time.now.strftime(@post.title) # TODO
     render action: 'new'
+  end
+
+  def mail
+    @post = set_post
+    smtp = Net::SMTP.new('smtp.gmail.com', 587)
+    smtp.enable_starttls_auto
+    smtp.start('gmail.com', current_user.email, current_user.google_auth_token, :xoauth2)
+    body = 'test'
+    body = <<EOT
+From: #{current_user.email}
+To: #{current_user.email}
+Subject: #{NKF.nkf("-WjMm0", 'subject')}
+Date: #{Time::now.strftime("%a, %d %b %Y %X %z")}
+Mime-Version: 1.0
+Content-Type: text/plain; charset=ISO-2022-JP
+Content-Transfer-Encoding: 7bit
+
+#{NKF.nkf("-Wjm0", body)}
+EOT
+    smtp.send_mail body, current_user.email, current_user.email
+    smtp.finish
+    redirect_to root_path(id: @post.id)
   end
 
   # GET /posts/1/edit
