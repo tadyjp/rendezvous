@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131213005609) do
+ActiveRecord::Schema.define(version: 20131226161253) do
 
   create_table "post_tags", force: true do |t|
     t.integer  "post_id",    null: false
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20131213005609) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "google_auth_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

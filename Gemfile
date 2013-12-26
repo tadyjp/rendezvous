@@ -77,3 +77,6 @@ gem 'ancestry'
 
 # profiler
 gem 'rack-mini-profiler'
+
+# Google smtp
+gem 'gmail_xoauth'

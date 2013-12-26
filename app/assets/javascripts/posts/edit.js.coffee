@@ -1,4 +1,4 @@
-if window.location.pathname.match /edit|new/
+if window.location.pathname.match /edit|new|fork/
 
   $ ->
 
