@@ -56,8 +56,13 @@ class PostsController < ApplicationController
   def mail
     @post = set_post
 
+    # refresh google oauth token if expired
+    current_user.google_oauth_token_refresh! if current_user.google_oauth_token_expired?
+
     compose_mail(@post, current_user).deliver
     redirect_to root_path(id: @post.id)
+  rescue ActionGmailer::DeliveryError
+    redirect_to root_path(id: @post.id), flash: { notice: 'Gmail authentication expired.' }
   end
 
   # GET /posts/1/edit

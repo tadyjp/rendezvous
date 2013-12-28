@@ -358,10 +358,6 @@ __HTML__
 
     html_body += <<'__HTML__'
 
-            <div style="font-weight: bold; font-size: 18px; line-height: 24px; color: #D03C0F;">
-            Quick Two Columns to Rows Demo
-            </div>
-
             <br>
 
             </td>

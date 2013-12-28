@@ -65,6 +65,8 @@ group :development do
   gem 'thin'
 
   # gem 'capistrano', '~> 3.0.1'
+
+  gem 'pry-rails'
 end
 
 group :production do
@@ -86,3 +88,5 @@ gem 'action-gmailer', github: 'popgiro/action-gmailer'
 # compose html mail
 gem 'nokogiri'
 gem 'premailer'
+
+gem 'faraday'
