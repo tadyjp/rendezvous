@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   before_action :require_login, except: [:index]
 
   include ApplicationHelper
+  include RV::Mailer
 
   # GET /posts
   # GET /posts.json
@@ -55,9 +56,7 @@ class PostsController < ApplicationController
   def mail
     @post = set_post
 
-    subject = @post.title
-    body = @post.body
-    RV::Mailer.compose_mail(subject, body, current_user).deliver
+    compose_mail(@post, current_user).deliver
     redirect_to root_path(id: @post.id)
   end
 

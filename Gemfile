@@ -82,3 +82,7 @@ gem 'rack-mini-profiler'
 # ref. https://github.com/popgiro/action-gmailer
 gem 'mail'
 gem 'action-gmailer', github: 'popgiro/action-gmailer'
+
+# compose html mail
+gem 'nokogiri'
+gem 'premailer'
