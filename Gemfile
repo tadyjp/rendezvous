@@ -69,6 +69,14 @@ group :development do
   gem 'pry-rails'
 end
 
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'factory_girl_rails'
+  gem 'spring'
+end
+
+
 group :production do
   gem 'rails_12factor'
   gem 'pg'
