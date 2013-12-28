@@ -55,9 +55,9 @@ class PostsController < ApplicationController
     @post = set_post
     smtp = Net::SMTP.new('smtp.gmail.com', 587)
     smtp.enable_starttls_auto
-    smtp.start('gmail.com', current_user.email, current_user.google_auth_token, :xoauth2)
+    smtp.start('smtp.gmail.com', current_user.email, current_user.google_auth_token, :xoauth2)
     body = 'test'
-    body = <<EOT
+    body2 = <<EOT
 From: #{current_user.email}
 To: #{current_user.email}
 Subject: #{NKF.nkf("-WjMm0", 'subject')}
@@ -68,7 +68,7 @@ Content-Transfer-Encoding: 7bit
 
 #{NKF.nkf("-Wjm0", body)}
 EOT
-    smtp.send_mail body, current_user.email, current_user.email
+    smtp.send_mail(body2, current_user.email, current_user.email)
     smtp.finish
     redirect_to root_path(id: @post.id)
   end
