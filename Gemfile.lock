@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/popgiro/action-gmailer.git
+  revision: e04b69f578ead4514f6cea5ac85db16896f7e71c
+  specs:
+    action-gmailer (0.1.0)
+      actionmailer
+      activesupport
+      gmail_xoauth
+
+GIT
   remote: git://github.com/vmg/redcarpet.git
   revision: 52c5fa3c5753d2125e827f235cdf4cb730484902
   branch: master
@@ -168,14 +177,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  action-gmailer!
   ancestry
   better_errors
   binding_of_caller
   coderay
   coffee-rails (~> 4.0.0)
   devise
-  gmail_xoauth
   jbuilder (~> 1.2)
+  mail
   omniauth-google-oauth2
   pg
   rack-mini-profiler

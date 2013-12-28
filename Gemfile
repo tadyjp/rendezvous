@@ -78,5 +78,7 @@ gem 'ancestry'
 # profiler
 gem 'rack-mini-profiler'
 
-# Google smtp
-gem 'gmail_xoauth'
+# Send mail via gmail oauth
+# ref. https://github.com/popgiro/action-gmailer
+gem 'mail'
+gem 'action-gmailer', github: 'popgiro/action-gmailer'

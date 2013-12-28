@@ -21,5 +21,18 @@ module Rendezvous
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+
+    # config.action_mailer.delivery_method = :action_gmailer
+    config.action_mailer.smtp_settings = {
+      smtp_host:    'smtp.gmail.com',
+      smtp_port:    587,
+      helo_domain:  'gmail.com',
+      auth_type:    :xoauth2,
+      # oauth2_token: 'FIXME',
+      # account:      'FIXME'
+    }
+
+
   end
 end

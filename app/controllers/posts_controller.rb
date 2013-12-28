@@ -1,4 +1,5 @@
 require 'nkf'
+require 'rv/mailer'
 
 class PostsController < ApplicationController
 
@@ -53,23 +54,10 @@ class PostsController < ApplicationController
 
   def mail
     @post = set_post
-    smtp = Net::SMTP.new('smtp.gmail.com', 587)
-    smtp.enable_starttls_auto
-    smtp.start('smtp.gmail.com', current_user.email, current_user.google_auth_token, :xoauth2)
-    body = 'test'
-    body2 = <<EOT
-From: #{current_user.email}
-To: #{current_user.email}
-Subject: #{NKF.nkf("-WjMm0", 'subject')}
-Date: #{Time::now.strftime("%a, %d %b %Y %X %z")}
-Mime-Version: 1.0
-Content-Type: text/plain; charset=ISO-2022-JP
-Content-Transfer-Encoding: 7bit
 
-#{NKF.nkf("-Wjm0", body)}
-EOT
-    smtp.send_mail(body2, current_user.email, current_user.email)
-    smtp.finish
+    subject = @post.title
+    body = @post.body
+    RV::Mailer.compose_mail(subject, body, current_user).deliver
     redirect_to root_path(id: @post.id)
   end
 
@@ -142,4 +130,5 @@ EOT
         _param_hash
       end
     end
+
 end
