@@ -1,5 +1,4 @@
 module PostsHelper
-
   # @param {ActiveRecord::Relation} node
   def h_display_tree(node)
     _html = '<ul>'
@@ -10,7 +9,7 @@ module PostsHelper
       _html << h_display_tree(_child)
     end
     _html << '</ul>'
+
     _html.html_safe
   end
-
 end

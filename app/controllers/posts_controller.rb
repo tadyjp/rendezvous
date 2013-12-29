@@ -2,7 +2,6 @@ require 'nkf'
 require 'rv/mailer'
 
 class PostsController < ApplicationController
-
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :require_login
 
@@ -27,7 +26,6 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     render layout: false, partial: 'posts/show_fragment'
   end
-
 
   # GET /posts/1
   # GET /posts/1.json
@@ -104,26 +102,26 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      @post_params ||= begin
-        _param_hash = params.require(:post).permit(:title, :body, :tags).to_hash
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-        # tags_text == 'Javascript,Ruby'
-        tags_text = _param_hash.delete('tags')
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    @post_params ||= begin
+      _param_hash = params.require(:post).permit(:title, :body, :tags).to_hash
 
-        tags = tags_text.split(',').map do |_tag_name|
-          Tag.find_or_create_by(name: _tag_name)
-        end
-        _param_hash["tag_ids"] = tags.map(&:id)
+      # tags_text == 'Javascript,Ruby'
+      tags_text = _param_hash.delete('tags')
 
-        _param_hash
+      tags = tags_text.split(',').map do |_tag_name|
+        Tag.find_or_create_by(name: _tag_name)
       end
-    end
+      _param_hash['tag_ids'] = tags.map(&:id)
 
+      _param_hash
+    end
+  end
 end
