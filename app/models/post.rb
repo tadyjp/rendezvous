@@ -38,7 +38,7 @@ class Post < ActiveRecord::Base
   end
 
   # generate forked post (not saved)
-  def generate_fork(user: )
+  def generate_fork(user)
     forked_post = self.clone
     forked_post.title = forked_post.title.gsub(/%Name/, user.name)
     forked_post.title = Time.now.strftime(forked_post.title) # TODO

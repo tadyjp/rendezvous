@@ -267,7 +267,6 @@ DEPENDENCIES
   guard-spring
   jbuilder
   mail
-  minitest (= 4.7.5)
   nokogiri
   omniauth-google-oauth2
   premailer
