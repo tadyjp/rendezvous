@@ -10,7 +10,7 @@ describe Post do
 
     describe 'Fork' do
 
-      subject { @post.generate_fork(user: @alice) }
+      subject { @post.generate_fork(@alice) }
 
       it 'valid title' do
         expect(subject.title).to eq('sample title')

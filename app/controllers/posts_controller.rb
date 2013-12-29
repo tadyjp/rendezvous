@@ -40,7 +40,7 @@ class PostsController < ApplicationController
   end
 
   def fork
-    @post = set_post.generate_fork(user: current_user)
+    @post = set_post.generate_fork(current_user)
     render action: 'new'
   end
 
