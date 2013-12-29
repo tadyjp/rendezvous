@@ -1,0 +1,21 @@
+
+LineLength:
+  Max: 159
+
+NumericLiterals:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+WordArray:
+  Enabled: false
+
+MethodLength:
+  Max: 30
+
+IfUnlessModifier:
+  Enabled: false
+
+CyclomaticComplexity:
+  Max: 10

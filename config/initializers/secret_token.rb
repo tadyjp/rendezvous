@@ -9,4 +9,5 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Rendezvous::Application.config.secret_key_base = 'd8e487b60856000161a94ea764b38e7492512bbbeeca2f4cec068c8cc6618cacb54172ec54afc61675684f01bf02c74bf1e93dfe6971247d75ff001b1584d987'
+Rendezvous::Application.config.secret_key_base = \
+  'd8e487b60856000161a94ea764b38e7492512bbbeeca2f4cec068c8cc6618cacb54172ec54afc61675684f01bf02c74bf1e93dfe6971247d75ff001b1584d987'

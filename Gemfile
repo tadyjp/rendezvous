@@ -70,6 +70,10 @@ group :development do
 
   # profiler
   gem 'rack-mini-profiler'
+
+  # rubocop
+  gem 'rubocop'
+  gem 'guard-rubocop'
 end
 
 group :development, :test do

@@ -22,7 +22,6 @@ module Rendezvous
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :ja
 
-
     # config.action_mailer.delivery_method = :action_gmailer
     config.action_mailer.smtp_settings = {
       smtp_host:    'smtp.gmail.com',
@@ -32,7 +31,5 @@ module Rendezvous
       # oauth2_token: 'FIXME',
       # account:      'FIXME'
     }
-
-
   end
 end

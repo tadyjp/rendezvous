@@ -10,3 +10,8 @@ guard :rspec, spring: true do
   watch('config/routes.rb')                           { 'spec/routing' }
   watch('app/controllers/application_controller.rb')  { 'spec/controllers' }
 end
+
+guard :rubocop, cli: ['--rails', '--auto-correct'] do
+  watch(%r{.+\.rb$})
+  watch(%r{(?:.+/)?\.rubocop\.yml$}) { |m| File.dirname(m[0]) }
+end
