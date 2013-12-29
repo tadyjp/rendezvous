@@ -104,3 +104,7 @@ gem 'nokogiri'
 gem 'premailer'
 
 gem 'faraday'
+
+group :test do
+  gem 'coveralls', :require => false
+end
