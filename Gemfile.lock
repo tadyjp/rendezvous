@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/popgiro/action-gmailer.git
+  revision: e04b69f578ead4514f6cea5ac85db16896f7e71c
+  specs:
+    action-gmailer (0.1.0)
+      actionmailer
+      activesupport
+      gmail_xoauth
+
+GIT
   remote: git://github.com/vmg/redcarpet.git
   revision: 52c5fa3c5753d2125e827f235cdf4cb730484902
   branch: master
@@ -64,6 +73,8 @@ GEM
     execjs (2.0.2)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
+    gmail_xoauth (0.4.1)
+      oauth (>= 0.3.6)
     hashie (2.0.5)
     hike (1.2.3)
     httpauth (0.2.0)
@@ -81,6 +92,7 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.2)
     multipart-post (1.2.0)
+    oauth (0.4.7)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -165,6 +177,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  action-gmailer!
   ancestry
   better_errors
   binding_of_caller
@@ -172,6 +185,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   jbuilder (~> 1.2)
+  mail
   omniauth-google-oauth2
   pg
   rack-mini-profiler

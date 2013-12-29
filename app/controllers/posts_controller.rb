@@ -1,3 +1,6 @@
+require 'nkf'
+require 'rv/mailer'
+
 class PostsController < ApplicationController
 
   before_action :set_post, only: [:show, :edit, :update, :destroy]
@@ -40,6 +43,22 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+  end
+
+  def fork
+    @post = set_post.clone
+    @post.title = @post.title.gsub(/%Name/, current_user.name)
+    @post.title = Time.now.strftime(@post.title) # TODO
+    render action: 'new'
+  end
+
+  def mail
+    @post = set_post
+
+    subject = @post.title
+    body = @post.body
+    RV::Mailer.compose_mail(subject, body, current_user).deliver
+    redirect_to root_path(id: @post.id)
   end
 
   # GET /posts/1/edit
@@ -111,4 +130,5 @@ class PostsController < ApplicationController
         _param_hash
       end
     end
+
 end
