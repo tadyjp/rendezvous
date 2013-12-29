@@ -4,18 +4,15 @@ class Post < ActiveRecord::Base
   belongs_to :author, class_name: 'User'
 
   # Named scope
-
-  def self.build_query(params)
+  scope :search, (lambda do |query|
     _where_list = includes(:author, :tags)
 
     # Convert spaces to one space.
-    query_string = params[:q].gsub(/[\s　]+/, ' ')
-
-    query_list = query_string.split(' ')
+    query_list = query.gsub(/[\s　]+/, ' ').split(' ')
 
     query_list.each do |_query|
       case _query
-      when /^post:(.+)/
+      when /^id:(.+)/
         _where_list = _where_list.where('id = ?', Regexp.last_match[1])
       when /^title:(.+)/
         _where_list = _where_list.where('title LIKE ?', "%#{Regexp.last_match[1]}%")
@@ -34,7 +31,7 @@ class Post < ActiveRecord::Base
     end
 
     _where_list
-  end
+  end)
 
   # generate forked post (not saved)
   def generate_fork(user)

@@ -1,5 +1,4 @@
 require 'nkf'
-require 'rv/mailer'
 
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
@@ -12,7 +11,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     if params[:q].present?
-      @posts = Post.build_query(params).limit(10)
+      @posts = Post.search(params[:q]).limit(10)
     else
       @posts = Post.order(updated_at: :desc).limit(10)
     end

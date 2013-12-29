@@ -17,6 +17,6 @@
 
 /bin/set-env.sh
 
-/coverage/*
+/coverage/.*
 
 *.bk

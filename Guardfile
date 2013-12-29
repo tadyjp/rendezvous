@@ -1,4 +1,4 @@
-guard :rspec, spring: true do
+guard :rspec, all_after_pass: true, spring: true do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { 'spec' }
@@ -11,7 +11,7 @@ guard :rspec, spring: true do
   watch('app/controllers/application_controller.rb')  { 'spec/controllers' }
 end
 
-guard :rubocop, cli: ['--rails', '--auto-correct'] do
+guard :rubocop, all_after_pass: true, cli: ['--rails', '--auto-correct'] do
   watch(%r{.+\.rb$})
   watch(%r{(?:.+/)?\.rubocop\.yml$}) { |m| File.dirname(m[0]) }
 end
