@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.0.2'
@@ -65,7 +65,23 @@ group :development do
   gem 'thin'
 
   # gem 'capistrano', '~> 3.0.1'
+
+  gem 'pry-rails'
 end
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'guard-spring'
+  gem 'factory_girl_rails'
+  gem 'spring'
+end
+
+group :test do
+  gem 'email_spec'
+end
+
+
 
 group :production do
   gem 'rails_12factor'
@@ -82,3 +98,9 @@ gem 'rack-mini-profiler'
 # ref. https://github.com/popgiro/action-gmailer
 gem 'mail'
 gem 'action-gmailer', github: 'popgiro/action-gmailer'
+
+# compose html mail
+gem 'nokogiri'
+gem 'premailer'
+
+gem 'faraday'

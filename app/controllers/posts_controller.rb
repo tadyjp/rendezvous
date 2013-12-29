@@ -4,24 +4,18 @@ require 'rv/mailer'
 class PostsController < ApplicationController
 
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :require_login, except: [:index]
+  before_action :require_login
 
   include ApplicationHelper
+  include RV::Mailer
 
   # GET /posts
   # GET /posts.json
   def index
-    if user_signed_in?
-
-      if params[:q].present?
-        @posts = Post.build_query(params).limit(10)
-      else
-        @posts = Post.order(updated_at: :desc).limit(10)
-      end
-
-      render
+    if params[:q].present?
+      @posts = Post.build_query(params).limit(10)
     else
-      render file: 'home/login'
+      @posts = Post.order(updated_at: :desc).limit(10)
     end
   end
 
@@ -46,19 +40,20 @@ class PostsController < ApplicationController
   end
 
   def fork
-    @post = set_post.clone
-    @post.title = @post.title.gsub(/%Name/, current_user.name)
-    @post.title = Time.now.strftime(@post.title) # TODO
+    @post = set_post.generate_fork(user: current_user)
     render action: 'new'
   end
 
   def mail
     @post = set_post
 
-    subject = @post.title
-    body = @post.body
-    RV::Mailer.compose_mail(subject, body, current_user).deliver
+    # refresh google oauth token if expired
+    current_user.google_oauth_token_refresh! if current_user.google_oauth_token_expired?
+
+    compose_mail(@post, current_user).deliver
     redirect_to root_path(id: @post.id)
+  rescue ActionGmailer::DeliveryError
+    redirect_to root_path(id: @post.id), flash: { notice: 'Gmail authentication expired.' }
   end
 
   # GET /posts/1/edit
