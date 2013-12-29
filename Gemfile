@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.0.2'
@@ -72,9 +72,15 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'guard-rspec'
+  gem 'guard-spring'
   gem 'factory_girl_rails'
   gem 'spring'
 end
+
+group :test do
+  gem 'email_spec'
+end
+
 
 
 group :production do

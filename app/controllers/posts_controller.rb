@@ -4,7 +4,7 @@ require 'rv/mailer'
 class PostsController < ApplicationController
 
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :require_login, except: [:index]
+  before_action :require_login
 
   include ApplicationHelper
   include RV::Mailer
@@ -12,17 +12,10 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    if user_signed_in?
-
-      if params[:q].present?
-        @posts = Post.build_query(params).limit(10)
-      else
-        @posts = Post.order(updated_at: :desc).limit(10)
-      end
-
-      render
+    if params[:q].present?
+      @posts = Post.build_query(params).limit(10)
     else
-      render file: 'home/login'
+      @posts = Post.order(updated_at: :desc).limit(10)
     end
   end
 
@@ -47,9 +40,7 @@ class PostsController < ApplicationController
   end
 
   def fork
-    @post = set_post.clone
-    @post.title = @post.title.gsub(/%Name/, current_user.name)
-    @post.title = Time.now.strftime(@post.title) # TODO
+    @post = set_post.generate_fork(user: current_user)
     render action: 'new'
   end
 

@@ -1,4 +1,4 @@
-if window.location.pathname.match /^\/$/
+if window.location.pathname.match /^\/posts\/?$/
 
   $ ->
 
