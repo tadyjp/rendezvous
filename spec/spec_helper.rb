@@ -9,7 +9,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
-require 'email_spec'
+# require 'email_spec'
 require 'factory_girl'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -50,8 +50,8 @@ RSpec.configure do |config|
 
   config.include FactoryGirl::Syntax::Methods
 
-  config.include(EmailSpec::Helpers)
-  config.include(EmailSpec::Matchers)
+  # config.include(EmailSpec::Helpers)
+  # config.include(EmailSpec::Matchers)
 
 
   config.before(:all) do
