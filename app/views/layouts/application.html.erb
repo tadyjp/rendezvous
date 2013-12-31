@@ -13,20 +13,6 @@
 </head>
 <body>
 
-  <% if notice %>
-    <script type="text/javascript">
-      alert('<%= notice %>');
-    </script>
-    <!--     <p class="notice"><%= notice %></p>  -->
-  <% end %>
-  <% if alert %>
-    <script type="text/javascript">
-      alert('<%= alert %>');
-    </script>
-    <!--     <p class="notice"><%= notice %></p>  -->
-    <p class="alert"><%= alert %></p>
-  <% end %>
-
   <%= yield %>
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>

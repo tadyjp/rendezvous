@@ -21,14 +21,14 @@ class PostsController < ApplicationController
     render text: h_application_format_markdown(params[:text])
   end
 
-  def show_fragment
-    @post = Post.find(params[:id])
-    render layout: false, partial: 'posts/show_fragment'
-  end
-
   # GET /posts/1
   # GET /posts/1.json
   def show
+    if params[:fragment].present?
+      render layout: false, partial: 'posts/show_fragment'
+    else
+      render
+    end
   end
 
   # GET /posts/new
@@ -47,10 +47,12 @@ class PostsController < ApplicationController
     # refresh google oauth token if expired
     current_user.google_oauth_token_refresh! if current_user.google_oauth_token_expired?
 
-    compose_mail(@post, current_user).deliver
+    compose_mail(@post, user: current_user, to: mail_params[:to]).deliver
     redirect_to root_path(id: @post.id)
   rescue ActionGmailer::DeliveryError
     redirect_to root_path(id: @post.id), flash: { notice: 'Gmail authentication expired.' }
+  rescue ArgumentError => err
+    render text: err.to_s, status: :bad_request
   end
 
   # GET /posts/1/edit
@@ -122,5 +124,9 @@ class PostsController < ApplicationController
 
       _param_hash
     end
+  end
+
+  def mail_params
+    params.require(:mail).permit(:to).to_hash.symbolize_keys
   end
 end

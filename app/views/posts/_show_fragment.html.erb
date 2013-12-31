@@ -1,17 +1,7 @@
-<div style="text-align:right">
-  <a href="<%= mail_post_path(@post) %>" class="btn navbar-btn" style!="position:absolute;right:0;top:0;margin-top:2px;margin-top:3px;margin-right:3px;">
-    Mail
-  </a>
-  <a href="<%= fork_post_path(@post) %>" class="btn navbar-btn" style!="position:absolute;right:0;top:0;margin-top:2px;margin-top:3px;margin-right:3px;">
-    Fork
-  </a>
-  <a href="<%= edit_post_path(@post) %>" class="btn btn-primary navbar-btn" style!="position:absolute;right:0;top:0;margin-top:2px;margin-top:3px;margin-right:3px;">
-    <span class="glyphicon glyphicon-pencil"></span>
-  </a>
-</div>
 <div class="text-box title" style!="position:relative;">
   <a href="<%= post_path(@post) %>"><%= @post.title %></a>
 </div>
+
 <div class="text-box meta">
   <% @post.tags.each do |tag| %>
     <span class="label label-info">
@@ -24,8 +14,80 @@
   <span class="label label-danger">
     <a href="<%= root_path(q: "date:#{@post.updated_at.strftime('%Y-%m-%d')}") %>"><%= @post.updated_at.strftime('%Y-%m-%d') %></a>
   </span>
+
+  <!-- Split button -->
+  <div class="btn-group pull-right" style="margin: -7px -12px 0 0;">
+    <button type="button" class="btn btn-primary">
+      <span class="glyphicon glyphicon-pencil"></span>
+    </button>
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      <span class="caret"></span>
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="<%= fork_post_path(@post) %>">Fork</a></li>
+      <li><a href="#" data-toggle="modal" data-target="#myModal">Mail to...</a></li>
+      <li class="divider"></li>
+      <li><%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+    </ul>
+  </div>
+  <!-- /Split button -->
+
 </div>
 <div class="text-box body viewer github">
   <%= h_application_format_markdown(@post.body) %>
 </div>
 
+
+<!-- Button trigger modal -->
+<!-- <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+ -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <%= form_tag mail_post_path(@post), method: :post, class: 'form-horizontal', role: 'form' do %>
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Mail this post to...</h4>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Title</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" value="<%= @post.title %>" readonly>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">To</label>
+            <div class="col-sm-10">
+              <input type="email" name="mail[to]" class="form-control" id="inputEmail3" placeholder="Email">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">From</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" value="<%= current_user.email %>" readonly>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" data-disable-with="Sending...">Send</button>
+        </div>
+      </div><!-- /.modal-content -->
+
+    <% end %><%# form %>
+
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -19,3 +19,6 @@ IfUnlessModifier:
 
 CyclomaticComplexity:
   Max: 10
+
+RaiseArgs:
+  Enabled: false

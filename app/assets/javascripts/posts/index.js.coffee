@@ -11,7 +11,9 @@ if window.location.pathname.match /^\/posts\/?$/
       $this.addClass('active')
 
       id = $this.data('postId')
-      $.get('/posts/show_fragment', { id: id })
+      $.get("/posts/#{id}", {
+        fragment: 1
+      })
       .done (data) ->
         $('#list_post').html(data)
         prettyPrint()
@@ -21,8 +23,8 @@ if window.location.pathname.match /^\/posts\/?$/
     id_param = RV.tools.getQueryParams()["id"]
     if id_param?
       $("a.post-list[data-post-id='#{id_param}']").addClass('active')
-      $.get('/posts/show_fragment', {
-        'id': id_param,
+      $.get("/posts/#{id_param}", {
+        fragment: 1
       })
       .done (data) ->
         $('#list_post').html(data)
@@ -30,8 +32,8 @@ if window.location.pathname.match /^\/posts\/?$/
     else
       $el = $("a.post-list:eq(0)")
       $el.addClass('active')
-      $.get('/posts/show_fragment', {
-        'id': $el.data('postId'),
+      $.get("/posts/#{$el.data('postId')}", {
+        fragment: 1
       })
       .done (data) ->
         $('#list_post').html(data)

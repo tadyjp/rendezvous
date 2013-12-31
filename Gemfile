@@ -14,6 +14,8 @@ gem 'uglifier'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails'
 
+gem 'jquery-rails'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -110,3 +112,6 @@ gem 'nokogiri'
 gem 'premailer'
 
 gem 'faraday'
+
+# Check mail format
+gem 'validates_email_format_of'
