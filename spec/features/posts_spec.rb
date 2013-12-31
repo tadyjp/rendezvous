@@ -18,9 +18,9 @@ describe 'Request via js', js: true do
     visit '/posts'
   end
 
-  it 'show placeholder' do
+  it 'show first post' do
     page.save_screenshot(Rails.root.join('tmp', 'screenshots', "a-#{Time.now.strftime('%Y-%m-%d %H%M%S')}.png"))
-    expect(page.find('#posts-placeholder').text).to include('Select a post')
+    expect(page.find('#list_post div.title a').text).to include('ruby rspec')
   end
 
   it 'click post and show' do
