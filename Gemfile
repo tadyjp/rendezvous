@@ -26,6 +26,8 @@ gem 'coffee-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
 
+gem 'i18n_generators'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -45,6 +47,9 @@ end
 
 # gem 'bootstrap-sass-rails'
 
+gem 'mysql2'
+gem 'sqlite3'
+
 gem 'devise'
 gem 'omniauth-google-oauth2'
 
@@ -57,8 +62,6 @@ gem 'coderay'
 
 group :development do
   # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
-
   gem 'better_errors'
   gem 'binding_of_caller'
 
@@ -74,24 +77,25 @@ group :development do
   # rubocop
   gem 'rubocop'
   gem 'guard-rubocop'
+  gem 'guard-rspec'
+  gem 'guard-spring'
+  gem 'spring'
 end
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'guard-rspec'
-  gem 'guard-spring'
-  gem 'factory_girl_rails'
-  gem 'spring'
+
+  # gem 'database_cleaner'
+  gem 'database_rewinder'
 end
 
-# group :test do
-#   gem 'email_spec'
-# end
-
-# group :production do
-#   gem 'rails_12factor'
-#   gem 'pg'
-# end
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'poltergeist'
+  gem 'coveralls', :require => false
+end
 
 # tree structure
 gem 'ancestry'
@@ -106,7 +110,3 @@ gem 'nokogiri'
 gem 'premailer'
 
 gem 'faraday'
-
-group :test do
-  gem 'coveralls', :require => false
-end

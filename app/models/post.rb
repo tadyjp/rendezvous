@@ -13,15 +13,15 @@ class Post < ActiveRecord::Base
     query_list.each do |_query|
       case _query
       when /^id:(.+)/
-        _where_list = _where_list.where('id = ?', Regexp.last_match[1])
+        _where_list = _where_list.where(id: Regexp.last_match[1])
       when /^title:(.+)/
         _where_list = _where_list.where('title LIKE ?', "%#{Regexp.last_match[1]}%")
       when /^body:(.+)/
         _where_list = _where_list.where('body LIKE ?', "%#{Regexp.last_match[1]}%")
       when /^@(.+)/
-        _where_list = _where_list.where('users.name = ?', Regexp.last_match[1])
+        _where_list = _where_list.where(users: { name: Regexp.last_match[1] })
       when /^#(.+)/
-        _where_list = _where_list.where('tags.name = ?', Regexp.last_match[1])
+        _where_list = _where_list.where(tags: { name: Regexp.last_match[1] })
       when /^date:(\d+)-(\d+)-(\d+)/
         _date = Time.new(Regexp.last_match[1], Regexp.last_match[2], Regexp.last_match[3])
         _where_list = _where_list.where('updated_at > ? AND updated_at < ?', _date, _date + 1.day)

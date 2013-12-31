@@ -10,6 +10,19 @@ require 'rspec/autorun'
 # require 'email_spec'
 require 'factory_girl'
 
+require 'capybara'
+require 'capybara/rspec'
+
+## Setting for polterguist.
+require 'capybara/poltergeist'
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, timeout: 10)
+end
+Capybara.javascript_driver = :poltergeist
+
+# Set capybara wait time (default: 2)
+Capybara.default_wait_time = 5
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
@@ -33,7 +46,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
@@ -53,5 +66,18 @@ RSpec.configure do |config|
 
   config.before(:all) do
     FactoryGirl.reload
+  end
+
+  config.include Capybara::DSL
+
+  config.before :suite do
+    DatabaseRewinder.clean_all
+  end
+
+  # config.before :each do
+  # end
+
+  config.after :each do
+    DatabaseRewinder.clean
   end
 end
