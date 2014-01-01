@@ -3,19 +3,18 @@ require 'spec_helper'
 describe User do
 
   describe 'Instance method' do
-    before :each do
-      @alice = create(:alice)
-      @bob = create(:bob)
-    end
+
+    let(:alice) { create(:alice) }
+    let(:bob) { create(:bob) }
 
     describe '#google_oauth_token_expired?' do
 
       it 'not expired' do
-        expect(@alice.google_oauth_token_expired?).to be_false
+        expect(alice.google_oauth_token_expired?).to be_false
       end
 
       it 'expired' do
-        expect(@bob.google_oauth_token_expired?).to be_true
+        expect(bob.google_oauth_token_expired?).to be_true
       end
 
     end

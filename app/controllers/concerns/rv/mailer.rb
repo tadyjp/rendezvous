@@ -5,12 +5,17 @@ require 'premailer'
 module RV::Mailer
   include ApplicationHelper
 
-  def compose_mail(post, user)
+  def compose_mail(post, opts = {})
+    fail ArgumentError.new('post missing') unless post.present?
+    fail ArgumentError.new('user missing') unless opts[:user].present? && opts[:user].is_a?(User)
+    fail ArgumentError.new('to missing') unless opts[:to].present?
+    fail ArgumentError.new('to mail format invalid') unless ValidatesEmailFormatOf.validate_email_format(opts[:to]).nil?
+
     html_body = generate_html_mail(post.body)
 
     mail = Mail.new do
-      from     user.email
-      to       user.email
+      from     opts[:user].email
+      to       opts[:to]
       subject  post.title
       body     post.body
 
@@ -22,8 +27,8 @@ module RV::Mailer
 
     # set ActionGmailer
     config = {
-      oauth2_token: user.google_auth_token,
-      account: user.email
+      oauth2_token: opts[:user].google_auth_token,
+      account: opts[:user].email
     }.merge(Rendezvous::Application.config.action_mailer.smtp_settings)
     mail.delivery_method(ActionGmailer::DeliveryMethod, config)
 

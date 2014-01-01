@@ -1,0 +1,42 @@
+ja:
+  activerecord:
+    models:
+      post: post  #g
+      post_tag: post_tag  #g
+      tag: tag  #g
+      user: user  #g
+
+    attributes:
+      post:
+        author: :activerecord.models.author  #g
+        body: body  #g
+        post_tags: post_tags  #g
+        tags: tags  #g
+        title: title  #g
+
+      post_tag:
+        post: :activerecord.models.post  #g
+        tag: :activerecord.models.tag  #g
+
+      tag:
+        ancestry: ancestry  #g
+        name: name  #g
+        post_tags: post_tags  #g
+        posts: posts  #g
+
+      user:
+        current_sign_in_at: current_sign_in_at  #g
+        current_sign_in_ip: current_sign_in_ip  #g
+        email: email  #g
+        encrypted_password: encrypted_password  #g
+        google_auth_token: google_auth_token  #g
+        google_refresh_token: google_refresh_token  #g
+        google_token_expires_at: google_token_expires_at  #g
+        image_url: image_url  #g
+        last_sign_in_at: last_sign_in_at  #g
+        last_sign_in_ip: last_sign_in_ip  #g
+        name: name  #g
+        posts: posts  #g
+        remember_created_at: remember_created_at  #g
+        reset_password_sent_at: reset_password_sent_at  #g
+        reset_password_token: reset_password_token  #g

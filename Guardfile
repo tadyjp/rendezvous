@@ -5,6 +5,7 @@ guard :rspec, all_after_pass: true, spring: true do
 
   watch(%r{^app/(.+)\.rb$})                           { |m| "spec/#{m[1]}_spec.rb" }
   watch(%r{^app/(.*)(\.erb|\.haml)$})                 { |m| "spec/#{m[1]}#{m[2]}_spec.rb" }
+  watch(%r{^app/(.*)(\.erb|\.haml)$})                 { 'spec/features' }
   watch(%r{^spec/factories/(.+)\.rb$})                { 'spec/factories_spec.rb' }
   watch(%r{^spec/support/(.+)\.rb$})                  { 'spec' }
   watch('config/routes.rb')                           { 'spec/routing' }

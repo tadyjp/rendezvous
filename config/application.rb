@@ -20,7 +20,8 @@ module Rendezvous
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    config.i18n.default_locale = :ja
+    I18n.enforce_available_locales = true
+    config.i18n.default_locale = 'ja'
 
     # config.action_mailer.delivery_method = :action_gmailer
     config.action_mailer.smtp_settings = {

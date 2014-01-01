@@ -20,3 +20,5 @@
 /coverage/.*
 
 *.bk
+
+/db/*.sql
