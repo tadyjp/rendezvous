@@ -48,11 +48,11 @@ class PostsController < ApplicationController
     current_user.google_oauth_token_refresh! if current_user.google_oauth_token_expired?
 
     compose_mail(@post, user: current_user, to: mail_params[:to]).deliver
-    redirect_to root_path(id: @post.id)
+    redirect_to root_path(id: @post.id), flash: { success: 'Mail has sent!' }
   rescue ActionGmailer::DeliveryError
     redirect_to root_path(id: @post.id), flash: { notice: 'Gmail authentication expired.' }
   rescue ArgumentError => err
-    render text: err.to_s, status: :bad_request
+    redirect_to root_path(id: @post.id), flash: { alert: 'Mail format is invalid: ' + err.to_s }
   end
 
   # GET /posts/1/edit
@@ -67,7 +67,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to root_path(id: @post.id), notice: 'Post was successfully created.' }
+        format.html { redirect_to root_path(id: @post.id), flash: { notice: 'Post was successfully created.' } }
         format.json { render action: 'show', status: :created, location: @post }
       else
         format.html { render action: 'new' }
@@ -83,7 +83,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to root_path(id: @post.id), notice: 'Post was successfully updated.' }
+        format.html { redirect_to root_path(id: @post.id), flash: { notice: 'Post was successfully updated.' } }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -97,7 +97,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to posts_url, flash: { success: 'Post successfully deleted.' }}
       format.json { head :no_content }
     end
   end

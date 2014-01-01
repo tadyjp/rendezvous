@@ -5,14 +5,14 @@
 <div class="text-box meta">
   <% @post.tags.each do |tag| %>
     <span class="label label-info">
-      <a href="<%= root_path(q: "##{tag.name}") %>">#<%= tag.name %></a>
+      <a href="<%= posts_path(q: "##{tag.name}") %>">#<%= tag.name %></a>
     </span>
   <% end %>
   <span class="label label-success">
-    <a href="<%= root_path(q: "@#{@post.author.name}") %>">@<%= @post.author.name %></a>
+    <a href="<%= posts_path(q: "@#{@post.author.name}") %>">@<%= @post.author.name %></a>
   </span>
   <span class="label label-danger">
-    <a href="<%= root_path(q: "date:#{@post.updated_at.strftime('%Y-%m-%d')}") %>"><%= @post.updated_at.strftime('%Y-%m-%d') %></a>
+    <a href="<%= posts_path(q: "date:#{@post.updated_at.strftime('%Y-%m-%d')}") %>"><%= @post.updated_at.strftime('%Y-%m-%d') %></a>
   </span>
 
   <!-- Split button -->

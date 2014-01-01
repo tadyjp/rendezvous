@@ -11,7 +11,9 @@
 
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="<%= params[:controller] %>-<%= params[:action] %>">
+
+  <%= render partial: 'partials/header_notifications' %>
 
   <%= yield %>
 
