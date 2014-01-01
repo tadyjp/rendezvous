@@ -25,6 +25,10 @@
         </div>
       </form>
 
+      <p class="navbar-text">
+        <a href="#"><span class="glyphicon glyphicon-question-sign"></span></a>
+      </p>
+
       <%= form_tag(destroy_user_session_path, :method => :delete, class: 'navbar-form navbar-right') do %>
         <%= submit_tag 'SignOut', class: 'btn btn-default' %>
       <% end %>
