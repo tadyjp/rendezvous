@@ -1,5 +1,4 @@
 module StyleHelper
-
   ## Store style
   # Usage:
   #   <% style do %>

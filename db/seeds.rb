@@ -39,12 +39,12 @@ _tag_tree.each do |_parent, _child|
 end
 
 # User
-User.find_or_create_by(name: '山田太郎') do |_u|
+user_1 = User.find_or_create_by(name: '山田太郎') do |_u|
   _u.email = "#{Devise.friendly_token[0, 20]}@example.com"
   _u.password = Devise.friendly_token[0, 20]
 end
 
-User.find_or_create_by(name: '鈴木二郎') do |_u|
+user_2 = User.find_or_create_by(name: '鈴木二郎') do |_u|
   _u.email = "#{Devise.friendly_token[0, 20]}@example.com"
   _u.password = Devise.friendly_token[0, 20]
 end
@@ -57,13 +57,18 @@ end
 # Post
 users = User.all
 
+Post.delete_all
 Dir.glob(Rails.root.join('db', 'seeds').to_s + '/*').each do |file_name|
   Rails.logger.debug "[Post Tag] #{file_name}"
   title = file_name.split('/').last
 
-  post = Post.find_or_initialize_by(title: title)
+  post = Post.new(title: title)
   post.body = File.read(file_name)
   post.author = users.sample
   post.tags = [tags.sample, tags.sample]
   post.save!
 end
+
+Post.first.comments.create(author: user_1, body: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.')
+Post.first.comments.create(author: user_2, body: 'Hooooooo....')
+Post.first.comments.create(author: user_1, body: 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.')

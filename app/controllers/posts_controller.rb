@@ -102,6 +102,21 @@ class PostsController < ApplicationController
     end
   end
 
+  # POST /posts/1/comment
+  def comment
+    @post = set_post
+    @comment = @post.comments.build(comment_params.merge(author: current_user))
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to posts_path(id: @post.id) }
+        format.json { render json: { status: 'ok', comment: @comment }, status: :created }
+      else
+        format.html { redirect_to posts_path(id: @post.id), flash: { alert: 'Comment is not saved.' } }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -128,5 +143,9 @@ class PostsController < ApplicationController
 
   def mail_params
     params.require(:mail).permit(:to).to_hash.symbolize_keys
+  end
+
+  def comment_params
+    params.require(:comment).permit(:body).to_hash
   end
 end
