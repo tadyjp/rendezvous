@@ -7,11 +7,11 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: rendezvous_development
+  database: <%= ENV['DB_DEVELOPMENT_DATABASE'] %>
   pool: 5
   username: <%= ENV['DB_DEVELOPMENT_USER'] %>
   password: <%= ENV['DB_DEVELOPMENT_PASS'] %>
-  host: localhost
+  host: <%= ENV['DB_DEVELOPMENT_HOST'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -25,11 +25,11 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: rendezvous_test
+  database: <%= ENV['DB_TEST_DATABASE'] %>
   pool: 5
   username: <%= ENV['DB_TEST_USER'] %>
   password: <%= ENV['DB_TEST_PASS'] %>
-  host: localhost
+  host: <%= ENV['DB_TEST_HOST'] %>
 
 production:
   adapter: sqlite3
