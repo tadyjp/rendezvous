@@ -6,7 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
 # Tag
 
 _tag_tree = [
@@ -31,7 +30,7 @@ _tag_tree = [
 tags = []
 
 _tag_tree.each do |_parent, _child|
-  puts "[Seed Tag] #{_parent} => #{_child}"
+  Rails.logger.debug "[Seed Tag] #{_parent} => #{_child}"
   parent = Tag.find_or_create_by(name: _parent) if _parent
   child = Tag.find_or_initialize_by(name: _child)
   child.parent = parent if _parent
@@ -39,28 +38,27 @@ _tag_tree.each do |_parent, _child|
   tags << child
 end
 
-
 # User
 User.find_or_create_by(name: '山田太郎') do |_u|
-  _u.email = "#{Devise.friendly_token[0,20]}@example.com"
-  _u.password = Devise.friendly_token[0,20]
+  _u.email = "#{Devise.friendly_token[0, 20]}@example.com"
+  _u.password = Devise.friendly_token[0, 20]
 end
 
 User.find_or_create_by(name: '鈴木二郎') do |_u|
-  _u.email = "#{Devise.friendly_token[0,20]}@example.com"
-  _u.password = Devise.friendly_token[0,20]
+  _u.email = "#{Devise.friendly_token[0, 20]}@example.com"
+  _u.password = Devise.friendly_token[0, 20]
 end
 
 User.find_or_create_by(name: '田中三郎') do |_u|
-  _u.email = "#{Devise.friendly_token[0,20]}@example.com"
-  _u.password = Devise.friendly_token[0,20]
+  _u.email = "#{Devise.friendly_token[0, 20]}@example.com"
+  _u.password = Devise.friendly_token[0, 20]
 end
 
 # Post
 users = User.all
 
 Dir.glob(Rails.root.join('db', 'seeds').to_s + '/*').each do |file_name|
-  puts "[Post Tag] #{file_name}"
+  Rails.logger.debug "[Post Tag] #{file_name}"
   title = file_name.split('/').last
 
   post = Post.find_or_initialize_by(title: title)
@@ -69,4 +67,3 @@ Dir.glob(Rails.root.join('db', 'seeds').to_s + '/*').each do |file_name|
   post.tags = [tags.sample, tags.sample]
   post.save!
 end
-

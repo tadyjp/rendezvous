@@ -6,13 +6,15 @@ ruby '2.0.0'
 gem 'rails', '~> 4.0.2'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails'
+
+gem 'jquery-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -24,7 +26,9 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder'
+
+gem 'i18n_generators'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -45,6 +49,9 @@ end
 
 # gem 'bootstrap-sass-rails'
 
+gem 'mysql2'
+gem 'sqlite3'
+
 gem 'devise'
 gem 'omniauth-google-oauth2'
 
@@ -57,19 +64,39 @@ gem 'coderay'
 
 group :development do
   # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
-
   gem 'better_errors'
   gem 'binding_of_caller'
 
   gem 'thin'
 
   # gem 'capistrano', '~> 3.0.1'
+
+  gem 'pry-rails'
+
+  # profiler
+  gem 'rack-mini-profiler'
+
+  # rubocop
+  gem 'rubocop'
+  gem 'guard-rubocop'
+  gem 'guard-rspec'
+  gem 'guard-spring'
+  gem 'spring'
 end
 
-group :production do
-  gem 'rails_12factor'
-  gem 'pg'
+group :development, :test do
+  gem 'rspec-rails'
+
+  # gem 'database_cleaner'
+  gem 'database_rewinder'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'poltergeist'
+  gem 'coveralls', :require => false
 end
 
 group :development, :test do
@@ -79,8 +106,16 @@ end
 # tree structure
 gem 'ancestry'
 
-# profiler
-gem 'rack-mini-profiler'
+# Send mail via gmail oauth
+# ref. https://github.com/popgiro/action-gmailer
+gem 'mail'
+gem 'action-gmailer', github: 'popgiro/action-gmailer'
 
-# Google smtp
-gem 'gmail_xoauth'
+# compose html mail
+gem 'nokogiri'
+gem 'premailer'
+
+gem 'faraday'
+
+# Check mail format
+gem 'validates_email_format_of'

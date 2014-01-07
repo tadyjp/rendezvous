@@ -1,26 +1,19 @@
 require 'nkf'
 
 class PostsController < ApplicationController
-
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :require_login, except: [:index]
+  before_action :require_login
 
   include ApplicationHelper
+  include RV::Mailer
 
   # GET /posts
   # GET /posts.json
   def index
-    if user_signed_in?
-
-      if params[:q].present?
-        @posts = Post.build_query(params).limit(10)
-      else
-        @posts = Post.order(updated_at: :desc).limit(10)
-      end
-
-      render
+    if params[:q].present?
+      @posts = Post.search(params[:q]).limit(10)
     else
-      render file: 'home/login'
+      @posts = Post.order(updated_at: :desc).limit(10)
     end
   end
 
@@ -28,15 +21,14 @@ class PostsController < ApplicationController
     render text: h_application_format_markdown(params[:text])
   end
 
-  def show_fragment
-    @post = Post.find(params[:id])
-    render layout: false, partial: 'posts/show_fragment'
-  end
-
-
   # GET /posts/1
   # GET /posts/1.json
   def show
+    if params[:fragment].present?
+      render layout: false, partial: 'posts/show_fragment'
+    else
+      render
+    end
   end
 
   # GET /posts/new
@@ -45,32 +37,22 @@ class PostsController < ApplicationController
   end
 
   def fork
-    @post = set_post.clone
-    @post.title = @post.title.gsub(/%Name/, current_user.name)
-    @post.title = Time.now.strftime(@post.title) # TODO
+    @post = set_post.generate_fork(current_user)
     render action: 'new'
   end
 
   def mail
     @post = set_post
-    smtp = Net::SMTP.new('smtp.gmail.com', 587)
-    smtp.enable_starttls_auto
-    smtp.start('gmail.com', current_user.email, current_user.google_auth_token, :xoauth2)
-    body = 'test'
-    body = <<EOT
-From: #{current_user.email}
-To: #{current_user.email}
-Subject: #{NKF.nkf("-WjMm0", 'subject')}
-Date: #{Time::now.strftime("%a, %d %b %Y %X %z")}
-Mime-Version: 1.0
-Content-Type: text/plain; charset=ISO-2022-JP
-Content-Transfer-Encoding: 7bit
 
-#{NKF.nkf("-Wjm0", body)}
-EOT
-    smtp.send_mail body, current_user.email, current_user.email
-    smtp.finish
-    redirect_to root_path(id: @post.id)
+    # refresh google oauth token if expired
+    current_user.google_oauth_token_refresh! if current_user.google_oauth_token_expired?
+
+    compose_mail(@post, user: current_user, to: mail_params[:to]).deliver
+    redirect_to root_path(id: @post.id), flash: { success: 'Mail has sent!' }
+  rescue ActionGmailer::DeliveryError
+    redirect_to root_path(id: @post.id), flash: { notice: 'Gmail authentication expired.' }
+  rescue ArgumentError => err
+    redirect_to root_path(id: @post.id), flash: { alert: 'Mail format is invalid: ' + err.to_s }
   end
 
   # GET /posts/1/edit
@@ -85,7 +67,7 @@ EOT
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to root_path(id: @post.id), notice: 'Post was successfully created.' }
+        format.html { redirect_to root_path(id: @post.id), flash: { notice: 'Post was successfully created.' } }
         format.json { render action: 'show', status: :created, location: @post }
       else
         format.html { render action: 'new' }
@@ -101,7 +83,7 @@ EOT
 
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to root_path(id: @post.id), notice: 'Post was successfully updated.' }
+        format.html { redirect_to root_path(id: @post.id), flash: { notice: 'Post was successfully updated.' } }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -115,31 +97,36 @@ EOT
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to posts_url, flash: { success: 'Post successfully deleted.' } }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      @post_params ||= begin
-        _param_hash = params.require(:post).permit(:title, :body, :tags).to_hash
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-        # tags_text == 'Javascript,Ruby'
-        tags_text = _param_hash.delete('tags')
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    @post_params ||= begin
+      _param_hash = params.require(:post).permit(:title, :body, :tags).to_hash
 
-        tags = tags_text.split(',').map do |_tag_name|
-          Tag.find_or_create_by(name: _tag_name)
-        end
-        _param_hash["tag_ids"] = tags.map(&:id)
+      # tags_text == 'Javascript,Ruby'
+      tags_text = _param_hash.delete('tags')
 
-        _param_hash
+      tags = tags_text.split(',').map do |_tag_name|
+        Tag.find_or_create_by(name: _tag_name)
       end
+      _param_hash['tag_ids'] = tags.map(&:id)
+
+      _param_hash
     end
+  end
+
+  def mail_params
+    params.require(:mail).permit(:to).to_hash.symbolize_keys
+  end
 end

@@ -4,8 +4,6 @@
 
 .app {
 
-  padding-top: 70px;
-
   .navbar-default .navbar-brand {
     background-color: #428bca;
     color: #fff;
@@ -49,6 +47,12 @@
 
   #app-search-form {
     width: 200px;
+  }
+
+  /* side tree view
+  -------------------------------------------------- */
+  ul {
+    padding-left: 1em;
   }
 
   /* home#show

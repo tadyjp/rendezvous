@@ -17,6 +17,8 @@
 
 /bin/set-env.sh
 
-/config/database.yml
+/coverage/.*
 
 *.bk
+
+/db/*.sql
