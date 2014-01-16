@@ -79,7 +79,6 @@ group :development do
   # rubocop
   gem 'rubocop'
   gem 'guard-rubocop'
-  gem 'guard-rspec'
   gem 'guard-spring'
   gem 'spring'
 end
@@ -97,10 +96,6 @@ group :test do
   gem 'launchy'
   gem 'poltergeist'
   gem 'coveralls', :require => false
-end
-
-group :development, :test do
-  gem 'rspec-rails'
 end
 
 # tree structure
