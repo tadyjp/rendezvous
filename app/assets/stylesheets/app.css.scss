@@ -4,8 +4,6 @@
 
 .app {
 
-  padding-top: 70px;
-
   .navbar-default .navbar-brand {
     background-color: #428bca;
     color: #fff;
@@ -51,9 +49,15 @@
     width: 200px;
   }
 
+  /* side tree view
+  -------------------------------------------------- */
+/*  ul {
+    padding-left: 1em;
+  }
+*/
   /* home#show
   -------------------------------------------------- */
-  .text-box {
+/*  .text-box {
     padding: 9px 14px;
     border: 1px solid #e1e1e8;
     border-radius: 4px;
@@ -81,7 +85,7 @@
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
   }
-
+*/
 
   /* posts#new
   -------------------------------------------------- */

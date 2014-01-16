@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   devise :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_many :posts
+  has_many :comments
 
   # Device
   def self.find_for_google_oauth2(access_token, signed_in_resource = nil)

@@ -15,8 +15,10 @@
 /log/*.log
 /tmp
 
-/bin/set-env.sh
+.env
 
 /coverage/.*
 
 *.bk
+
+/db/*.sql

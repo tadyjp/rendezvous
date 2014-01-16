@@ -1,3 +1,9 @@
 language: ruby
+services:
+  - mysql
 rvm:
-- 2.0.0
+  - 2.0.0
+before_script:
+  - mysql -e 'CREATE DATABASE rendezvous_test;'
+env:
+  - DB_TEST_DATABASE=rendezvous_test DB_TEST_USER=travis

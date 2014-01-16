@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: git://github.com/vmg/redcarpet.git
-  revision: 52c5fa3c5753d2125e827f235cdf4cb730484902
+  revision: 0c4cd0e7ea5f7f44e2953f3013fdf751af91162d
   branch: master
   specs:
     redcarpet (3.0.0)
@@ -54,8 +54,15 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.1.4)
+    capybara (2.2.1)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
     celluloid (0.15.2)
       timers (~> 1.1.0)
+    cliver (0.3.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -73,6 +80,7 @@ GEM
     css_parser (1.3.5)
       addressable
     daemons (1.1.9)
+    database_rewinder (0.0.2)
     debug_inspector (0.0.2)
     devise (3.2.2)
       bcrypt-ruby (~> 3.0)
@@ -81,7 +89,9 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
-    docile (1.1.1)
+    docile (1.1.2)
+    domain_name (0.5.15)
+      unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.0.2)
@@ -90,8 +100,8 @@ GEM
     factory_girl_rails (4.3.0)
       factory_girl (~> 4.3.0)
       railties (>= 3.0.0)
-    faraday (0.8.8)
-      multipart-post (~> 1.2.0)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.3)
     formatador (0.2.4)
     gmail_xoauth (0.4.1)
@@ -102,10 +112,7 @@ GEM
       lumberjack (~> 1.0)
       pry (>= 0.9.12)
       thor (>= 0.18.1)
-    guard-rspec (4.2.0)
-      guard (>= 2.1.1)
-      rspec (>= 2.14, < 4.0)
-    guard-rubocop (1.0.0)
+    guard-rubocop (1.0.1)
       guard (~> 2.0)
       rubocop (~> 0.10)
     guard-spring (0.0.4)
@@ -114,14 +121,24 @@ GEM
     hashie (2.0.5)
     hike (1.2.3)
     htmlentities (4.3.1)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     httpauth (0.2.0)
     i18n (0.6.9)
-    jbuilder (2.0.1)
+    i18n_generators (1.2.1)
+      mechanize
+      rails (>= 3.0.0)
+    jbuilder (2.0.2)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
+    jquery-rails (3.0.4)
+      railties (>= 3.0, < 5.0)
+      thor (>= 0.14, < 2.0)
     json (1.8.1)
-    jwt (0.1.8)
+    jwt (0.1.10)
       multi_json (>= 1.5)
+    launchy (2.4.2)
+      addressable (~> 2.3)
     listen (2.4.0)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -130,14 +147,27 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mechanize (2.7.2)
+      domain_name (~> 0.5, >= 0.5.1)
+      http-cookie (~> 1.0.0)
+      mime-types (~> 1.17, >= 1.17.2)
+      net-http-digest_auth (~> 1.1, >= 1.1.1)
+      net-http-persistent (~> 2.5, >= 2.5.2)
+      nokogiri (~> 1.4)
+      ntlm-http (~> 0.1, >= 0.1.1)
+      webrobots (>= 0.0.9, < 0.2)
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
-    multi_json (1.8.2)
-    multipart-post (1.2.0)
+    multi_json (1.8.4)
+    multipart-post (2.0.0)
+    mysql2 (0.3.14)
+    net-http-digest_auth (1.4)
+    net-http-persistent (2.9)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    ntlm-http (0.1.1)
     oauth (0.4.7)
     oauth2 (0.8.1)
       faraday (~> 0.8)
@@ -145,23 +175,28 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    omniauth (1.1.4)
+    omniauth (1.2.1)
       hashie (>= 1.2, < 3)
-      rack
-    omniauth-google-oauth2 (0.2.1)
+      rack (~> 1.0)
+    omniauth-google-oauth2 (0.2.2)
       omniauth (~> 1.0)
       omniauth-oauth2
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     orm_adapter (0.5.0)
-    parser (2.0.0)
+    parser (2.1.4)
       ast (~> 1.1)
       slop (~> 3.4, >= 3.4.5)
+    poltergeist (1.5.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      multi_json (~> 1.0)
+      websocket-driver (>= 0.2.0)
     polyglot (0.3.3)
     powerpack (0.0.9)
-    premailer (1.7.9)
-      css_parser (>= 1.1.9)
+    premailer (1.8.0)
+      css_parser (>= 1.3.5)
       htmlentities (>= 4.0.0)
     pry (0.9.12.4)
       coderay (~> 1.0)
@@ -170,7 +205,7 @@ GEM
     pry-rails (0.3.2)
       pry (>= 0.9.10)
     rack (1.5.2)
-    rack-mini-profiler (0.1.31)
+    rack-mini-profiler (0.9.0)
       rack (>= 1.1.3)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -187,32 +222,29 @@ GEM
       activesupport (= 4.0.2)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rainbow (1.1.4)
+    rainbow (1.99.1)
     rake (10.1.1)
-    rb-fsevent (0.9.3)
+    rb-fsevent (0.9.4)
     rb-inotify (0.9.3)
       ffi (>= 0.5.0)
-    rdoc (3.12.2)
+    rdoc (4.1.1)
       json (~> 1.4)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rspec (2.14.1)
-      rspec-core (~> 2.14.0)
-      rspec-expectations (~> 2.14.0)
-      rspec-mocks (~> 2.14.0)
     rspec-core (2.14.7)
     rspec-expectations (2.14.4)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.4)
-    rspec-rails (2.14.0)
+    rspec-rails (2.14.1)
       actionpack (>= 3.0)
+      activemodel (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
-    rubocop (0.15.0)
-      parser (~> 2.0)
+    rubocop (0.16.0)
+      parser (~> 2.1)
       powerpack (~> 0.0.6)
       rainbow (>= 1.1.4)
     sass (3.2.13)
@@ -220,9 +252,9 @@ GEM
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
-    sdoc (0.3.20)
-      json (>= 1.1.3)
-      rdoc (~> 3.10)
+    sdoc (0.4.0)
+      json (~> 1.8)
+      rdoc (~> 4.0, < 5.0)
     simplecov (0.8.2)
       docile (~> 1.1.0)
       multi_json
@@ -259,8 +291,16 @@ GEM
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.3)
+      unf_ext
+    unf_ext (0.0.6)
+    validates_email_format_of (1.5.3)
     warden (1.2.3)
       rack (>= 1.0)
+    webrobots (0.1.1)
+    websocket-driver (0.3.2)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -270,19 +310,25 @@ DEPENDENCIES
   ancestry
   better_errors
   binding_of_caller
+  capybara
   coderay
   coffee-rails
   coveralls
+  database_rewinder
   devise
   factory_girl_rails
   faraday
-  guard-rspec
   guard-rubocop
   guard-spring
+  i18n_generators
   jbuilder
+  jquery-rails
+  launchy
   mail
+  mysql2
   nokogiri
   omniauth-google-oauth2
+  poltergeist
   premailer
   pry-rails
   rack-mini-profiler
@@ -296,3 +342,4 @@ DEPENDENCIES
   sqlite3
   thin
   uglifier
+  validates_email_format_of
