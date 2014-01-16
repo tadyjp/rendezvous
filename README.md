@@ -36,7 +36,7 @@ $ bundle exec rake db:seed
 Set ENV before start server.
 
 ```
-$ . .env
+$ source .env
 $ bundle exec rails s
 ```
 

@@ -20,13 +20,13 @@ describe 'Request via js', js: true do
 
   it 'show first post' do
     page.save_screenshot(Rails.root.join('tmp', 'screenshots', "a-#{Time.now.strftime('%Y-%m-%d %H%M%S')}.png"))
-    expect(page.find('#list_post div.title a').text).to include('ruby rspec')
+    expect(page.find('.panel-title a').text).to include('ruby rspec')
   end
 
   it 'click post and show' do
     find('.post-list:nth-child(3)').click
     page.save_screenshot(Rails.root.join('tmp', 'screenshots', "b-#{Time.now.strftime('%Y-%m-%d %H%M%S')}.png"))
-    expect(page.find('#list_post div.title a').text).to include('java java...')
+    expect(page.find('.panel-title a').text).to include('java java...')
   end
 
   after :each do
