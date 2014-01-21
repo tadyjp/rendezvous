@@ -1,5 +1,4 @@
 rendezvous
-
 ==========
 
 [![Build Status](https://travis-ci.org/tadyjp/rendezvous.png)](https://travis-ci.org/tadyjp/rendezvous)
@@ -17,7 +16,7 @@ A simple markdown-based wiki system for team.
 
 # How to install and use.
 
-Get code and install gems.
+## Get code and install gems.
 
 ```
 $ git clone git@github.com:tadyjp/rendezvous.git
@@ -25,7 +24,7 @@ $ cd rendezvous
 $ bundle install
 ```
 
-Get Google API Key.
+## Get Google API Key.
 
 Register application on https://code.google.com/apis/console,
 and get
@@ -33,14 +32,13 @@ and get
 1. Access https://code.google.com/apis/console
 2. Create New Project
 3. Create Client ID ([APIs & auth] > [Credentials] > [CREATE NEW CLIENT ID])
-4. Enter
+4. Input form
   - `http://localhost:3000` in [Authorized Javascript origins]
   - `http://localhost:3000/users/auth/google_oauth2/callback` in [Authorized redirect URI]
-  and save
 5. Get [Client ID] and [Client secret]
 
 
-Create your .env file.
+## Create your .env file.
 
 ```
 $ cp .env.example .env
@@ -49,14 +47,15 @@ $ vim .env
 
 Set Google API [Client ID] and [Client secret] in `.env`
 
-Setup DB (Default: mysql).
+
+## Setup DB (Default: mysql).
 
 ```
 $ (bundle exec) rake db:migrate
 $ (bundle exec) rake db:seed
 ```
 
-Set ENV before start server.
+## Set ENV before start server.
 
 ```
 $ source .env
