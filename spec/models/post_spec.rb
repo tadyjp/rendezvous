@@ -6,26 +6,33 @@ describe Post do
     before :each do
       @post = create(:post)
       @alice = create(:alice)
+      @new_post = @post.generate_fork(@alice).save
     end
 
     describe 'Fork' do
 
-      subject { @post.generate_fork(@alice) }
+      # subject {
+      #   @post.generate_fork(@alice).save
+      # }
+
+      it 'duplicated' do
+        expect(@new_post.id).not_to eq(@post.id)
+      end
 
       it 'valid title' do
-        expect(subject.title).to eq('sample title')
+        expect(@new_post.title).to eq('sample title')
       end
 
       it 'valid body' do
-        expect(subject.body).to eq('sample body')
+        expect(@new_post.body).to eq('sample body')
       end
 
       it 'valid user' do
-        expect(subject.author).to eq(@alice)
+        expect(@new_post.author).to eq(@alice)
       end
 
       it 'valid user' do
-        expect(subject.tags).to include(@post.tags.first)
+        expect(@new_post.tags).to include(@post.tags.first)
       end
 
     end
