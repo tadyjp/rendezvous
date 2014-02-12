@@ -32,7 +32,11 @@ test:
   host: <%= ENV['DB_TEST_HOST'] %>
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: <%= ENV['DB_PRODUCTION_DATABASE'] %>
   pool: 5
-  timeout: 5000
+  username: <%= ENV['DB_PRODUCTION_USER'] %>
+  password: <%= ENV['DB_PRODUCTION_PASS'] %>
+  host: <%= ENV['DB_PRODUCTION_HOST'] %>

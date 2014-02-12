@@ -13,65 +13,65 @@
 
 ActiveRecord::Schema.define(version: 20140106160129) do
 
-  create_table 'comments', force: true do |t|
-    t.integer  'author_id'
-    t.integer  'post_id'
-    t.text     'body'
-    t.datetime 'created_at'
-    t.datetime 'updated_at'
+  create_table "comments", force: true do |t|
+    t.integer  "author_id"
+    t.integer  "post_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index 'comments', ['author_id', 'updated_at'], name: 'index_comments_on_author_id_and_updated_at', using: :btree
-  add_index 'comments', ['post_id', 'updated_at'], name: 'index_comments_on_post_id_and_updated_at', using: :btree
+  add_index "comments", ["author_id", "updated_at"], name: "index_comments_on_author_id_and_updated_at", using: :btree
+  add_index "comments", ["post_id", "updated_at"], name: "index_comments_on_post_id_and_updated_at", using: :btree
 
-  create_table 'post_tags', force: true do |t|
-    t.integer  'post_id',    null: false
-    t.integer  'tag_id',     null: false
-    t.datetime 'created_at'
-    t.datetime 'updated_at'
+  create_table "post_tags", force: true do |t|
+    t.integer  "post_id",    null: false
+    t.integer  "tag_id",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index 'post_tags', ['post_id'], name: 'index_post_tags_on_post_id', using: :btree
-  add_index 'post_tags', ['tag_id'], name: 'index_post_tags_on_tag_id', using: :btree
+  add_index "post_tags", ["post_id"], name: "index_post_tags_on_post_id", using: :btree
+  add_index "post_tags", ["tag_id"], name: "index_post_tags_on_tag_id", using: :btree
 
-  create_table 'posts', force: true do |t|
-    t.string   'title'
-    t.text     'body'
-    t.integer  'author_id'
-    t.datetime 'created_at'
-    t.datetime 'updated_at'
+  create_table "posts", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "author_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table 'tags', force: true do |t|
-    t.string   'name'
-    t.datetime 'created_at'
-    t.datetime 'updated_at'
-    t.string   'ancestry'
+  create_table "tags", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "ancestry"
   end
 
-  add_index 'tags', ['ancestry'], name: 'index_tags_on_ancestry', using: :btree
+  add_index "tags", ["ancestry"], name: "index_tags_on_ancestry", using: :btree
 
-  create_table 'users', force: true do |t|
-    t.string   'name'
-    t.string   'image_url'
-    t.datetime 'created_at'
-    t.datetime 'updated_at'
-    t.string   'email',                   default: '', null: false
-    t.string   'encrypted_password',      default: '', null: false
-    t.string   'reset_password_token'
-    t.datetime 'reset_password_sent_at'
-    t.datetime 'remember_created_at'
-    t.integer  'sign_in_count',           default: 0,  null: false
-    t.datetime 'current_sign_in_at'
-    t.datetime 'last_sign_in_at'
-    t.string   'current_sign_in_ip'
-    t.string   'last_sign_in_ip'
-    t.string   'google_auth_token'
-    t.string   'google_refresh_token'
-    t.datetime 'google_token_expires_at'
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "image_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "email",                   default: "", null: false
+    t.string   "encrypted_password",      default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",           default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "google_auth_token"
+    t.string   "google_refresh_token"
+    t.datetime "google_token_expires_at"
   end
 
-  add_index 'users', ['email'], name: 'index_users_on_email', unique: true, using: :btree
-  add_index 'users', ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

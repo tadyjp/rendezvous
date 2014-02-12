@@ -41,9 +41,6 @@ end
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
@@ -69,8 +66,6 @@ group :development do
 
   gem 'thin'
 
-  # gem 'capistrano', '~> 3.0.1'
-
   gem 'pry-rails'
 
   # profiler
@@ -81,6 +76,12 @@ group :development do
   gem 'guard-rubocop'
   gem 'guard-spring'
   gem 'spring'
+
+  # Use Capistrano for deployment
+  gem 'capistrano', '~> 3.1'
+  gem 'capistrano-bundler', '~> 1.1.2'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-rbenv', '~> 2.0'
 end
 
 group :development, :test do
