@@ -47,7 +47,6 @@ end
 # gem 'bootstrap-sass-rails'
 
 gem 'mysql2'
-gem 'sqlite3'
 
 gem 'devise'
 gem 'omniauth-google-oauth2'
