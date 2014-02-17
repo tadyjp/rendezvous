@@ -22,3 +22,4 @@
 *.bk
 
 /db/*.sql
+/config/database.yml
