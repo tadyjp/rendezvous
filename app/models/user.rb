@@ -44,8 +44,8 @@ class User < ActiveRecord::Base
       builder.adapter  :net_http
     end
     response = conn.post '/o/oauth2/token',
-                         client_id: ENV['GOOGLE_KEY'],
-                         client_secret: ENV['GOOGLE_SECRET'],
+                         client_id: Settings.google_api.client_id,
+                         client_secret: Settings.google_api.secret,
                          refresh_token: google_refresh_token,
                          grant_type: 'refresh_token'
 
