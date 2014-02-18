@@ -1,0 +1,14 @@
+defaults: &defaults
+  google_api:
+    client_id: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com"
+    secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+

@@ -112,5 +112,7 @@ gem 'premailer'
 
 gem 'faraday'
 
+gem 'settingslogic'
+
 # Check mail format
 gem 'validates_email_format_of'

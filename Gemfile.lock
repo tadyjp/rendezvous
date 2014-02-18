@@ -273,6 +273,7 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
+    settingslogic (2.0.9)
     simplecov (0.8.2)
       docile (~> 1.1.0)
       multi_json
@@ -366,6 +367,7 @@ DEPENDENCIES
   rubocop
   sass-rails
   sdoc
+  settingslogic
   spring
   therubyracer
   thin
