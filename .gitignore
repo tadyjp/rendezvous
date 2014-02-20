@@ -23,6 +23,5 @@
 /db/*.sql
 
 # secret files
-.env
 /config/database.yml
 /config/settings.yml
