@@ -72,9 +72,10 @@ group :development do
 
   # rubocop
   gem 'rubocop'
+  gem 'guard-rspec', require: false
   gem 'guard-rubocop'
-  gem 'guard-spring'
-  gem 'spring'
+  # gem 'guard-spring'
+  # gem 'spring'
 
   # Use Capistrano for deployment
   gem 'capistrano', '~> 3.1'

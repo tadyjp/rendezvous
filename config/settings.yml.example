@@ -1,3 +1,7 @@
+# Read Me
+# Copy this file to `settings.yml` when you run first development.
+#   $ cp config/settings.yml.example config/settings.yml
+
 defaults: &defaults
   google_api:
     client_id: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com"

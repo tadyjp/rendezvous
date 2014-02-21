@@ -6,7 +6,8 @@ describe Post do
     before :each do
       @post = create(:post)
       @alice = create(:alice)
-      @new_post = @post.generate_fork(@alice).save
+      @new_post = @post.generate_fork(@alice)
+      @new_post.save
     end
 
     describe 'Fork' do
