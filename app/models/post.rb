@@ -37,12 +37,12 @@ class Post < ActiveRecord::Base
   # generate forked post (not saved)
   def generate_fork(user)
 
-    forked_post = Post.new(self.attributes.except(:id))
-    forked_post.title = forked_post.title.gsub(/%Name/, user.name)
-    forked_post.title = Time.now.strftime(forked_post.title) # TODO
-    forked_post.tag_ids = self.tag_ids
-    forked_post.author = user
+    _forked_post = Post.new(self.attributes.except('id'))
+    _forked_post.title = _forked_post.title.gsub(/%Name/, user.name)
+    _forked_post.title = Time.now.strftime(_forked_post.title) # TODO
+    _forked_post.tag_ids = self.tag_ids
+    _forked_post.author = user
 
-    forked_post
+    _forked_post
   end
 end

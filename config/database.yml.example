@@ -6,28 +6,28 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: <%= ENV['DB_DEVELOPMENT_DATABASE'] %>
   pool: 5
-  username: <%= ENV['DB_DEVELOPMENT_USER'] %>
-  password: <%= ENV['DB_DEVELOPMENT_PASS'] %>
-  host: <%= ENV['DB_DEVELOPMENT_HOST'] %>
+  host: localhost
+  database: rendezvous_development
+  username: rendezvous
+  password: rendezvous
 
 test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: <%= ENV['DB_TEST_DATABASE'] %>
   pool: 5
-  username: <%= ENV['DB_TEST_USER'] %>
-  password: <%= ENV['DB_TEST_PASS'] %>
-  host: <%= ENV['DB_TEST_HOST'] %>
+  host: localhost
+  database: rendezvous_test
+  username: travis
+  password:
 
 production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: <%= ENV['DB_PRODUCTION_DATABASE'] %>
   pool: 5
-  username: <%= ENV['DB_PRODUCTION_USER'] %>
-  password: <%= ENV['DB_PRODUCTION_PASS'] %>
-  host: <%= ENV['DB_PRODUCTION_HOST'] %>
+  host: rendezvous.production
+  database: rendezvous
+  username: xxxxxxxxxxxxxx
+  password: xxxxxxxxxxxxxx
