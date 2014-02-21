@@ -6,5 +6,6 @@ rvm:
 before_script:
   - mysql -e 'CREATE DATABASE rendezvous_test;'
   - cp config/database.yml.example config/database.yml
+  - cp config/settings.yml.example config/settings.yml
 env:
   - DB_TEST_DATABASE=rendezvous_test DB_TEST_USER=travis
