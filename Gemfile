@@ -52,8 +52,7 @@ gem 'devise'
 gem 'omniauth-google-oauth2'
 
 # Markdown
-gem 'redcarpet', :git => 'git://github.com/vmg/redcarpet.git',
-                 :branch => "master"
+gem 'github-markdown'
 
 # Syntax Highlight
 gem 'coderay'

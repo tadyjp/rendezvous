@@ -7,13 +7,6 @@ GIT
       activesupport
       gmail_xoauth
 
-GIT
-  remote: git://github.com/vmg/redcarpet.git
-  revision: e627bee83b80fd440fc7edb609def9cb4393e332
-  branch: master
-  specs:
-    redcarpet (3.1.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -122,6 +115,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffi (1.9.3)
     formatador (0.2.4)
+    github-markdown (0.6.4)
     gmail_xoauth (0.4.1)
       oauth (>= 0.3.6)
     guard (2.4.0)
@@ -360,6 +354,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   faraday
+  github-markdown
   guard-rspec
   guard-rubocop
   i18n_generators
@@ -375,7 +370,6 @@ DEPENDENCIES
   pry-rails
   rack-mini-profiler
   rails (~> 4.0)
-  redcarpet!
   rspec-rails
   rubocop
   sass-rails
