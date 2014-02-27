@@ -6,8 +6,13 @@ class ApplicationController < ActionController::Base
   def require_login
     unless user_signed_in?
       flash[:alert] = 'You need Login!'
+      session[:login_redirect_to] = request.url
       redirect_to root_path
     end
+  end
+
+  def after_sign_in_path_for(resource)
+    session[:login_redirect_to] || request.env['omniauth.origin'] || stored_location_for(resource) || root_path
   end
 
   rescue_from(ActionController::ParameterMissing) do |parameter_missing_exception|
