@@ -3,7 +3,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     email = request.env['omniauth.auth'].info['email']
 
-    # reject if email is not zigexn nor ventura
+    # reject if email is not zigexn nor ventura.
     if email !~ /@zigexn\.co\.jp$/ && email !~ /@zigexn\.vn$/
       redirect_to root_path, flash: { alert: 'Your email address is not permitted.' }
       return
