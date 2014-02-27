@@ -1,52 +1,5 @@
 <div class="login">
 
-  <!-- Carousel
-  ================================================== -->
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner">
-      <div class="item active">
-        <p style="text-align:center;"><img src="<%= image_path 'office-space-view.jpg' %>" alt="First slide"></p>
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>らんでぶー</h1>
-            <p>Googleアカウントでログインしてください。</p>
-            <p><a class="btn btn-lg btn-primary" href="<%= user_omniauth_authorize_path(:google_oauth2) %>" role="button">Sign up with Google</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <p style="text-align:center;"><img src="<%= image_path 'business-communication.jpg' %>" alt="Second slide"></p>
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>Another example headline.</h1>
-            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a class="btn btn-lg btn-primary" href="<%= user_omniauth_authorize_path(:google_oauth2) %>" role="button">Sign up with Google</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <p style="text-align:center;"><img src="<%= image_path 'group-communication.jpg' %>" alt="Third slide"></p>
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>One more for good measure.</h1>
-            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a class="btn btn-lg btn-primary" href="<%= user_omniauth_authorize_path(:google_oauth2) %>" role="button">Sign up with Google</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-  </div><!-- /.carousel -->
-
-
-
   <!-- Marketing messaging and featurettes
   ================================================== -->
   <!-- Wrap the rest of the page in another container to center all the content. -->
@@ -54,24 +7,16 @@
   <div class="container marketing">
 
     <!-- Three columns of text below the carousel -->
-    <div class="row">
+    <div class="row" style="margin-top: 40px">
       <div class="col-lg-4">
-        <img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
-        <img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
-        <h2>Heading</h2>
-        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        <img class="img-circle" src="http://placehold.it/140x140&amp;text=Rendezvous" alt="Generic placeholder image">
+        <h2>Rendezvous</h2>
+        <p>Rendezvousはチームの`Stock`と`Flow`の<br>2つの情報を蓄積・検索・共有する<br>オープンソースのソフトウェアです。</p>
+        <p><a class="btn btn-lg btn-primary" href="<%= user_omniauth_authorize_path(:google_oauth2) %>" role="button">Sign up with Google</a></p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
-        <img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
 
@@ -82,11 +27,11 @@
 
     <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+        <h2 class="featurette-heading">Stock all you have done. <span class="text-muted">It may be priceless for others.</span></h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
       </div>
       <div class="col-md-5">
-        <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        <img class="featurette-image img-responsive" src="http://placehold.it/500x400&amp;text=Stock" alt="Stock">
       </div>
     </div>
 
@@ -94,10 +39,10 @@
 
     <div class="row featurette">
       <div class="col-md-5">
-        <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        <img class="featurette-image img-responsive" src="http://placehold.it/500x400&amp;text=Flow" alt="Flow">
       </div>
       <div class="col-md-7">
-        <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+        <h2 class="featurette-heading">Flow anything member have come up with. <span class="text-muted">Which accelerate your PDCA.</span></h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
       </div>
     </div>
@@ -106,24 +51,17 @@
 
     <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+        <h2 class="featurette-heading">Collaborate with other team on documents. <span class="text-muted">Making more and more generic plans.</span></h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
       </div>
       <div class="col-md-5">
-        <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        <img class="featurette-image img-responsive" src="http://placehold.it/500x400&amp;text=Collaboration" alt="Collaboration">
       </div>
     </div>
 
     <hr class="featurette-divider">
 
     <!-- /END THE FEATURETTES -->
-
-
-    <!-- FOOTER -->
-    <footer>
-      <p class="pull-right"><a href="#">Back to top</a></p>
-      <p>&copy; 2013 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-    </footer>
 
   </div><!-- /.container -->
 

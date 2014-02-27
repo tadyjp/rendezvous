@@ -28,7 +28,16 @@
     window.RV.AllTags = JSON.parse('<%= raw Tag.all.pluck(:name).to_json %>');
   </script>
 
+  <footer>
+    <div class="container">
+      <a href="https://github.com/tadyjp/rendezvous">Github</a>
+      |
+      <a href="https://twitter.com/tady_jp">@tady_jp</a>
+    </div>
+  </footer>
+
   <%= javascript_include_tag "application" %>
   <%= yield :footer_js %>
+
 </body>
 </html>
