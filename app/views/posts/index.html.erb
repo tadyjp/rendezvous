@@ -1,56 +1,40 @@
+<div class="row">
 
-<div class="app">
+  <div class="col-xs-6 col-md-4" id="sidebar" role="navigation">
 
-  <%= render partial: 'partials/app_header' %>
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#tab-list" data-toggle="tab">List</a></li>
+      <li><a href="#tab-tree" data-toggle="tab">Tag Tree</a></li>
+    </ul>
 
-  <div class="container">
-
-    <div class="row">
-
-      <div class="col-xs-6 col-md-4" id="sidebar" role="navigation">
-
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#tab-list" data-toggle="tab">List</a></li>
-          <li><a href="#tab-tree" data-toggle="tab">Tag Tree</a></li>
-        </ul>
-
-        <div class="tab-content">
-          <div class="tab-pane active" id="tab-list">
-            <div class="list-group">
-              <% @posts.each_with_index do |post, i| %>
-                <a href="#" data-post-id="<%= post.id %>" class="list-group-item post-list"><%= post.title %></a>
-              <% end %>
-            </div>
-          </div><!-- /.tab-pane -->
-          <div class="tab-pane" id="tab-tree">
-            <% cache('tag-tree', :expires_in => 1.hour) do %>
-              <div class="list-group">
-                <% Tag.roots.each do |root| %>
-                  <%= h_display_tree(root) %>
-                <% end %>
-              </div>
-            <% end %>
-          </div><!-- /.tab-pane -->
-        </div><!-- /.tab-content -->
-
-      </div><!--/span-->
-
-      <div class="col-xs-12 col-sm-6 col-md-8">
-
-        <div id="list_post">
-          <p id="posts-placeholder" style="color:#aaa;font-size:30px">&lt;-- Select a post...</p>
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab-list">
+        <div class="list-group">
+          <% @posts.each_with_index do |post, i| %>
+            <a href="#" data-post-id="<%= post.id %>" class="list-group-item post-list"><%= post.title %></a>
+          <% end %>
         </div>
+      </div><!-- /.tab-pane -->
+      <div class="tab-pane" id="tab-tree">
+        <% cache('tag-tree', :expires_in => 1.hour) do %>
+          <div class="list-group">
+            <% Tag.roots.each do |root| %>
+              <%= h_display_tree(root) %>
+            <% end %>
+          </div>
+        <% end %>
+      </div><!-- /.tab-pane -->
+    </div><!-- /.tab-content -->
 
-      </div><!--/span-->
+  </div><!--/span-->
 
-    </div><!--/row-->
+  <div class="col-xs-12 col-sm-6 col-md-8">
 
-  </div><!--/.container-->
+    <div id="list_post">
+      <p id="posts-placeholder" style="color:#aaa;font-size:30px">&lt;-- Select a post...</p>
+    </div>
 
-</div>
+  </div><!--/span-->
 
-<% content_for :footer_js do %>
-<script type="text/javascript">
+</div><!--/row-->
 
-</script>
-<% end %>
