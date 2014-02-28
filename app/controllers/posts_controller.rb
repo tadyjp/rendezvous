@@ -3,6 +3,7 @@ require 'nkf'
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :require_login
+  layout 'app'
 
   include ApplicationHelper
   include RV::Mailer

@@ -1,5 +1,6 @@
 Rendezvous::Application.routes.draw do
 
+
   root 'home#top', as: 'root'
 
   post 'posts/preview' => 'posts#preview'
@@ -8,6 +9,8 @@ Rendezvous::Application.routes.draw do
   post 'posts/:id/mail' => 'posts#mail', as: 'mail_post'
   post 'posts/:id/comment' => 'posts#comment', as: 'comment_post'
   resources :posts
+
+  get 'tags/:name' => 'tags#show', as: 'show_tag'
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
