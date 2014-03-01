@@ -16,7 +16,7 @@ services:
 before_install:
   - "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
   - gem install bundler fog
-  - "./script/travis/bundle_install.sh"
+  - "sh ./script/travis/bundle_install.sh"
 before_script:
   - mysql -e 'CREATE DATABASE rendezvous_test;'
   - cp config/database.yml.example config/database.yml
