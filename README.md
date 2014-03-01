@@ -6,7 +6,7 @@ rendezvous
 [![Code Climate](https://codeclimate.com/github/tadyjp/rendezvous.png)](https://codeclimate.com/github/tadyjp/rendezvous)
 [![Dependency Status](https://gemnasium.com/tadyjp/rendezvous.png)](https://gemnasium.com/tadyjp/rendezvous)
 
-A simple markdown-based wiki system for team.
+A simple markdown-based blog & wiki system for team.
 
 
 # Supported versions
@@ -38,28 +38,31 @@ and get
 5. Get [Client ID] and [Client secret]
 
 
-## Create your .env file.
+## Create and edit config files.
 
 ```
-$ cp .env.example .env
-$ vim .env
+$ cp config/database.yml.example config/database.yml
+$ vim config/database.yml
+
+$ cp config/settings.yml.example config/settings.yml
+$ vim config/settings.yml
 ```
 
-Set Google API [Client ID] and [Client secret] in `.env`
 
-
-## Setup DB (Default: mysql).
+## Setup DB
 
 ```
 $ (bundle exec) rake db:migrate
 $ (bundle exec) rake db:seed
 ```
-
-## Set ENV before start server.
-
-```
-$ source .env
-$ (bundle exec) rails s
-```
-
 And have fun with your team !
+
+
+
+# Test
+
+Rendezvous uses travis-ci for test.
+
+To speet up `bundle install` in travis-ci, Rendezvous use AWS S3 backet for storing gems.
+
+see also: http://randomerrata.com/post/45827813818/travis-s3

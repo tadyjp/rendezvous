@@ -1,11 +1,26 @@
+bundler_args: --without development --path=~/.bundle
 language: ruby
-services:
-  - mysql
 rvm:
   - 2.0.0
+env:
+  matrix:
+  - DB_TEST_DATABASE=rendezvous_test DB_TEST_USER=travis
+  global:
+    - secure: iCVObmVUWglzaPBvhJ/oCg/0LXFffDyGii/ws2YanPxXs9QsFhVDDj0WtKikK1ZsvZQBADRUJlQwDeTj2VD8rTGsq0Wu9Tjjz82vm+BJ6wb67QMr8HAdi096QeushLKmuVni1HEZcfStltSbmxkZpeRNf2XH9hkjb98g/2x4mzg=
+    - BUNDLE_ARCHIVE="rendezvous-travis-bundler"
+    - AWS_S3_REGION="us-east-1"
+    - AWS_S3_BUCKET="rendezvous-travis-bundler"
+    - RAILS_ENV=test
+services:
+  - mysql
+before_install:
+  - "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
+  - gem install bundler fog
+  - "sh ./script/travis/bundle_install.sh"
 before_script:
   - mysql -e 'CREATE DATABASE rendezvous_test;'
   - cp config/database.yml.example config/database.yml
   - cp config/settings.yml.example config/settings.yml
-env:
-  - DB_TEST_DATABASE=rendezvous_test DB_TEST_USER=travis
+after_script:
+  - "ruby script/travis/bundle_cache.rb"
+script: "bundle exec rake db:create db:test:load spec"
