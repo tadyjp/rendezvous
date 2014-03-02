@@ -1,71 +1,76 @@
-<%= form_for(@post) do |f| %>
+<div id="post-form">
+  <%= form_for(@post) do |f| %>
 
-  <% if @post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+    <% if @post.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-      <ul>
-      <% @post.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row">
+
+      <div class="col-md-10">
+        <div class="field">
+          <div class="input-group">
+            <span class="input-group-addon"><%= f.label :title %></span>
+            <%= f.text_field :title, class: 'form-control mod-mdEditor-title' %>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="input-group">
+            <span class="input-group-addon"><%= f.label :tags %></span>
+            <%= hidden_field :post, :tags, class: 'mod-mdEditor-tags', style: 'width:300px', value: @post.tags.pluck(:name).join(',') %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="actions">
+          <%= f.submit class: 'btn btn-primary js-disable-confirm-unload', id: 'save_button' %>
+        </div>
+      </div>
+
     </div>
+
+    <br>
+
+    <div class="row">
+
+      <div class="col-xs-6 col-md-6">
+
+        <div class="field">
+          <!-- <%= f.label :body %><br> -->
+          <%= f.text_area :body, class: 'mod-mdEditor-body' %>
+        </div>
+
+      </div><!--/span-->
+
+      <div class="col-xs-12 col-sm-6 col-md-6">
+
+        <div class="box-text">
+          <%# TODO: class名の整理 %>
+          <div class="text-box body viewer github mod-mdEditor-preview">
+          </div>
+        </div>
+
+      </div><!--/span-->
+
+    </div><!--/row-->
+
   <% end %>
-
-  <div class="row">
-
-    <div class="col-md-10">
-      <div class="field">
-        <div class="input-group">
-          <span class="input-group-addon"><%= f.label :title %></span>
-          <%= f.text_field :title, class: 'form-control' %>
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="input-group">
-          <span class="input-group-addon"><%= f.label :tags %></span>
-          <%= hidden_field :post, :tags, id: 'post_tags', style: 'width:300px', value: @post.tags.pluck(:name).join(',') %>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-2">
-      <div class="actions">
-        <%= f.submit class: 'btn btn-primary js-disable-confirm-unload', id: 'save_button' %>
-      </div>
-    </div>
-
-  </div>
-
-  <br>
-
-  <div class="row">
-
-    <div class="col-xs-6 col-md-6">
-
-      <div class="field">
-        <!-- <%= f.label :body %><br> -->
-        <%= f.text_area :body, class: 'autosize editor disable-tab' %>
-      </div>
-
-    </div><!--/span-->
-
-    <div class="col-xs-12 col-sm-6 col-md-6">
-
-      <div class="box-text">
-        <div id="post_preview" class="text-box body viewer github">
-        </div>
-      </div>
-
-    </div><!--/span-->
-
-  </div><!--/row-->
-
-<% end %>
+</div>
 
 <% content_for :footer_js do %>
 <script type="text/javascript">
-  $.setConfirmUnload()
+  $.setConfirmUnload();
+
+  $('#post-form').mod_mdEditor({end_point: '/apis/markdown_preview'});
 </script>
 <% end %>

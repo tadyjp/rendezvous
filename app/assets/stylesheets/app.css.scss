@@ -87,33 +87,4 @@
   }
 */
 
-  /* posts#new
-  -------------------------------------------------- */
-  #post_title {
-    width: 95%;
-    height: 40px;
-    font-weight: bold;
-    font-size: 25px;
-  }
-  .input-group-addon {
-    label {
-      margin: 0;
-    }
-  }
-
-  #post_body {
-    width: 100%;
-    min-height: 400px;
-    font-size: 9pt;
-    padding: 3px;
-    tab-size: 2;
-  }
-
-  #post_preview {
-    min-height: 400px;
-  }
-
-  .editor {
-    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', 'Ricty', monospace;
-  }
 }

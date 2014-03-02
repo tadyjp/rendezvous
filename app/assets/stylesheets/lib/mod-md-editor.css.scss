@@ -1,0 +1,29 @@
+/* Style for mod-mdEditor
+-------------------------------------------------- */
+.mod-mdEditor-title {
+  width: 95%;
+  height: 40px;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+// .input-group-addon {
+//   label {
+//     margin: 0;
+//   }
+// }
+
+.mod-mdEditor-body {
+  width: 100%;
+  min-height: 400px;
+  font-size: 9pt;
+  padding: 3px;
+  tab-size: 2;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', 'Ricty', monospace;
+}
+
+.mod-mdEditor-preview {
+  min-height: 400px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', 'Ricty', monospace;
+}
+

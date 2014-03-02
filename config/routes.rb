@@ -1,8 +1,9 @@
 Rendezvous::Application.routes.draw do
 
+  post 'apis/markdown_preview'
+
   root   'home#top', as: 'root'
 
-  post   'posts/preview' => 'posts#preview'
   get    'posts/:id/fork' => 'posts#fork', as: 'fork_post'
   post   'posts/:id/mail' => 'posts#mail', as: 'mail_post'
   post   'posts/:id/comment' => 'posts#comment', as: 'comment_post'
