@@ -17,4 +17,10 @@ class Tag < ActiveRecord::Base
       _post.tags << other_tag unless _post.tags.include?(other_tag)
     end
   end
+
+  # 親タグを設定する
+  def set_parent!(other_tag)
+    self.parent = other_tag
+    self.save!
+  end
 end

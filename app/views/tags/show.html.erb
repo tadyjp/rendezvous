@@ -15,8 +15,7 @@
       </button>
       <ul class="dropdown-menu" role="menu">
         <li><a href="#" data-toggle="modal" data-target="#modal-merge">Merge to...</a></li>
-        <li><a href="#" data-toggle="modal" data-target="#myModal">Rename to...</a></li>
-        <li><a href="#" data-toggle="modal" data-target="#myModal">Open Tag Tree editor...</a></li>
+        <li><a href="#" data-toggle="modal" data-target="#modal-moveUnder">Move this tag under...</a></li>
       </ul>
     </div>
   </div>
@@ -52,54 +51,102 @@
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <%= form_tag '#', method: :post, class: 'form-horizontal', role: 'form' do %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title" id="myModalLabel">Merge to other tag</h4>
+      </div>
 
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h3 class="modal-title" id="myModalLabel">Merge to other tag</h4>
+      <div class="modal-body">
+        <h4>マージ先のTagを選んでください</h4>
+        <div id="merge-tag-tree">
+          <%= Tag.all.decorate.tree_view %>
         </div>
+      </div>
 
-        <div class="modal-body">
-          <h4>マージ先のTagを選んでください</h4>
-          <div id="merge-tag-tree">
-            <%= Tag.all.decorate.tree_view %>
-          </div>
-        </div>
+      <% content_for :footer_js do %>
+        <script type="text/javascript">
+          $(function(){
+            $('#merge-tag-tree a').on('click', function(e){
 
-<% content_for :footer_js do %>
-  <script type="text/javascript">
-    $(function(){
-      $('#merge-tag-tree a').on('click', function(e){
+              console.log(e)
 
-        console.log(e)
+              e.preventDefault();
+              var $this = $(this);
 
-        e.preventDefault();
-        var $this = $(this);
+              if(window.confirm('「<%= @tag.name %>」を「' + $this.data('name') + '」にマージます')) {
+                $.ajax({
+                  type: "POST",
+                  url: "/tags/<%= @tag.name %>/merge_to/" + $this.data('name')
+                }).done(function(data){
+                  location.href = "/tags/" + $this.data('name');
+                }).fail(function(data){
+                  alert('error');
+                });
+              } else {
+                return false;
+              }
+            })
+          })
+        </script>
+      <% end %>
 
-        if(window.confirm('「<%= @tag.name %>」を「' + $this.data('name') + '」にマージます')) {
-          $.ajax({
-            type: "POST",
-            url: "/tags/<%= @tag.name %>/merge_to/" + $this.data('name')
-          }).done(function(data){
-            location.href = "/tags/" + $this.data('name');
-          }).fail(function(data){
-            alert('error');
-          });
-        } else {
-          return false;
-        }
-      })
-    })
-  </script>
-<% end %>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div><!-- /.modal-content -->
-
-    <% end %><%# form %>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
 
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+
+<!-- Modal -->
+<div class="modal fade" id="modal-moveUnder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title" id="myModalLabel">Merge to other tag</h4>
+      </div>
+
+      <div class="modal-body">
+        <h4>マージ先のTagを選んでください</h4>
+        <div id="move-tag-tree">
+          <%= Tag.all.decorate.tree_view %>
+        </div>
+      </div>
+
+      <% content_for :footer_js do %>
+        <script type="text/javascript">
+          $(function(){
+            $('#move-tag-tree a').on('click', function(e){
+
+              console.log(e)
+
+              e.preventDefault();
+              var $this = $(this);
+
+              if(window.confirm('「<%= j @tag.name %>」を「' + $this.data('name') + '」の下に移動します')) {
+                $.ajax({
+                  type: "POST",
+                  url: "/tags/<%= @tag.name %>/move_to/" + encodeURIComponent($this.data('name'))
+                }).done(function(data){
+                  location.href = "/tags/<%= j @tag.name %>";
+                }).fail(function(data){
+                  alert('error');
+                });
+              } else {
+                return false;
+              }
+            })
+          })
+        </script>
+      <% end %>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-  before_action :set_tag, only: [:show, :edit, :update, :destroy]
+  before_action :set_tag, only: [:show, :edit, :update, :destroy, :merge_to, :move_to]
 
   def index
   end
@@ -48,11 +48,27 @@ class TagsController < ApplicationController
     end
   end
 
+  # このタグを他のタグにマージ
+  #   すべてのPostを移動先のタグに移動し
+  #   このタグを削除する
   def merge_to
     @merge_to_tag = Tag.find_by(name: params[:merge_to_name]) or raise ActiveRecord::RecordNotFound
 
     @tag.move_all_posts_to!(@merge_to_tag)
     @tag.delete
+
+    flash[:notice] = "「#{@tag.name}」は「#{@merge_to_tag.name}」にmergeされました"
+
+    render json: { status: 'OK' }
+  end
+
+  # このタグを他のタグの下に移動
+  def move_to
+    @move_to_tag = Tag.find_by(name: params[:move_to_name]) or raise ActiveRecord::RecordNotFound
+
+    @tag.set_parent!(@move_to_tag)
+
+    flash[:notice] = "「#{@tag.name}」は「#{@move_to_tag.name}」の下に移動しました"
 
     render json: { status: 'OK' }
   end

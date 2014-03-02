@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Tag do
-  describe '#move_posts_to' do
+  describe '#move_all_posts_to!' do
     before :each do
       @tag_ruby = Tag.create(name: 'ruby')
       @tag_java = Tag.create(name: 'java')
@@ -16,6 +16,21 @@ describe Tag do
       @tag_java.move_all_posts_to!(@tag_ruby)
       expect(Tag.find_by(name: 'ruby').posts).to have(3).items
       expect(Tag.find_by(name: 'java').posts).to have(0).items
+    end
+  end
+
+  describe '#set_parent!' do
+    before :each do
+      @tag_ruby = Tag.create(name: 'ruby')
+      @tag_lang = Tag.create(name: 'lang')
+    end
+
+    it 'successfully moved' do
+      expect(@tag_ruby.parent).not_to eq(@tag_lang)
+      expect(@tag_lang.children).not_to include(@tag_ruby)
+      @tag_ruby.set_parent!(@tag_lang)
+      expect(@tag_ruby.parent).to eq(@tag_lang)
+      expect(@tag_lang.children).to include(@tag_ruby)
     end
   end
 end
