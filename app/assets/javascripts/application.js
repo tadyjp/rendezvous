@@ -17,3 +17,5 @@
 //= require_tree ./lib
 //= require_tree .
 
+_.mixin(_.string.exports());
+

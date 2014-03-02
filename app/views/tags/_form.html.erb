@@ -1,12 +1,13 @@
-<div id="post-form">
-  <%= form_for(@post) do |f| %>
+<div id="tag-form">
 
-    <% if @post.errors.any? %>
+  <%= form_for(@tag, url: @tag.show_path) do |f| %>
+
+    <% if @tag.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+        <h2><%= pluralize(@tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
 
         <ul>
-        <% @post.errors.full_messages.each do |msg| %>
+        <% @tag.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
         </ul>
@@ -18,16 +19,8 @@
       <div class="col-md-10">
         <div class="field">
           <div class="input-group">
-            <span class="input-group-addon"><%= f.label :title %></span>
-            <%= f.text_field :title, class: 'form-control mod-mdEditor-title' %>
-          </div>
-        </div>
-
-        <div class="field">
-          <div class="input-group">
-            <span class="input-group-addon"><%= f.label :tags %></span>
-            <%= hidden_field :post, :tags, class: 'mod-mdEditor-tags', style: 'width:300px',
-              value: @post.tags.map{ |_tag| _tag.name }.join(',') %>
+            <span class="input-group-addon"><%= f.label :name %></span>
+            <%= f.text_field :name, class: 'form-control' %>
           </div>
         </div>
       </div>
@@ -56,8 +49,7 @@
       <div class="col-xs-12 col-sm-6 col-md-6">
 
         <div class="box-text">
-          <%# TODO: class名の整理 %>
-          <div class="text-box body viewer github mod-mdEditor-preview">
+          <div id="tag_preview" class="text-box body viewer github mod-mdEditor-preview">
           </div>
         </div>
 
@@ -66,12 +58,13 @@
     </div><!--/row-->
 
   <% end %>
+
 </div>
 
 <% content_for :footer_js do %>
 <script type="text/javascript">
-  $.setConfirmUnload();
+  $.setConfirmUnload()
 
-  $('#post-form').mod_mdEditor({end_point: '/apis/markdown_preview'});
+  $('#tag-form').mod_mdEditor({end_point: '/apis/markdown_preview'});
 </script>
 <% end %>

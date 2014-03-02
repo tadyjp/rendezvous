@@ -3,9 +3,7 @@ require 'nkf'
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :require_login
-  layout 'app'
 
-  include ApplicationHelper
   include RV::Mailer
 
   # GET /posts
@@ -16,10 +14,6 @@ class PostsController < ApplicationController
     else
       @posts = Post.order(updated_at: :desc).limit(10)
     end
-  end
-
-  def preview
-    render text: h_application_format_markdown(params[:text])
   end
 
   # GET /posts/1

@@ -1,16 +1,17 @@
 Rendezvous::Application.routes.draw do
 
+  post 'apis/markdown_preview'
 
-  root 'home#top', as: 'root'
+  root   'home#top', as: 'root'
 
-  post 'posts/preview' => 'posts#preview'
-  # get 'posts/show_fragment' => 'posts#show_fragment'
-  get 'posts/:id/fork' => 'posts#fork', as: 'fork_post'
-  post 'posts/:id/mail' => 'posts#mail', as: 'mail_post'
-  post 'posts/:id/comment' => 'posts#comment', as: 'comment_post'
+  get    'posts/:id/fork' => 'posts#fork', as: 'fork_post'
+  post   'posts/:id/mail' => 'posts#mail', as: 'mail_post'
+  post   'posts/:id/comment' => 'posts#comment', as: 'comment_post'
   resources :posts
 
-  get 'tags/:name' => 'tags#show', as: 'show_tag'
+  post   'tags/:name/merge_to/:merge_to_name' => 'tags#merge_to', as: 'merge_to_tag'
+  post   'tags/:name/move_to/:move_to_name' => 'tags#move_to', as: 'move_to_tag'
+  resources :tags, :param => :name
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 

@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
   skip_before_action :require_login
-  layout 'welcome'
 
   def top
     if user_signed_in?

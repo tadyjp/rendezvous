@@ -21,7 +21,7 @@ describe Post do
       end
 
       it 'valid title' do
-        expect(@new_post.title).to eq('sample title')
+        expect(@new_post.title).to eq('sample title のコピー')
       end
 
       it 'valid body' do
