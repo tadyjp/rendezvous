@@ -26,7 +26,8 @@
         <div class="field">
           <div class="input-group">
             <span class="input-group-addon"><%= f.label :tags %></span>
-            <%= hidden_field :post, :tags, class: 'mod-mdEditor-tags', style: 'width:300px', value: @post.tags.pluck(:name).join(',') %>
+            <%= hidden_field :post, :tags, class: 'mod-mdEditor-tags', style: 'width:300px',
+              value: @post.tags.map{ |_tag| _tag.name }.join(',') %>
           </div>
         </div>
       </div>

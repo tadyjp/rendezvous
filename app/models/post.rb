@@ -39,9 +39,17 @@ class Post < ActiveRecord::Base
   # generate forked post (not saved)
   def generate_fork(user)
 
+    # `id`以外をコピーする
     _forked_post = Post.new(self.attributes.except('id'))
+
+    # `%Name`をユーザー名に置換
     _forked_post.title = _forked_post.title.gsub(/%Name/, user.name)
+
+    # `%Y`などを日付に変換
     _forked_post.title = Time.now.strftime(_forked_post.title) # TODO
+
+    _forked_post.title = _forked_post.title + ' のコピー'
+
     _forked_post.tag_ids = self.tag_ids
     _forked_post.author = user
 

@@ -2,89 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.app {
+.navbar-default .navbar-brand {
+  background-color: #428bca;
+  color: #fff;
+}
 
-  .navbar-default .navbar-brand {
-    background-color: #428bca;
-    color: #fff;
-  }
+.navbar-default .navbar-brand,
+.label a {
+  color: white;
+}
 
-  .label a {
-    color: white;
-  }
-
-/*  .navbar-default a.btn, .navbar-default a.btn:hover{
-    padding: 10px 20px;
-    color: #fff;
-    margin-top: 6px;
-  }
-*/
-  .box-text {
-    padding: 9px 14px;
-    margin-left: 0;
-    margin-right: 0;
-    background-color: #fff;
-    border-width: 1px;
-    border-color: #ddd;
-    border: 1px solid #e1e1e8;
-    border-radius: 4px 4px 0 0;
-    box-shadow: none;
-  }
-
-  .box-highlight {
-    padding: 9px 14px;
-    margin-bottom: 14px;
-    background-color: #f7f7f9;
-    border: 1px solid #e1e1e8;
-    border-radius: 4px;
-  }
-
-  .box-text + .box-highlight {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-  }
-
-
-  #app-search-form {
-    width: 200px;
-  }
-
-  /* side tree view
-  -------------------------------------------------- */
-/*  ul {
-    padding-left: 1em;
-  }
-*/
-  /* home#show
-  -------------------------------------------------- */
-/*  .text-box {
-    padding: 9px 14px;
-    border: 1px solid #e1e1e8;
-    border-radius: 4px;
-  }
-
-  .text-box.title {
-    background-color: #fff;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-    font-weight: bold;
-    font-size: 12pt;
-  }
-
-  .text-box.meta {
-    background-color: #f7f7f9;
-    border-radius: 0;
-
-    .label {
-      display: inline-block;
-    }
-  }
-
-  .text-box.body {
-    background-color: #fff;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-  }
-*/
-
+#app-search-form {
+  width: 200px;
 }

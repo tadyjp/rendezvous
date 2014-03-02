@@ -3,27 +3,24 @@
 <head>
   <title>Rendezvous</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <%= stylesheet_link_tag    "application", media: "all" %>
-  <!-- Latest compiled and minified CSS -->
+
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-  <!-- Optional theme -->
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css">
+  <%= stylesheet_link_tag    "application", media: "all" %>
 
   <%= render_style %>
 
   <%= csrf_meta_tags %>
 </head>
-<body class="<%= params[:controller] %>-<%= params[:action] %>">
+<body class="rails-<%= params[:controller] %>-<%= params[:action] %>">
 
   <%= render partial: 'partials/header_notifications' %>
 
-  <div class="app">
-    <%= render partial: 'partials/app_header' %>
+  <%= render partial: 'partials/app_header' %>
 
-    <div class="container">
-      <%= yield %>
-    </div><!--/.container-->
-  </div>
+  <div class="container">
+    <%= yield %>
+  </div><!--/.container-->
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.string/2.3.3/underscore.string.min.js"></script>
