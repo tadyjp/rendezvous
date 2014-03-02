@@ -11,6 +11,7 @@ Rendezvous::Application.routes.draw do
   resources :posts
 
   get 'tags/:name' => 'tags#show', as: 'show_tag'
+  post 'tags/:name/merge_to/:merge_to_name' => 'tags#merge_to', as: 'merge_to_tag'
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 

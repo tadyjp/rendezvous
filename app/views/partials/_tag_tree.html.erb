@@ -1,0 +1,22 @@
+<%#
+  desc:
+    - タグTreeを表示
+    - フィルタリングフォームあり
+  css:
+    - mod-tag-tree.css
+  locals:
+    - root {Model}
+  usage:
+    render partial: 'partials/tag_tree', locals: { root: Tag }
+%>
+
+<ul class="mod-tag-tree">
+
+  <input type="search" class="mod-tag-tree-filter form-control" placeholder="filter...">
+
+  <% root.roots.each do |tag_root| %>
+    <li>
+      <%= h_display_tree(tag_root) %>
+    </li>
+  <% end %>
+</ul>

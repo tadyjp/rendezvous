@@ -1,0 +1,42 @@
+ul.mod-tag-tree {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  list-style: none;
+
+  a {
+    display: inline-block;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    list-style: none;
+    margin-left: 1.5em;
+  }
+  li {
+    margin: 0 0 0 0.5em;
+    padding: 0;
+    border-left: 1px solid #999;
+    zoom: 1;
+  }
+  li:before {
+    margin-right: 0.5em;
+    border-bottom: 1px solid #999;
+    float: left;
+    width: 1em;
+    height: 0.75em;
+    overflow: hidden;
+    content: "";
+  }
+  li:last-child {
+    border: none;
+  }
+  li:last-child:before {
+    border-left: 1px solid #999;
+  }
+
+  .mod-tag-tree-filter {
+
+  }
+}
