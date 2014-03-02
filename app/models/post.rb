@@ -6,6 +6,10 @@ class Post < ActiveRecord::Base
 
   default_scope  { order(:updated_at => :desc) }
 
+
+  has_many :attachments, as: :attachable
+  accepts_nested_attributes_for :attachments
+
   # Named scope
   scope :search, (lambda do |query|
     _where_list = includes(:author, :tags)
