@@ -58,7 +58,7 @@
         <div class="modal-body">
           <h4>マージ先のTagを選んでください</h4>
           <div id="merge-tag-tree">
-            <%= render partial: 'partials/tag_tree', locals: { root: Tag } %>
+            <%= Tag.all.decorate.tree_view %>
           </div>
         </div>
 
