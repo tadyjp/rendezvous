@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   before_action :require_login
   layout 'app'
 
+  # TODO: not to use
   include ApplicationHelper
   include RV::Mailer
 
@@ -19,6 +20,7 @@ class PostsController < ApplicationController
   end
 
   def preview
+    # TODO: not to use
     render text: h_application_format_markdown(params[:text])
   end
 

@@ -18,3 +18,4 @@
 //= require_tree .
 
 _.mixin(_.string.exports());
+
