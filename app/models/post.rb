@@ -6,7 +6,6 @@ class Post < ActiveRecord::Base
 
   default_scope  { order(:updated_at => :desc) }
 
-
   has_many :attachments, as: :attachable
   accepts_nested_attributes_for :attachments
 

@@ -1,13 +1,13 @@
 CarrierWave.configure do |config|
-  config.fog_credentials = {
-    :provider               => 'AWS',                         # required
-    :aws_access_key_id      => Settings.s3.access_key_id,     # required
-    :aws_secret_access_key  => Settings.s3.secret_access_key, # required
-    :region                 => 'ap-northeast-1',              # optional, defaults to 'us-east-1'
-    # :host                   => 's3.example.com',              # optional, defaults to nil
-    # :endpoint               => 'https://s3.example.com:8080'  # optional, defaults to nil
+  config.storage    = :aws
+  config.aws_bucket = 'rendezvous-uploads'
+  config.aws_acl    = :private
+  # config.asset_host = 'http://example.com'
+  config.aws_authenticated_url_expiration = 60 * 1
+
+  config.aws_credentials = {
+    access_key_id:     Settings.s3.access_key_id,
+    secret_access_key: Settings.s3.secret_access_key,
+    config:            AWS.config(region: 'ap-northeast-1')
   }
-  config.fog_directory  = 'rendezvous-uploads'                     # required
-  config.fog_public     = false                                   # optional, defaults to true
-  # config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}  # optional, defaults to {}
 end

@@ -125,4 +125,4 @@ gem 'paper_trail'
 
 # Upload slides and videos
 gem 'carrierwave'
-gem 'fog'
+gem 'carrierwave-aws'
