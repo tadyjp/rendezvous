@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!--
+Have a nice $$$$$$$\                            $$\
+            $$  __$$\                           $$ |
+            $$ |  $$ | $$$$$$\  $$$$$$$\   $$$$$$$ | $$$$$$\ $$$$$$$$\$$\    $$\  $$$$$$\  $$\   $$\  $$$$$$$\
+            $$$$$$$  |$$  __$$\ $$  __$$\ $$  __$$ |$$  __$$\\____$$  \$$\  $$  |$$  __$$\ $$ |  $$ |$$  _____|
+            $$  __$$< $$$$$$$$ |$$ |  $$ |$$ /  $$ |$$$$$$$$ | $$$$ _/ \$$\$$  / $$ /  $$ |$$ |  $$ |\$$$$$$\
+            $$ |  $$ |$$   ____|$$ |  $$ |$$ |  $$ |$$   ____|$$  _/    \$$$  /  $$ |  $$ |$$ |  $$ | \____$$\
+            $$ |  $$ |\$$$$$$$\ $$ |  $$ |\$$$$$$$ |\$$$$$$$\$$$$$$$$\   \$  /   \$$$$$$  |\$$$$$$  |$$$$$$$  |
+            \__|  \__| \_______|\__|  \__| \_______| \_______\________|   \_/     \______/  \______/ \_______/  with your team.
+-->
 <html lang="ja">
 <head>
   <title>Rendezvous</title>
@@ -16,9 +25,11 @@
 
   <%= render partial: 'partials/header_notifications' %>
 
-  <%= render partial: 'partials/app_header' %>
+  <%- if params[:controller] != 'home' -%>
+    <%= render partial: 'partials/app_header' %>
+  <%- end -%>
 
-  <div class="container">
+  <div class="container container-main">
     <%= yield %>
   </div><!--/.container-->
 
@@ -32,6 +43,7 @@
     window.RV.AllTags = JSON.parse('<%= raw Tag.all.pluck(:name).to_json %>');
   </script>
 
+  <hr>
   <footer>
     <div class="container">
       <a href="https://github.com/tadyjp/rendezvous">Github</a>

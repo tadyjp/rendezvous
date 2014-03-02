@@ -27,7 +27,11 @@
         「<%= @tag.name %>」とは
       </div>
       <div class="panel-body">
-        まだ「<%= @tag.name %>」の情報がありません。
+        <%- if @tag.body.present? -%>
+          <%= h_application_format_markdown(@tag.body) %>
+        <%- else -%>
+          まだ「<%= @tag.name %>」の情報がありません。
+        <%- end -%>
       </div>
     </div>
   </div>
@@ -35,7 +39,7 @@
   <div class="col-xs-4">
     <div class="list-group">
       <h2><small>「<%= @tag.name %>」のタグが付いた記事</small></h2>
-      <% @posts.each_with_index do |post, i| %>
+      <% @tag.posts.each_with_index do |post, i| %>
         <a href="<%= post_path(post) %>" class="list-group-item post-list"><%= post.title %></a>
       <% end %>
     </div>

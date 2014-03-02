@@ -1,6 +1,6 @@
 <div id="tag-form">
 
-  <%= form_for(@tag) do |f| %>
+  <%= form_for(@tag, url: @tag.show_path) do |f| %>
 
     <% if @tag.errors.any? %>
       <div id="error_explanation">

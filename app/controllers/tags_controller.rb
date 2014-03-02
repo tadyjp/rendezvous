@@ -1,12 +1,10 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
-  layout 'app'
 
   def index
   end
 
   def show
-    @posts = @tag.posts
   end
 
   def new
@@ -18,11 +16,10 @@ class TagsController < ApplicationController
 
   def create
     @tag = Tag.new(tag_params)
-    @tag.author = current_user
 
     respond_to do |format|
       if @tag.save
-        format.html { redirect_to root_path(id: @tag.id), flash: { notice: 'Tag was successfully created.' } }
+        format.html { redirect_to @tag.show_path, flash: { notice: 'Tag was successfully created.' } }
         format.json { render action: 'show', status: :created, location: @tag }
       else
         format.html { render action: 'new' }
@@ -32,11 +29,9 @@ class TagsController < ApplicationController
   end
 
   def update
-    @tag.author = current_user
-
     respond_to do |format|
       if @tag.update(tag_params)
-        format.html { redirect_to root_path(id: @tag.id), flash: { notice: 'Tag was successfully updated.' } }
+        format.html { redirect_to @tag.show_path, flash: { notice: 'Tag was successfully updated.' } }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -69,5 +64,8 @@ class TagsController < ApplicationController
     @tag = tag.decorate
   end
 
+  def tag_params
+    params.require(:tag).permit(:name, :body).to_hash
+  end
 
 end
