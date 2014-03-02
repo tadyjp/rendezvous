@@ -10,7 +10,7 @@
       <%### Post meta ###%>
       <% @post.tags.each do |tag| %>
         <span class="label label-info">
-          <a href="<%= show_tag_path(name: url_encode(tag.name)) %>">#<%= tag.name %></a>
+          <a href="<%= tag.decorate.show_path %>">#<%= tag.name %></a>
         </span>
       <% end %>
       <span class="label label-success">

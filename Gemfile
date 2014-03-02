@@ -119,3 +119,6 @@ gem 'validates_email_format_of'
 
 # Presentaion layer
 gem 'draper', '~> 1.3'
+
+# ActiveRecord versioning
+gem 'paper_trail', '~> 3.0.0'

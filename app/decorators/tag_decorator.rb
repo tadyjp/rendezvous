@@ -10,11 +10,17 @@ class TagDecorator < Draper::Decorator
   #     end
   #   end
 
+  # tagページのURL
+  # urlエンコードを施す
+  def show_path
+    h.show_tag_path(name: h.url_encode(model.name))
+  end
+
   # tagをtree viewで表示する
   def tree_view_node
     _html = ''
     _html += %Q{
-      <a href="#{ h.posts_path(q: '#' + model.name) }" data-name="#{model.name}">
+      <a href="#{ self.show_path }" data-name="#{model.name}">
         #{model.name} <span class="badge">#{model.posts.count}</span>
       </a>
     }

@@ -2,7 +2,11 @@ class Tag < ActiveRecord::Base
   has_many :post_tags
   has_many :posts, through: :post_tags
 
+  # for tree structure
   has_ancestry
+
+  # for versioning
+  has_paper_trail
 
   default_scope { order(:updated_at => :desc) }
 

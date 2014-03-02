@@ -210,6 +210,9 @@ GEM
       oauth2 (~> 0.9.3)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
+    paper_trail (3.0.0)
+      activerecord (>= 3.0, < 5.0)
+      activesupport (>= 3.0, < 5.0)
     parser (2.1.5)
       ast (~> 1.1)
       slop (~> 3.4, >= 3.4.5)
@@ -372,6 +375,7 @@ DEPENDENCIES
   mysql2
   nokogiri
   omniauth-google-oauth2
+  paper_trail (~> 3.0.0)
   poltergeist
   premailer
   pry-rails
