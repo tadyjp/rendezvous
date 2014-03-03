@@ -122,3 +122,5 @@ gem 'draper', '~> 1.3'
 
 # ActiveRecord versioning
 gem 'paper_trail', '~> 3.0.0'
+
+gem 'aws-sdk'

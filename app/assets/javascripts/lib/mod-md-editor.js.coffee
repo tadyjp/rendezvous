@@ -69,7 +69,7 @@ $.fn.extend
           # TODO
           prettyPrint()
 
-      $('.mod-mdEditor-body').on('keyup mouseup', generatePreview)
+      $('.mod-mdEditor-body').on('keyup mouseup change', generatePreview)
 
       generatePreview()
 
