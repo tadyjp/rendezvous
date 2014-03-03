@@ -1,5 +1,5 @@
 <div id="post-form">
-  <%= form_for(@post) do |f| %>
+  <%= form_for @post, html: { multipart: true } do |f| %>
 
     <% if @post.errors.any? %>
       <div id="error_explanation">
@@ -14,15 +14,24 @@
     <% end %>
 
     <div class="row">
-
-      <div class="col-md-10">
+      <div class="col-xs-10">
         <div class="field">
           <div class="input-group">
             <span class="input-group-addon"><%= f.label :title %></span>
             <%= f.text_field :title, class: 'form-control mod-mdEditor-title' %>
           </div>
         </div>
+      </div>
 
+      <div class="col-xs-2">
+        <div class="actions">
+          <%= f.submit class: 'btn btn-primary js-disable-confirm-unload', id: 'save_button' %>
+        </div>
+      </div>
+    </div><!-- /.row -->
+
+    <div class="row">
+      <div class="col-xs-6">
         <div class="field">
           <div class="input-group">
             <span class="input-group-addon"><%= f.label :tags %></span>
@@ -32,19 +41,19 @@
         </div>
       </div>
 
-      <div class="col-md-2">
-        <div class="actions">
-          <%= f.submit class: 'btn btn-primary js-disable-confirm-unload', id: 'save_button' %>
+      <div class="col-xs-6">
+        <input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>
+        <div id="progress">
+          <div class="bar progress-bar progress-bar-success" style="width: 0%;"></div>
         </div>
       </div>
-
-    </div>
+    </div><!-- /.row -->
 
     <br>
 
     <div class="row">
 
-      <div class="col-xs-6 col-md-6">
+      <div class="col-xs-6">
 
         <div class="field">
           <!-- <%= f.label :body %><br> -->
@@ -53,7 +62,7 @@
 
       </div><!--/span-->
 
-      <div class="col-xs-12 col-sm-6 col-md-6">
+      <div class="col-xs-6">
 
         <div class="box-text">
           <%# TODO: class名の整理 %>
@@ -73,5 +82,24 @@
   $.setConfirmUnload();
 
   $('#post-form').mod_mdEditor({end_point: '/apis/markdown_preview'});
+
+  $(function () {
+    $('#fileupload').fileupload({
+      dataType: 'json',
+      add: function (e, data) {
+        data.context = $('<p/>').text('Uploading...').appendTo(document.body);
+        data.submit();
+      },
+      done: function (e, data) {
+        $.each(data.result.files, function (index, file) {
+          $('<p/>').text(file.name).appendTo(document.body);
+        });
+      },
+      progressall: function (e, data) {
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        $('#progress .bar').css( 'width', progress + '%' );
+      }
+    });
+  });
 </script>
 <% end %>

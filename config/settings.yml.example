@@ -6,6 +6,9 @@ defaults: &defaults
   google_api:
     client_id: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com"
     secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  s3:
+    access_key_id: "xxxxxxxxxxxxxxxxxxxx"
+    secret_access_key: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 development:
   <<: *defaults

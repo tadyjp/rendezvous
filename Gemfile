@@ -118,7 +118,11 @@ gem 'settingslogic'
 gem 'validates_email_format_of'
 
 # Presentaion layer
-gem 'draper', '~> 1.3'
+gem 'draper'
 
 # ActiveRecord versioning
-gem 'paper_trail', '~> 3.0.0'
+gem 'paper_trail'
+
+# Upload slides and videos
+gem 'carrierwave'
+gem 'carrierwave-aws'

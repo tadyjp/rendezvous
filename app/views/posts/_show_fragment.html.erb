@@ -40,6 +40,11 @@
     </li>
   </ul>
   <div class="panel-body viewer github">
+    <% @post.attachments.each do |attachment| %>
+      <object data="<%= attachment.file.url %>#view=fitH" width="400" height="300">
+      </object>
+    <% end %>
+    <hr>
     <%= h_application_format_markdown(@post.body) %>
   </div>
 </div>
