@@ -124,3 +124,5 @@ gem 'draper', '~> 1.3'
 gem 'paper_trail', '~> 3.0.0'
 
 gem 'aws-sdk'
+
+gem 'newrelic_rpm'
