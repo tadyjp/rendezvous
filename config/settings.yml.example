@@ -6,6 +6,7 @@ defaults: &defaults
   google_api:
     client_id: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com"
     secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    bucket_name: "xxxxxxxxxxxxxx"
 
 development:
   <<: *defaults

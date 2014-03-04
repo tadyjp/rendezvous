@@ -19,8 +19,11 @@ class ApisController < ApplicationController
       basename = File.basename(file.path)
       o = bucket.objects[basename]
       out = o.write(:file => file.path)
+      # TODO rename file name
 
-      s3_file_urls << out.url_for(:read, expireds: 60).to_s
+      # http://soplana.hateblo.jp/entry/%E2%96%A0
+
+      s3_file_urls << out.url_for(:read).to_s
     end
 
     render json: { status: 'OK', urls: s3_file_urls }
