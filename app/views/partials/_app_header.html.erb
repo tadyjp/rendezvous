@@ -26,7 +26,13 @@
       </form>
 
       <p class="navbar-text" id="header-search-hint">
-        <a href="#"><span class="glyphicon glyphicon-question-sign" data-toggle="modal" data-target="#header-search-description"></span></a>
+        <a href="#" data-toggle="modal" data-target="#header-search-description">
+          Search <span class="glyphicon glyphicon-question-sign" ></span>
+        </a>
+        |
+        <a href="https://help.github.com/articles/github-flavored-markdown" target="_blank">
+          Markdown <span class="glyphicon glyphicon-question-sign" ></span>
+        </a>
       </p>
 
       <%= form_tag(destroy_user_session_path, :method => :delete, class: 'navbar-form navbar-right') do %>
