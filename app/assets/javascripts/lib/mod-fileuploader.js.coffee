@@ -8,8 +8,8 @@ $.extend
     settings.$input.fileupload
       dataType: 'json'
       done: (e, data) ->
-        $.each data.result.urls, (index, url) ->
-          settings.$textarea.val(settings.$textarea.val() + "![](" + url + ")\n")
+        $.each data.result.files, (index, _file) ->
+          settings.$textarea.val(settings.$textarea.val() + "![" + _file.name + "](" + _file.url + ")\n")
           settings.$textarea.trigger("change")
           # $('<p/>').text(file.name).appendTo('#files') # TODO
       progressall: (e, data) ->
