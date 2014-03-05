@@ -1,0 +1,36 @@
+{
+  "Version": "2012-10-17",
+  "Id": "Rendezvous http referer policy",
+  "Statement": [
+    {
+      "Sid": "Allow get requests referred by rendezvous",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::rendezvous-uploads/*",
+      "Condition": {
+        "StringLike": {
+          "aws:Referer": [
+            "http://localhost:3000/*",
+            "http://rendezvous.*"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "Explicit deny to ensure requests are allowed only from specific referer.",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::rendezvous-uploads/*",
+      "Condition": {
+        "StringNotLike": {
+          "aws:Referer": [
+            "http://localhost:3000/*",
+            "http://rendezvous.*"
+          ]
+        }
+      }
+    }
+  ]
+}

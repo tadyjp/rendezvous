@@ -1,6 +1,7 @@
 Rendezvous::Application.routes.draw do
 
   post 'apis/markdown_preview'
+  post 'apis/file_receiver'
 
   root   'home#top', as: 'root'
 
