@@ -11,6 +11,8 @@
 /db/*.sqlite3
 /db/*.sqlite3-journal
 
+*.sql
+
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
@@ -25,3 +27,6 @@
 # secret files
 /config/database.yml
 /config/settings.yml
+
+/backup
+/script/backup.sh
