@@ -126,3 +126,5 @@ gem 'paper_trail', '~> 3.0.0'
 gem 'aws-sdk'
 
 gem 'newrelic_rpm'
+
+gem 'breadcrumble'
