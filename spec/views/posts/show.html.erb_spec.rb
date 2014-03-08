@@ -1,5 +1,7 @@
 require 'spec_helper'
 
 describe "posts/show.html.erb" do
-  pending "パンくず"
+  describe "パンくず" do
+    pending
+  end
 end
