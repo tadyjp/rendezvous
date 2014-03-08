@@ -19,6 +19,11 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @post.tags.each do |_tag|
+      add_breadcrumb("##{_tag.name}", _tag.decorate.show_path)
+    end
+    add_breadcrumb(@post.title)
+
     if params[:fragment].present?
       render layout: false, partial: 'posts/show_fragment'
     else
