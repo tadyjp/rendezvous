@@ -55,4 +55,9 @@ class Post < ActiveRecord::Base
 
     _forked_post
   end
+
+  # slideshow用のbody
+  def body_for_slideshow
+    self.body.gsub(/^#/, "---\n\n#")
+  end
 end

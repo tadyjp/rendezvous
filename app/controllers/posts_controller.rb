@@ -1,7 +1,7 @@
 require 'nkf'
 
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :slideshow]
   before_action :require_login
 
   include RV::Mailer
@@ -110,6 +110,11 @@ class PostsController < ApplicationController
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # Show presentation view
+  def slideshow
+    render layout: 'slideshow'
   end
 
   private
