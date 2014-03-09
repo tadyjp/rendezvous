@@ -95,7 +95,8 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'poltergeist'
-  gem 'coveralls', :require => false
+  gem 'coveralls', require: false
+  gem 'turnip'
 end
 
 # tree structure

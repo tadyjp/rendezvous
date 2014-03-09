@@ -126,6 +126,8 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffi (1.9.3)
     formatador (0.2.4)
+    gherkin (2.12.2)
+      multi_json (~> 1.3)
     github-markdown (0.6.4)
     gmail_xoauth (0.4.1)
       oauth (>= 0.3.6)
@@ -338,6 +340,9 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    turnip (1.2.1)
+      gherkin (>= 2.5)
+      rspec (>= 2.0, < 4.0)
     tzinfo (0.3.38)
     uglifier (2.4.0)
       execjs (>= 0.3.0)
@@ -402,5 +407,6 @@ DEPENDENCIES
   slim
   therubyracer
   thin
+  turnip
   uglifier
   validates_email_format_of
