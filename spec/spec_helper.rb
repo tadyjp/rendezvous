@@ -86,4 +86,14 @@ RSpec.configure do |config|
   config.after :each do
     DatabaseRewinder.clean
   end
+
+
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock(:google_oauth2, {
+    'uid' => '12345',
+    'provider' => 'google_oauth2',
+    'info' => {'name' => 'Taro Yamada', 'email' => 'taro@zigexn.co.jp'},
+    'credentials' => {'token' => 'aaaaa', 'refresh_token' => 'bbbbb', 'expires_at' => 9999999999}
+  })
+
 end

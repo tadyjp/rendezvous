@@ -12,13 +12,13 @@ class User < ActiveRecord::Base
 
   # Device
   def self.find_for_google_oauth2(access_token, signed_in_resource = nil)
-    data = access_token.info
-    user = User.where(email: data['email']).first
+    info = access_token.info
+    user = User.where(email: info['email']).first
 
     unless user
-      user = User.create(name: data['name'],
-                         image_url: data['image'],
-                         email: data['email'],
+      user = User.create(name: info['name'],
+                         image_url: info['image'],
+                         email: info['email'],
                          password: Devise.friendly_token[0, 20]
       )
     end
