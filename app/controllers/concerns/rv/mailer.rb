@@ -40,7 +40,7 @@ module RV::Mailer
     template = File.open(path).read
 
     html_body = template
-      .sub('__POST_URL__', Settings.rendezvous.app_host + post_path(post))
+      .sub('__POST_URL__', Settings.rendezvous.app_host + post.decorate.show_path)
       .sub('__HTML_TITLE__', h_application_format_markdown(post.title))
       .sub('__HTML_BODY__', h_application_format_markdown(post.body))
       .sub('__RV_URL__', Settings.rendezvous.app_host + '/')
