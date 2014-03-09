@@ -5,6 +5,9 @@ Coveralls.wear!
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
+
+Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
+
 require 'rspec/rails'
 require 'rspec/autorun'
 # require 'email_spec'
@@ -13,15 +16,19 @@ require 'factory_girl'
 require 'capybara'
 require 'capybara/rspec'
 
+
 ## Setting for polterguist.
 require 'capybara/poltergeist'
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, timeout: 30)
-end
-Capybara.javascript_driver = :poltergeist
 
-# Set capybara wait time (default: 2)
-Capybara.default_wait_time = 10
+def register_poltergeist(config)
+  Capybara.register_driver :poltergeist do |app|
+    Capybara::Poltergeist::Driver.new(app, timeout: 60)
+  end
+  # Capybara.run_server = true
+  # Capybara.default_driver = :poltergeist
+  Capybara.javascript_driver = :poltergeist
+  Capybara.default_wait_time = 10
+end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -87,6 +94,8 @@ RSpec.configure do |config|
     DatabaseRewinder.clean
   end
 
+  # Capybara.app_host = "http://127.0.0.1/"
+  register_poltergeist(config)
 
   OmniAuth.config.test_mode = true
   OmniAuth.config.add_mock(:google_oauth2, {

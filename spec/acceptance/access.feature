@@ -22,13 +22,20 @@ Feature: アクセス制限
   #   Then response includes '<!-- view:home/login -->'
 
   Scenario: ログイン --> TOPページ
-    Given user login
+    Given login
     When visit '/'
     Then response code is 200
     Then response includes '<!-- view:post/index -->'
 
   Scenario: ログイン --> postsページ
-    Given user login
+    Given login
     When visit '/posts'
     Then response code is 200
     Then response includes '<!-- view:post/index -->'
+
+  Scenario: ログイン --> ログアウト
+    Given login
+    When logout
+    Then response code is 200
+    Then response includes '<!-- view:home/login -->'
+
