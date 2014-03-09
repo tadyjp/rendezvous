@@ -31,6 +31,12 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
+
+# Setting for turnip.
+Dir.glob("spec/steps/**/*steps.rb") { |f| load f, true }
+require 'turnip'
+require 'turnip/capybara'
+
 RSpec.configure do |config|
   # ## Mock Framework
   #
