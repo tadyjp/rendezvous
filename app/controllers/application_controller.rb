@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  add_breadcrumb("Rendezvous", '/')
+
   def require_login
     unless user_signed_in?
       flash[:alert] = 'You need Login!'

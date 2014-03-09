@@ -1,0 +1,11 @@
+<textarea id="source">
+
+class: center, middle
+
+<%= @post.title %>
+
+<%= @post.author.name %> (<%= @post.updated_at.strftime('%Y-%m-%d') %>)
+
+<%= @post.body_for_slideshow %>
+
+</textarea>

@@ -8,6 +8,7 @@ Rendezvous::Application.routes.draw do
   get    'posts/:id/fork' => 'posts#fork', as: 'fork_post'
   post   'posts/:id/mail' => 'posts#mail', as: 'mail_post'
   post   'posts/:id/comment' => 'posts#comment', as: 'comment_post'
+  get    'posts/:id/slideshow' => 'posts#slideshow', as: 'slideshow_post'
   resources :posts
 
   post   'tags/:name/merge_to/:merge_to_name' => 'tags#merge_to', as: 'merge_to_tag'

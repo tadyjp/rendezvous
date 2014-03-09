@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.0'
+gem 'rails', '~> 4'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
@@ -67,7 +67,7 @@ group :development do
   gem 'pry-rails'
 
   # profiler
-  gem 'rack-mini-profiler'
+  # gem 'rack-mini-profiler'
 
   # rubocop
   gem 'rubocop'
@@ -127,3 +127,5 @@ gem 'paper_trail', '~> 3.0.0'
 gem 'aws-sdk'
 
 gem 'newrelic_rpm'
+
+gem 'breadcrumble'

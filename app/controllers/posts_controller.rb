@@ -1,7 +1,7 @@
 require 'nkf'
 
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :slideshow]
   before_action :require_login
 
   include RV::Mailer
@@ -19,6 +19,11 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @post.tags.each do |_tag|
+      add_breadcrumb("##{_tag.name}", _tag.decorate.show_path)
+    end
+    add_breadcrumb(@post.title)
+
     if params[:fragment].present?
       render layout: false, partial: 'posts/show_fragment'
     else
@@ -110,6 +115,11 @@ class PostsController < ApplicationController
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # Show presentation view
+  def slideshow
+    render layout: 'slideshow'
   end
 
   private
