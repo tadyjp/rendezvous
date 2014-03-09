@@ -3,6 +3,8 @@
 #   $ cp config/settings.yml.example config/settings.yml
 
 defaults: &defaults
+  rendezvous:
+    app_host: "http://rendezvous.dev"
   google_api:
     client_id: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com"
     secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxx"

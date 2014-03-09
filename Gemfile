@@ -129,3 +129,5 @@ gem 'aws-sdk'
 gem 'newrelic_rpm'
 
 gem 'breadcrumble'
+
+gem 'slim'
