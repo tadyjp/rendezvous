@@ -88,9 +88,6 @@ group :development, :test do
 
   # gem 'database_cleaner'
   gem 'database_rewinder'
-
-  gem "erb2haml"
-  gem 'haml'
 end
 
 group :test do

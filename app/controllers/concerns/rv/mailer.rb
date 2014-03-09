@@ -11,7 +11,7 @@ module RV::Mailer
     fail ArgumentError.new('to missing') unless opts[:to].present?
     fail ArgumentError.new('to mail format invalid') unless ValidatesEmailFormatOf.validate_email_format(opts[:to]).nil?
 
-    html_body = generate_html_mail(post.body)
+    html_body = generate_html_mail(post)
 
     mail = Mail.new do
       from     opts[:user].email
@@ -35,11 +35,15 @@ module RV::Mailer
     mail
   end
 
-  def generate_html_mail(body)
+  def generate_html_mail(post)
     path = File.expand_path(File.dirname(__FILE__) + '/mail-template.html')
     template = File.open(path).read
 
-    html_body = template.sub('__HTML_BODY__', h_application_format_markdown(body))
+    html_body = template
+      .sub('__POST_URL__', Settings.rendezvous.app_host + post_path(post))
+      .sub('__HTML_TITLE__', h_application_format_markdown(post.title))
+      .sub('__HTML_BODY__', h_application_format_markdown(post.body))
+      .sub('__RV_URL__', Settings.rendezvous.app_host + '/')
 
     premailer = Premailer.new(html_body, with_html_string: true, adapter: :nokogiri)
     premailer.to_inline_css

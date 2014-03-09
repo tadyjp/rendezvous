@@ -1,0 +1,19 @@
+.row
+  #sidebar.col-xs-6.col-md-4 role="navigation" 
+    ul.nav.nav-tabs
+      li.active
+        a data-toggle="tab" href="#tab-list"  List
+      li
+        a data-toggle="tab" href="#tab-tree"  Tag Tree
+    .tab-content
+      #tab-list.tab-pane.active
+        .list-group
+          - @posts.each_with_index do |post, i|
+            a.list-group-item.post-list data-post-id=post.id href="#" = post.title
+      #tab-tree.tab-pane
+        - cache('tag-tree', :expires_in => 1.hour) do
+          .list-group
+            = Tag.all.decorate.tree_view
+  .col-xs-12.col-sm-6.col-md-8
+    #list_post
+      p#posts-placeholder style="color:#aaa;font-size:30px"  &lt;-- Select a post...

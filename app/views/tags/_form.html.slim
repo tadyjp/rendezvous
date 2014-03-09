@@ -2,35 +2,35 @@
   = form_for(@tag, url: @tag.show_path) do |f|
     - if @tag.errors.any?
       #error_explanation
-        %h2
+        h2
           = pluralize(@tag.errors.count, "error")
-          prohibited this tag from being saved:
-        %ul
+          | prohibited this tag from being saved:
+        ul
           - @tag.errors.full_messages.each do |msg|
-            %li= msg
+            li= msg
     .row
       .col-md-10
         .field
           .input-group
-            %span.input-group-addon= f.label :name
+            span.input-group-addon= f.label :name
             = f.text_field :name, class: 'form-control'
       .col-md-2
         .actions
           = f.submit class: 'btn btn-primary js-disable-confirm-unload', id: 'save_button'
-    %br/
+    br/
     .row
       .col-xs-6.col-md-6
         .field
-          / <haml:loud> f.label :body </haml:loud><br>
+          /! <haml:loud> f.label :body </haml:loud><br
           = f.text_area :body, class: 'mod-mdEditor-body'
-      / /span
+      /! /span
       .col-xs-12.col-sm-6.col-md-6
         .box-text
           #tag_preview.text-box.body.viewer.github.mod-mdEditor-preview
-      / /span
-    / /row
+      /! /span
+    /! /row
 - content_for :footer_js do
-  :javascript
+  javascript:
     $.setConfirmUnload()
 
     $('#tag-form').mod_mdEditor({end_point: '/apis/markdown_preview'});
