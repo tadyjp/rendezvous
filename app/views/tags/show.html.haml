@@ -1,0 +1,118 @@
+= render_breadcrumbs
+.row
+  .col-xs-8
+    %h1
+      = @tag.name
+      についてのページ
+  .col-xs-4
+    .btn-group.pull-right
+      %a.btn.btn-primary{:href => @tag.edit_path}
+        このページを編集する
+        %span.glyphicon.glyphicon-pencil
+      %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+        %span.caret
+        %span.sr-only Toggle Dropdown
+      %ul.dropdown-menu{:role => "menu"}
+        %li
+          %a{"data-target" => "#modal-merge", "data-toggle" => "modal", :href => "#"} Merge to...
+        %li
+          %a{"data-target" => "#modal-moveUnder", "data-toggle" => "modal", :href => "#"} Move this tag under...
+  .col-xs-8
+    .panel.panel-default
+      .panel-heading
+        「#{@tag.name}」とは
+      .panel-body
+        - if @tag.body.present?
+          = h_application_format_markdown(@tag.body)
+        - else
+          まだ「#{@tag.name}」の情報がありません。
+  .col-xs-4
+    .list-group
+      %h2
+        %small
+          「#{@tag.name}」のタグが付いた記事
+      - @tag.posts.each_with_index do |post, i|
+        %a.list-group-item.post-list{:href => post_path(post)}= post.title
+/ /row
+/ Modal
+#modal-merge.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h3#myModalLabel.modal-title
+          Merge to other tag
+      .modal-body
+        %h4 マージ先のTagを選んでください
+        #merge-tag-tree
+          = Tag.all.decorate.tree_view
+      - content_for :footer_js do
+        :javascript
+          $(function(){
+            $('#merge-tag-tree a').on('click', function(e){
+
+              console.log(e)
+
+              e.preventDefault();
+              var $this = $(this);
+
+              if(window.confirm('「#{@tag.name}」を「' + $this.data('name') + '」にマージます')) {
+                $.ajax({
+                  type: "POST",
+                  url: "/tags/#{@tag.name}/merge_to/" + $this.data('name')
+                }).done(function(data){
+                  location.href = "/tags/" + $this.data('name');
+                }).fail(function(data){
+                  alert('error');
+                });
+              } else {
+                return false;
+              }
+            })
+          })
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+    / /.modal-content
+  / /.modal-dialog
+/ /.modal
+/ Modal
+#modal-moveUnder.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h3#myModalLabel.modal-title
+          Merge to other tag
+      .modal-body
+        %h4 マージ先のTagを選んでください
+        #move-tag-tree
+          = Tag.all.decorate.tree_view
+      - content_for :footer_js do
+        :javascript
+          $(function(){
+            $('#move-tag-tree a').on('click', function(e){
+
+              console.log(e)
+
+              e.preventDefault();
+              var $this = $(this);
+
+              if(window.confirm('「#{j @tag.name}」を「' + $this.data('name') + '」の下に移動します')) {
+                $.ajax({
+                  type: "POST",
+                  url: "/tags/#{@tag.name}/move_to/" + encodeURIComponent($this.data('name'))
+                }).done(function(data){
+                  location.href = "/tags/#{j @tag.name}";
+                }).fail(function(data){
+                  alert('error');
+                });
+              } else {
+                return false;
+              }
+            })
+          })
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+    / /.modal-content
+  / /.modal-dialog
+/ /.modal

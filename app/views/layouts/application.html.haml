@@ -1,0 +1,33 @@
+!!!
+= render partial: 'partials/rendezvous'
+%html{:lang => "ja"}
+  %head
+    %title Rendezvous
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %link{:href => "//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css", :rel => "stylesheet"}/
+    %link{:href => "//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css", :rel => "stylesheet"}/
+    = stylesheet_link_tag    "application", media: "all"
+    = render_style
+    = csrf_meta_tags
+  %body{:class => "rails-#{params[:controller]}-#{params[:action]}"}
+    = render partial: 'partials/header_notifications'
+    - if params[:controller] != 'home'
+      = render partial: 'partials/app_header'
+    .container.container-main
+      = yield
+    / /.container
+    %script{:src => "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"}
+    %script{:src => "//cdnjs.cloudflare.com/ajax/libs/underscore.string/2.3.3/underscore.string.min.js"}
+    %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"}
+    %script{:src => "//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"}
+    :javascript
+      window.RV = window.RV || {};
+      window.RV.AllTags = JSON.parse('#{raw Tag.all.pluck(:name).to_json}');
+    %hr/
+    %footer
+      .container
+        %a{:href => "https://github.com/tadyjp/rendezvous"} Github
+        |
+        %a{:href => "https://twitter.com/tady_jp"} @tady_jp
+    = javascript_include_tag "application"
+    = yield :footer_js
