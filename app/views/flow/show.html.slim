@@ -1,0 +1,11 @@
+/! view:flow/show
+.row
+  .col-xs-8 role="navigation"
+    #tab-list.tab-pane.active
+      .list-group
+        - @posts.each_with_index do |post, i|
+          a.list-group-item.post-list data-post-id=post.id href="#" = post.title
+
+  .col-xs-4
+    #list_post
+      p#posts-placeholder style="color:#aaa;font-size:30px"  &lt;-- Select a post...
