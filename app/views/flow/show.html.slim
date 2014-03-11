@@ -1,11 +1,18 @@
 /! view:flow/show
 .row
+
+  h1
+    | Flow
+    small  - 最近投稿された記事
+
   .col-xs-8 role="navigation"
-    #tab-list.tab-pane.active
-      .list-group
-        - @posts.each_with_index do |post, i|
-          a.list-group-item.post-list data-post-id=post.id href="#" = post.title
+    .list-group
+      - @posts.each_with_index do |post, i|
+        a.list-group-item.post-list data-post-id=post.id href="#" = post.title
 
   .col-xs-4
-    #list_post
-      p#posts-placeholder style="color:#aaa;font-size:30px"  &lt;-- Select a post...
+    h2
+      small 最近投稿したユーザー
+    .list-group
+      - User.post_recently.limit(10).each_with_index do |author, i|
+        a.list-group-item.post-list data-author-id=author.id href="#" = author.name
