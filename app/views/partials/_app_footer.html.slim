@@ -2,8 +2,12 @@ footer
   .container
     p
       a href="https://github.com/tadyjp/rendezvous" Github
-      | &nbsp;
+      | &nbsp;|&nbsp;
       a href="https://twitter.com/tady_jp" @tady_jp
+      | &nbsp;|&nbsp;
+      a data-target="#header-search-description" data-toggle="modal" href="#" Search
+      | &nbsp;|&nbsp;
+      a href="https://help.github.com/articles/github-flavored-markdown" target="_blank" Markdown
       | &nbsp;
       a href="https://travis-ci.org/tadyjp/rendezvous"
         img src="https://travis-ci.org/tadyjp/rendezvous.png"/
@@ -16,3 +20,43 @@ footer
       | &nbsp;
       a href="https://gemnasium.com/tadyjp/rendezvous"
         img src="https://gemnasium.com/tadyjp/rendezvous.png"/
+
+#header-search-description.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
+        h4#myModalLabel.modal-title Search command
+      .modal-body
+        dl.dl-horizontal
+          dt Search by title
+          dd
+            pre
+              a href=(posts_path(q: 'title:ruby'))  title:ruby
+          dt Search by id
+          dd
+            pre
+              a href=(posts_path(q: 'id:123'))  id:123
+          dt Search by body
+          dd
+            pre
+              a href=(posts_path(q: 'body:ruby'))  body:ruby
+          dt Search by author
+          dd
+            pre
+              a href=(posts_path(q: '@taro'))  @taro
+          dt Search by tag
+          dd
+            pre
+              a href=(posts_path(q: '#ruby'))  #ruby
+          dt Search by date
+          dd
+            pre
+              a href=(posts_path(q: 'date:2013-12-16'))  date:2013-12-16
+          dt Search by title or body
+          dd
+            pre
+              a href=(posts_path(q: 'ruby'))  ruby
+      .modal-footer
+        button.btn.btn-default data-dismiss="modal" type="button"  Close
+
