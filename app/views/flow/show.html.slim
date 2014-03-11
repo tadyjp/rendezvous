@@ -11,8 +11,18 @@
         a.list-group-item.post-list data-post-id=post.id href="#" = post.title
 
   .col-xs-4
-    h2
-      small 最近投稿したユーザー
-    .list-group
-      - User.post_recently.limit(10).each_with_index do |author, i|
-        a.list-group-item.post-list data-author-id=author.id href="#" = author.name
+    .panel.panel-default
+      .panel-heading
+        h2.panel-title この1週間で閲覧の多かった投稿
+      .panel-body.list-group
+        - Post.limit(5).each_with_index do |post, i|
+          a.list-group-item.post-list data-post-id=post.id href="#" = post.title
+
+    .panel.panel-default
+      .panel-heading
+        h2.panel-title 最近投稿したユーザー
+      .panel-body.list-group
+        - User.post_recently.limit(10).each_with_index do |author, i|
+          a.list-group-item.post-list data-author-id=author.id href="#" = author.name
+
+
