@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   devise :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_many :posts, foreign_key: 'author_id'
-  has_many :comments
+  has_many :comments, foreign_key: 'author_id'
 
   scope :post_recently, -> {
     User.joins(:posts).group('id').order('posts.updated_at desc')
