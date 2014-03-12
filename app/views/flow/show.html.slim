@@ -7,25 +7,16 @@
 
   .col-xs-8 role="navigation"
     .list-group
-      - @posts.each_with_index do |post, i|
-        a.list-group-item.post-list data-post-id=post.id href="#"
-          .text-primary #{post.title}
-          small
-            | #{post.author.name} posted&nbsp;
-            abbr.js-time-ago data-time-ago-at=post.updated_at
-            |.&nbsp;&nbsp;
-            - post.tags.each do |tag|
-              span.label.label-success ##{tag.name}
-              | &nbsp;
-
+      - @posts.each do |_post|
+        = render partial: 'posts/large_item', locals: { post: _post }
 
   .col-xs-4
     .panel.panel-default
       .panel-heading
         h2.panel-title この1週間で閲覧の多かった投稿(調整中)
       .panel-body.list-group
-        - Post.limit(5).each_with_index do |post, i|
-          a.list-group-item.post-list data-post-id=post.id href="#" = post.title
+        - Post.limit(5).each do |_post|
+          = render partial: 'posts/small_item', locals: { post: _post }
 
     .panel.panel-default
       .panel-heading

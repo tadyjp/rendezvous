@@ -11,10 +11,12 @@ nav.navbar.navbar-default.navbar-fixed-top role="navigation"
             button.btn.btn-default data-disable-with="Searching..." type="submit"
               span.glyphicon.glyphicon-search
       ul.nav.navbar-nav
-        li
-          a Stock
-        li.active
-          a Flow
+        li class=('active' if current_page?(stock_path))
+          a href=stock_path title="Stock"
+            | Stock
+        li class=('active' if current_page?(flow_path))
+          a href=flow_path title="Frow"
+            | Flow
 
       = form_tag(destroy_user_session_path, :method => :delete, class: 'navbar-form navbar-right') do
         = submit_tag 'SignOut', class: 'btn btn-default'
