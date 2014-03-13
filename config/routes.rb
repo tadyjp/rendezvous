@@ -2,6 +2,7 @@ Rendezvous::Application.routes.draw do
 
   post   'apis/markdown_preview'
   post   'apis/file_receiver'
+  get    'tags/:name/events' => 'tags#events', as: 'event_tag'
 
   root   'welcome#top', as: 'root'
 

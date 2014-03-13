@@ -6,6 +6,8 @@ html lang="ja"
     meta content="width=device-width, initial-scale=1.0" name="viewport" /
     link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet" /
     link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css" rel="stylesheet" /
+    link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.css" rel="stylesheet" /
+    link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.print.css" rel="stylesheet" /
     = stylesheet_link_tag    "application", media: "all"
     = render_style
     = csrf_meta_tags
@@ -21,6 +23,7 @@ html lang="ja"
     script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
     script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"
     script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"
+    script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.min.js"
     javascript:
       window.RV = window.RV || {};
       window.RV.AllTags = JSON.parse('#{raw Tag.all.pluck(:name).to_json}');

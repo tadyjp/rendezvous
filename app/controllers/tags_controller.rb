@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-  before_action :set_tag, only: [:show, :edit, :update, :destroy, :merge_to, :move_to]
+  before_action :set_tag, only: [:show, :edit, :update, :destroy, :merge_to, :move_to, :events]
 
   def index
   end
@@ -12,6 +12,9 @@ class TagsController < ApplicationController
   end
 
   def edit
+  end
+
+  def events
   end
 
   def create
