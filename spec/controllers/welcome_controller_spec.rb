@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe HomeController do
+describe WelcomeController do
 
   describe "GET 'top'" do
     it 'should be successful' do
@@ -21,8 +21,8 @@ describe HomeController do
 
       it 'should be successful' do
         get :top
-        expect(subject).to redirect_to controller: 'posts',
-                                       action: 'index'
+        expect(subject).to redirect_to controller: 'flow',
+                                       action: 'show'
       end
 
       it 'should find the right user' do
