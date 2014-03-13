@@ -94,6 +94,9 @@ RSpec.configure do |config|
     DatabaseRewinder.clean
   end
 
+  config.include Devise::TestHelpers, :type => :controller
+  config.extend ControllerMacros, :type => :controller
+
   # Capybara.app_host = "http://127.0.0.1/"
   register_poltergeist(config)
 
