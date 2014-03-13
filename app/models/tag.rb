@@ -10,6 +10,13 @@ class Tag < ActiveRecord::Base
 
   default_scope { order(:updated_at => :desc) }
 
+  scope :posts_exist, lambda {
+    select('tags.*, count(posts.id) as posts_count').
+    joins(:posts).
+    group('tags.id').
+    having('posts_count > 0')
+  }
+
   # 自分のタグに紐づくPostをすべて`other_tag`へ移動する
   def move_all_posts_to!(other_tag)
     self.posts.each do |_post|

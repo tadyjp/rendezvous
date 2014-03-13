@@ -23,6 +23,7 @@ class TagDecorator < Draper::Decorator
   # tagをtree viewで表示する
   def tree_view_node
     _html = ''
+
     _html += %Q{
       <a href="#{ self.show_path }" data-name="#{model.name}">
         #{model.name} <span class="badge">#{model.posts.count}</span>
