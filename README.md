@@ -59,6 +59,7 @@ And have fun with your team !
 
 
 
+
 # Test
 
 Rendezvous uses travis-ci for test.
@@ -66,3 +67,4 @@ Rendezvous uses travis-ci for test.
 To speet up `bundle install` in travis-ci, Rendezvous use AWS S3 backet for storing gems.
 
 see also: http://randomerrata.com/post/45827813818/travis-s3
+

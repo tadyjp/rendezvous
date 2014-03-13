@@ -7,8 +7,12 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:google_oauth2]
 
-  has_many :posts
-  has_many :comments
+  has_many :posts, foreign_key: 'author_id'
+  has_many :comments, foreign_key: 'author_id'
+
+  scope :post_recently, -> {
+    User.joins(:posts).group('id').order('posts.updated_at desc')
+  }
 
   # Device
   def self.find_for_google_oauth2(access_token, signed_in_resource = nil)
@@ -56,4 +60,5 @@ class User < ActiveRecord::Base
       google_token_expires_at: Time.now + res_json['expires_in'].seconds
     )
   end
+
 end

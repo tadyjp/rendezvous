@@ -5,10 +5,10 @@
   ul.list-group
     li.list-group-item
       - @post.tags.each do |tag|
-        span.label.label-info
+        span.label.label-success
           a href=tag.decorate.show_path
             | ##{tag.name}
-      span.label.label-success
+      span.label.label-info
         a href=(posts_path(q: "@#{@post.author.name}"))
           | @#{@post.author.name}
       span.label.label-danger

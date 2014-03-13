@@ -1,0 +1,29 @@
+/! view:search/show
+.row
+
+  h1
+    span "#{params[:q]}"
+    span.small - 検索結果
+    span.small #{@count}件
+
+  .col-xs-8 role="navigation"
+    .list-group
+      - @posts.each do |_post|
+        = render partial: 'posts/large_item', locals: { post: _post }
+
+  .col-xs-4
+    .panel.panel-default
+      .panel-heading
+        h2.panel-title "#{params[:q]}"に関連するタグ
+      .panel-body.list-group
+        - @posts.related_tags.each do |_tag|
+          a.list-group-item href=search_path(q: "##{_tag.name}") = _tag.name
+
+    .panel.panel-default
+      .panel-heading
+        h2.panel-title "#{params[:q]}"に関連するユーザー
+      .panel-body.list-group
+        - @posts.related_authors.each do |_author|
+          a.list-group-item href=search_path(q: "@#{_author.name}") = _author.name
+
+

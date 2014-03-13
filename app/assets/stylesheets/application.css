@@ -14,3 +14,14 @@
  *= require_self
  */
 
+.text-shadow {
+  color: #999999;
+}
+
+a .text-link {
+  color: #1e0fbe;
+}
+
+a:visited .text-link {
+  color: #609;
+}
