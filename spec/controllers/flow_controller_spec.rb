@@ -9,6 +9,9 @@ describe FlowController do
   describe "GET 'show'" do
     it "returns http success" do
       get 'show'
+      puts '+++++++++++++++++++++++++++++'
+      p response.body
+      puts '+++++++++++++++++++++++++++++'
       response.should be_success
     end
   end
