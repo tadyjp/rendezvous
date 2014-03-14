@@ -17,7 +17,16 @@
           a data-target="#modal-merge" data-toggle="modal" href="#"  Merge to...
         li
           a data-target="#modal-moveUnder" data-toggle="modal" href="#"  Move this tag under...
+
+.row
   .col-xs-8
+    .panel.panel-default
+      .panel-heading
+        | 「#{@tag.name}」カレンダー
+      .panel-body
+        .js-calendar data-events-url=@tag.event_tag_path
+
+
     .panel.panel-default
       .panel-heading
         | 「#{@tag.name}」とは

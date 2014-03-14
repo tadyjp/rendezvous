@@ -6,4 +6,8 @@ describe TagsController do
     pending '...'
   end
 
+  describe "GET 'events'" do
+    pending '...'
+  end
+
 end

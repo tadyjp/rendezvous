@@ -5,12 +5,8 @@
     | Stock
     small  - 保存・蓄積された記事
 
-  #sidebar.col-xs-6.col-md-4 role="navigation"
+  #sidebar.col-xs-12 role="navigation"
     #tab-tree.tab-pane
       - cache('tag-tree', :expires_in => 1.hour) do
         .list-group
           = Tag.posts_exist.decorate.tree_view
-
-  .col-xs-12.col-sm-6.col-md-8
-    #list_post
-      p#posts-placeholder style="color:#aaa;font-size:30px"  &lt;-- Select a post...

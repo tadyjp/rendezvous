@@ -20,6 +20,10 @@ class TagDecorator < Draper::Decorator
     h.edit_tag_path(name: h.url_encode(model.name))
   end
 
+  def event_tag_path
+    h.event_tag_path(name: h.url_encode(model.name))
+  end
+
   # tagをtree viewで表示する
   def tree_view_node
     _html = ''
