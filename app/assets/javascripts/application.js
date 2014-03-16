@@ -16,6 +16,7 @@
 // require turbolinks
 //= require ./lib/jquery.ui.widget
 //= require_tree ./lib
+//= require_tree ./modules
 //= require_tree .
 
 _.mixin(_.string.exports());

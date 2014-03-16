@@ -8,6 +8,7 @@
         ul
           - @post.errors.full_messages.each do |msg|
             li= msg
+
     .row
       .col-xs-10
         .field
@@ -19,18 +20,36 @@
           = f.submit class: 'btn btn-primary js-disable-confirm-unload', id: 'save_button'
 
     .row
-      .col-xs-8
+      .col-xs-12
         .field
           .input-group
             span.input-group-addon= f.label :tags
             = hidden_field :post, :tags, class: 'mod-mdEditor-tags', style: 'width:300px', value: @post.tags.map{ |_tag| _tag.name }.join(',')
-      .col-xs-4
+
+    .row
+      .col-xs-12
+        .btn-toolbar role="toolbar"
+          .btn-group.btn-group-xs
+            button.btn.btn-default.mod-mdEditor-btn-h1 type="button" H1
+            button.btn.btn-default.mod-mdEditor-btn-h2 type="button" H2
+            button.btn.btn-default.mod-mdEditor-btn-h3 type="button" H3
+          .btn-group.btn-group-xs
+            button.btn.btn-default.mod-mdEditor-btn-bold type="button"
+              i.fa.fa-bold
+            button.btn.btn-default.mod-mdEditor-btn-italic type="button"
+              i.fa.fa-italic
+            button.btn.btn-default.mod-mdEditor-btn-ol type="button"
+              i.fa.fa-list-ol
+            button.btn.btn-default.mod-mdEditor-btn-ul type="button"
+              i.fa.fa-list-ul
+            / button.btn.btn-default.mod-mdEditor-btn-link type="button"
+            /   i.fa.fa-link
 
     br/
     .row
       .col-xs-6.col-md-6
         .field
-          = f.text_area :body, class: 'mod-mdEditor-body'
+          = f.text_area :body, class: 'mod-mdEditor-textarea'
       .col-xs-12.col-sm-6.col-md-6
         .box-text
           .text-box.body.viewer.github.mod-mdEditor-preview
@@ -38,11 +57,11 @@
 input#fileupload data-url="/apis/file_receiver" multiple="" name="files[]" style="display:none" type="file" /
 - content_for :footer_js do
   javascript:
-    $.setConfirmUnload();
+    // $.setConfirmUnload();
 
     $('#post-form').mod_mdEditor({end_point: '/apis/markdown_preview'});
 
     $.mod_fileuploader({
       $input: $('#fileupload'),
-      $textarea: $('.mod-mdEditor-body')
+      $textarea: $('.mod-mdEditor-textarea')
     });
