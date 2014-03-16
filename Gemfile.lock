@@ -143,6 +143,9 @@ GEM
     guard-rubocop (1.0.2)
       guard (~> 2.0)
       rubocop (~> 0.10)
+    guard-teaspoon (0.0.4)
+      guard (>= 1.6.1)
+      teaspoon (>= 0.5.3)
     hashie (2.0.5)
     hike (1.2.3)
     htmlentities (4.3.1)
@@ -386,6 +389,7 @@ DEPENDENCIES
   github-markdown
   guard-rspec
   guard-rubocop
+  guard-teaspoon
   i18n_generators
   jbuilder
   jquery-rails

@@ -1,6 +1,21 @@
 # TODO:
 #   mod-mdEditorがページ内に複数あった場合の処理
 
+@_mod_md_editor = {}
+
+class @_mod_md_editor.TextareaText
+  constructor: (@text, @sel_start, @sel_end) ->
+
+  total_line_num: ->
+    99
+  current_line_num: ->
+    80
+  current_line_head_pos: ->
+    70
+  current_pos_in_line: ->
+    4
+
+
 $.fn.extend
   mod_mdEditor: (options) ->
     settings =
@@ -8,7 +23,7 @@ $.fn.extend
       end_point: ''
     settings = $.extend settings, options
 
-    return @each ()->
+    return @each () ->
 
       $root = $(@)
       $textarea = $root.find('.mod-mdEditor-textarea')
