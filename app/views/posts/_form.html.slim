@@ -1,5 +1,5 @@
 #post-form
-  = form_for(@post) do |f|
+  = form_for(@post, role: 'form') do |f|
     - if @post.errors.any?
       #error_explanation
         h2
@@ -8,41 +8,61 @@
         ul
           - @post.errors.full_messages.each do |msg|
             li= msg
+
     .row
       .col-xs-10
-        .field
-          .input-group
-            span.input-group-addon= f.label :title
-            = f.text_field :title, class: 'form-control mod-mdEditor-title'
+        .form-group
+          = f.label :title
+          = f.text_field :title, class: 'form-control mod-mdEditor-title', placeholder: 'post title'
       .col-xs-2
         .actions
           = f.submit class: 'btn btn-primary js-disable-confirm-unload', id: 'save_button'
 
     .row
-      .col-xs-8
-        .field
-          .input-group
-            span.input-group-addon= f.label :tags
-            = hidden_field :post, :tags, class: 'mod-mdEditor-tags', style: 'width:300px', value: @post.tags.map{ |_tag| _tag.name }.join(',')
-      .col-xs-4
+      .col-xs-12
+        .form-group
+          = f.label :tags
+          = hidden_field :post, :tags, class: 'mod-mdEditor-tags', style: 'width:300px', value: @post.tags.map{ |_tag| _tag.name }.join(',')
 
-    br/
     .row
-      .col-xs-6.col-md-6
-        .field
-          = f.text_area :body, class: 'mod-mdEditor-body'
-      .col-xs-12.col-sm-6.col-md-6
+      .col-xs-6
+        .panel.panel-default
+          .panel-heading
+            .btn-toolbar role="toolbar"
+              .btn-group.btn-group-xs
+                button.btn.btn-default.mod-mdEditor-btn-h1 type="button" title="Header level 1" H1
+                button.btn.btn-default.mod-mdEditor-btn-h2 type="button" title="Header level 2" H2
+                button.btn.btn-default.mod-mdEditor-btn-h3 type="button" title="Header level 3" H3
+              .btn-group.btn-group-xs
+                button.btn.btn-default.mod-mdEditor-btn-bold type="button" title="Text bold"
+                  i.fa.fa-bold
+                button.btn.btn-default.mod-mdEditor-btn-italic type="button" title="Text itelic"
+                  i.fa.fa-italic
+              .btn-group.btn-group-xs
+                button.btn.btn-default.mod-mdEditor-btn-ol type="button" title="順序リスト"
+                  i.fa.fa-list-ol
+                button.btn.btn-default.mod-mdEditor-btn-ul type="button" title="リスト"
+                  i.fa.fa-list-ul
+                button.btn.btn-default.mod-mdEditor-btn-strikethrough type="button" title="打ち消し線"
+                  i.fa.fa-strikethrough
+                / button.btn.btn-default.mod-mdEditor-btn-link type="button"
+                /   i.fa.fa-link
+
+          .panel-body.panel-body-nopadding
+            = f.text_area :body, class: 'mod-mdEditor-textarea'
+
+      .col-xs-6
         .box-text
           .text-box.body.viewer.github.mod-mdEditor-preview
 
 input#fileupload data-url="/apis/file_receiver" multiple="" name="files[]" style="display:none" type="file" /
 - content_for :footer_js do
   javascript:
-    $.setConfirmUnload();
+    // $.setConfirmUnload();
 
     $('#post-form').mod_mdEditor({end_point: '/apis/markdown_preview'});
 
     $.mod_fileuploader({
       $input: $('#fileupload'),
-      $textarea: $('.mod-mdEditor-body')
+      $textarea: $('.mod-mdEditor-textarea')
     });

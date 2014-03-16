@@ -16,3 +16,7 @@ guard :rspec do
   watch(%r{^spec/steps/(.+)_steps\.rb$})   { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
 end
 
+guard :teaspoon do
+  watch(%r{^app/assets/javascripts/(.+).js}) { |m| "spec/javascripts/#{m[1]}_spec.js.coffee" }
+  watch(%r{^spec/javascripts/(.*)})
+end

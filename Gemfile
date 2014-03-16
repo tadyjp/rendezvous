@@ -88,6 +88,9 @@ group :development, :test do
 
   # gem 'database_cleaner'
   gem 'database_rewinder'
+
+  gem 'teaspoon'
+  gem 'guard-teaspoon'
 end
 
 group :test do
