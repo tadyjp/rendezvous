@@ -82,36 +82,34 @@ $.fn.extend
         if matches? then matches.length + 1 else 1
 
       replace_regexp_meta = (str) ->
-        b = str.replace(/([\.\^\$\[\]\*\+\?\|\(\)])/g, "\\$1")
-        console.log str + ' -> ' + b
-        b
+        str.replace(/([\.\^\$\[\]\*\+\?\|\(\)])/g, "\\$1")
 
       # 行の先頭に文字を挿入
       md_head_insert_string = (insert_str) ->
         textarea_text = $textarea.val()
 
-        console.log 'insert_str: ' + insert_str
+
 
         sel_start_pos = $textarea.get(0).selectionStart
-        console.log 'sel_start_pos: ' + sel_start_pos
+
         # sel_end_pos = $textarea.get(0).selectionEnd
-        # console.log 'sel_end_pos: ' + sel_end_pos
+
 
         # # textの全行数
         # line_num = count_line_number(textarea_text)
-        # console.log('line_num: ' + line_num)
+
 
         # # 現在行の行数
         # current_line_num = count_line_number(textarea_text.substr(0, sel_start_pos))
-        # console.log('current_line_num: ' + current_line_num)
+
 
         # 現在行の最初の文字の位置
         current_line_head_pos = textarea_text.lastIndexOf("\n", sel_start_pos - 1) + 1
-        console.log('current_line_head_pos: ' + current_line_head_pos)
+
 
         # 現在行のカーソル位置
         current_pos_in_line = sel_start_pos - current_line_head_pos
-        console.log('current_pos_in_line: ' + current_pos_in_line)
+
 
         # すでに挿入済みの場合は取り除く
         insert_str_re = new RegExp('^' + replace_regexp_meta(insert_str), "g") # TODO ?
@@ -132,12 +130,8 @@ $.fn.extend
       md_wrap_string = (wrap_str) ->
         textarea_text = $textarea.val()
 
-        console.log 'wrap_str: ' + wrap_str
-
         sel_start_pos = $textarea.get(0).selectionStart
-        console.log 'sel_start_pos: ' + sel_start_pos
         sel_end_pos = $textarea.get(0).selectionEnd
-        console.log 'sel_end_pos: ' + sel_end_pos
 
         # 文字が選択されていなければplaceholderを挿入
         if sel_start_pos == sel_end_pos
@@ -149,22 +143,18 @@ $.fn.extend
           ].join(''))
           $textarea.get(0).selectionEnd = sel_end_pos + 2 + 2 * wrap_str.length + placeholder_str.length
 
-          console.log '$textarea.get(0).selectionEnd: ' + $textarea.get(0).selectionEnd
+
           # execute self.
           md_wrap_string(wrap_str)
           return
 
-        console.log '$textarea.get(0).selectionStart: ' + $textarea.get(0).selectionStart
-        console.log '$textarea.get(0).selectionEnd: ' + $textarea.get(0).selectionEnd
 
         # すでに挿入済みの場合は取り除く
         wrap_str_re = new RegExp('^ ' + replace_regexp_meta(wrap_str))
-        console.log wrap_str_re
+
         wrap_str_re_end = new RegExp(replace_regexp_meta(wrap_str) + ' $')
         if textarea_text.substring(sel_start_pos, sel_end_pos).match(wrap_str_re)
-          console.log textarea_text.substring(sel_start_pos, sel_end_pos).replace(wrap_str_re, '')
-          console.log textarea_text.substring(0, sel_start_pos)
-          console.log textarea_text.substring(sel_end_pos)
+
           $textarea.val([
             textarea_text.substring(0, sel_start_pos),
             textarea_text.substring(sel_start_pos, sel_end_pos).
@@ -187,8 +177,6 @@ $.fn.extend
         $textarea.get(0).selectionEnd = sel_end_pos + 2 + 2 * wrap_str.length
 
         $textarea.get(0).selectionStart = sel_start_pos
-        console.log '$textarea.get(0).selectionStart: ' + $textarea.get(0).selectionStart
-        console.log '$textarea.get(0).selectionEnd: ' + $textarea.get(0).selectionEnd
 
 
       # WYSIWYG
@@ -227,5 +215,9 @@ $.fn.extend
         md_wrap_string('_')
         generatePreview()
 
+      $root.find('.mod-mdEditor-btn-strikethrough').on 'click', (e) ->
+        e.preventDefault()
+        md_wrap_string('~~')
+        generatePreview()
 
 

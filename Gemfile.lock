@@ -320,6 +320,8 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh
       term-ansicolor
+    teaspoon (0.7.9)
+      railties (>= 3.2.5, < 5)
     temple (0.6.7)
     term-ansicolor (1.3.0)
       tins (~> 1.0)
@@ -404,6 +406,7 @@ DEPENDENCIES
   sdoc
   settingslogic
   slim
+  teaspoon
   therubyracer
   thin
   turnip

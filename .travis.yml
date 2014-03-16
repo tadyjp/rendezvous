@@ -24,4 +24,4 @@ before_script:
 - cp config/settings.yml.example config/settings.yml
 after_script:
 - ruby script/travis/bundle_cache.rb
-script: bundle exec rake db:create db:test:load spec
+script: bundle exec rake db:create db:test:load spec teaspoon
