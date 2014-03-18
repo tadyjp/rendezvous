@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   belongs_to :author, class_name: 'User'
   has_many :comments
 
-  default_scope  { order(:updated_at => :desc) }
+  # default_scope  { where(is_draft: false).order(:updated_at => :desc) }
 
   # Named scope
   scope :search, (lambda do |query|
