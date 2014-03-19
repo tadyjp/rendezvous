@@ -45,6 +45,7 @@ describe Post do
       @post1 = Post.create id: 1001, title: 'ruby rspec', body: 'This is first espec test: ruby'
       @post2 = Post.create id: 1002, title: 'php test', body: 'PHP is very easy', author_id: @alice.id
       @post3 = Post.create id: 1003, title: 'java java...', body: 'Java is not ruby...', updated_at: Time.new(1989, 2, 25, 5, 30, 0)
+      @post4 = Post.create id: 1004, title: 'about ruby TDD', body: 'test is the best ....', is_draft: true
       @tag_java = Tag.create(name: 'java')
       @post3.tags << @tag_java
     end
@@ -55,7 +56,7 @@ describe Post do
     end
 
     it 'by title' do
-      expect(Post.search('title:ruby')).to have(1).items
+      expect(Post.search('title:ruby')).to have(2).items
       expect(Post.search('title:ruby')).to include(@post1)
     end
 
@@ -79,8 +80,13 @@ describe Post do
       expect(Post.search('date:1989-2-25')).to include(@post3)
     end
 
+    it 'by draft' do
+      expect(Post.search('ruby')).to have(3).items
+      expect(Post.search('ruby draft:1')).to have(1).items
+    end
+
     it 'by else' do
-      expect(Post.search('ruby')).to have(2).items
+      expect(Post.search('ruby')).to have(3).items
       expect(Post.search('ruby')).to include(@post1)
       expect(Post.search('ruby')).to include(@post3)
     end

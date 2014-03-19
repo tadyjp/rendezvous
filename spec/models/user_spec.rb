@@ -118,4 +118,8 @@ describe User do
     end
   end
 
+  describe 'draft' do
+    pending 'draft'
+  end
+
 end
