@@ -55,3 +55,47 @@ input#fileupload data-url="/apis/file_receiver" multiple="" name="files[]" style
       var val = $('.mod-mdEditor-body').val();
       console.log(val);
     });
+
+    // mention補完
+    // TODO: mod-md-editorに入れる？
+    $('textarea').textcomplete([
+      { // html
+        mentions: ['yuku_t'],
+        match: /\B@([^\B]*)$/,
+        search: function (term, callback) {
+          $.getJSON('/apis/user_mention', { q: term })
+            .done(function (resp) { callback(resp); })
+            .fail(function ()     { callback([]);   });
+        },
+        index: 1,
+        replace: function (mention) {
+          return '@' + mention + ' ';
+        }
+      }
+    ]).on({
+      'textComplete:select': function (e, value) {
+        console.log('textComplete:select ' + value);
+      },
+      'textComplete:show': function (e) {
+        console.log('textComplete:show');
+        $(this).data('autocompleting', true);
+      },
+      'textComplete:hide': function (e) {
+        console.log('textComplete:hide');
+        $(this).data('autocompleting', false);
+      }
+    });
+    // .overlay([
+    //   {
+    //     match: /\B@\w+/g,
+    //     css: {
+    //       'background-color': '#d8dfea'
+    //     }
+    //   }
+    // ]);
+
+
+  css:
+    .textcomplete-wrapper {
+      width: 100%;
+    }

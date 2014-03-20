@@ -20,6 +20,11 @@ class User < ActiveRecord::Base
     User.joins(:posts).group('id').order('posts.updated_at desc')
   }
 
+  scope :search, (lambda do |_query|
+    where('name LIKE ? OR nickname LIKE ?', "%#{_query}%", "%#{_query}%")
+  end)
+
+
   ######################################################################
   # validations
   ######################################################################
@@ -52,6 +57,7 @@ class User < ActiveRecord::Base
     user
   end
 
+
   # check if google oauth token is expired
   def google_oauth_token_expired?
     google_token_expires_at < Time.now
@@ -76,5 +82,7 @@ class User < ActiveRecord::Base
       google_token_expires_at: Time.now + res_json['expires_in'].seconds
     )
   end
+
+
 
 end
