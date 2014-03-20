@@ -7,9 +7,15 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:google_oauth2]
 
+  ######################################################################
+  # association
+  ######################################################################
   has_many :posts, foreign_key: 'author_id'
   has_many :comments, foreign_key: 'author_id'
 
+  ######################################################################
+  # scope
+  ######################################################################
   scope :post_recently, -> {
     User.joins(:posts).group('id').order('posts.updated_at desc')
   }
@@ -21,7 +27,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :email, uniqueness: true
   validates :nickname, presence: true
-  validates :nickname, format: { with: /\A[0-9A-Za-z]+\Z/i }
+  validates :nickname, format: { with: /\A[0-9A-Za-z]+\z/i }
   validates :nickname, uniqueness: true
 
   # Device
