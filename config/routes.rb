@@ -21,6 +21,7 @@ Rendezvous::Application.routes.draw do
   resources :tags, :param => :name
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  resources :users, :only => [:edit, :update]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

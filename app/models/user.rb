@@ -14,6 +14,16 @@ class User < ActiveRecord::Base
     User.joins(:posts).group('id').order('posts.updated_at desc')
   }
 
+  ######################################################################
+  # validations
+  ######################################################################
+  validates :name, presence: true
+  validates :email, presence: true
+  validates :email, uniqueness: true
+  validates :nickname, presence: true
+  validates :nickname, format: { with: /\A[0-9A-Za-z]+\Z/i }
+  validates :nickname, uniqueness: true
+
   # Device
   def self.find_for_google_oauth2(access_token, signed_in_resource = nil)
     info = access_token.info
