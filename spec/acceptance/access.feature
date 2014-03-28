@@ -21,21 +21,21 @@ Feature: アクセス制限
   #   Then response code is 200
   #   Then response includes '<!--view:welcome/login-->'
 
-  Scenario: ログイン --> TOPページ
-    Given login
-    When visit '/'
-    Then response code is 200
-    Then response includes '<!--view:flow/show-->'
+  # Scenario: ログイン --> TOPページ
+  #   Given login
+  #   When visit '/'
+  #   Then response code is 200
+  #   Then response includes '<!--view:flow/show-->'
 
-  Scenario: ログイン --> flowページ
-    Given login
-    When visit '/flow'
-    Then response code is 200
-    Then response includes '<!--view:flow/show-->'
+  # Scenario: ログイン --> flowページ
+  #   Given login
+  #   When visit '/flow'
+  #   Then response code is 200
+  #   Then response includes '<!--view:flow/show-->'
 
-  Scenario: ログイン --> ログアウト
-    Given login
-    When logout
-    Then response code is 200
-    Then response includes '<!--view:welcome/login-->'
+  # Scenario: ログイン --> ログアウト
+  #   Given login
+  #   When logout
+  #   Then response code is 200
+  #   Then response includes '<!--view:welcome/login-->'
 

@@ -25,6 +25,7 @@ describe User do
       @attr = {
         name: 'Example User',
         email: 'user@example.com',
+        nickname: 'testnick',
         password: 'changeme',
         password_confirmation: 'changeme'
       }

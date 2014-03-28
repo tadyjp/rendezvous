@@ -21,8 +21,11 @@ Rendezvous::Application.routes.draw do
   post   'tags/:name/move_to/:move_to_name' => 'tags#move_to', as: 'move_to_tag'
   resources :tags, :param => :name
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   resources :users, :only => [:edit, :update]
+  devise_for :users , controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  # get    'users/edit'   => 'users#edit',   as: 'edit_user'
+  # post   'users/update' => 'users#update', as: 'update_user'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

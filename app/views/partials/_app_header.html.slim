@@ -33,7 +33,7 @@ nav.navbar.navbar-default.navbar-fixed-top role="navigation"
             b.caret
           ul.dropdown-menu
             li
-              a href=search_path(q: "@#{current_user.name} draft:1")
+              a href=search_path(q: "@#{current_user.nickname} draft:1")
                 | 下書き
                 span.badge.pull-right = current_user.decorate.draft_count
             li
