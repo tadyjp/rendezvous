@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140320043116) do
+ActiveRecord::Schema.define(version: 20140328045902) do
 
   create_table "comments", force: true do |t|
     t.integer  "author_id"
@@ -40,7 +40,8 @@ ActiveRecord::Schema.define(version: 20140320043116) do
     t.integer  "author_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_draft",   default: false
+    t.boolean  "is_draft",       default: false
+    t.date     "specified_date"
   end
 
   add_index "posts", ["is_draft"], name: "index_posts_on_is_draft", using: :btree
