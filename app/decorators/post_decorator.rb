@@ -19,4 +19,12 @@ class PostDecorator < Draper::Decorator
     end
   end
 
+  def display_date
+    if model.specified_date
+      model.specified_date.strftime('%Y-%m-%d')
+    else
+      model.updated_at.strftime('%Y-%m-%d')
+    end
+  end
+
 end

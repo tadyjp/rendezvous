@@ -12,7 +12,7 @@
         a href=(posts_path(q: "@#{@post.author.name}"))
           | @#{@post.author.name}
       span.label.label-danger
-        a href=(posts_path(q: "date:#{@post.updated_at.strftime('%Y-%m-%d')}")) = @post.updated_at.strftime('%Y-%m-%d')
+        a href=(posts_path(q: "date:#{@post.display_date}")) = @post.display_date
       .btn-group.pull-right style=("margin: -7px -12px 0 0;")
         a.btn.btn-primary href=edit_post_path(@post)
           span.glyphicon.glyphicon-pencil
