@@ -23,6 +23,6 @@
         h2.panel-title 最近投稿したユーザー(調整中)
       .panel-body.list-group
         - User.post_recently.limit(10).each_with_index do |author, i|
-          a.list-group-item.post-list data-author-id=author.id href="#" = author.name
+          a.list-group-item.post-list data-author-id=author.id href=search_path(q: "@#{author.nickname}") = author.name
 
 

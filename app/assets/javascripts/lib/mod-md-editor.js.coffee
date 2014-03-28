@@ -21,6 +21,9 @@ $.fn.extend
 
         keyCode = e.keyCode || e.which
 
+        console.log(keyCode)
+        console.log($this.data('autocompleting'))
+
         # tab key
         if keyCode is 9
           e.preventDefault()
@@ -38,6 +41,9 @@ $.fn.extend
 
         # enter key
         else if keyCode is 13
+
+          return true if $this.data('autocompleting')
+
           val = $this.val()
           start = $this.get(0).selectionStart
           bl = val.lastIndexOf("\n", start-1)

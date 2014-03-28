@@ -16,7 +16,7 @@ class Post < ActiveRecord::Base
   # Named scope
   ######################################################################
   scope :search, (lambda do |query|
-    _where_list = includes(:author, :tags)
+    _where_list = includes(:author, :tags).order(updated_at: :desc)
 
     # Convert spaces to one space.
     query_list = query.split(/[\s　]+/)
@@ -30,7 +30,7 @@ class Post < ActiveRecord::Base
       when /\Abody:(.+)/
         _where_list = _where_list.where('posts.body LIKE ?', "%#{Regexp.last_match[1]}%")
       when /\A@(.+)/
-        _where_list = _where_list.where(users: { name: Regexp.last_match[1] })
+        _where_list = _where_list.where(users: { nickname: Regexp.last_match[1] })
       when /\A#(.+)/
         _where_list = _where_list.where(tags: { name: Regexp.last_match[1] })
       when /\Adate:(\d+)-(\d+)-(\d+)/

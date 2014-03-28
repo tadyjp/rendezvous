@@ -7,12 +7,33 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:google_oauth2]
 
+  ######################################################################
+  # association
+  ######################################################################
   has_many :posts, foreign_key: 'author_id'
   has_many :comments, foreign_key: 'author_id'
 
+  ######################################################################
+  # scope
+  ######################################################################
   scope :post_recently, -> {
     User.joins(:posts).group('id').order('posts.updated_at desc')
   }
+
+  scope :search, (lambda do |_query|
+    where('name LIKE ? OR nickname LIKE ?', "%#{_query}%", "%#{_query}%")
+  end)
+
+
+  ######################################################################
+  # validations
+  ######################################################################
+  validates :name, presence: true
+  validates :email, presence: true
+  validates :email, uniqueness: true
+  validates :nickname, presence: true
+  validates :nickname, format: { with: /\A[0-9A-Za-z]+\z/i }
+  validates :nickname, uniqueness: true
 
   # Device
   def self.find_for_google_oauth2(access_token, signed_in_resource = nil)
@@ -35,6 +56,7 @@ class User < ActiveRecord::Base
 
     user
   end
+
 
   # check if google oauth token is expired
   def google_oauth_token_expired?
@@ -60,5 +82,7 @@ class User < ActiveRecord::Base
       google_token_expires_at: Time.now + res_json['expires_in'].seconds
     )
   end
+
+
 
 end

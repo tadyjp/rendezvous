@@ -24,6 +24,6 @@
         h2.panel-title "#{params[:q]}"に関連するユーザー
       .panel-body.list-group
         - @posts.related_authors.each do |_author|
-          a.list-group-item href=search_path(q: "@#{_author.name}") = _author.name
+          a.list-group-item href=search_path(q: "@#{_author.nickname}") = _author.name
 
 
