@@ -41,10 +41,12 @@ class User < ActiveRecord::Base
     user = User.where(email: info['email']).first
 
     unless user
+      new_nickname = (("a".."z").to_a + ("A".."Z").to_a + (0..9).to_a).shuffle[0..4].join
       user = User.create(name: info['name'],
                          image_url: info['image'],
                          email: info['email'],
-                         password: Devise.friendly_token[0, 20]
+                         password: Devise.friendly_token[0, 20],
+                         nickname: new_nickname
       )
     end
 
