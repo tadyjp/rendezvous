@@ -37,6 +37,9 @@ GEM
     addressable (2.3.6)
     ancestry (2.0.0)
       activerecord (>= 3.0.0)
+    annotate (2.6.2)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
     arel (4.0.2)
     ast (1.1.0)
     atomic (1.1.16)
@@ -364,6 +367,7 @@ PLATFORMS
 DEPENDENCIES
   action-gmailer!
   ancestry
+  annotate (>= 2.6.0)
   aws-sdk
   better_errors
   binding_of_caller
