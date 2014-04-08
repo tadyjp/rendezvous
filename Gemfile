@@ -132,3 +132,5 @@ gem 'newrelic_rpm'
 gem 'breadcrumble'
 
 gem 'slim'
+
+gem 'annotate', ">=2.6.0"
