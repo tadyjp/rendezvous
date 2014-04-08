@@ -8,11 +8,13 @@
         span.label.label-success
           a href=tag.decorate.show_path
             | ##{tag.name}
+      | &nbsp;
       span.label.label-info
-        a href=(posts_path(q: "@#{@post.author.name}"))
+        a href=(search_path(q: "@#{@post.author.name}"))
           | @#{@post.author.name}
+      | &nbsp;
       span.label.label-danger
-        a href=(posts_path(q: "date:#{@post.display_date}")) = @post.display_date
+        a href=(search_path(q: "date:#{@post.display_date}")) = @post.display_date
       .btn-group.pull-right style=("margin: -7px -12px 0 0;")
         a.btn.btn-primary href=edit_post_path(@post)
           span.glyphicon.glyphicon-pencil
