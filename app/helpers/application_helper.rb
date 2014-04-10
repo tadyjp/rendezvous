@@ -1,4 +1,3 @@
-require 'redcarpet'
 module ApplicationHelper
 
   class MarkdownRenderer < Redcarpet::Render::HTML
