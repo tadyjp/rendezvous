@@ -34,10 +34,7 @@
   .panel-body.viewer.github
     = markdown(@post.body)
     #likebox
-      - if @is_liked
-        = render partial: 'posts/boxunlike'
-      - else
-        = render partial: 'posts/boxlike'
+      = render partial: 'posts/boxlike'
       javascript:
         function likePost(){
           $.ajax({url:"/posts/like",type:"POST",data:{post_id:#{@post.id}},success:function(html){

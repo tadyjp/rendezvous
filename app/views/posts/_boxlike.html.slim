@@ -1,5 +1,9 @@
-button.btn.btn-default.btn-sm#like type="button" onclick="likePost();"
-  span.glyphicon.glyphicon-thumbs-up
+- if @is_liked
+    button.btn.btn-default.btn-sm#like type="button" onclick="unlikePost();"
+      span.glyphicon.glyphicon-thumbs-down
+- else
+    button.btn.btn-default.btn-sm#like type="button" onclick="likePost();"
+      span.glyphicon.glyphicon-thumbs-up
 span.badge  #{@count_like}
 - @user_like.each do |item|
-    a href="#"  #{item.user.name}
+    a href=search_path(q: "@#{item.user.nickname}")  #{item.user.name}

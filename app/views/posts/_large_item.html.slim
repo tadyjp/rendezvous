@@ -28,6 +28,8 @@ a.list-group-item.post-list.mod-hover-hidden data-post-id=post.id href=post_path
           span.mod-hover-hidden-item
             | コメント
           | &nbsp;#{post.comments.count}&nbsp;&nbsp;
+          span.glyphicon.glyphicon-thumbs-up
+          | &nbsp;#{post.like.count}&nbsp;&nbsp;
     .row
       .col-xs-12
         small.text-shadow

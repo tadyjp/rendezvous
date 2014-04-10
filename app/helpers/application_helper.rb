@@ -3,7 +3,8 @@ module ApplicationHelper
 
   class MarkdownRenderer < Redcarpet::Render::HTML
     def block_code(code, language)
-      CodeRay.highlight(code, language.split(".").first)
+      return "<div class='CodeRay'><div class='code'><pre>#{code}</pre></div></div>" if language.blank?
+      CodeRay.highlight(code, language.gsub(/[^[:alnum:]].*/, ""))
     end
   end
 
