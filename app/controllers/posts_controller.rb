@@ -24,8 +24,6 @@ class PostsController < ApplicationController
     end
     add_breadcrumb(@post.title)
 
-    render_box_like @post.id
-
     if params[:fragment].present?
       render layout: false, partial: 'posts/show_fragment'
     else
@@ -123,32 +121,6 @@ class PostsController < ApplicationController
   # Show presentation view
   def slideshow
     render layout: 'slideshow'
-  end
-
-  def like
-    post_id = params[:post_id]
-    model = Like.new
-    model[:post_id] = post_id
-    model[:user_id] = current_user.id
-    if model.save()
-      render_box_like post_id
-      render layout: false, partial: 'posts/boxlike'
-    else
-      render json: model.errors, status: :unprocessable_entity
-    end
-  end
-
-  def unlike
-    post_id = params[:post_id]
-    Like.destroy_all(:post_id => post_id, :user_id => current_user.id)
-    render_box_like post_id
-    render layout: false, partial: 'posts/boxlike'
-  end
-
-  def render_box_like post_id
-    @count_like = Like.count_by_post(post_id)
-    @user_like = Like.get_by_post(post_id)
-    @is_liked = Like.is_user_liked_post(post_id, current_user.id)
   end
 
   private

@@ -16,10 +16,10 @@ Rendezvous::Application.routes.draw do
   post   'posts/:id/comment' => 'posts#comment', as: 'comment_post'
   get    'posts/:id/slideshow' => 'posts#slideshow', as: 'slideshow_post'
 
-  post   'posts/like' => 'posts#like', as: 'like_post'
-  post   'posts/unlike' => 'posts#unlike', as: 'unlike_post'
-
   resources :posts
+
+  post   'likes/like' => 'likes#like', as: 'like_post'
+  post   'likes/unlike' => 'likes#unlike', as: 'unlike_post'
 
   post   'tags/:name/merge_to/:merge_to_name' => 'tags#merge_to', as: 'merge_to_tag'
   post   'tags/:name/move_to/:move_to_name' => 'tags#move_to', as: 'move_to_tag'

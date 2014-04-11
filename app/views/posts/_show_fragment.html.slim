@@ -37,12 +37,12 @@
       = render partial: 'posts/boxlike'
       javascript:
         function likePost(){
-          $.ajax({url:"/posts/like",type:"POST",data:{post_id:#{@post.id}},success:function(html){
+          $.ajax({url:"/likes/like",type:"POST",data:{post_id:#{@post.id}},success:function(html){
           $("#likebox").html(html);
             }});
           }
         function unlikePost(){
-          $.ajax({url:"/posts/unlike",type:"POST",data:{post_id:#{@post.id}},success:function(html){
+          $.ajax({url:"/likes/unlike",type:"POST",data:{post_id:#{@post.id}},success:function(html){
             $("#likebox").html(html);
             }});
           }

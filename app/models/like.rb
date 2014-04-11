@@ -9,10 +9,6 @@ class Like < ActiveRecord::Base
     self.where(:post_id => post_id)
   end
 
-  def self.count_by_post(post_id)
-    self.distinct.count('id', :conditions => "post_id = #{post_id}")
-  end
-
   def self.is_user_liked_post(post_id, user_id)
     self.distinct.count('id', :conditions => "post_id = #{post_id} AND user_id = #{user_id}") > 0 ? true : false
   end
