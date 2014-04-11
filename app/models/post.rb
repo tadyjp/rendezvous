@@ -3,7 +3,8 @@ class Post < ActiveRecord::Base
   has_many :tags, through: :post_tags
   belongs_to :author, class_name: 'User'
   has_many :comments
-  has_many :like
+  has_many :likes
+  has_many :favorites
 
   # default_scope  { where(is_draft: false).order(:updated_at => :desc) }
 

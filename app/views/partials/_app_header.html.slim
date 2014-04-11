@@ -18,6 +18,9 @@ nav.navbar.navbar-default.navbar-fixed-top role="navigation"
         li class=('active' if current_page?(flow_path))
           a href=flow_path title="Frow"
             | Flow
+        li class=('active' if current_page?(favorite_path))
+          a href=favorite_path title="Favorite"
+            | Favorites
 
       ul.nav.navbar-nav.navbar-right
         li

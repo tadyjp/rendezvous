@@ -10,7 +10,7 @@ a.list-group-item.post-list.mod-hover-hidden data-post-id=post.id href=post_path
         small.pull-right
           ##{post.id}
     .row
-      .col-xs-8
+      .col-xs-7
         small.text-success
           | #{post.author.name} posted&nbsp;
           abbr.js-time-ago data-time-ago-at=post.updated_at
@@ -18,7 +18,7 @@ a.list-group-item.post-list.mod-hover-hidden data-post-id=post.id href=post_path
           - post.tags.each do |tag|
             span.label.label-success ##{tag.name}
             | &nbsp;
-      .col-xs-4
+      .col-xs-5
         small.pull-right
           span.glyphicon.glyphicon-time
           span.mod-hover-hidden-item
@@ -29,7 +29,9 @@ a.list-group-item.post-list.mod-hover-hidden data-post-id=post.id href=post_path
             | コメント
           | &nbsp;#{post.comments.count}&nbsp;&nbsp;
           span.glyphicon.glyphicon-thumbs-up
-          | &nbsp;#{post.like.count}&nbsp;&nbsp;
+          | &nbsp;#{post.likes.count}&nbsp;&nbsp;
+          span.glyphicon.glyphicon-star
+          | &nbsp;#{post.favorites.count}&nbsp;&nbsp;
     .row
       .col-xs-12
         small.text-shadow

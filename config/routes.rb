@@ -10,6 +10,7 @@ Rendezvous::Application.routes.draw do
   get    'stock' => 'stock#show', as: 'stock'
   get    'flow'  => 'flow#show',  as: 'flow'
   get    'search'  => 'search#show',  as: 'search'
+  get    'favorites'  => 'favorites#show',  as: 'favorite'
 
   get    'posts/:id/fork' => 'posts#fork', as: 'fork_post'
   post   'posts/:id/mail' => 'posts#mail', as: 'mail_post'
@@ -20,6 +21,9 @@ Rendezvous::Application.routes.draw do
 
   post   'likes/like' => 'likes#like', as: 'like_post'
   post   'likes/unlike' => 'likes#unlike', as: 'unlike_post'
+
+  post   'favorites/favorite' => 'favorites#favorite', as: 'favorite_post'
+  post   'favorites/unfavorite' => 'favorites#unfavorite', as: 'unfavorite_post'
 
   post   'tags/:name/merge_to/:merge_to_name' => 'tags#merge_to', as: 'merge_to_tag'
   post   'tags/:name/move_to/:move_to_name' => 'tags#move_to', as: 'move_to_tag'

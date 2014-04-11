@@ -1,4 +1,5 @@
 class LikesController < ApplicationController
+  before_action :require_login
 
   def like
     @post = Post.find(params[:post_id])

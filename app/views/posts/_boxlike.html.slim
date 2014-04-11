@@ -1,9 +1,9 @@
 - if is_user_liked_post(@post.id)
-    button.btn.btn-default.btn-sm#like type="button" onclick="unlikePost();"
+    button.btn.btn-default.btn-sm.btn-primary type="button" onclick="unlikePost();"
       span.glyphicon.glyphicon-thumbs-down
 - else
-    button.btn.btn-default.btn-sm#like type="button" onclick="likePost();"
+    button.btn.btn-default.btn-sm type="button" onclick="likePost();"
       span.glyphicon.glyphicon-thumbs-up
-span.badge #{@post.like.count}
+span.badge #{@post.likes.count}
 - likes_by_post(@post.id).each do |item|
     a href=search_path(q: "@#{item.user.nickname}") #{item.user.name}
