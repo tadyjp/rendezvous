@@ -9,7 +9,7 @@ class LikesController < ApplicationController
     if model.save()
       render layout: false, partial: 'posts/boxlike'
     else
-      render :json => { :result=>"failed", :error=>model.errors, :post_id=>@post.id }
+      render :json => { :result => "failed", :error => model.errors, :post_id => @post.id }
     end
   end
 
@@ -18,7 +18,7 @@ class LikesController < ApplicationController
     if Like.destroy_all(:post_id => @post.id, :user_id => current_user.id)
       render layout: false, partial: 'posts/boxlike'
     else
-      render :json => { :result=>"failed", :error=>"Cannot unlike a post", :post_id=>@post.id }
+      render :json => { :result => "failed", :error => "Cannot unlike a post", :post_id => @post.id }
     end
   end
 

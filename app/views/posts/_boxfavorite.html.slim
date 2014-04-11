@@ -1,0 +1,6 @@
+- if is_user_favorited_post(@post.id)
+    button.btn.btn-default.btn-sm.btn-warning type="button" onclick="unfavoritePost();"
+      span.glyphicon.glyphicon-star
+- else
+    button.btn.btn-default.btn-sm type="button" onclick="favoritePost();"
+      span.glyphicon.glyphicon-star
