@@ -57,6 +57,7 @@ gem 'github-markdown'
 
 # Syntax Highlight
 gem 'coderay'
+gem 'redcarpet'
 
 group :development do
   # Use sqlite3 as the database for Active Record

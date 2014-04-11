@@ -32,7 +32,20 @@
           li.divider
           li= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' }
   .panel-body.viewer.github
-    = h_application_format_markdown(@post.body)
+    = markdown(@post.body)
+    #likebox
+      = render partial: 'posts/boxlike'
+      javascript:
+        function likePost(){
+          $.ajax({url:"/likes/like",type:"POST",data:{post_id:#{@post.id}},success:function(html){
+          $("#likebox").html(html);
+            }});
+          }
+        function unlikePost(){
+          $.ajax({url:"/likes/unlike",type:"POST",data:{post_id:#{@post.id}},success:function(html){
+            $("#likebox").html(html);
+            }});
+          }
 .panel.panel-success
   .panel-heading
     h3.panel-title Comments
