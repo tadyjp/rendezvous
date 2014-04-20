@@ -27,4 +27,12 @@ class PostDecorator < Draper::Decorator
     end
   end
 
+  def display_specified_date
+    if model.specified_date
+      model.specified_date.strftime('%Y-%m-%d')
+    else
+      ''
+    end
+  end
+
 end
