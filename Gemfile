@@ -50,6 +50,9 @@ gem 'mysql2'
 
 gem 'devise'
 
+# http://d.hatena.ne.jp/tkawa/20130812/p1
+gem 'devise-better_routes'
+
 gem 'omniauth-google-oauth2'
 
 # Markdown

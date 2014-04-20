@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class MeController < ApplicationController
   before_action :set_user, only: [:edit, :update]
 
   def edit
@@ -6,12 +6,12 @@ class UsersController < ApplicationController
 
   def update
     respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to edit_user_path, flash: { notice: 'Post was successfully updated.' } }
+      if @me.update(user_params)
+        format.html { redirect_to edit_me_path, flash: { notice: 'Post was successfully updated.' } }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @me.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_user
-    @user = current_user
+    @me = current_user
   end
 
   def user_params

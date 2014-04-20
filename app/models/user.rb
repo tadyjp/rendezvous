@@ -37,20 +37,15 @@ class User < ActiveRecord::Base
 
   # Device
   def self.find_for_google_oauth2(access_token, signed_in_resource = nil)
-    info = access_token.info
-    user = User.where(email: info['email']).first
 
-    unless user
-      new_nickname = (("a".."z").to_a + ("A".."Z").to_a + (0..9).to_a).shuffle[0..4].join
-      user = User.create(name: info['name'],
-                         image_url: info['image'],
-                         email: info['email'],
-                         password: Devise.friendly_token[0, 20],
-                         nickname: new_nickname
-      )
+    user = self.where(email: access_token.info['email']).first_or_create do |_user|
+      _user.name = access_token.info['name']
+      _user.image_url = access_token.info['image']
+      _user.password = Devise.friendly_token[0, 20]
+      _user.nickname = (("a".."z").to_a + ("A".."Z").to_a + (0..9).to_a).shuffle[0..4].join
     end
 
-    user.update_attributes(
+    user.update(
       google_auth_token: access_token.credentials['token'],
       google_refresh_token: access_token.credentials['refresh_token'],
       google_token_expires_at: Time.at(access_token.credentials['expires_at'])
