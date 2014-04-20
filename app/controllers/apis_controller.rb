@@ -32,4 +32,10 @@ class ApisController < ApplicationController
 
     render json: { status: 'OK', files: s3_files }
   end
+
+  def user_mention
+    name_list = User.search(params[:q]).map{ |_user| "#{_user.nickname}[#{_user.name}]" }
+
+    render json: name_list
+  end
 end

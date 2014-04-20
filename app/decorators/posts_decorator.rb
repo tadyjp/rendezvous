@@ -9,10 +9,10 @@ class PostsDecorator < Draper::CollectionDecorator
   end
 
   def related_authors
-    _authors = self.map do |_post|
+    self.map do |_post|
       _post.author
-    end.flatten.uniq
-
-    UserDecorator.decorate_collection(_authors)
+    end.flatten.uniq.map do |_author|
+      _author.decorate
+    end
   end
 end

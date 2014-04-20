@@ -1,5 +1,6 @@
 nav.navbar.navbar-default.navbar-fixed-top role="navigation"
   .container
+
     .navbar-header
       a.navbar-brand href=root_path Rendezvous
 
@@ -18,7 +19,6 @@ nav.navbar.navbar-default.navbar-fixed-top role="navigation"
           a href=flow_path title="Frow"
             | Flow
 
-
       ul.nav.navbar-nav.navbar-right
         li
           form
@@ -29,14 +29,17 @@ nav.navbar.navbar-default.navbar-fixed-top role="navigation"
           a.dropdown-toggle data-toggle="dropdown"
             = current_user.name
             img src=current_user.image_url width="20" height="20"/
+            span.badge = current_user.decorate.draft_count
             b.caret
           ul.dropdown-menu
             li
-              a Account (todo)
+              a href=search_path(q: "@#{current_user.nickname} draft:1")
+                | 下書き
+                span.badge.pull-right = current_user.decorate.draft_count
             li
-              a Settings (todo)
+              a href=edit_user_path(current_user) マイページ
             li.divider
             li
-              a href=destroy_user_session_path data-method="delete" rel="nofollow" SignOut
+              a href=sign_out_path data-method="delete" rel="nofollow" SignOut
 
 

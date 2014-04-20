@@ -4,32 +4,42 @@ class Post < ActiveRecord::Base
   belongs_to :author, class_name: 'User'
   has_many :comments
 
-  default_scope  { order(:updated_at => :desc) }
+  # default_scope  { where(is_draft: false).order(:updated_at => :desc) }
 
+  ######################################################################
+  # validations
+  ######################################################################
+  validates :title, presence: true
+  validates :body, presence: true
+
+  ######################################################################
   # Named scope
+  ######################################################################
   scope :search, (lambda do |query|
-    _where_list = includes(:author, :tags)
+    _where_list = includes(:author, :tags).order(updated_at: :desc)
 
     # Convert spaces to one space.
-    query_list = query.gsub(/[\s　]+/, ' ').split(' ')
+    query_list = query.split(/[\s　]+/)
 
     query_list.each do |_query|
       case _query
-      when /^id:(.+)/
+      when /\Aid:(.+)/
         _where_list = _where_list.where(id: Regexp.last_match[1])
-      when /^title:(.+)/
-        _where_list = _where_list.where('title LIKE ?', "%#{Regexp.last_match[1]}%")
-      when /^body:(.+)/
-        _where_list = _where_list.where('body LIKE ?', "%#{Regexp.last_match[1]}%")
-      when /^@(.+)/
-        _where_list = _where_list.where(users: { name: Regexp.last_match[1] })
-      when /^#(.+)/
+      when /\Atitle:(.+)/
+        _where_list = _where_list.where('posts.title LIKE ?', "%#{Regexp.last_match[1]}%")
+      when /\Abody:(.+)/
+        _where_list = _where_list.where('posts.body LIKE ?', "%#{Regexp.last_match[1]}%")
+      when /\A@(.+)/
+        _where_list = _where_list.where(users: { nickname: Regexp.last_match[1] })
+      when /\A#(.+)/
         _where_list = _where_list.where(tags: { name: Regexp.last_match[1] })
-      when /^date:(\d+)-(\d+)-(\d+)/
+      when /\Adate:(\d+)-(\d+)-(\d+)/
         _date = Time.new(Regexp.last_match[1], Regexp.last_match[2], Regexp.last_match[3])
-        _where_list = _where_list.where('updated_at > ? AND updated_at < ?', _date, _date + 1.day)
+        _where_list = _where_list.where('posts.updated_at > ? AND posts.updated_at < ?', _date, _date + 1.day)
+      when /\Adraft:1/
+        _where_list = _where_list.where(is_draft: true)
       else
-        _where_list = _where_list.where('title LIKE ? OR body LIKE ?', "%#{_query}%", "%#{_query}%")
+        _where_list = _where_list.where('posts.title LIKE ? OR posts.body LIKE ?', "%#{_query}%", "%#{_query}%")
       end
     end
 

@@ -10,19 +10,27 @@
             li= msg
 
     .row
-      .col-xs-10
-        .form-group
-          = f.label :title
-          = f.text_field :title, class: 'form-control mod-mdEditor-title', placeholder: 'post title'
-      .col-xs-2
-        .actions
-          = f.submit class: 'btn btn-primary js-disable-confirm-unload', id: 'save_button'
+      .col-xs-9
+        .field
+          .input-group
+            span.input-group-addon= f.label :title
+            = f.text_field :title, class: 'form-control mod-mdEditor-title'
 
-    .row
-      .col-xs-12
-        .form-group
-          = f.label :tags
-          = hidden_field :post, :tags, class: 'mod-mdEditor-tags', style: 'width:300px', value: @post.tags.map{ |_tag| _tag.name }.join(',')
+        .field
+          .input-group
+            span.input-group-addon= f.label :tags
+            = hidden_field :post, :tags, class: 'mod-mdEditor-tags', style: 'width:300px', value: @post.tags.map{ |_tag| _tag.name }.join(',')
+
+      .col-xs-3
+        p.actions
+          = f.submit class: 'btn btn-primary js-disable-confirm-unload', id: 'save_button'
+        p.actions
+          = f.check_box :is_draft
+          = f.label :is_draft, "下書き保存"
+        p.actions
+          = f.date_select :specified_date
+
+    br/
 
     .row
       .col-xs-6
@@ -56,6 +64,7 @@
           .text-box.body.viewer.github.mod-mdEditor-preview
 
 input#fileupload data-url="/apis/file_receiver" multiple="" name="files[]" style="display:none" type="file" /
+
 - content_for :footer_js do
   javascript:
     // $.setConfirmUnload();
@@ -66,3 +75,54 @@ input#fileupload data-url="/apis/file_receiver" multiple="" name="files[]" style
       $input: $('#fileupload'),
       $textarea: $('.mod-mdEditor-textarea')
     });
+
+    // 下書き保存
+    $('.btn-save-draft').on('click', function(e){
+      e.preventDefault();
+      var val = $('.mod-mdEditor-body').val();
+      console.log(val);
+    });
+
+    // mention補完
+    // TODO: mod-md-editorに入れる？
+    $('textarea').textcomplete([
+      { // html
+        mentions: ['yuku_t'],
+        match: /\B@([^\B]*)$/,
+        search: function (term, callback) {
+          $.getJSON('/apis/user_mention', { q: term })
+            .done(function (resp) { callback(resp); })
+            .fail(function ()     { callback([]);   });
+        },
+        index: 1,
+        replace: function (mention) {
+          return '@' + mention + ' ';
+        }
+      }
+    ]).on({
+      'textComplete:select': function (e, value) {
+        console.log('textComplete:select ' + value);
+      },
+      'textComplete:show': function (e) {
+        console.log('textComplete:show');
+        $(this).data('autocompleting', true);
+      },
+      'textComplete:hide': function (e) {
+        console.log('textComplete:hide');
+        $(this).data('autocompleting', false);
+      }
+    });
+    // .overlay([
+    //   {
+    //     match: /\B@\w+/g,
+    //     css: {
+    //       'background-color': '#d8dfea'
+    //     }
+    //   }
+    // ]);
+
+
+  css:
+    .textcomplete-wrapper {
+      width: 100%;
+    }

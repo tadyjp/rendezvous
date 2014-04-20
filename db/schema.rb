@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140302053916) do
+ActiveRecord::Schema.define(version: 20140328045902) do
 
   create_table "comments", force: true do |t|
     t.integer  "author_id"
@@ -40,7 +40,11 @@ ActiveRecord::Schema.define(version: 20140302053916) do
     t.integer  "author_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_draft",       default: false
+    t.date     "specified_date"
   end
+
+  add_index "posts", ["is_draft"], name: "index_posts_on_is_draft", using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "name"
@@ -70,9 +74,11 @@ ActiveRecord::Schema.define(version: 20140302053916) do
     t.string   "google_auth_token"
     t.string   "google_refresh_token"
     t.datetime "google_token_expires_at"
+    t.string   "nickname",                default: "", null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["nickname"], name: "index_users_on_nickname", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "versions", force: true do |t|

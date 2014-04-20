@@ -36,6 +36,9 @@ and get
   - `http://localhost:3000` in [Authorized Javascript origins]
   - `http://localhost:3000/users/auth/google_oauth2/callback` in [Authorized redirect URI]
 5. Get [Client ID] and [Client secret]
+6. Write your Client ID & Secret in config/settings/yml
+7. Input form
+  -`rendevous` in [Project name] in Consent screen
 
 
 ## Create and edit config files.

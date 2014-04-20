@@ -126,13 +126,13 @@ class PostsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:id]).decorate
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
     @post_params ||= begin
-      _param_hash = params.require(:post).permit(:title, :body, :tags).to_hash
+      _param_hash = params.require(:post).permit(:title, :body, :tags, :is_draft, :specified_date).to_hash
 
       # tags_text == 'Javascript,Ruby'
       tags_text = _param_hash.delete('tags')
