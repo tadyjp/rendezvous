@@ -33,8 +33,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
-    @post.title = '新しい投稿'
+    @post = Post.new(title: '新しい投稿')
   end
 
   def fork
