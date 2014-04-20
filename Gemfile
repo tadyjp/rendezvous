@@ -71,7 +71,7 @@ group :development do
   gem 'pry-rails'
 
   # profiler
-  # gem 'rack-mini-profiler'
+  gem 'rack-mini-profiler'
 
   # rubocop
   gem 'rubocop'

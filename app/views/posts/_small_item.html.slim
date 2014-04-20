@@ -1,4 +1,6 @@
 / locals:
 /   post {Post}
 
-a.list-group-item.post-list data-post-id=post.id href="#" = post.title
+a.list-group-item.post-list data-post-id=post.id href=post_path(post)
+  span.label.label-default.pull-right = post.display_specified_date if post.specified_date
+  = post.title

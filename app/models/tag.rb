@@ -29,6 +29,10 @@ class Tag < ActiveRecord::Base
     having('posts_count > 0')
   }
 
+  def recent_posts(limit = 30)
+    self.posts.recent(limit)
+  end
+
   # 自分のタグに紐づくPostをすべて`other_tag`へ移動する
   def move_all_posts_to!(other_tag)
     self.posts.each do |_post|

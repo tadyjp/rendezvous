@@ -10,6 +10,8 @@ class TagDecorator < Draper::Decorator
   #     end
   #   end
 
+  decorates_association :posts
+
   # tagページのURL
   # urlエンコードを施す
   def show_path
@@ -30,7 +32,7 @@ class TagDecorator < Draper::Decorator
 
     _html += %Q{
       <a href="#{ self.show_path }" data-name="#{model.name}">
-        #{model.name} <span class="badge">#{model.posts.count}</span>
+        #{model.name} <span class="badge">#{model.posts.size}</span>
       </a>
     }
 

@@ -27,7 +27,7 @@ Rendezvous::Application.routes.draw do
   # devise_for :users , only: [:sign_in, :sign_out, :session]
 
   devise_for :users,
-    path_names: {current_user: 'me'},
+    path_names: { current_user: 'me' },
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' },
     skip: [:passwords]
 

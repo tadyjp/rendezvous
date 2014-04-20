@@ -61,6 +61,11 @@ class Post < ActiveRecord::Base
     _where_list
   end)
 
+  # 最新のPostを取得
+  scope :recent, -> (limit = 10) {
+    order(updated_at: :desc).limit(limit)
+  }
+
   # generate forked post (not saved)
   def generate_fork(user)
 
