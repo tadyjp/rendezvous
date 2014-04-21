@@ -1,5 +1,93 @@
 = render_breadcrumbs
 .row
-  div
-    = render partial: 'posts/show_fragment'
-/! /row
+  .panel.panel-default
+    .panel-heading
+      h3.panel-title
+        a href=post_path(@post) = @post.title
+    ul.list-group
+      li.list-group-item
+        - @post.tags.each do |tag|
+          span.label.label-success
+            a href=tag.decorate.show_path
+              | ##{tag.name}
+          | &nbsp;
+        span.label.label-info
+          a href=(search_path(q: "@#{@post.author.name}"))
+            | @#{@post.author.name}
+        | &nbsp;
+        span.label.label-danger
+          a href=(search_path(q: "date:#{@post.display_date}")) = @post.display_date
+        .btn-group.pull-right style=("margin: -7px -12px 0 0;")
+          a.btn.btn-primary href=edit_post_path(@post)
+            span.glyphicon.glyphicon-pencil
+          button.btn.btn-default.dropdown-toggle data-toggle="dropdown" type="button"
+            span.caret
+            span.sr-only Toggle Dropdown
+          ul.dropdown-menu role="menu"
+            li
+              a href=slideshow_post_path(@post) target="_blank"  Slideshow
+            li
+              a.small href="https://github.com/gnab/remark" target="_blank"  What is Slideshow?
+            li.divider
+            li
+              a href=fork_post_path(@post)  Fork
+            li
+              a data-target="#myModal" data-toggle="modal" href="#"  Mail to...
+            li.divider
+            li= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' }
+    .panel-body.viewer.github
+      = h_application_format_markdown(@post.body)
+  .panel.panel-success
+    .panel-heading
+      h3.panel-title Comments
+    .panel-body
+      ul.media-list
+        - @post.comments.each do |comment|
+          li.media
+            a.pull-left href="#"
+              img.media-object src=comment.author.image_url /
+            .media-body
+              h4.media-heading= comment.author.name
+              = comment.body
+        = form_tag(comment_post_path, method: :post, data: { 'form-id' => "comment_#{@post.id}" }) do
+          li.media
+            a.pull-left href="#"
+              img.media-object src=current_user.image_url /
+            .media-body
+              h4.media-heading= current_user.name
+              = text_area :comment, :body, class: 'form-control', placeholder: 'コメントする...'
+              = submit_tag 'Comment', class: 'btn btn-primary', data: { 'disable-with' => '...' }
+      javascript:
+        $("form[data-form-id='comment_#{@post.id}']").on('ajax:success', function(event, data, xhr) {
+
+        });
+
+/! Button trigger modal
+/!
+/! Modal
+#myModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+  .modal-dialog
+    .modal-content
+      = form_tag mail_post_path(@post), method: :post, class: 'form-horizontal', role: 'form' do
+        .modal-header
+          button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
+          h4#myModalLabel.modal-title Mail this post to...
+        .modal-body
+          .form-group
+            label.col-sm-2.control-label Title
+            .col-sm-10
+              input.form-control readonly="" type="text" value=@post.title /
+          .form-group
+            label.col-sm-2.control-label for="inputEmail3"  To
+            .col-sm-10
+              input#inputEmail3.form-control name="mail[to]" placeholder="Email" type="email" /
+          .form-group
+            label.col-sm-2.control-label From
+            .col-sm-10
+              input.form-control readonly="" type="text" value=current_user.email /
+        .modal-footer
+          button.btn.btn-default data-dismiss="modal" type="button"  Close
+          button.btn.btn-primary data-disable-with="Sending..." type="submit"  Send
+    /! /.modal-content
+  /! /.modal-dialog
+/! /.modal

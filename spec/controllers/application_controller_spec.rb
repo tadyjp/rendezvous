@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ApplicationController do
 
-  pending '#require_login'
+  pending '#redirect_unless_signed_in'
 
   pending '#after_sign_in_path_for'
 
