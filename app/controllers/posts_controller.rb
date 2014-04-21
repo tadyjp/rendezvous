@@ -2,7 +2,6 @@ require 'nkf'
 
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy, :slideshow]
-  before_action :require_login
 
   include RV::Mailer
 
@@ -23,12 +22,6 @@ class PostsController < ApplicationController
       add_breadcrumb("##{_tag.name}", _tag.decorate.show_path)
     end
     add_breadcrumb(@post.title)
-
-    if params[:fragment].present?
-      render layout: false, partial: 'posts/show_fragment'
-    else
-      render
-    end
   end
 
   # GET /posts/new
@@ -67,7 +60,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to root_path(id: @post.id), flash: { notice: 'Post was successfully created.' } }
+        format.html { redirect_to post_path(id: @post.id), flash: { notice: 'Post was successfully created.' } }
         format.json { render action: 'show', status: :created, location: @post }
       else
         format.html { render action: 'new' }
@@ -83,7 +76,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to root_path(id: @post.id), flash: { notice: 'Post was successfully updated.' } }
+        format.html { redirect_to post_path(id: @post.id), flash: { notice: 'Post was successfully updated.' } }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

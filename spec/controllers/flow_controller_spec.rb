@@ -2,11 +2,19 @@ require 'spec_helper'
 
 describe FlowController do
 
-  describe "GET 'show'" do
+  describe "GET 'show' without login" do
+    it "returns http redirect" do
+      get 'show'
+      expect(response).to redirect_to('/')
+    end
+  end
+
+  describe "GET 'show' with login" do
     login_user
+
     it "returns http success" do
       get 'show'
-      response.should be_success
+      expect(response).to be_success
     end
   end
 

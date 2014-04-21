@@ -1,4 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+
+  skip_before_action :redirect_unless_signed_in
+
   def google_oauth2
 
     email = request.env['omniauth.auth'].info['email']
