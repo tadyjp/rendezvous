@@ -3,6 +3,7 @@ Rendezvous::Application.routes.draw do
   post   'apis/markdown_preview'
   post   'apis/file_receiver'
   get    'apis/user_mention'
+
   get    'tags/:name/events' => 'tags#events', as: 'event_tag'
 
   root   'welcome#top', as: 'root'
@@ -15,31 +16,16 @@ Rendezvous::Application.routes.draw do
   post   'posts/:id/mail' => 'posts#mail', as: 'mail_post'
   post   'posts/:id/comment' => 'posts#comment', as: 'comment_post'
   get    'posts/:id/slideshow' => 'posts#slideshow', as: 'slideshow_post'
-  resources :posts
+  resources :posts, except: [:index]
 
   post   'tags/:name/merge_to/:merge_to_name' => 'tags#merge_to', as: 'merge_to_tag'
   post   'tags/:name/move_to/:move_to_name' => 'tags#move_to', as: 'move_to_tag'
-  resources :tags, :param => :name
-
-  # resource :user, :only => [:edit, :update]
-
-  # devise_for :users , controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  # devise_for :users , only: [:sign_in, :sign_out, :session]
+  resources :tags, :param => :name, except: [:index]
 
   devise_for :users,
     path_names: { current_user: 'me' },
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' },
     skip: [:passwords]
-
-  # , controllers: { omniauth_callbacks: 'users/omniauth_callbacks' } # , skip: [:sessions]
-  # devise_scope :user do
-  #   get 'sign_in', to: 'users/sessions#new', as: :new_user_session
-  #   delete 'sign_out', to: 'devise/sessions#destroy', as: :sign_out
-  # end
-
-
-  # get    'users/edit'   => 'users#edit',   as: 'edit_user'
-  # post   'users/update' => 'users#update', as: 'update_user'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

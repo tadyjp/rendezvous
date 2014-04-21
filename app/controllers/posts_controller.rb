@@ -5,16 +5,6 @@ class PostsController < ApplicationController
 
   include RV::Mailer
 
-  # GET /posts
-  # GET /posts.json
-  def index
-    if params[:q].present?
-      @posts = Post.search(params[:q]).limit(10)
-    else
-      @posts = Post.order(updated_at: :desc).limit(10)
-    end
-  end
-
   # GET /posts/1
   # GET /posts/1.json
   def show
