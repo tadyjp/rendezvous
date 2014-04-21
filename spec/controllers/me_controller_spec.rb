@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UsersController do
+describe MeController do
 
   before do
   end
@@ -17,7 +17,7 @@ describe UsersController do
     login_user
     it "returns http success" do
       patch :update, user: { nickname: 'bob' }
-      response.should redirect_to('/user/edit')
+      response.should redirect_to('/me/edit')
     end
   end
 

@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: tags
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  ancestry   :string(255)
+#  body       :text
+#
+
 class Tag < ActiveRecord::Base
   has_many :post_tags
   has_many :posts, through: :post_tags
@@ -16,6 +28,10 @@ class Tag < ActiveRecord::Base
     group('tags.id').
     having('posts_count > 0')
   }
+
+  def recent_posts(limit = 30)
+    self.posts.recent(limit)
+  end
 
   # 自分のタグに紐づくPostをすべて`other_tag`へ移動する
   def move_all_posts_to!(other_tag)

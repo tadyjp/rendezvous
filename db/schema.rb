@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140328045902) do
+ActiveRecord::Schema.define(version: 20140420120819) do
 
   create_table "comments", force: true do |t|
     t.integer  "author_id"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20140328045902) do
     t.datetime "updated_at"
     t.string   "ancestry"
     t.text     "body"
+    t.integer  "posts_count", default: 0, null: false
   end
 
   add_index "tags", ["ancestry"], name: "index_tags_on_ancestry", using: :btree

@@ -50,6 +50,9 @@ gem 'mysql2'
 
 gem 'devise'
 
+# http://d.hatena.ne.jp/tkawa/20130812/p1
+gem 'devise-better_routes'
+
 gem 'omniauth-google-oauth2'
 
 # Markdown
@@ -68,7 +71,7 @@ group :development do
   gem 'pry-rails'
 
   # profiler
-  # gem 'rack-mini-profiler'
+  gem 'rack-mini-profiler'
 
   # rubocop
   gem 'rubocop'
@@ -89,6 +92,9 @@ group :development, :test do
 
   # gem 'database_cleaner'
   gem 'database_rewinder'
+
+  gem 'teaspoon'
+  gem 'guard-teaspoon'
 end
 
 group :test do
@@ -132,3 +138,5 @@ gem 'newrelic_rpm'
 gem 'breadcrumble'
 
 gem 'slim'
+
+gem 'annotate', ">=2.6.0"

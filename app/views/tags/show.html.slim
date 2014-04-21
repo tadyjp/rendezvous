@@ -40,8 +40,10 @@
       h2
         small
           | 「#{@tag.name}」のタグが付いた記事
-      - @tag.posts.each_with_index do |post, i|
-        a.list-group-item.post-list href=post_path(post) = post.title
+      - @tag.recent_posts.each do |post|
+        = render partial: 'posts/small_item', locals: { post: post.decorate }
+      a.list-group-item.post-list href=search_path(q: "##{@tag.name}") もっと見る
+
 
 #modal-merge.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
   .modal-dialog

@@ -30,3 +30,5 @@
 
 /backup
 /script/backup.sh
+
+.rbenv-gemsets

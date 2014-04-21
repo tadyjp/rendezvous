@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: posts
+#
+#  id             :integer          not null, primary key
+#  title          :string(255)
+#  body           :text
+#  author_id      :integer
+#  created_at     :datetime
+#  updated_at     :datetime
+#  is_draft       :boolean          default(FALSE)
+#  specified_date :date
+#
+#    specified_dateは特定の日付を指定したい場合に使用
+
 class Post < ActiveRecord::Base
   has_many :post_tags
   has_many :tags, through: :post_tags
@@ -45,6 +60,11 @@ class Post < ActiveRecord::Base
 
     _where_list
   end)
+
+  # 最新のPostを取得
+  scope :recent, -> (limit = 10) {
+    order(updated_at: :desc).limit(limit)
+  }
 
   # generate forked post (not saved)
   def generate_fork(user)
