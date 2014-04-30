@@ -15,18 +15,12 @@ describe 'Request via js', js: true do
 
   before :each do
     login_as user, scope: :user
-    visit '/posts'
+    visit '/flow'
   end
 
   it 'show first post' do
     page.save_screenshot(Rails.root.join('tmp', 'screenshots', "a-#{Time.now.strftime('%Y-%m-%d %H%M%S')}.png"))
-    expect(page.find('.panel-title a').text).to include('java java')
-  end
-
-  it 'click post and show' do
-    find('.post-list:nth-child(3)').click
-    page.save_screenshot(Rails.root.join('tmp', 'screenshots', "b-#{Time.now.strftime('%Y-%m-%d %H%M%S')}.png"))
-    expect(page.find('.panel-title a').text).to include('ruby rspec')
+    expect(page.find('.post-list:first-child h4').text).to include('java java')
   end
 
   after :each do

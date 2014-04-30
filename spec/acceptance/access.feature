@@ -6,7 +6,7 @@ Feature: アクセス制限
     Then response includes '<!--view:welcome/login-->'
 
   Scenario: 非ログイン --> postsページ
-    When visit '/posts'
+    When visit '/flow'
     Then response code is 200
     Then response includes '<!--view:welcome/login-->'
 
