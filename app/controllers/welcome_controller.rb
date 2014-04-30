@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
-  skip_before_action :require_login
+
+  skip_before_action :redirect_unless_signed_in
 
   def top
     if user_signed_in?

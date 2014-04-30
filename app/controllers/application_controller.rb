@@ -5,7 +5,9 @@ class ApplicationController < ActionController::Base
 
   add_breadcrumb("Rendezvous", '/')
 
-  def require_login
+  before_action :redirect_unless_signed_in
+
+  def redirect_unless_signed_in
     unless user_signed_in?
       flash[:alert] = 'You need Login!'
       session[:login_redirect_to] = request.url
