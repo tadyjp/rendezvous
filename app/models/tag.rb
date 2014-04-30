@@ -29,6 +29,17 @@ class Tag < ActiveRecord::Base
     having('posts_count > 0')
   }
 
+  class << self
+
+    # 最近投稿されたTagを取得
+    def recent(limit=10)
+      Post.recent(20).map do |post|
+        post.tags
+      end.flatten.compact.uniq.take(limit)
+    end
+
+  end
+
   def recent_posts(limit = 30)
     self.posts.recent(limit)
   end
