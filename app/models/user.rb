@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
   ######################################################################
   has_many :posts, foreign_key: 'author_id'
   has_many :comments, foreign_key: 'author_id'
+  has_many :notifications
 
   ######################################################################
   # scope
@@ -105,6 +106,10 @@ class User < ActiveRecord::Base
     )
   end
 
+  # push通知を追加
+  def push_notification(detail_path, body)
+    notifications.create(detail_path: detail_path, body: body, is_read: false)
+  end
 
 
 end
