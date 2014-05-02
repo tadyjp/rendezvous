@@ -44,14 +44,18 @@ nav.navbar.navbar-default.navbar-fixed-top role="navigation"
         li.dropdown
           a.dropdown-toggle data-toggle="dropdown"
             | 通知
-            span.badge = current_user.decorate.draft_count
+            - if current_user.notifications.unread.any?
+              span.badge = current_user.notifications.unread.count
             b.caret
           ul.dropdown-menu
-            - current_user.notifications.each do |notification|
+            - if current_user.notifications.unread.any?
+              - current_user.notifications.unread.each do |notification|
+                li
+                  a href=notification_bridge_path(notification.id)
+                    = notification.body
+            - else
               li
-                a href=notification.detail_path
-                  = notification.body
-                  span.badge.pull-right = current_user.decorate.draft_count
+                a 通知はありません
 
 
 
