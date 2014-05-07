@@ -17,4 +17,13 @@ class Comment < ActiveRecord::Base
   validates :author_id, presence: true
   validates :post_id, presence: true
   validates :body, presence: true
+
+  ### Callback ###
+  after_save :notify_author
+
+  private
+
+  def notify_author
+    post.author.push_notification(post.decorate.show_path, "#{author.name}さんがあなたの投稿にコメントしました")
+  end
 end
