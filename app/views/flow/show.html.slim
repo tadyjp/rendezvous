@@ -9,6 +9,7 @@
     .list-group
       - @posts.each do |_post|
         = render partial: 'posts/large_item', locals: { post: _post }
+    = paginate(@posts)
 
   .col-xs-4
     / .panel.panel-default

@@ -129,7 +129,7 @@ gem 'draper', '~> 1.3'
 # ActiveRecord versioning
 gem 'paper_trail', '~> 3.0.0'
 
-gem 'aws-sdk'
+gem 'aws-sdk', '1.39.0'
 
 gem 'newrelic_rpm'
 
@@ -138,3 +138,5 @@ gem 'breadcrumble'
 gem 'slim'
 
 gem 'annotate', ">=2.6.0"
+
+gem 'kaminari', github: 'amatsuda/kaminari'
