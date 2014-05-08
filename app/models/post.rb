@@ -13,6 +13,8 @@
 #
 #    specified_dateは特定の日付を指定したい場合に使用
 
+require 'date'
+
 class Post < ActiveRecord::Base
   has_many :post_tags
   has_many :tags, through: :post_tags
@@ -74,14 +76,13 @@ class Post < ActiveRecord::Base
 
     # `%Name`をユーザー名に置換
     _forked_post.title = _forked_post.title.gsub(/%Name/, user.name)
-
     # `%Y`などを日付に変換
     _forked_post.title = Time.now.strftime(_forked_post.title) # TODO
-
     _forked_post.title = _forked_post.title + ' のコピー'
 
     _forked_post.tag_ids = self.tag_ids
     _forked_post.author = user
+    _forked_post.specified_date = Date.today
 
     _forked_post
   end

@@ -19,6 +19,7 @@ FactoryGirl.define do
   factory :post do
     title 'sample title'
     body 'sample body'
+    specified_date Date.new(2014, 4, 1)
 
     after(:create) do |post|
       create(:post_tag, post: post, tag: create(:tag_ruby))

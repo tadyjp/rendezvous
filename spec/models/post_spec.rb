@@ -13,6 +13,7 @@
 #
 
 require 'spec_helper'
+require 'date'
 
 describe Post do
 
@@ -48,6 +49,10 @@ describe Post do
 
       it 'valid user' do
         expect(@new_post.tags).to include(@post.tags.first)
+      end
+
+      it 'valid specified_date' do
+        expect(@new_post.specified_date).to eq(Date.today)
       end
 
     end
