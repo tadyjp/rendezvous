@@ -18,6 +18,8 @@ Rendezvous::Application.routes.draw do
   get    'posts/:id/slideshow' => 'posts#slideshow', as: 'slideshow_post'
   resources :posts, except: [:index]
 
+  get    'notification_bridge/:id'  => 'notifications#bridge',  as: 'notification_bridge'
+
   post   'tags/:name/merge_to/:merge_to_name' => 'tags#merge_to', as: 'merge_to_tag'
   post   'tags/:name/move_to/:move_to_name' => 'tags#move_to', as: 'move_to_tag'
   resources :tags, :param => :name, except: [:index]

@@ -21,7 +21,7 @@ role :db,  %w{tady@rendezvous}
 # you can see them in [net/ssh documentation](http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start)
 # set it globally
 set :ssh_options, {
-  keys: %w(/Users/tady/.ssh/id_rsa_07PC12),
+  keys: %w(/Users/tady/.ssh/id_rsa),
   forward_agent: true,
   auth_methods: %w(publickey)
 }
