@@ -8,6 +8,6 @@ class SearchController < ApplicationController
     end
 
     @count = scope.count
-    @posts = scope.limit(100).decorate
+    @posts = scope.page(params[:page]).decorate
   end
 end
