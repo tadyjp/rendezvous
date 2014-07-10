@@ -8,8 +8,7 @@ a.list-group-item.post-list.mod-hover-hidden data-post-id=post.id href=post_path
         h4.text-link #{post.title}
       .col-xs-3
         span.label.label-danger = post.display_specified_date if post.specified_date
-        small.pull-right
-          ##{post.id}
+        small.pull-right "##{post.id}"
     .row
       .col-xs-8
         small.text-success

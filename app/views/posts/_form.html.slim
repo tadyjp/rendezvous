@@ -67,7 +67,7 @@ input#fileupload data-url="/apis/file_receiver" multiple="" name="files[]" style
 
 - content_for :footer_js do
   javascript:
-    // $.setConfirmUnload();
+    $.setConfirmUnload();
 
     $('#post-form').mod_mdEditor({end_point: '/apis/markdown_preview'});
 
