@@ -35,11 +35,11 @@ describe User do
     describe '#google_oauth_token_expired?' do
 
       it 'not expired' do
-        expect(alice.google_oauth_token_expired?).to be_false
+        expect(alice.google_oauth_token_expired?).to be_falsey
       end
 
       it 'expired' do
-        expect(bob.google_oauth_token_expired?).to be_true
+        expect(bob.google_oauth_token_expired?).to be_truthy
       end
 
     end

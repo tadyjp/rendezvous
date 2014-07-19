@@ -70,42 +70,42 @@ describe Post do
     end
 
     it 'by id' do
-      expect(Post.search('id:1001')).to have(1).items
+      expect(Post.search('id:1001').size).to eq(1)
       expect(Post.search('id:1001')).to include(@post1)
     end
 
     it 'by title' do
-      expect(Post.search('title:ruby')).to have(2).items
+      expect(Post.search('title:ruby').size).to eq(2)
       expect(Post.search('title:ruby')).to include(@post1)
     end
 
     it 'by body' do
-      expect(Post.search('body:ruby')).to have(2).items
+      expect(Post.search('body:ruby').size).to eq(2)
       expect(Post.search('body:ruby')).to include(@post3)
     end
 
     it 'by @<author_name>' do
-      expect(Post.search('@Alice')).to have(1).items
+      expect(Post.search('@Alice').size).to eq(1)
       expect(Post.search('@Alice')).to include(@post2)
     end
 
     it 'by #<tag_name>' do
-      expect(Post.search('#java')).to have(1).items
+      expect(Post.search('#java').size).to eq(1)
       expect(Post.search('#java')).to include(@post3)
     end
 
     it 'by date' do
-      expect(Post.search('date:1989-2-25')).to have(1).items
+      expect(Post.search('date:1989-2-25').size).to eq(1)
       expect(Post.search('date:1989-2-25')).to include(@post3)
     end
 
     it 'by draft' do
-      expect(Post.search('ruby')).to have(3).items
-      expect(Post.search('ruby draft:1')).to have(1).items
+      expect(Post.search('ruby').size).to eq(3)
+      expect(Post.search('ruby draft:1').size).to eq(1)
     end
 
     it 'by else' do
-      expect(Post.search('ruby')).to have(3).items
+      expect(Post.search('ruby').size).to eq(3)
       expect(Post.search('ruby')).to include(@post1)
       expect(Post.search('ruby')).to include(@post3)
     end
