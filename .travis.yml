@@ -1,7 +1,7 @@
 bundler_args: "--without development --path=~/.bundle"
 language: ruby
 rvm:
-- 2.0.0
+- 2.1.2
 env:
   matrix:
   - DB_TEST_DATABASE=rendezvous_test DB_TEST_USER=travis
