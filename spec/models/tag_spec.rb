@@ -11,7 +11,7 @@
 #  posts_count :integer          default(0), not null
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Tag do
   describe '#move_all_posts_to!' do

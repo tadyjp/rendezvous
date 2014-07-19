@@ -12,7 +12,7 @@
 #  specified_date :date
 #
 
-require 'spec_helper'
+require 'rails_helper'
 require 'date'
 
 describe Post do
@@ -36,7 +36,7 @@ describe Post do
       end
 
       it 'valid title' do
-        expect(@new_post.title).to eq('sample title のコピー')
+        expect(@new_post.title).to eq('sample title')
       end
 
       it 'valid body' do

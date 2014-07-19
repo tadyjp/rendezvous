@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 step 'access :site' do |site|
   Capybara.app_host = site
 end
