@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe TagsController do
+describe TagsController, type: :controller do
 
   let(:tag) { FactoryGirl.create(:tag_ruby) }
 
@@ -12,9 +12,9 @@ describe TagsController do
   end
 
   describe "GET 'show' with login" do
-    login_user
-
     it "returns http success" do
+      sign_in FactoryGirl.create(:alice)
+
       get 'show', name: tag.name
       expect(response).to be_success
     end

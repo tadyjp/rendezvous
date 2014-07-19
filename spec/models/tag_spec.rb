@@ -2,12 +2,13 @@
 #
 # Table name: tags
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  ancestry   :string(255)
-#  body       :text
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  ancestry    :string(255)
+#  body        :text
+#  posts_count :integer          default(0), not null
 #
 
 require 'spec_helper'
@@ -23,11 +24,11 @@ describe Tag do
     end
 
     it 'successfully moved' do
-      expect(Tag.find_by(name: 'ruby').posts).to have(2).items
-      expect(Tag.find_by(name: 'java').posts).to have(2).items
+      expect(Tag.find_by(name: 'ruby').posts.size).to eq(2)
+      expect(Tag.find_by(name: 'java').posts.size).to eq(2)
       @tag_java.move_all_posts_to!(@tag_ruby)
-      expect(Tag.find_by(name: 'ruby').posts).to have(3).items
-      expect(Tag.find_by(name: 'java').posts).to have(0).items
+      expect(Tag.find_by(name: 'ruby').posts.size).to eq(3)
+      expect(Tag.find_by(name: 'java').posts.size).to eq(0)
     end
   end
 

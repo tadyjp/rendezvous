@@ -1,7 +1,7 @@
 # Teaspoon includes some support files, but you can use anything from your own support path too.
-# require support/jasmine-jquery-1.7.0
-# require support/jasmine-jquery-2.0.0
+# require support/expect
 # require support/sinon
+# require support/chai
 # require support/your-support-file
 #
 # PhantomJS (Teaspoons default driver) doesn't have support for Function.prototype.bind, which has caused confusion.
@@ -25,6 +25,14 @@
 # the configuration and use this file as a manifest.
 #
 # For more information: http://github.com/modeset/teaspoon
+#
+# Chai
+# If you're using Chai, you'll probably want to initialize your preferred assertion style. You can read more about Chai
+# at: http://chaijs.com/guide/styles
+#
+# window.assert = chai.assert
+# window.expect = chai.expect
+# window.should = chai.should()
 #
 # You can require your own javascript files here. By default this will include everything in application, however you
 # may get better load performance if you require the specific files that are being used in the spec that tests them.

@@ -26,8 +26,16 @@ Rendezvous::Application.routes.draw do
 
   devise_for :users,
     path_names: { current_user: 'me' },
-    controllers: { omniauth_callbacks: 'users/omniauth_callbacks' },
-    skip: [:passwords]
+    controllers: {
+      omniauth_callbacks: 'users/omniauth_callbacks',
+      registrations: 'users/registrations'
+    },
+    skip: [
+      :passwords,
+      :registrations,
+    ]
+
+  resource :user
 
 
   # The priority is based upon order of creation: first created -> highest priority.

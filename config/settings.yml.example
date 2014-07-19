@@ -4,10 +4,16 @@
 
 defaults: &defaults
   rendezvous:
+
+    # For amil body
     app_host: "http://rendezvous.dev"
+
+  # For login
   google_api:
     client_id: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com"
     secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+  # For file upload
   s3:
     access_key_id: "xxxxxxxxxxxxxxxxxxxxx"
     secret_access_key: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"

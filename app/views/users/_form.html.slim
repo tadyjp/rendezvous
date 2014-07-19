@@ -1,12 +1,12 @@
 #post-form
-  = form_for(@me, url: me_path) do |f|
-    - if @me.errors.any?
+  = form_for(@user, url: user_path) do |f|
+    - if @user.errors.any?
       #error_explanation
         h2
-          = pluralize(@me.errors.count, "error")
+          = pluralize(@user.errors.count, "error")
           | prohibited this post from being saved:
         ul
-          - @me.errors.full_messages.each do |msg|
+          - @user.errors.full_messages.each do |msg|
             li= msg
 
     .row
