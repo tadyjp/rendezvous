@@ -18,6 +18,9 @@ nav.navbar.navbar-default.navbar-fixed-top role="navigation"
         li class=('active' if current_page?(flow_path))
           a href=flow_path title="Frow"
             | Flow
+        li class=('active' if current_page?(templates_path))
+          a href=templates_path title="Templates"
+            | Templates
 
       ul.nav.navbar-nav.navbar-right
         li
