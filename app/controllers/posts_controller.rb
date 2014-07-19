@@ -8,6 +8,9 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+
+    current_user.visit_post!(@post)
+
     @post.tags.each do |_tag|
       add_breadcrumb("##{_tag.name}", _tag.decorate.show_path)
     end

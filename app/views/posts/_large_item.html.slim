@@ -20,14 +20,15 @@ a.list-group-item.post-list.mod-hover-hidden data-post-id=post.id href=post_path
             | &nbsp;
       .col-xs-4
         small.pull-right
-          span.glyphicon.glyphicon-time
-          span.mod-hover-hidden-item
-            | 読了時間
+          span.glyphicon.glyphicon-time title="読了時間"
           | &nbsp;#{post.read_time}&nbsp;&nbsp;
-          span.glyphicon.glyphicon-comment
-          span.mod-hover-hidden-item
-            | コメント
+
+          span.glyphicon.glyphicon-comment title="コメント"
           | &nbsp;#{post.comments.count}&nbsp;&nbsp;
+
+          span.glyphicon.glyphicon-eye-open title="閲覧者数"
+          | &nbsp;#{post.visited_user_count}&nbsp;&nbsp;
+
     .row
       .col-xs-12
         small.text-shadow

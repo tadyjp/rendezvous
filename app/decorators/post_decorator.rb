@@ -27,6 +27,14 @@ class PostDecorator < Draper::Decorator
     end
   end
 
+  def created_date
+    model.created_at.strftime('%Y-%m-%d')
+  end
+
+  def updated_date
+    model.updated_at.strftime('%Y-%m-%d')
+  end
+
   def display_specified_date
     if model.specified_date
       model.specified_date.strftime('%Y-%m-%d')
