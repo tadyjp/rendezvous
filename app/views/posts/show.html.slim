@@ -9,7 +9,7 @@
 
   .col-xs-3
 
-    p.btn-group
+    .btn-group
       a.btn.btn-primary href=edit_post_path(@post)
         | 編集&nbsp;
         span.glyphicon.glyphicon-pencil
@@ -29,7 +29,16 @@
         li.divider
         li= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' }
 
-    .well
+    | &nbsp;
+
+    .btn-group
+      - if current_user.watching?(post: @post)
+        = link_to 'Watching <span class="glyphicon glyphicon-eye-open"></span>'.html_safe, watch_post_path, :remote => true, :'data-type' => :html, :class => 'btn btn-warning ajax_link'
+      - else
+        = link_to 'Watch <span class="glyphicon glyphicon-eye-open"></span>'.html_safe, watch_post_path, :remote => true, :'data-type' => :html, :class => 'btn btn-default ajax_link'
+
+
+    .well style="margin-top:20px"
       dl
         dt 作成者
         dd
@@ -63,8 +72,6 @@
         dt コメント数
         dd
           = @post.comments.count
-
-
 
 .row
   .panel.panel-success

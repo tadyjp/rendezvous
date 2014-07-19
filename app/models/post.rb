@@ -21,6 +21,7 @@ class Post < ActiveRecord::Base
   belongs_to :author, class_name: 'User'
   has_many :comments
   has_many :footprints
+  has_many :watchers, :as => :resource
 
   # default_scope  { where(is_draft: false).order(:updated_at => :desc) }
 
