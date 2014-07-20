@@ -115,15 +115,15 @@ ActiveRecord::Schema.define(version: 20140719145016) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
-  create_table "watchers", force: true do |t|
-    t.integer  "user_id",       null: false
-    t.string   "resource_type", null: false
-    t.integer  "resource_id",   null: false
+  create_table "watches", force: true do |t|
+    t.integer  "watcher_id",     null: false
+    t.string   "watchable_type", null: false
+    t.integer  "watchable_id",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "watchers", ["resource_type", "resource_id"], name: "index_watchers_on_resource_type_and_resource_id", using: :btree
-  add_index "watchers", ["user_id", "resource_type", "resource_id"], name: "index_watchers_on_user_id_and_resource_type_and_resource_id", unique: true, using: :btree
+  add_index "watches", ["watchable_type", "watchable_id"], name: "index_watches_on_watchable_type_and_watchable_id", using: :btree
+  add_index "watches", ["watcher_id", "watchable_type", "watchable_id"], name: "index_watches_on_watcher_id_and_watchable_type_and_watchable_id", unique: true, using: :btree
 
 end

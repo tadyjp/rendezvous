@@ -21,15 +21,20 @@ class Post < ActiveRecord::Base
   belongs_to :author, class_name: 'User'
   has_many :comments
   has_many :footprints
-  has_many :watchers, :as => :resource
 
-  # default_scope  { where(is_draft: false).order(:updated_at => :desc) }
+  has_many :watches, :as => :watchable, :dependent => :destroy
+  has_many :watchers, :through => :watches
 
   ######################################################################
   # validations
   ######################################################################
   validates :title, presence: true
   validates :body, presence: true
+
+  ######################################################################
+  # Callback
+  ######################################################################
+  after_save :notify_watchers
 
   ######################################################################
   # Named scope
@@ -100,5 +105,13 @@ class Post < ActiveRecord::Base
 
   def visited_user_count
     footprints.select(:user_id).uniq.count
+  end
+
+  private
+
+  def notify_watchers
+    watchers.each do |watcher|
+      watcher.push_notification(decorate.show_path, "#{author.name}さんが「#{title}」を編集しました")
+    end
   end
 end

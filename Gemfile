@@ -87,6 +87,7 @@ group :development, :test do
 
   gem 'teaspoon'
   gem 'guard-teaspoon'
+  gem 'byebug'
 end
 
 group :test do

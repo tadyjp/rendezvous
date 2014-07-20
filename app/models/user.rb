@@ -39,8 +39,11 @@ class User < ActiveRecord::Base
   has_many :comments, foreign_key: 'author_id'
   has_many :notifications
   has_many :footprints
-  has_many :watchings, class_name: 'Watcher'
-  has_many :watchers, :as => :resource
+
+  has_many :watches
+  has_many :watchings, class_name: 'Watch', foreign_key: 'watcher_id'
+  has_many :watching_posts, :through => :watchings, :source => :watchable, :source_type => "Post"
+  # has_many :watchings, :as => :resource
 
   ######################################################################
   # scope
@@ -126,14 +129,14 @@ class User < ActiveRecord::Base
   # TODO: tag/user
   def watching?(hash)
     if hash[:post]
-      hash[:post].watchers.where(user_id: self.id).exists?
+      hash[:post].watchings.where(user_id: self.id).exists?
     else
       false
     end
   end
 
-  def watching_posts
-    ids = watchings.where(resource_type: "Post").pluck(:resource_id)
-    Post.where(id: ids)
-  end
+  # def watching_posts
+  #   ids = watching_items.where(resource_type: "Post").pluck(:resource_id)
+  #   Post.where(id: ids)
+  # end
 end
