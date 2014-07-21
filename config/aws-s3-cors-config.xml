@@ -1,0 +1,12 @@
+<CORSConfiguration>
+    <CORSRule>
+        <AllowedOrigin>*</AllowedOrigin>
+        <AllowedMethod>GET</AllowedMethod>
+        <MaxAgeSeconds>3000</MaxAgeSeconds>
+        <AllowedHeader>*</AllowedHeader>
+        <ExposeHeader>Accept-Ranges</ExposeHeader>
+        <ExposeHeader>Content-Encoding</ExposeHeader>
+        <ExposeHeader>Content-Length </ExposeHeader>
+        <ExposeHeader>Content-Range</ExposeHeader>
+    </CORSRule>
+</CORSConfiguration>

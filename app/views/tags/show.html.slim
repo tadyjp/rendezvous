@@ -32,7 +32,7 @@
         | 「#{@tag.name}」とは
       .panel-body
         - if @tag.body.present?
-          = h_application_format_markdown(@tag.body)
+          = MarkdownRenderer.new(@tag.body).render
         - else
           | まだ「#{@tag.name}」の情報がありません。
   .col-xs-4
