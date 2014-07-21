@@ -15,5 +15,22 @@
 require 'spec_helper'
 
 describe Notification do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'Instance method' do
+    let(:alice) { create(:alice) }
+
+    it "notifies on post edited" do
+    end
+
+    it "notifies on post commented" do
+    end
+
+    it "set watch on user create a new post" do
+    end
+
+    it "set watch on user edit a post" do
+    end
+
+    it "set watch on user comment a post" do
+    end
+  end
 end
