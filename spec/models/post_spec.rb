@@ -105,7 +105,22 @@ describe Post do
       expect(Post.search('ruby')).to include(@post1)
       expect(Post.search('ruby')).to include(@post3)
     end
-
   end
 
+  describe '#notify_watchers' do
+    before :each do
+      @alice = create(:alice)
+      @bob = create(:bob)
+      @post = @alice.posts.create id: 1001, title: 'ruby rspec', body: 'This is first espec test: ruby'
+    end
+
+    it do
+      @post.watchers << @bob
+
+      expect(@bob.watching_posts.size).to eq(1)
+      expect(@bob.notifications.size).to eq(0)
+      @post.update!(title: @post.title + '+')
+      expect(@bob.notifications.size).to eq(1)
+    end
+  end
 end

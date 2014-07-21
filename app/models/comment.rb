@@ -14,13 +14,21 @@ class Comment < ActiveRecord::Base
   belongs_to :author, class_name: 'User'
   belongs_to :post
 
+  ######################################################################
+  # validations
+  ######################################################################
   validates :author_id, presence: true
   validates :post_id, presence: true
   validates :body, presence: true
 
-  ### Callback ###
+  ######################################################################
+  # Callback
+  ######################################################################
   after_save :notify_author
 
+  ######################################################################
+  # Instance method
+  ######################################################################
   private
 
   def notify_author
