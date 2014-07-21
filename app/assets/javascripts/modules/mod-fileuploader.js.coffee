@@ -9,7 +9,7 @@ $.extend
       dataType: 'json'
       done: (e, data) ->
         $.each data.result.files, (index, _file) ->
-          settings.$textarea.val(settings.$textarea.val() + "![" + _file.name + "](" + _file.url + ")\n")
+          settings.$textarea.val(settings.$textarea.val() + "\n![" + _file.name + "](" + _file.url + ")\n")
           settings.$textarea.trigger("change")
           # $('<p/>').text(file.name).appendTo('#files') # TODO
       progressall: (e, data) ->

@@ -64,6 +64,9 @@ GEM
     breadcrumble (4.1.0)
       rails (>= 4.0.0)
     builder (3.2.2)
+    byebug (3.1.2)
+      columnize (~> 0.8)
+      debugger-linecache (~> 1.2)
     capistrano (3.2.1)
       i18n
       rake (>= 10.0.0)
@@ -95,6 +98,7 @@ GEM
       execjs
     coffee-script-source (1.7.1)
     colorize (0.7.3)
+    columnize (0.8.9)
     coveralls (0.7.0)
       multi_json (~> 1.3)
       rest-client
@@ -106,6 +110,7 @@ GEM
     daemons (1.1.9)
     database_rewinder (0.2.0)
     debug_inspector (0.0.2)
+    debugger-linecache (1.2.0)
     devise (3.2.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -391,6 +396,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   breadcrumble
+  byebug
   capistrano (~> 3.1)
   capistrano-bundler (~> 1.1.2)
   capistrano-rails (~> 1.1)

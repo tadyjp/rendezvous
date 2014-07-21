@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140719132802) do
+ActiveRecord::Schema.define(version: 20140719145016) do
 
   create_table "comments", force: true do |t|
     t.integer  "author_id"
@@ -114,5 +114,16 @@ ActiveRecord::Schema.define(version: 20140719132802) do
   end
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
+
+  create_table "watches", force: true do |t|
+    t.integer  "watcher_id",     null: false
+    t.string   "watchable_type", null: false
+    t.integer  "watchable_id",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "watches", ["watchable_type", "watchable_id"], name: "index_watches_on_watchable_type_and_watchable_id", using: :btree
+  add_index "watches", ["watcher_id", "watchable_type", "watchable_id"], name: "index_watches_on_watcher_id_and_watchable_type_and_watchable_id", unique: true, using: :btree
 
 end

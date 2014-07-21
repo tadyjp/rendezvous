@@ -15,6 +15,9 @@ class Tag < ActiveRecord::Base
   has_many :post_tags
   has_many :posts, through: :post_tags
 
+  has_many :watches, :as => :watchable, :dependent => :destroy
+  has_many :watchers, :through => :watches
+
   # for tree structure
   has_ancestry
 

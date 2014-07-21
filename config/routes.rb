@@ -1,7 +1,5 @@
 Rendezvous::Application.routes.draw do
 
-  get 'templates/show'
-
   post   'apis/markdown_preview'
   post   'apis/file_receiver'
   get    'apis/user_mention'
@@ -14,11 +12,13 @@ Rendezvous::Application.routes.draw do
   get    'flow'  => 'flow#show',  as: 'flow'
   get    'search'  => 'search#show',  as: 'search'
   get    'templates'  => 'templates#show',  as: 'templates'
+  get    'watchings' => 'watchings#show', as: 'watching'
 
   get    'posts/:id/fork' => 'posts#fork', as: 'fork_post'
   post   'posts/:id/mail' => 'posts#mail', as: 'mail_post'
   post   'posts/:id/comment' => 'posts#comment', as: 'comment_post'
   get    'posts/:id/slideshow' => 'posts#slideshow', as: 'slideshow_post'
+  get    'posts/:id/watch' => 'posts#watch', as: 'watch_post'
   resources :posts, except: [:index]
 
   get    'notification_bridge/:id'  => 'notifications#bridge',  as: 'notification_bridge'
