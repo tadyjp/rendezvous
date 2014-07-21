@@ -1,5 +1,7 @@
 Rendezvous::Application.routes.draw do
 
+  get 'templates/show'
+
   post   'apis/markdown_preview'
   post   'apis/file_receiver'
   get    'apis/user_mention'
@@ -11,6 +13,7 @@ Rendezvous::Application.routes.draw do
   get    'stock' => 'stock#show', as: 'stock'
   get    'flow'  => 'flow#show',  as: 'flow'
   get    'search'  => 'search#show',  as: 'search'
+  get    'templates'  => 'templates#show',  as: 'templates'
 
   get    'posts/:id/fork' => 'posts#fork', as: 'fork_post'
   post   'posts/:id/mail' => 'posts#mail', as: 'mail_post'
