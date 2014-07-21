@@ -20,6 +20,7 @@ class Post < ActiveRecord::Base
   has_many :tags, through: :post_tags
   belongs_to :author, class_name: 'User'
   has_many :comments
+  has_many :footprints
 
   # default_scope  { where(is_draft: false).order(:updated_at => :desc) }
 
@@ -68,6 +69,10 @@ class Post < ActiveRecord::Base
     order(updated_at: :desc).limit(limit)
   }
 
+  ######################################################################
+  # Instance method
+  ######################################################################
+
   # generate forked post (not saved)
   def generate_fork(user)
 
@@ -90,5 +95,9 @@ class Post < ActiveRecord::Base
   # slideshow用のbody
   def body_for_slideshow
     self.body.gsub(/^#/, "---\n\n#")
+  end
+
+  def visited_user_count
+    footprints.select(:user_id).uniq.count
   end
 end

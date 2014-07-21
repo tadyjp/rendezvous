@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
   has_many :posts, foreign_key: 'author_id'
   has_many :comments, foreign_key: 'author_id'
   has_many :notifications
+  has_many :footprints
 
   ######################################################################
   # scope
@@ -80,6 +81,9 @@ class User < ActiveRecord::Base
     user
   end
 
+  ######################################################################
+  # instance methods
+  ######################################################################
 
   # check if google oauth token is expired
   def google_oauth_token_expired?
@@ -111,5 +115,8 @@ class User < ActiveRecord::Base
     notifications.create(detail_path: detail_path, body: body, is_read: false)
   end
 
-
+  # record footprint
+  def visit_post!(post)
+    footprints.create!(post: post)
+  end
 end
