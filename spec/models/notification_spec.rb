@@ -16,7 +16,8 @@ require 'rails_helper'
 
 describe Notification do
   describe 'Instance method' do
-    let(:alice) { create(:alice) }
+    let(:bob) { create(:bob) }
+    let(:post) { create(:post) }
 
     it "notifies on post edited" do
     end

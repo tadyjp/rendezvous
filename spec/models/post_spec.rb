@@ -20,16 +20,12 @@ describe Post do
   describe 'Instance method' do
     before :each do
       @post = create(:post)
-      @alice = create(:alice)
-      @new_post = @post.generate_fork(@alice)
+      @bob = create(:bob)
+      @new_post = @post.generate_fork(@bob)
       @new_post.save
     end
 
     describe 'Fork' do
-
-      # subject {
-      #   @post.generate_fork(@alice).save
-      # }
 
       it 'duplicated' do
         expect(@new_post.id).not_to eq(@post.id)
@@ -44,7 +40,7 @@ describe Post do
       end
 
       it 'valid user' do
-        expect(@new_post.author).to eq(@alice)
+        expect(@new_post.author).to eq(@bob)
       end
 
       it 'valid user' do
