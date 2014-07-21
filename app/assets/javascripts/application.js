@@ -21,3 +21,5 @@
 
 _.mixin(_.string.exports());
 
+// $('[data-toggle="tooltip"]').tooltip();
+// $('[data-toggle="popover"]').popover();

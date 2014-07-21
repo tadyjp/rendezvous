@@ -16,6 +16,9 @@
 require 'date'
 
 class Post < ActiveRecord::Base
+  ######################################################################
+  # Associations
+  ######################################################################
   has_many :post_tags
   has_many :tags, through: :post_tags
   belongs_to :author, class_name: 'User'
@@ -34,7 +37,8 @@ class Post < ActiveRecord::Base
   ######################################################################
   # Callback
   ######################################################################
-  after_save :notify_watchers
+  after_save :set_watcher!
+  after_save :notify_watchers!
 
   ######################################################################
   # Named scope
@@ -107,11 +111,24 @@ class Post < ActiveRecord::Base
     footprints.select(:user_id).uniq.count
   end
 
+  # FIXME:
+  #   has_many :watchers, :through => :watches
+  #   正常に動作しないため動作しないため一時的にメソッドを作成
+  # def watchers
+  #   watches.map { |watch| watch.watcher }
+  # end
+
   private
 
-  def notify_watchers
+  def notify_watchers!
     watchers.each do |watcher|
+      next if watcher == author
+
       watcher.push_notification(decorate.show_path, "#{author.name}さんが「#{title}」を編集しました")
     end
+  end
+
+  def set_watcher!
+    author.watch!(post: self)
   end
 end

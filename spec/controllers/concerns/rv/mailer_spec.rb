@@ -6,7 +6,7 @@ describe RV::Mailer do
 
   let(:klass) { DummyClass.new.extend(RV::Mailer) }
   let(:alice) { FactoryGirl.create(:alice) }
-  let(:post) { Post.create title: 'ruby rspec', body: 'This is first espec test: ruby' }
+  let(:post) { Post.create title: 'ruby rspec', body: 'This is first espec test: ruby', author: create(:author) }
 
   it 'valid' do
     expect { klass.compose_mail(post, user: alice, to: 'dummy@example.com') }.not_to raise_error

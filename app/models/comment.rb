@@ -11,11 +11,14 @@
 #
 
 class Comment < ActiveRecord::Base
+  ######################################################################
+  # Associations
+  ######################################################################
   belongs_to :author, class_name: 'User'
   belongs_to :post
 
   ######################################################################
-  # validations
+  # Validations
   ######################################################################
   validates :author_id, presence: true
   validates :post_id, presence: true
@@ -24,14 +27,23 @@ class Comment < ActiveRecord::Base
   ######################################################################
   # Callback
   ######################################################################
-  after_save :notify_author
+  after_save :set_watcher!
+  after_save :notify_watchers!
 
   ######################################################################
   # Instance method
   ######################################################################
   private
 
-  def notify_author
-    post.author.push_notification(post.decorate.show_path, "#{author.name}さんがあなたの投稿にコメントしました")
+  def notify_watchers!
+    post.watchers.each do |watcher|
+      next if watcher == author
+
+      watcher.push_notification(post.decorate.show_path, "#{author.name}さんが「#{post.title}」にコメントしました。")
+    end
+  end
+
+  def set_watcher!
+    author.watch!(post: post)
   end
 end

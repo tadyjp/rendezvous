@@ -15,5 +15,59 @@
 require 'rails_helper'
 
 describe Notification do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'Instance method' do
+
+    before :each do
+      @alice = create(:alice)
+      @bob = create(:bob)
+      @post = create(:post)
+    end
+
+    it "notifies on post edited" do
+      @bob.watch!(post: @post)
+      expect(@bob.watching?(post: @post)).to be_truthy
+      @post.reload
+      expect(@post.watchers).to include(@bob)
+      @post.update!(title: @post.title + ' [New!]')
+      expect(@bob.notifications.size).to eq(1)
+    end
+
+    it "not notifies on post edited by him" do
+      @bob.watch!(post: @post)
+      @post.reload
+      @post.update!(title: @post.title + ' [New!]', author: @bob)
+      expect(@bob.notifications.size).to eq(0)
+    end
+
+    it "notifies on post commented" do
+      @bob.watch!(post: @post)
+      expect(@bob.watching?(post: @post)).to be_truthy
+      @post.reload
+      expect(@post.watchers).to include(@bob)
+      @post.comments.create!(author: @alice, body: 'new comment')
+      expect(@bob.notifications.size).to eq(1)
+    end
+
+    it "not notifies on post commented by him" do
+      @bob.watch!(post: @post)
+      @post.reload
+      @post.comments.create!(author: @bob, body: 'new comment')
+      expect(@bob.notifications.size).to eq(0)
+    end
+
+    it "set watch on user create a new post" do
+      new_post = Post.create!(author: @bob, title: 'title', body: 'body')
+      expect(@bob.watching?(post: new_post)).to be_truthy
+    end
+
+    it "set watch on user edit a post" do
+      @post.update!(author: @bob, title: 'new title')
+      expect(@bob.watching?(post: @post)).to be_truthy
+    end
+
+    it "set watch on user comment a post" do
+      @post.comments.create!(author: @bob, body: 'new comment')
+      expect(@bob.watching?(post: @post)).to be_truthy
+    end
+  end
 end

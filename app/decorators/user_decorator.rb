@@ -4,5 +4,4 @@ class UserDecorator < Draper::Decorator
   def draft_count
     model.posts.where(is_draft: true).count
   end
-
 end

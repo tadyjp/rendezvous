@@ -8,7 +8,6 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-
     current_user.visit_post!(@post)
 
     @post.tags.each do |_tag|
