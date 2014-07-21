@@ -110,9 +110,9 @@ class PostsController < ApplicationController
 
   def watch
     if current_user.watching?(post: @post)
-      @post.watchings.where(user: current_user).destroy_all
+      current_user.unwatch!(post: @post)
     else
-      @post.watchings.create!(user: current_user)
+      current_user.watch!(post: @post)
     end
 
     respond_to do |format|

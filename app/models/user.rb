@@ -33,14 +33,16 @@ class User < ActiveRecord::Base
   devise :omniauthable, omniauth_providers: [:google_oauth2]
 
   ######################################################################
-  # association
+  # Associations
   ######################################################################
   has_many :posts, foreign_key: 'author_id'
   has_many :comments, foreign_key: 'author_id'
   has_many :notifications
   has_many :footprints
 
-  has_many :watches
+  has_many :watches, :as => :watchable, :dependent => :destroy
+  has_many :watchers, :through => :watches
+
   has_many :watchings, class_name: 'Watch', foreign_key: 'watcher_id'
   has_many :watching_posts, :through => :watchings, :source => :watchable, :source_type => "Post"
   # has_many :watchings, :as => :resource
@@ -58,7 +60,7 @@ class User < ActiveRecord::Base
 
 
   ######################################################################
-  # validations
+  # Validations
   ######################################################################
   validates :name, presence: true
   validates :email, presence: true
@@ -125,13 +127,41 @@ class User < ActiveRecord::Base
     footprints.create!(post: post)
   end
 
+  def watch!(hash)
+    if hash[:post]
+      watching_posts << hash[:post] unless watching_posts.include?(hash[:post])
+    elsif hash[:tag]
+      raise 'Not Implemented.'
+    elsif hash[:user]
+      raise 'Not Implemented.'
+    else
+      raise 'No hash argument set.'
+    end
+  end
+
+  def unwatch!(hash)
+    if hash[:post]
+      hash[:post].watches.where(watcher: self).destroy_all
+    elsif hash[:tag]
+      raise 'Not Implemented.'
+    elsif hash[:user]
+      raise 'Not Implemented.'
+    else
+      raise 'No hash argument set.'
+    end
+  end
+
   # check if user watching post/tag/user
   # TODO: tag/user
   def watching?(hash)
     if hash[:post]
-      hash[:post].watchings.where(user_id: self.id).exists?
+      hash[:post].watches.where(watcher: self).exists?
+    elsif hash[:tag]
+      raise 'Not Implemented.'
+    elsif hash[:user]
+      raise 'Not Implemented.'
     else
-      false
+      raise 'No hash argument set.'
     end
   end
 
