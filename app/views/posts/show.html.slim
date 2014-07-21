@@ -5,10 +5,9 @@
         h3.panel-title
           a href=post_path(@post) = @post.title
       .panel-body.viewer.github
-        = h_application_format_markdown(@post.body)
+        = MarkdownRenderer.new(@post.body).render
 
   .col-xs-3
-
     .btn-group
       a.btn.btn-primary href=edit_post_path(@post)
         | 編集&nbsp;
@@ -23,7 +22,7 @@
           a.small href="https://github.com/gnab/remark" target="_blank"  What is Slideshow?
         li.divider
         li
-          a href=fork_post_path(@post)  Fork
+          a href=fork_post_path(@post) Fork
         li
           a data-target="#myModal" data-toggle="modal" href="#"  Mail to...
         li.divider
@@ -36,7 +35,6 @@
         = link_to 'Watching <span class="glyphicon glyphicon-eye-open"></span>'.html_safe, watch_post_path, :remote => true, :'data-type' => :html, :class => 'btn btn-warning ajax_link'
       - else
         = link_to 'Watch <span class="glyphicon glyphicon-eye-open"></span>'.html_safe, watch_post_path, :remote => true, :'data-type' => :html, :class => 'btn btn-default ajax_link'
-
 
     .well style="margin-top:20px"
       dl

@@ -28,7 +28,6 @@ Rendezvous::Application.routes.draw do
   resources :tags, :param => :name, except: [:index]
 
   devise_for :users,
-    path_names: { current_user: 'me' },
     controllers: {
       omniauth_callbacks: 'users/omniauth_callbacks',
       registrations: 'users/registrations'
