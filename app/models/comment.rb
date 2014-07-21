@@ -37,6 +37,8 @@ class Comment < ActiveRecord::Base
 
   def notify_watchers!
     post.watchers.each do |watcher|
+      next if watcher == author
+
       watcher.push_notification(post.decorate.show_path, "#{author.name}さんが「#{post.title}」にコメントしました。")
     end
   end

@@ -122,6 +122,8 @@ class Post < ActiveRecord::Base
 
   def notify_watchers!
     watchers.each do |watcher|
+      next if watcher == author
+
       watcher.push_notification(decorate.show_path, "#{author.name}さんが「#{title}」を編集しました")
     end
   end

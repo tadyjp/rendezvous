@@ -32,6 +32,13 @@ describe Notification do
       expect(@bob.notifications.size).to eq(1)
     end
 
+    it "not notifies on post edited by him" do
+      @bob.watch!(post: @post)
+      @post.reload
+      @post.update!(title: @post.title + ' [New!]', author: @bob)
+      expect(@bob.notifications.size).to eq(0)
+    end
+
     it "notifies on post commented" do
       @bob.watch!(post: @post)
       expect(@bob.watching?(post: @post)).to be_truthy
@@ -39,6 +46,13 @@ describe Notification do
       expect(@post.watchers).to include(@bob)
       @post.comments.create!(author: @alice, body: 'new comment')
       expect(@bob.notifications.size).to eq(1)
+    end
+
+    it "not notifies on post commented by him" do
+      @bob.watch!(post: @post)
+      @post.reload
+      @post.comments.create!(author: @bob, body: 'new comment')
+      expect(@bob.notifications.size).to eq(0)
     end
 
     it "set watch on user create a new post" do
