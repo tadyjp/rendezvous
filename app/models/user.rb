@@ -40,12 +40,8 @@ class User < ActiveRecord::Base
   has_many :notifications
   has_many :footprints
 
-  has_many :watches, :as => :watchable, :dependent => :destroy
-  has_many :watchers, :through => :watches
-
   has_many :watchings, class_name: 'Watch', foreign_key: 'watcher_id'
   has_many :watching_posts, :through => :watchings, :source => :watchable, :source_type => "Post"
-  # has_many :watchings, :as => :resource
 
   ######################################################################
   # scope

@@ -29,8 +29,8 @@ describe User do
 
   describe 'Instance method' do
 
-    let(:alice) { create(:alice) }
     let(:bob) { create(:bob) }
+    let(:alice) { create(:alice) }
     let(:post) { create(:post) }
 
     describe '#google_oauth_token_expired?' do

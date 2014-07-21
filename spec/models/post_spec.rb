@@ -57,10 +57,11 @@ describe Post do
   describe 'scope :search' do
     before :each do
       @alice = create(:alice)
-      @post1 = Post.create id: 1001, title: 'ruby rspec', body: 'This is first espec test: ruby'
-      @post2 = Post.create id: 1002, title: 'php test', body: 'PHP is very easy', author_id: @alice.id
-      @post3 = Post.create id: 1003, title: 'java java...', body: 'Java is not ruby...', updated_at: Time.new(1989, 2, 25, 5, 30, 0)
-      @post4 = Post.create id: 1004, title: 'about ruby TDD', body: 'test is the best ....', is_draft: true
+      @author = create(:author)
+      @post1 = Post.create id: 1001, author: @alice, title: 'ruby rspec', body: 'This is first espec test: ruby'
+      @post2 = Post.create id: 1002, author: @alice, title: 'php test', body: 'PHP is very easy'
+      @post3 = Post.create id: 1003, author: @author, title: 'java java...', body: 'Java is not ruby...', updated_at: Time.new(1989, 2, 25, 5, 30, 0)
+      @post4 = Post.create id: 1004, author: @author, title: 'about ruby TDD', body: 'test is the best ....', is_draft: true
       @tag_java = Tag.create(name: 'java')
       @post3.tags << @tag_java
     end
@@ -81,7 +82,7 @@ describe Post do
     end
 
     it 'by @<author_name>' do
-      expect(Post.search('@Alice').size).to eq(1)
+      expect(Post.search('@Alice').size).to eq(2)
       expect(Post.search('@Alice')).to include(@post2)
     end
 
@@ -116,10 +117,11 @@ describe Post do
 
     it do
       @post.watchers << @bob
-
+      @post.reload
       expect(@bob.watching_posts.size).to eq(1)
       expect(@bob.notifications.size).to eq(0)
       @post.update!(title: @post.title + '+')
+      @bob.reload
       expect(@bob.notifications.size).to eq(1)
     end
   end

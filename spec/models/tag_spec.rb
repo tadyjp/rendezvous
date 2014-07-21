@@ -18,9 +18,10 @@ describe Tag do
     before :each do
       @tag_ruby = Tag.create(name: 'ruby')
       @tag_java = Tag.create(name: 'java')
-      @post1 = Post.create id: 1001, title: 'ruby rspec', body: 'hoge', tags: [@tag_ruby]
-      @post2 = Post.create id: 1002, title: 'ruby is better than java', body: 'hoge', tags: [@tag_ruby, @tag_java]
-      @post3 = Post.create id: 1003, title: 'java java...', body: 'hoge', tags: [@tag_java]
+      @author = create(:author)
+      @post1 = Post.create id: 1001, author: @author, title: 'ruby rspec', body: 'hoge', tags: [@tag_ruby]
+      @post2 = Post.create id: 1002, author: @author, title: 'ruby is better than java', body: 'hoge', tags: [@tag_ruby, @tag_java]
+      @post3 = Post.create id: 1003, author: @author, title: 'java java...', body: 'hoge', tags: [@tag_java]
     end
 
     it 'successfully moved' do
