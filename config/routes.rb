@@ -11,11 +11,14 @@ Rendezvous::Application.routes.draw do
   get    'stock' => 'stock#show', as: 'stock'
   get    'flow'  => 'flow#show',  as: 'flow'
   get    'search'  => 'search#show',  as: 'search'
+  get    'templates'  => 'templates#show',  as: 'templates'
+  get    'watchings' => 'watchings#show', as: 'watching'
 
   get    'posts/:id/fork' => 'posts#fork', as: 'fork_post'
   post   'posts/:id/mail' => 'posts#mail', as: 'mail_post'
   post   'posts/:id/comment' => 'posts#comment', as: 'comment_post'
   get    'posts/:id/slideshow' => 'posts#slideshow', as: 'slideshow_post'
+  get    'posts/:id/watch' => 'posts#watch', as: 'watch_post'
   resources :posts, except: [:index]
 
   get    'notification_bridge/:id'  => 'notifications#bridge',  as: 'notification_bridge'
@@ -25,9 +28,16 @@ Rendezvous::Application.routes.draw do
   resources :tags, :param => :name, except: [:index]
 
   devise_for :users,
-    path_names: { current_user: 'me' },
-    controllers: { omniauth_callbacks: 'users/omniauth_callbacks' },
-    skip: [:passwords]
+    controllers: {
+      omniauth_callbacks: 'users/omniauth_callbacks',
+      registrations: 'users/registrations'
+    },
+    skip: [
+      :passwords,
+      :registrations,
+    ]
+
+  resource :user
 
 
   # The priority is based upon order of creation: first created -> highest priority.

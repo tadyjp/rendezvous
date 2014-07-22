@@ -1,0 +1,23 @@
+/! view:templates/show
+.row
+
+  h1
+    | Templates
+    small - テンプレートから作成
+
+  .panel.panel-info
+    .panel-heading
+      span.glyphicon.glyphicon-info-sign
+      | テンプレートの使い方
+
+    .panel-body
+      ul
+        li 「template」 というタグをつけた投稿はこのページに現れます
+        li コピーすることで同じフォーマットの文章が簡単に書けます
+
+  .list-group
+    - if template_tag = Tag.find_by(name: 'template')
+      - template_tag.posts.decorate.each do |_post|
+        = render partial: 'post', locals: { post: _post }
+    - else
+      | テンプレートが存在しません

@@ -26,3 +26,7 @@ a .text-link {
 a:visited .text-link {
   color: #609;
 }
+
+.popover {
+  max-width: 400px;
+}

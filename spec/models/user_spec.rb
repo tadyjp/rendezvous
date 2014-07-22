@@ -23,25 +23,47 @@
 #  nickname                :string(255)      default(""), not null
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe User do
 
   describe 'Instance method' do
 
-    let(:alice) { create(:alice) }
     let(:bob) { create(:bob) }
+    let(:alice) { create(:alice) }
+    let(:post) { create(:post) }
 
     describe '#google_oauth_token_expired?' do
-
       it 'not expired' do
-        expect(alice.google_oauth_token_expired?).to be_false
+        expect(alice.google_oauth_token_expired?).to be_falsey
       end
 
       it 'expired' do
-        expect(bob.google_oauth_token_expired?).to be_true
+        expect(bob.google_oauth_token_expired?).to be_truthy
+      end
+    end
+
+    describe '#unwatch / #watch / #watching?' do
+      it 'not watching' do
+        expect(alice.watching?(post: post)).to be_falsey
       end
 
+      it '#watch!' do
+        alice.watch!(post: post)
+        expect(alice.watching?(post: post)).to be_truthy
+      end
+
+      it '#watch! (uniqueness)' do
+        alice.watch!(post: post)
+        alice.watch!(post: post)
+        expect(alice.watching_posts.size).to be(1)
+      end
+
+      it '#unwatch!' do
+        alice.watch!(post: post)
+        alice.unwatch!(post: post)
+        expect(alice.watching?(post: post)).to be_falsey
+      end
     end
   end
 

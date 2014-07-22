@@ -17,6 +17,7 @@
 FactoryGirl.define do
 
   factory :post do
+    association :author, factory: :author
     title 'sample title'
     body 'sample body'
     specified_date Date.new(2014, 4, 1)

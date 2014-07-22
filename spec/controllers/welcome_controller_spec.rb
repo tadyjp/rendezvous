@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe WelcomeController do
+describe WelcomeController, type: :controller do
 
   describe "GET 'top'" do
     it 'should be successful' do
@@ -12,22 +12,23 @@ describe WelcomeController do
 
   describe 'Login' do
 
-    before(:each) do
-      @user = FactoryGirl.create(:login_user_1)
-      sign_in @user
-    end
+    let(:user) { FactoryGirl.create(:alice) }
 
     describe "GET 'top'" do
 
       it 'should be successful' do
+        sign_in FactoryGirl.create(:alice)
+
         get :top
         expect(subject).to redirect_to controller: 'flow',
                                        action: 'show'
       end
 
       it 'should find the right user' do
+        sign_in user
+
         get :top
-        expect(assigns(:current_user)).to eq(@user)
+        expect(assigns(:current_user)).to eq(user)
       end
 
     end

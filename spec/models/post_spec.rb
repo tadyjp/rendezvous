@@ -12,7 +12,7 @@
 #  specified_date :date
 #
 
-require 'spec_helper'
+require 'rails_helper'
 require 'date'
 
 describe Post do
@@ -20,23 +20,19 @@ describe Post do
   describe 'Instance method' do
     before :each do
       @post = create(:post)
-      @alice = create(:alice)
-      @new_post = @post.generate_fork(@alice)
+      @bob = create(:bob)
+      @new_post = @post.generate_fork(@bob)
       @new_post.save
     end
 
     describe 'Fork' do
-
-      # subject {
-      #   @post.generate_fork(@alice).save
-      # }
 
       it 'duplicated' do
         expect(@new_post.id).not_to eq(@post.id)
       end
 
       it 'valid title' do
-        expect(@new_post.title).to eq('sample title のコピー')
+        expect(@new_post.title).to eq('sample title')
       end
 
       it 'valid body' do
@@ -44,7 +40,7 @@ describe Post do
       end
 
       it 'valid user' do
-        expect(@new_post.author).to eq(@alice)
+        expect(@new_post.author).to eq(@bob)
       end
 
       it 'valid user' do
@@ -61,55 +57,72 @@ describe Post do
   describe 'scope :search' do
     before :each do
       @alice = create(:alice)
-      @post1 = Post.create id: 1001, title: 'ruby rspec', body: 'This is first espec test: ruby'
-      @post2 = Post.create id: 1002, title: 'php test', body: 'PHP is very easy', author_id: @alice.id
-      @post3 = Post.create id: 1003, title: 'java java...', body: 'Java is not ruby...', updated_at: Time.new(1989, 2, 25, 5, 30, 0)
-      @post4 = Post.create id: 1004, title: 'about ruby TDD', body: 'test is the best ....', is_draft: true
+      @author = create(:author)
+      @post1 = Post.create id: 1001, author: @alice, title: 'ruby rspec', body: 'This is first espec test: ruby'
+      @post2 = Post.create id: 1002, author: @alice, title: 'php test', body: 'PHP is very easy'
+      @post3 = Post.create id: 1003, author: @author, title: 'java java...', body: 'Java is not ruby...', updated_at: Time.new(1989, 2, 25, 5, 30, 0)
+      @post4 = Post.create id: 1004, author: @author, title: 'about ruby TDD', body: 'test is the best ....', is_draft: true
       @tag_java = Tag.create(name: 'java')
       @post3.tags << @tag_java
     end
 
     it 'by id' do
-      expect(Post.search('id:1001')).to have(1).items
+      expect(Post.search('id:1001').size).to eq(1)
       expect(Post.search('id:1001')).to include(@post1)
     end
 
     it 'by title' do
-      expect(Post.search('title:ruby')).to have(2).items
+      expect(Post.search('title:ruby').size).to eq(2)
       expect(Post.search('title:ruby')).to include(@post1)
     end
 
     it 'by body' do
-      expect(Post.search('body:ruby')).to have(2).items
+      expect(Post.search('body:ruby').size).to eq(2)
       expect(Post.search('body:ruby')).to include(@post3)
     end
 
     it 'by @<author_name>' do
-      expect(Post.search('@Alice')).to have(1).items
+      expect(Post.search('@Alice').size).to eq(2)
       expect(Post.search('@Alice')).to include(@post2)
     end
 
     it 'by #<tag_name>' do
-      expect(Post.search('#java')).to have(1).items
+      expect(Post.search('#java').size).to eq(1)
       expect(Post.search('#java')).to include(@post3)
     end
 
     it 'by date' do
-      expect(Post.search('date:1989-2-25')).to have(1).items
+      expect(Post.search('date:1989-2-25').size).to eq(1)
       expect(Post.search('date:1989-2-25')).to include(@post3)
     end
 
     it 'by draft' do
-      expect(Post.search('ruby')).to have(3).items
-      expect(Post.search('ruby draft:1')).to have(1).items
+      expect(Post.search('ruby').size).to eq(3)
+      expect(Post.search('ruby draft:1').size).to eq(1)
     end
 
     it 'by else' do
-      expect(Post.search('ruby')).to have(3).items
+      expect(Post.search('ruby').size).to eq(3)
       expect(Post.search('ruby')).to include(@post1)
       expect(Post.search('ruby')).to include(@post3)
     end
-
   end
 
+  describe '#notify_watchers' do
+    before :each do
+      @alice = create(:alice)
+      @bob = create(:bob)
+      @post = @alice.posts.create id: 1001, title: 'ruby rspec', body: 'This is first espec test: ruby'
+    end
+
+    it do
+      @post.watchers << @bob
+      @post.reload
+      expect(@bob.watching_posts.size).to eq(1)
+      expect(@bob.notifications.size).to eq(0)
+      @post.update!(title: @post.title + '+')
+      @bob.reload
+      expect(@bob.notifications.size).to eq(1)
+    end
+  end
 end

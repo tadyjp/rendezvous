@@ -33,11 +33,15 @@ class User < ActiveRecord::Base
   devise :omniauthable, omniauth_providers: [:google_oauth2]
 
   ######################################################################
-  # association
+  # Associations
   ######################################################################
   has_many :posts, foreign_key: 'author_id'
   has_many :comments, foreign_key: 'author_id'
   has_many :notifications
+  has_many :footprints
+
+  has_many :watchings, class_name: 'Watch', foreign_key: 'watcher_id'
+  has_many :watching_posts, :through => :watchings, :source => :watchable, :source_type => "Post"
 
   ######################################################################
   # scope
@@ -52,7 +56,7 @@ class User < ActiveRecord::Base
 
 
   ######################################################################
-  # validations
+  # Validations
   ######################################################################
   validates :name, presence: true
   validates :email, presence: true
@@ -80,6 +84,9 @@ class User < ActiveRecord::Base
     user
   end
 
+  ######################################################################
+  # instance methods
+  ######################################################################
 
   # check if google oauth token is expired
   def google_oauth_token_expired?
@@ -111,5 +118,51 @@ class User < ActiveRecord::Base
     notifications.create(detail_path: detail_path, body: body, is_read: false)
   end
 
+  # record footprint
+  def visit_post!(post)
+    footprints.create!(post: post)
+  end
 
+  def watch!(hash)
+    if hash[:post]
+      watching_posts << hash[:post] unless watching_posts.include?(hash[:post])
+    elsif hash[:tag]
+      raise 'Not Implemented.'
+    elsif hash[:user]
+      raise 'Not Implemented.'
+    else
+      raise 'No hash argument set.'
+    end
+  end
+
+  def unwatch!(hash)
+    if hash[:post]
+      hash[:post].watches.where(watcher: self).destroy_all
+    elsif hash[:tag]
+      raise 'Not Implemented.'
+    elsif hash[:user]
+      raise 'Not Implemented.'
+    else
+      raise 'No hash argument set.'
+    end
+  end
+
+  # check if user watching post/tag/user
+  # TODO: tag/user
+  def watching?(hash)
+    if hash[:post]
+      hash[:post].watches.where(watcher: self).exists?
+    elsif hash[:tag]
+      raise 'Not Implemented.'
+    elsif hash[:user]
+      raise 'Not Implemented.'
+    else
+      raise 'No hash argument set.'
+    end
+  end
+
+  # def watching_posts
+  #   ids = watching_items.where(resource_type: "Post").pluck(:resource_id)
+  #   Post.where(id: ids)
+  # end
 end

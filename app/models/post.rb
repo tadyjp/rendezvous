@@ -16,18 +16,29 @@
 require 'date'
 
 class Post < ActiveRecord::Base
+  ######################################################################
+  # Associations
+  ######################################################################
   has_many :post_tags
   has_many :tags, through: :post_tags
   belongs_to :author, class_name: 'User'
   has_many :comments
+  has_many :footprints
 
-  # default_scope  { where(is_draft: false).order(:updated_at => :desc) }
+  has_many :watches, :as => :watchable, :dependent => :destroy
+  has_many :watchers, :through => :watches
 
   ######################################################################
   # validations
   ######################################################################
   validates :title, presence: true
   validates :body, presence: true
+
+  ######################################################################
+  # Callback
+  ######################################################################
+  after_save :set_watcher!
+  after_save :notify_watchers!
 
   ######################################################################
   # Named scope
@@ -68,17 +79,21 @@ class Post < ActiveRecord::Base
     order(updated_at: :desc).limit(limit)
   }
 
+  ######################################################################
+  # Instance method
+  ######################################################################
+
   # generate forked post (not saved)
   def generate_fork(user)
 
     # `id`以外をコピーする
     _forked_post = Post.new(self.attributes.except('id'))
 
-    # `%Name`をユーザー名に置換
-    _forked_post.title = _forked_post.title.gsub(/%Name/, user.name)
+    # `%name`をユーザー名に置換
+    _forked_post.title = _forked_post.title.gsub(/%name/, user.name)
     # `%Y`などを日付に変換
     _forked_post.title = Time.now.strftime(_forked_post.title) # TODO
-    _forked_post.title = _forked_post.title + ' のコピー'
+    _forked_post.title = _forked_post.title
 
     _forked_post.tag_ids = self.tag_ids
     _forked_post.author = user
@@ -90,5 +105,30 @@ class Post < ActiveRecord::Base
   # slideshow用のbody
   def body_for_slideshow
     self.body.gsub(/^#/, "---\n\n#")
+  end
+
+  def visited_user_count
+    footprints.select(:user_id).uniq.count
+  end
+
+  # FIXME:
+  #   has_many :watchers, :through => :watches
+  #   正常に動作しないため動作しないため一時的にメソッドを作成
+  # def watchers
+  #   watches.map { |watch| watch.watcher }
+  # end
+
+  private
+
+  def notify_watchers!
+    watchers.each do |watcher|
+      next if watcher == author
+
+      watcher.push_notification(decorate.show_path, "#{author.name}さんが「#{title}」を編集しました")
+    end
+  end
+
+  def set_watcher!
+    author.watch!(post: self)
   end
 end

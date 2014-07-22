@@ -1,0 +1,27 @@
+/ locals:
+/   post {Post}
+
+.list-group-item.post-list.mod-hover-hidden
+  .container-fluid
+    .row
+      .col-xs-9
+        h4.text-link #{post.title}
+      .col-xs-3
+        small.pull-right ##{post.id}
+    .row
+      .col-xs-8
+        p.small.text-success
+          | #{post.author.name} posted&nbsp;
+          abbr.js-time-ago data-time-ago-at=post.updated_at
+          |.&nbsp;&nbsp;
+          - post.tags.each do |tag|
+            span.label.label-success ##{tag.name}
+            | &nbsp;
+      .col-xs-4
+        span.pull-right.label.label-danger = post.display_specified_date if post.specified_date
+
+      .btn-group.mod-hover-hidden
+        a.btn.btn-info.mod-hover-hidden-item href=fork_post_path(post)
+          | このテンプレートを利用する
+        a.btn.btn-default.mod-hover-hidden-item href=edit_post_path(post)
+          | このテンプレートを編集する

@@ -1,13 +1,15 @@
 require 'nkf'
 
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :slideshow]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :slideshow, :watch]
 
   include RV::Mailer
 
   # GET /posts/1
   # GET /posts/1.json
   def show
+    current_user.visit_post!(@post)
+
     @post.tags.each do |_tag|
       add_breadcrumb("##{_tag.name}", _tag.decorate.show_path)
     end
@@ -103,6 +105,19 @@ class PostsController < ApplicationController
   # Show presentation view
   def slideshow
     render layout: 'slideshow'
+  end
+
+  def watch
+    if current_user.watching?(post: @post)
+      current_user.unwatch!(post: @post)
+    else
+      current_user.watch!(post: @post)
+    end
+
+    respond_to do |format|
+      format.html { render action: :show, layout: false }
+      format.json { head :no_content }
+    end
   end
 
   private

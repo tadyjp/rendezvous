@@ -1,0 +1,12 @@
+/! view:flow/show
+.row
+
+  h1
+    | Watchings
+    small - ウォッチ中の項目
+
+  .col-xs-8 role="navigation"
+    .list-group
+      - @posts.each do |_post|
+        = render partial: 'posts/large_item', locals: { post: _post }
+    = paginate(@posts)

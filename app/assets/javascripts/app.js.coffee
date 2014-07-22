@@ -11,4 +11,6 @@ $ ->
   # TODO
   prettyPrint()
 
-
+  $(document).on 'ajax:success', '.ajax_link', (data, res, xhr) ->
+    console.log(res)
+    $('#yield').html(res)
