@@ -11,8 +11,8 @@ A simple markdown-based blog & wiki system for team.
 
 # Supported versions
 
-- Ruby 2.0.0+
-- Rails 4.0.0+
+- Ruby 2.1.2
+- Rails 4.1.0
 
 # How to install and use.
 
