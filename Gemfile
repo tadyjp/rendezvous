@@ -25,6 +25,8 @@ gem 'jbuilder'
 
 gem 'i18n_generators'
 
+gem 'unicorn'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -77,6 +79,7 @@ group :development do
   gem 'capistrano-bundler', '~> 1.1.2'
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-rbenv', '~> 2.0'
+  gem 'capistrano3-unicorn'
 end
 
 group :development, :test do
