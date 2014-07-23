@@ -6,7 +6,7 @@ set :repo_url, 'git@github.com:tadyjp/rendezvous.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
-set :branch, fetch(:branch, "master")
+set :branch, ENV['REVISION'] || 'master'
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/var/www/rendezvous'
@@ -83,6 +83,5 @@ namespace :linked_files do
     end
   end
 
-  before 'deploy:check:make_linked_dirs', 'linked_files:touch'
   before 'deploy:check:linked_files', 'linked_files:touch'
 end
