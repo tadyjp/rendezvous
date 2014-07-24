@@ -1,46 +1,41 @@
 /! view:welcome/login
+.background-image
+.background-mask
 .login
   .container.marketing
     .row style=("margin-top: 40px")
-      .col-lg-4
-      .col-lg-4
-        img.img-circle alt=("Generic placeholder image") src="http://placehold.it/140x140&amp;text=Rendezvous" /
-        h2 Rendezvous
+      .col-lg-12.welcome-box
+        h2.title Rendezvous
         p
-          | Rendezvousはチームの`Stock`と`Flow`の
-          br>/
+          | RendezvousはチームのStockとFlowの
           | 2種類の情報を蓄積・検索・共有する
-          br>/
           | オープンソースのソフトウェアです。
         p
-          a.btn.btn-lg.btn-primary href=user_omniauth_authorize_path(:google_oauth2) role="button"  Sign up with Google
-      .col-lg-4
+          a.btn.btn-lg.btn-primary.btn-original href=user_omniauth_authorize_path(:google_oauth2) role="button"  Sign up with Google
+        p.zigexn powerd by ZIGExN
 
     hr.featurette-divider/
     .row.featurette
       .col-md-7
         h2.featurette-heading
           | Stock all you have done.
-          span.text-muted It may be priceless for others.
-        p.lead Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+          span.text-muted  It may be priceless for others.
       .col-md-5
-        img.featurette-image.img-responsive alt="Stock" src="http://placehold.it/500x400&amp;text=Stock" /
+        = image_tag "font.jpg", class: "featurette-image img-responsive"
     hr.featurette-divider/
     .row.featurette
       .col-md-5
-        img.featurette-image.img-responsive alt="Flow" src="http://placehold.it/500x400&amp;text=Flow" /
+        = image_tag "paper.jpg", class: "featurette-image img-responsive"
       .col-md-7
         h2.featurette-heading
           | Flow anything member have come up with.
-          span.text-muted Which accelerate your PDCA.
-        p.lead Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+          span.text-muted  Which accelerate your PDCA.
     hr.featurette-divider/
     .row.featurette
       .col-md-7
         h2.featurette-heading
           | Collaborate with other team on documents.
-          span.text-muted Making more and more generic plans.
-        p.lead Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+          span.text-muted  Making more and more generic plans.
       .col-md-5
-        img.featurette-image.img-responsive alt="Collaboration" src="http://placehold.it/500x400&amp;text=Collaboration" /
+        = image_tag "pc.jpg", class: "featurette-image img-responsive"
     hr.featurette-divider/
