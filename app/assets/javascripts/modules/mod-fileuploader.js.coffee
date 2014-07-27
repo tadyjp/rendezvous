@@ -2,31 +2,52 @@ $.extend
   mod_fileuploader: (options) ->
     settings =
       $input: null,
-      $textarea: null
+      $textarea: null,
+      $progressWrapper: null,
+      $progressBar: null
     settings = $.extend settings, options
+
+    # Used for replacing text
+    uploadingIndex = 0
 
     settings.$input.fileupload
       dataType: 'json'
+
+      add: (e, data) ->
+        settings.$progressWrapper.show()
+        settings.$textarea.val(settings.$textarea.val() + "\n[Uploading... #" + uploadingIndex + "]\n")
+
+        data.formData = { uploading_index: uploadingIndex }
+        data.submit()
+        uploadingIndex += 1
+
       done: (e, data) ->
+        settings.$progressWrapper.hide()
+
         $.each data.result.files, (index, file) ->
           # TODO: カーソル位置に挿入
 
-          console.log file
+          textarea_value = settings.$textarea.val()
 
           if file.type is 'image'
-            # image ![file-name](file-url)
-            settings.$textarea.val(settings.$textarea.val() + "\n![" + file.name + "](" + file.image + ")\n")
+            # ![file-name](file-url)
+            replacing_text = "![" + file.name + "](" + file.image + ")"
+            new_textarea_value = textarea_value.replace('[Uploading... #' + data.result.uploading_index + ']', replacing_text)
+            settings.$textarea.val(new_textarea_value)
           else if file.type is 'slide'
-            # slide !slide!(file-url)
             # [![alt text](image link)](web link)
-            settings.$textarea.val(settings.$textarea.val() + "\n[![" + file.name + "](" + file.image + ")](" + file.url + ")\n")
+            replacing_text = "[![" + file.name + "](" + file.image + ")](" + file.url + ")"
+            new_textarea_value = textarea_value.replace('[Uploading... #' + data.result.uploading_index + ']', replacing_text)
+            settings.$textarea.val(new_textarea_value)
 
           settings.$textarea.trigger("change")
           # $('<p/>').text(file.name).appendTo('#files') # TODO
-      # progressall: (e, data) ->
-      #   progress = parseInt(data.loaded / data.total * 100, 10)
-      #   $('.progress-bar').css
-      #     width: progress + '%'
+      progressall: (e, data) ->
+        progress = parseInt(data.loaded / data.total * 100, 10)
+        settings.$progressBar
+          .css(width: progress + '%')
+          .text(progress + '%')
+
 
     settings.$input.prop('disabled', !$.support.fileInput)
       .parent().addClass($.support.fileInput ? undefined : 'disabled');
@@ -34,15 +55,12 @@ $.extend
     $('<p id="mod-fileuploader-notify"/>').text('ここにドロップしてください').appendTo('body')
 
     $(window).bind 'dragover', (e) ->
-      console.log('dragover')
       $('#mod-fileuploader-notify').show()
     # $(window).bind 'dragleave', (e) ->
     #   console.log('dragleave')
     #   $('#mod-fileuploader-notify').hide()
     $(window).bind 'dragend', (e) ->
-      console.log('dragend')
       $('#mod-fileuploader-notify').hide()
     $(window).bind 'drop', (e) ->
-      console.log('drop')
       $('#mod-fileuploader-notify').hide()
 

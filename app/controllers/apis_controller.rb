@@ -34,7 +34,7 @@ class ApisController < ApplicationController
         s3_files << { type: 'image', name: file.original_filename, image: res.public_url.to_s }
       when /\.pdf\Z/
         cover_image_name = "#{Digest::MD5.file(file.path).to_s}-cover.png"
-        pdf = Magick::ImageList.new(file.path)
+        pdf = Magick::ImageList.new(file.path + '[0]')
         cover_tmp = Rails.root.join('tmp', cover_image_name)
         pdf[0].write(cover_tmp)
         cover_res = s3_uploader.upload!(file: cover_tmp, name: cover_image_name)
@@ -43,7 +43,7 @@ class ApisController < ApplicationController
       end
     end
 
-    render json: { status: 'OK', files: s3_files }
+    render json: { status: 'OK', files: s3_files, uploading_index: params[:uploading_index] }
   end
 
   def user_mention
