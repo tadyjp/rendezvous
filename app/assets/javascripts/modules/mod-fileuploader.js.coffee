@@ -11,12 +11,15 @@ $.extend
         $.each data.result.files, (index, file) ->
           # TODO: カーソル位置に挿入
 
+          console.log file
+
           if file.type is 'image'
             # image ![file-name](file-url)
-            settings.$textarea.val(settings.$textarea.val() + "\n![" + file.name + "](" + file.url + ")\n")
+            settings.$textarea.val(settings.$textarea.val() + "\n![" + file.name + "](" + file.image + ")\n")
           else if file.type is 'slide'
             # slide !slide!(file-url)
-            settings.$textarea.val(settings.$textarea.val() + "\n!slide!(" + file.url + ")\n")
+            # [![alt text](image link)](web link)
+            settings.$textarea.val(settings.$textarea.val() + "\n[![" + file.name + "](" + file.image + ")](" + file.url + ")\n")
 
           settings.$textarea.trigger("change")
           # $('<p/>').text(file.name).appendTo('#files') # TODO
