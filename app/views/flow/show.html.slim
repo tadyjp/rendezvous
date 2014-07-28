@@ -1,14 +1,16 @@
 /! view:flow/show
-.row
-
-  h1
-    | Flow
-    small  - 最近投稿された記事
-
+.row.flow-wrapper
   .col-xs-8 role="navigation"
-    .list-group
-      - @posts.each do |_post|
-        = render partial: 'posts/large_item', locals: { post: _post }
+    .panel
+      .panel-heading
+        h1
+          = image_tag 'flow.png'
+          | Flow
+          small  - 最近投稿された記事
+
+      .panel-body.list-group
+        - @posts.each do |_post|
+          = render partial: 'posts/large_item', locals: { post: _post }
     = paginate(@posts)
 
   .col-xs-4
@@ -19,7 +21,7 @@
     /     - Post.limit(5).each do |_post|
     /       = render partial: 'posts/small_item', locals: { post: _post }
 
-    .panel.panel-default
+    .panel
       .panel-heading
         h2.panel-title 最近投稿されたタグ
       .panel-body.list-group

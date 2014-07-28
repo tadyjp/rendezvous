@@ -12,14 +12,17 @@ nav.navbar.navbar-fixed-top.navbar-original role="navigation"
             button.btn data-disable-with="Searching..." type="submit"
               = image_tag 'search.png', class: 'search'
       ul.nav.navbar-nav
-        li class=('active' if current_page?(stock_path))
+        li.stock class=('active' if current_page?(stock_path))
           a href=stock_path title="Stock"
+            = image_tag "stock.png", class: 'nav-icon stock'
             | Stock
-        li class=('active' if current_page?(flow_path))
+        li.flow class=('active' if current_page?(flow_path))
           a href=flow_path title="Frow"
+            = image_tag "flow.png", class: 'nav-icon'
             | Flow
-        li class=('active' if current_page?(templates_path))
+        li.template class=('active' if current_page?(templates_path))
           a href=templates_path title="Templates"
+            = image_tag "template.png", class: 'nav-icon'
             | Templates
 
       ul.nav.navbar-nav.navbar-right

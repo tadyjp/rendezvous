@@ -1,6 +1,6 @@
-.row
+.row.post-show-wrapper
   .col-xs-9
-    .panel.panel-info
+    .panel
       .panel-heading
         h3.panel-title
           a href=post_path(@post) = @post.title
@@ -8,8 +8,8 @@
         = MarkdownRenderer.new(@post.body).render
 
   .col-xs-3
-    .btn-group
-      a.btn.btn-primary href=edit_post_path(@post)
+    .btn-group.post-edit-btn
+      a.btn href=edit_post_path(@post)
         | 編集&nbsp;
         span.glyphicon.glyphicon-pencil
       button.btn.btn-default.dropdown-toggle data-toggle="dropdown" type="button"
@@ -32,11 +32,11 @@
 
     .btn-group
       - if current_user.watching?(post: @post)
-        = link_to 'Watching <span class="glyphicon glyphicon-eye-open"></span>'.html_safe, watch_post_path, :remote => true, :'data-type' => :html, :class => 'btn btn-warning ajax_link'
+        = link_to 'Watching <span class="glyphicon glyphicon-eye-open"></span>'.html_safe, watch_post_path, :remote => true, :'data-type' => :html, :class => 'btn ajax_link btn-watched'
       - else
-        = link_to 'Watch <span class="glyphicon glyphicon-eye-open"></span>'.html_safe, watch_post_path, :remote => true, :'data-type' => :html, :class => 'btn btn-default ajax_link'
+        = link_to 'Watch <span class="glyphicon glyphicon-eye-open"></span>'.html_safe, watch_post_path, :remote => true, :'data-type' => :html, :class => 'btn ajax_link watch-btn'
 
-    .well style="margin-top:20px"
+    .well.detail-wrapper style="margin-top:20px"
       dl
         dt 作成者
         dd
@@ -46,7 +46,7 @@
         dt タグ
         dd
           - @post.tags.each do |tag|
-            span.label.label-success
+            span.label.label-tag
               a href=tag.decorate.show_path
                 | ##{tag.name}
             | &nbsp;
@@ -72,30 +72,33 @@
           = @post.comments.count
 
 .row
-  .panel.panel-success
-    .panel-heading
-      h3.panel-title Comments
-    .panel-body
-      ul.media-list
-        - @post.comments.each do |comment|
-          li.media
-            a.pull-left href="#"
-              img.media-object src=comment.author.image_url /
-            .media-body
-              h4.media-heading= comment.author.name
-              = comment.body
-        = form_tag(comment_post_path, method: :post, data: { 'form-id' => "comment_#{@post.id}" }) do
-          li.media
-            a.pull-left href="#"
-              img.media-object src=current_user.image_url /
-            .media-body
-              h4.media-heading= current_user.name
-              = text_area :comment, :body, class: 'form-control', placeholder: 'コメントする...'
-              = submit_tag 'Comment', class: 'btn btn-primary', data: { 'disable-with' => '...' }
-      javascript:
-        $("form[data-form-id='comment_#{@post.id}']").on('ajax:success', function(event, data, xhr) {
+  .col-md-12
+    .panel.comment-wrapper
+      .panel-heading
+        h3.panel-title
+          = image_tag 'comment_w.png'
+          | Comments
+      .panel-body
+        ul.media-list
+          - @post.comments.each do |comment|
+            li.media
+              a.pull-left href="#"
+                img.media-object src=comment.author.image_url /
+              .media-body
+                h4.media-heading= comment.author.name
+                = comment.body
+          = form_tag(comment_post_path, method: :post, data: { 'form-id' => "comment_#{@post.id}" }) do
+            li.media
+              a.pull-left href="#"
+                img.media-object src=current_user.image_url /
+              .media-body
+                h4.media-heading= current_user.name
+                = text_area :comment, :body, class: 'form-control', placeholder: 'コメントする...'
+                = submit_tag "Comment", class: 'btn comment-btn', data: { 'disable-with' => '...' }
+        javascript:
+          $("form[data-form-id='comment_#{@post.id}']").on('ajax:success', function(event, data, xhr) {
 
-        });
+          });
 
 /! Button trigger modal
 /!

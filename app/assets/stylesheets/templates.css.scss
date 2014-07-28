@@ -14,7 +14,7 @@ $main-color: #75b3c8;
   background-color: $main-color!important;
   background-image: none!important;
   li:hover {
-    background-color: #ddd;
+    cursor: pointer;
     a {
     color: $main-color;
     }
@@ -39,6 +39,7 @@ $main-color: #75b3c8;
     }
     button {
       background-color: #fff;
+      border: 1px solid #fff;
       .search {
         width: 20px;
         &:hover {
@@ -46,6 +47,25 @@ $main-color: #75b3c8;
           @include transition;
         }
       }
+    }
+  }
+  .nav-icon {
+    width: 20px;
+    margin-right: 5px;
+  }
+  li.stock img {
+    width: 25px;
+    position: relative;
+    bottom: 2px;
+  }
+  li.flow {
+    a {
+      position: relative;
+      top: 2px;
+    }
+    img {
+      position: relative;
+      bottom: 2px;
     }
   }
   .navbar-right {
