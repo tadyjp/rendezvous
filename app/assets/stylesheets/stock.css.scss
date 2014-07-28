@@ -1,0 +1,39 @@
+@import 'values';
+
+.mod-tag-tree {
+  .mod-tag-tree-filter {
+    margin-bottom: 20px;
+    width: 400px!important;
+    &:focus {
+      border: 1px solid $main-color;
+      box-shadow: 0 0 0 #fff!important;
+      background-color: #f8f8f8;
+      @include transition;
+    }
+  }
+  li {
+    padding: 6px 0!important;
+    margin-right: 4px!important;
+    span {
+      min-height: 10px!important;
+      min-width: 10px!important;
+    }
+  }
+}
+
+.stock-wrapper {
+  margin-top: 15px;
+  h1 {
+    color: #fff;
+    small {
+      color: #f8f8f8;
+    }
+    .odometer {
+      position: relative;
+      bottom: 2px;
+    }
+  }
+  .list-group {
+    box-shadow: 0 0 0 #fff;
+  }
+}
