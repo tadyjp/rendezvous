@@ -3,13 +3,13 @@
   .numbers-wrapper
     .col-xs-4
       label.numbers Posts
-      p = @posts.count
+      p = Post.count
     .col-xs-4
       label.numbers Users
-      p = @users.count
+      p = User.count
     .col-xs-4
       label.numbers Tags
-      p = @tags.count
+      p = Tag.count
   .col-xs-8 role="navigation"
     .panel
       .panel-heading
