@@ -1,5 +1,15 @@
 /! view:flow/show
 .row.flow-wrapper
+  .numbers-wrapper
+    .col-xs-4
+      label.numbers Stocks
+      p = Post.count
+    .col-xs-4
+      label.numbers Users
+      p = User.count
+    .col-xs-4
+      label.numbers Tags
+      p = Tag.count
   .col-xs-8 role="navigation"
     .panel
       .panel-heading

@@ -22,13 +22,6 @@
             = hidden_field :post, :tags, class: 'mod-mdEditor-tags', style: 'width:300px', value: @post.tags.map{ |_tag| _tag.name }.join(',')
 
       .col-xs-3
-        p.actions
-          = f.submit class: 'btn btn-primary js-disable-confirm-unload', id: 'save_button'
-        p.actions
-          = f.check_box :is_draft
-          = f.label :is_draft, "下書き保存"
-        p.actions
-          = f.date_select :specified_date
 
     br/
 
@@ -57,11 +50,22 @@
                 /   i.fa.fa-link
 
           .panel-body.panel-body-nopadding
-            = f.text_area :body, class: 'mod-mdEditor-textarea'
+            = f.text_area :body, class: 'mod-mdEditor-textarea', placehoder: 'type your text....'
+        p.actions
+          = f.submit class: 'btn btn-lg js-disable-confirm-unload', id: 'save_button'
+        p.actions
+          = f.check_box :is_draft
+          = f.label :is_draft, "下書き保存"
+        p.actions
+          = f.date_select :specified_date
 
       .col-xs-6
-        .box-text
-          .text-box.body.viewer.github.mod-mdEditor-preview
+        .panel.preview-wrapper
+          .panel-heading
+            h5 Preview - 入力した内容がここに表示されます
+          .panel-body
+            .box-text
+            .text-box.body.viewer.github.mod-mdEditor-preview
 
 input#fileupload data-url="/apis/file_receiver" multiple="" name="files[]" style="display:none" type="file" /
 

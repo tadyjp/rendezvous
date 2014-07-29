@@ -35,19 +35,34 @@
     color: $main-color;
     font-size: 12px;
   }
+  .numbers-wrapper {
+    height: 150px;
+    .col-xs-4 {
+      text-align: center;
+      label {
+        border-bottom: 5px solid #ec0160;
+        font-weight: 300;
+      }
+      p {
+        font-size: 54px;
+        font-weight: 300;
+        font-family: 'Quicksand';
+        color: #ec0160;
+      }
+    }
+  }
 }
 
 .label-date {
   background-color: #aaa;
   padding-top: 3px;
   font-family: 'Quicksand';
-  font-weight: 300;
 }
 
 .label-tag {
   background-color: #e67e22;
   padding-top: 4px;
-  font-weight: 100;
+  font-weight: 300;
 }
 
 .post-show-wrapper {
