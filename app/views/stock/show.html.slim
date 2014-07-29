@@ -4,7 +4,6 @@
     .panel.stock-wrapper
       .panel-heading
         h1
-          #odometer.odometer 0
           | &nbsp;Stocks
           small  - 保存・蓄積された記事
       .panel-body
@@ -13,10 +12,3 @@
             - cache('tag-tree', :expires_in => 1.hour) do
               .list-group
                 = Tag.posts_exist.decorate.tree_view
-
-javascript:
-  $(document).ready(function() {
-    setTimeout(function(){
-      $('.odometer').html(#{Post.count}); //数字は最後の数値
-    }, 1000);
-  });

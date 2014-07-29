@@ -23,14 +23,14 @@
 
 .stock-wrapper {
   margin-top: 15px;
+  .odometer {
+    position: relative;
+    bottom: 2px;
+  }
   h1 {
     color: #fff;
     small {
       color: #f8f8f8;
-    }
-    .odometer {
-      position: relative;
-      bottom: 2px;
     }
   }
   .list-group {
