@@ -19,6 +19,8 @@ defaults: &defaults
     secret_access_key: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     bucket_name: "xxxxxxxxxxxxxxxxxx"
 
+  google_analytics:
+
 development:
   <<: *defaults
 
