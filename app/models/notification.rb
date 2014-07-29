@@ -19,9 +19,12 @@ class Notification < ActiveRecord::Base
   # Named scope
   ######################################################################
 
-  # 最新のPostを取得
   scope :unread, -> {
     where(is_read: false)
+  }
+
+  scope :recent, -> {
+    where(arel_table[:created_at].gt 7.day.ago)
   }
 
   ######################################################################

@@ -30,7 +30,7 @@ nav.navbar.navbar-fixed-top.navbar-original role="navigation"
           a#notifications data-container="body" data-toggle="popover" data-placement="bottom"
             span.glyphicon.glyphicon-flag
             - if current_user.notifications.unread.any?
-              span.badge = current_user.notifications.unread.count
+              span.badge = current_user.notifications.unread.recent.count
         li.new-post-btn
           form
             a.btn.navbar-btn href=new_post_path
@@ -56,10 +56,10 @@ nav.navbar.navbar-fixed-top.navbar-original role="navigation"
               a href=destroy_user_session_path data-method="delete" rel="nofollow" SignOut
 
 script#notification-content type="text/template"
-  - if current_user.notifications.unread.any?
+  - if current_user.notifications.unread.recent.any?
     h4 通知一覧
     .list-group
-    - current_user.notifications.unread.each do |notification|
+    - current_user.notifications.unread.recent.each do |notification|
         a.list-group-item href=notification_bridge_path(notification.id)
           spen.small
             | [#{notification.created_at.strftime('%m/%d %H:%M')}]&nbsp;

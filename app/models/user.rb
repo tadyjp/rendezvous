@@ -115,7 +115,9 @@ class User < ActiveRecord::Base
 
   # push通知を追加
   def push_notification(detail_path, body)
-    notifications.create(detail_path: detail_path, body: body, is_read: false)
+    unless notifications.where(detail_path: detail_path).unread.exists?
+      notifications.create(detail_path: detail_path, body: body, is_read: false)
+    end
   end
 
   # record footprint
