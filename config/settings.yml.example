@@ -24,6 +24,9 @@ defaults: &defaults
   #   token: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
   #   room: 'xxxxxxxxxxx'
 
+  # optional
+  # google_analytics:
+
 development:
   <<: *defaults
 
