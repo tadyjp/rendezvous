@@ -20,7 +20,12 @@ defaults: &defaults
     bucket_name: "xxxxxxxxxxxxxxxxxx"
 
   # optional
-  google_analytics:
+  # hipchat:
+  #   token: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+  #   room: 'xxxxxxxxxxx'
+
+  # optional
+  # google_analytics:
 
 development:
   <<: *defaults
