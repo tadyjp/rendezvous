@@ -19,6 +19,17 @@ defaults: &defaults
     secret_access_key: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     bucket_name: "xxxxxxxxxxxxxxxxxx"
 
+  # optional
+  # hipchat:
+  #   token: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+  #   room: 'xxxxxxxxxxx'
+
+  # optional
+  # google_analytics:
+
+  # optional
+  # pdf_uploading: false
+
 development:
   <<: *defaults
 

@@ -22,7 +22,10 @@ $.extend
         uploadingIndex += 1
 
       done: (e, data) ->
-        settings.$progressWrapper.hide()
+
+        setTimeout ->
+          settings.$progressWrapper.fadeOut()
+        , 1000
 
         $.each data.result.files, (index, file) ->
           # TODO: カーソル位置に挿入
@@ -44,6 +47,10 @@ $.extend
           # $('<p/>').text(file.name).appendTo('#files') # TODO
       progressall: (e, data) ->
         progress = parseInt(data.loaded / data.total * 100, 10)
+
+        if progress >= 99
+            settings.$progressWrapper.find('.progress-title').text 'Uploading files may task some time for converting.'
+
         settings.$progressBar
           .css(width: progress + '%')
           .text(progress + '%')

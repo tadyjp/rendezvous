@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 4.1'
 
 # Use SCSS for stylesheets
-gem 'sass-rails'
+gem 'sass-rails', github: 'rails/sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
@@ -141,4 +141,11 @@ gem 'kaminari', github: 'amatsuda/kaminari'
 
 gem 'jwt', '0.1.11'
 
+
+# Optional
+
+# For notifing to HipChat
+gem 'hipchat'
+
+# For PDF upload
 gem 'rmagick', :require => 'RMagick'

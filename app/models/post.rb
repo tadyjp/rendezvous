@@ -16,6 +16,8 @@
 require 'date'
 
 class Post < ActiveRecord::Base
+  include HipchatIntegration if Settings.respond_to?(:hipchat)
+
   ######################################################################
   # Associations
   ######################################################################
@@ -29,7 +31,7 @@ class Post < ActiveRecord::Base
   has_many :watchers, :through => :watches
 
   ######################################################################
-  # validations
+  # Validations
   ######################################################################
   validates :title, presence: true
   validates :body, presence: true
@@ -39,6 +41,7 @@ class Post < ActiveRecord::Base
   ######################################################################
   after_save :set_watcher!
   after_save :notify_watchers!
+  after_create :notify_hipchat! if Settings.respond_to?(:hipchat)
 
   ######################################################################
   # Named scope

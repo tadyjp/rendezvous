@@ -32,6 +32,16 @@ describe Notification do
       expect(@bob.notifications.size).to eq(1)
     end
 
+    it "not duplicated notifies on post edited" do
+      @bob.watch!(post: @post)
+      expect(@bob.watching?(post: @post)).to be_truthy
+      @post.reload
+      expect(@post.watchers).to include(@bob)
+      @post.update!(title: @post.title + ' [New!]')
+      @post.update!(title: @post.title + ' [New!]')
+      expect(@bob.notifications.size).to eq(1)
+    end
+
     it "not notifies on post edited by him" do
       @bob.watch!(post: @post)
       @post.reload
