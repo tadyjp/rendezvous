@@ -11,35 +11,41 @@ class ApisController < ApplicationController
   end
 
   # Receive file and upload to S3
+  # @response [JSON]
+  #  { "status": "OK",
+  #    "files": [
+  #      { "name": <file name>, "url": <link url>, "image": <image url>, "type": <file type>}, ...
+  #     ]
+  #  }
   def file_receiver
-    s3 = AWS::S3.new
-    bucket_name = "#{Settings.s3.bucket_name}/1/#{current_user.id}"
-    # bucket_name = "1/#{current_user.id}"
-    bucket = s3.buckets[bucket_name]
+    s3_uploader = S3Uploader.new(bucket: "#{Settings.s3.bucket_name}/1/#{current_user.id}")
 
     s3_files = []
 
     params[:files].each do |file|
-      basename = File.basename(file.path)
-
+      # Skip uploading if file ext is not listed.
       next unless file.original_filename =~ /\.(jpe?g|png|gif|pdf)\Z/
 
       object_file_name = "#{Digest::MD5.file(file.path).to_s}#{File.extname(file.original_filename)}"
-      obj = bucket.objects[object_file_name]
+      res = s3_uploader.upload!(file: file.path, name: object_file_name)
 
-      res = obj.write(file: file.path, acl: :public_read)
-
-      file_type = case file.original_filename
+      case file.original_filename
       when /\.(jpe?g|png|gif)\Z/
-        :image
+        s3_files << { type: 'image', name: file.original_filename, image: res.public_url.to_s }
       when /\.pdf\Z/
-        :slide
-      end
+        if Settings.respond_to?(:pdf_uploading) && Settings.pdf_uploading
+          cover_image_name = "#{Digest::MD5.file(file.path).to_s}-cover.png"
+          pdf = Magick::ImageList.new(file.path + '[0]')
+          cover_tmp = Rails.root.join('tmp', cover_image_name)
+          pdf[0].write(cover_tmp)
+          cover_res = s3_uploader.upload!(file: cover_tmp, name: cover_image_name)
 
-      s3_files << { name: file.original_filename, url: res.public_url.to_s, type: file_type }
+          s3_files << { type: 'slide', name: cover_image_name, url: res.public_url.to_s, image: cover_res.public_url.to_s }
+        end
+      end
     end
 
-    render json: { status: 'OK', files: s3_files }
+    render json: { status: 'OK', files: s3_files, uploading_index: params[:uploading_index] }
   end
 
   def user_mention

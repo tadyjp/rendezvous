@@ -27,6 +27,9 @@ defaults: &defaults
   # optional
   # google_analytics:
 
+  # optional
+  # pdf_uploading: false
+
 development:
   <<: *defaults
 

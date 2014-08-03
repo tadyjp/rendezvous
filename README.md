@@ -61,6 +61,14 @@ $ (bundle exec) rake db:seed
 And have fun with your team !
 
 
+# Optional features
+
+## PDF uploading
+
+```
+brew install imagemagick ghostscript
+```
+
 
 
 # Test

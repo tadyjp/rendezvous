@@ -26,6 +26,14 @@
     br/
 
     .row
+      #progress-wrapper.alert.alert-warning.fade.in style="display:none;"
+        span.progress-title
+          | Uploading files...
+        #progress style="height:20px;"
+          .progress-bar.progress-bar-success.progress-bar-striped.active role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"
+            | 0%
+
+    .row
       .col-xs-6
         .panel.panel-default
           .panel-heading
@@ -46,8 +54,9 @@
                   i.fa.fa-list-ul
                 button.btn.btn-default.mod-mdEditor-btn-strikethrough type="button" title="打ち消し線"
                   i.fa.fa-strikethrough
-                / button.btn.btn-default.mod-mdEditor-btn-link type="button"
-                /   i.fa.fa-link
+              .btn-group.btn-group-xs
+                button#uploadButton.btn.btn-default type="button" title="Upload"
+                  | Upload
 
           .panel-body.panel-body-nopadding
             = f.text_area :body, class: 'mod-mdEditor-textarea', placehoder: 'type your text....'
@@ -77,10 +86,18 @@ input#fileupload data-url="/apis/file_receiver" multiple="" name="files[]" style
 
     $.mod_fileuploader({
       $input: $('#fileupload'),
-      $textarea: $('.mod-mdEditor-textarea')
+      $textarea: $('.mod-mdEditor-textarea'),
+      $progressWrapper: $('#progress-wrapper'),
+      $progressBar: $('#progress .progress-bar')
+    });
+
+    // Display upload dialog.
+    $('#uploadButton').on('click', function(){
+      $('input#fileupload').trigger('click');
     });
 
     // 下書き保存
+    // TODO
     $('.btn-save-draft').on('click', function(e){
       e.preventDefault();
       var val = $('.mod-mdEditor-body').val();

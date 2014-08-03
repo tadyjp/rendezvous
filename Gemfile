@@ -141,5 +141,11 @@ gem 'kaminari', github: 'amatsuda/kaminari'
 
 gem 'jwt', '0.1.11'
 
+
 # Optional
+
+# For notifing to HipChat
 gem 'hipchat'
+
+# For PDF upload
+gem 'rmagick', :require => 'RMagick'
