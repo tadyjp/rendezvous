@@ -31,11 +31,14 @@ nav.navbar.navbar-fixed-top.navbar-original role="navigation"
             span.glyphicon.glyphicon-flag
             - if current_user.notifications.unread.any?
               span.badge = current_user.notifications.unread.recent.count
-        li.new-post-btn
-          form
-            a.btn.navbar-btn href=new_post_path
-              | 投稿する
-              = image_tag 'write.png', class: "write"
+
+        - unless params[:action] == 'new' && params[:controller] == 'posts'
+          li.new-post-btn
+            form
+              a.btn.navbar-btn href=new_post_path
+                | 投稿する
+                = image_tag 'write.png', class: "write"
+
         li.dropdown
           a.dropdown-toggle data-toggle="dropdown"
             = current_user.name
