@@ -15,15 +15,15 @@ class TagDecorator < Draper::Decorator
   # tagページのURL
   # urlエンコードを施す
   def show_path
-    h.tag_path(name: h.url_encode(model.name))
+    h.tag_path(name: model.name)
   end
 
   def edit_path
-    h.edit_tag_path(name: h.url_encode(model.name))
+    h.edit_tag_path(name: model.name)
   end
 
   def event_tag_path
-    h.event_tag_path(name: h.url_encode(model.name))
+    h.event_tag_path(name: model.name)
   end
 
   # tagをtree viewで表示する
