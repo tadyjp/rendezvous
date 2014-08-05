@@ -23,6 +23,7 @@ class PostsController < ApplicationController
 
   def fork
     @post = set_post.generate_fork(current_user)
+    @post.tags.destroy Tag.find_by(name: 'template')
     render action: 'new'
   end
 

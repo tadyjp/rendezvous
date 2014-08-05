@@ -4,7 +4,7 @@
       .panel-heading
         h3.panel-title
           a href=post_path(@post) = @post.title
-      .panel-body.viewer.github
+      .panel-body.viewer.github.mod-image-style
         = MarkdownRenderer.new(@post.body).render
 
   .col-xs-3
