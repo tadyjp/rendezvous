@@ -63,6 +63,7 @@
   background-color: #e67e22;
   padding-top: 4px;
   font-weight: 300;
+  @include border_radius(20px);
 }
 
 .post-show-wrapper {

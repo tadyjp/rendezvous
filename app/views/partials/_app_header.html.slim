@@ -42,7 +42,6 @@ nav.navbar.navbar-fixed-top.navbar-original role="navigation"
         li.dropdown
           a.dropdown-toggle data-toggle="dropdown"
             = current_user.name
-            img src=current_user.image_url width="20" height="20"/
             span.badge = current_user.decorate.draft_count
             b.caret
           ul.dropdown-menu
