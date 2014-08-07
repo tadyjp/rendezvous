@@ -16,7 +16,7 @@ a.list-group-item.post-list.mod-hover-hidden data-post-id=post.id href=post_path
           abbr.js-time-ago data-time-ago-at=post.updated_at
           |.&nbsp;&nbsp;
           - post.tags.each do |tag|
-            span.label.label-success.label-tag ##{tag.name}
+            span.label.label-success.label-tag #{tag.name}
             | &nbsp;
       .col-xs-4
         small.pull-right
