@@ -1,17 +1,17 @@
 rendezvous
 ==========
 
-[![Build Status](https://travis-ci.org/tadyjp/rendezvous.png)](https://travis-ci.org/tadyjp/rendezvous)
-[![Coverage Status](https://coveralls.io/repos/tadyjp/rendezvous/badge.png)](https://coveralls.io/r/tadyjp/rendezvous)
-[![Code Climate](https://codeclimate.com/github/tadyjp/rendezvous.png)](https://codeclimate.com/github/tadyjp/rendezvous)
-[![Dependency Status](https://gemnasium.com/tadyjp/rendezvous.png)](https://gemnasium.com/tadyjp/rendezvous)
+[![Build Status](https://travis-ci.org/ZIGExN/rendezvous.png)](https://travis-ci.org/ZIGExN/rendezvous)
+[![Coverage Status](https://coveralls.io/repos/ZIGExN/rendezvous/badge.png)](https://coveralls.io/r/ZIGExN/rendezvous)
+[![Code Climate](https://codeclimate.com/github/ZIGExN/rendezvous.png)](https://codeclimate.com/github/ZIGExN/rendezvous)
+[![Dependency Status](https://gemnasium.com/ZIGExN/rendezvous.png)](https://gemnasium.com/ZIGExN/rendezvous)
 
 A simple markdown-based blog & wiki system for team.
 
 
 # Supported versions
 
-- Ruby 2.0.0
+- Ruby 2.1.2
 - Rails 4.1.0
 
 # How to install and use.
@@ -19,7 +19,7 @@ A simple markdown-based blog & wiki system for team.
 ## Get code and install gems.
 
 ```
-$ git clone git@github.com:tadyjp/rendezvous.git
+$ git clone git@github.com:ZIGExN/rendezvous.git
 $ cd rendezvous
 $ bundle install
 ```
