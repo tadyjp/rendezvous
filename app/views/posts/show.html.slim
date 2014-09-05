@@ -40,7 +40,7 @@
       dl
         dt 作成者
         dd
-          a href=(search_path(q: "@#{@post.author.name}"))
+          a href=(search_path(q: "@#{@post.author.nickname}"))
            | @#{@post.author.name}
 
         dt タグ
@@ -83,10 +83,10 @@
           - @post.comments.each do |comment|
             li.media
               a.pull-left href="#"
-                img.media-object src=comment.author.image_url /
+                img.media-object src=comment.author.decorate.image_url /
               .media-body
                 h4.media-heading= comment.author.name
-                = comment.body
+                = MarkdownRenderer.new(comment.body).render
           = form_tag(comment_post_path, method: :post, data: { 'form-id' => "comment_#{@post.id}" }) do
             li.media
               a.pull-left href="#"
