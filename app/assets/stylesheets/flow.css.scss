@@ -60,9 +60,13 @@
 }
 
 .label-tag {
-  background-color: #e67e22;
+  // background-color: #e67e22;
   padding-top: 4px;
-  font-weight: 300;
+  // font-weight: 300;
+  background-color: transparent;
+  color: #75b3c8;
+  border: 1.5px solid #75b3c8;
+  padding: 4px 6px;
   @include border_radius(20px);
 }
 
@@ -112,11 +116,11 @@
   dd {
     margin-bottom: 10px;
   }
-  .label-tag {
-    background-color: #e67e22;
-    padding-top: 4px;
-    font-weight: 100;
-  }
+  // .label-tag {
+  //   background-color: #e67e22;
+  //   padding-top: 4px;
+  //   // font-weight: 100;
+  // }
 }
 
 .comment-wrapper {

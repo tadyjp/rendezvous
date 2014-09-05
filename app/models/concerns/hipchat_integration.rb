@@ -1,6 +1,8 @@
 module HipchatIntegration
   # Call Hipchat API
   def notify_hipchat!
+    return if is_draft
+
     client = HipChat::Client.new(Settings.hipchat.token)
     client[Settings.hipchat.room].send('Rendezvous', notify_hipchat_body, message_format:'text', notify: 1)
   end
