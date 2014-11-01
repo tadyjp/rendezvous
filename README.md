@@ -11,8 +11,7 @@ A simple markdown-based blog & wiki system for team.
 
 # Supported versions
 
-- Ruby 2+
-- Rails 4.1+
+- Ruby 2.1.4
 
 # How to install and use.
 
@@ -41,15 +40,7 @@ and get
   -`rendevous` in [Project name] in Consent screen
 
 
-## Create and edit config files.
-
-```
-$ cp config/database.yml.example config/database.yml
-$ vim config/database.yml
-
-$ cp config/settings.yml.example config/settings.yml
-$ vim config/settings.yml
-```
+## Dotenv
 
 
 ## Setup DB
