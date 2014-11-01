@@ -93,6 +93,8 @@ group :development, :test do
   gem 'teaspoon'
   gem 'guard-teaspoon'
   gem 'byebug'
+
+  gem 'dotenv-rails'
 end
 
 group :test do

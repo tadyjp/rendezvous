@@ -1,23 +1,19 @@
-# Read Me
-# Copy this file to `settings.yml` when you run first development.
-#   $ cp config/settings.yml.example config/settings.yml
-
 defaults: &defaults
   rendezvous:
 
     # For amil body
-    app_host: "http://rendezvous.dev"
+    app_host: <%= ENV['RV_RENDEZVOUS_APP_HOST'] %>
 
   # For login
   google_api:
-    client_id: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com"
-    secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    client_id: <%= ENV['RV_GOOGLE_API_CLIENT_ID'] %>
+    secret: <%= ENV['RV_GOOGLE_API_SECRET'] %>
 
   # For file upload
   s3:
-    access_key_id: "xxxxxxxxxxxxxxxxxxxxx"
-    secret_access_key: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-    bucket_name: "xxxxxxxxxxxxxxxxxx"
+    access_key_id: <%= ENV['RV_S3_ASSESS_KEY_ID'] %>
+    secret_access_key: <%= ENV['RV_S3_SECRET_ACCESS_KEY'] %>
+    bucket_name: <%= ENV['RV_S3_BACKET_NAME'] %>
 
   # optional
   # hipchat:
@@ -28,7 +24,7 @@ defaults: &defaults
   # google_analytics:
 
   # optional
-  # pdf_uploading: false
+  pdf_uploading: <%= ENV['RV_PDF_UPLOADING'].present? %>
 
 development:
   <<: *defaults
