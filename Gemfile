@@ -149,3 +149,7 @@ gem 'hipchat'
 
 # For PDF upload
 gem 'rmagick', :require => 'RMagick'
+
+
+# for heroku
+gem 'rails_12factor', group: :production
