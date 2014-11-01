@@ -153,3 +153,4 @@ gem 'rmagick', :require => 'RMagick'
 
 # for heroku
 gem 'rails_12factor', group: :production
+gem 'mysql'

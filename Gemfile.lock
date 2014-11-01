@@ -331,6 +331,7 @@ GEM
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    mysql (2.9.1)
     mysql2 (0.3.16)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
@@ -557,6 +558,7 @@ DEPENDENCIES
   kaminari!
   launchy
   mail
+  mysql
   mysql2
   newrelic_rpm
   nokogiri
