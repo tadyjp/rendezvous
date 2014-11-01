@@ -20,8 +20,6 @@ before_install:
 - sh ./script/travis/bundle_install.sh
 before_script:
 - mysql -e 'CREATE DATABASE rendezvous_test;'
-- cp config/database.yml.example config/database.yml
-- cp config/settings.yml.example config/settings.yml
 after_script:
 - ruby script/travis/bundle_cache.rb
 script: bundle exec rake db:create db:test:load spec teaspoon
