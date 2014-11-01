@@ -158,3 +158,6 @@ gem 'rmagick', :require => 'RMagick'
 # for heroku
 gem 'rails_12factor', group: :production
 gem 'mysql'
+
+# for IP restriction
+gem 'rack-contrib', require: 'rack/contrib'
