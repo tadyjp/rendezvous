@@ -11,6 +11,7 @@ env:
   - AWS_S3_REGION="us-east-1"
   - AWS_S3_BUCKET="rendezvous-travis-bundler"
   - RAILS_ENV=test
+  - RV_RENDEZVOUS_APP_HOST=example.com
   - secure: A72vqUWQiRal8fCMlobXhYrGVDImUXmrCQGuUc382glay7WdJ4ZsIiVvO1gp8mj7X4HUeejmgY4AUVJy6FmCL4LNxDhdRuOirQ+kOcdsuQKDlMPcbGdoYk23ZBlxeq1tqW9Qs8mNjZYHGx3BFf/qtNhgvTLMr+/wQMZi+110e3g=
 services:
 - mysql
@@ -22,4 +23,6 @@ before_script:
 - mysql -e 'CREATE DATABASE rendezvous_test;'
 after_script:
 - ruby script/travis/bundle_cache.rb
-script: bundle exec rake db:create db:test:load spec teaspoon; bundle exec rubocop
+script:
+- bundle exec rake db:create db:test:load spec
+- bundle exec rubocop
