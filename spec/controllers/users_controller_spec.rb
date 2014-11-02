@@ -7,7 +7,7 @@ describe UsersController, type: :controller do
       sign_in FactoryGirl.create(:alice)
 
       get :edit
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
@@ -16,7 +16,7 @@ describe UsersController, type: :controller do
       sign_in FactoryGirl.create(:alice)
 
       patch :update, user: { nickname: 'bob' }
-      response.should redirect_to('/user/edit')
+      expect(response).to redirect_to('/user/edit')
     end
   end
 
