@@ -47,3 +47,11 @@ Style/RescueModifier:
 # and/orを許容
 Style/AndOr:
   Enabled: false
+
+# ABCチェックを無効
+Metrics/AbcSize:
+  Enabled: false
+
+# ???
+Style/RaiseArgs:
+  Enabled: false

@@ -43,14 +43,14 @@ class Tag < ActiveRecord::Base
 
   # 自分のタグに紐づくPostをすべて`other_tag`へ移動する
   def move_all_posts_to!(other_tag)
-    posts.each do |_post|
-      _post.tags.delete(self)
-      _post.tags << other_tag unless _post.tags.include?(other_tag)
+    posts.each do |moving_post|
+      moving_post.tags.delete(self)
+      moving_post.tags << other_tag unless moving_post.tags.include?(other_tag)
     end
   end
 
   # 親タグを設定する
-  def set_parent!(other_tag)
+  def parent_tag=(other_tag)
     self.parent = other_tag
     self.save!
   end

@@ -48,7 +48,7 @@ class ApisController < ApplicationController
   end
 
   def user_mention
-    name_list = User.search(params[:q]).map { |_user| "#{_user.nickname}[#{_user.name}]" }
+    name_list = User.search(params[:q]).map { |user| "#{user.nickname}[#{user.name}]" }
 
     render json: name_list
   end

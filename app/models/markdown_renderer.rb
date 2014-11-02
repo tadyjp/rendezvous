@@ -11,7 +11,8 @@ class MarkdownRenderer
     text = @text.gsub(/!slide!\(([^\)]+)\)/) do |_|
       slide_urls << %(
         <div class="embed-responsive embed-responsive-4by3">
-          <iframe style="text-align:center;" src="/ViewerJS/##{Regexp.last_match[1]}" width="400" height="300" allowfullscreen="true" webkitallowfullscreen="true"></iframe>
+          <iframe style="text-align:center;" src="/ViewerJS/##{Regexp.last_match[1]}"
+            width="400" height="300" allowfullscreen="true" webkitallowfullscreen="true"></iframe>
         </div>
             )
       "%%slide:#{slide_urls.size - 1}%%"

@@ -8,11 +8,11 @@ class ApplicationController < ActionController::Base
   before_action :redirect_unless_signed_in
 
   def redirect_unless_signed_in
-    unless user_signed_in?
-      flash[:alert] = 'You need Login!'
-      session[:login_redirect_to] = request.url
-      redirect_to root_path
-    end
+    return if user_signed_in?
+
+    flash[:alert] = 'You need Login!'
+    session[:login_redirect_to] = request.url
+    redirect_to root_path
   end
 
   def after_sign_in_path_for(resource)

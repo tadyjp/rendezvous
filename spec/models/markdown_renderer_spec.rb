@@ -8,6 +8,7 @@ RSpec.describe MarkdownRenderer, type: :model do
 - body
 - test
 EOS
+
     expect(renderer.render.to_s.gsub(/^ +/, '')).to eq(<<EOS)
 <h1>title</h1>
 
@@ -26,12 +27,14 @@ EOS
     expect(renderer.render.to_s.gsub(/^ +/, '')).to eq(<<EOS)
 <p>
 <div class="embed-responsive embed-responsive-4by3">
-<iframe style="text-align:center;" src="/ViewerJS/#http://test.com/slide-1.pdf" width="400" height="300" allowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<iframe style="text-align:center;" src="/ViewerJS/#http://test.com/slide-1.pdf"
+width="400" height="300" allowfullscreen="true" webkitallowfullscreen="true"></iframe>
 </div>
 <br>
 
 <div class="embed-responsive embed-responsive-4by3">
-<iframe style="text-align:center;" src="/ViewerJS/#http://test.com/slide-2.pdf" width="400" height="300" allowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<iframe style="text-align:center;" src="/ViewerJS/#http://test.com/slide-2.pdf"
+width="400" height="300" allowfullscreen="true" webkitallowfullscreen="true"></iframe>
 </div>
 </p>
 EOS

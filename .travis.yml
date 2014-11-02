@@ -22,4 +22,4 @@ before_script:
 - mysql -e 'CREATE DATABASE rendezvous_test;'
 after_script:
 - ruby script/travis/bundle_cache.rb
-script: bundle exec rake db:create db:test:load spec teaspoon
+script: bundle exec rake db:create db:test:load spec teaspoon; bundle exec rubocop

@@ -66,7 +66,7 @@ class TagsController < ApplicationController
   def move_to
     @move_to_tag = Tag.find_by(name: params[:move_to_name]) or fail ActiveRecord::RecordNotFound
 
-    @tag.set_parent!(@move_to_tag)
+    @tag.parent_tag = @move_to_tag
 
     flash[:notice] = "「#{@tag.name}」は「#{@move_to_tag.name}」の下に移動しました"
 

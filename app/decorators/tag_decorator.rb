@@ -28,22 +28,22 @@ class TagDecorator < Draper::Decorator
 
   # tagをtree viewで表示する
   def tree_view_node
-    _html = ''
+    html = ''
 
-    _html += %(
+    html += %(
       <a href="#{ show_path }" data-name="#{model.name}">
         #{model.name} <span class="badge">#{model.posts.size}</span>
       </a>
         )
 
-    _html += '<ul>'
-    model.children.each do |_child|
-      _html += '<li>'
-      _html << _child.decorate.tree_view_node
-      _html += '</li>'
+    html += '<ul>'
+    model.children.each do |child|
+      html += '<li>'
+      html << child.decorate.tree_view_node
+      html += '</li>'
     end
-    _html += '</ul>'
+    html += '</ul>'
 
-    _html.html_safe
+    html.html_safe
   end
 end
