@@ -16,12 +16,12 @@ defaults: &defaults
     bucket_name: <%= ENV['RV_S3_BACKET_NAME'] %>
 
   # optional
-  # hipchat:
-  #   token: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-  #   room: 'xxxxxxxxxxx'
+  hipchat:
+    token: <%= ENV['RV_HIPCHAT_TOKEN'] %>
+    room: <%= ENV['RV_HIPCHAT_ROOM'] %>
 
   # optional
-  # google_analytics:
+  google_analytics: <%= ENV['RV_GOOGLE_ANALYTICS_ID'] %>
 
   # optional
   pdf_uploading: <%= ENV['RV_PDF_UPLOADING'].present? %>
