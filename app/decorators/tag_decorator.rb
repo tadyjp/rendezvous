@@ -30,11 +30,11 @@ class TagDecorator < Draper::Decorator
   def tree_view_node
     _html = ''
 
-    _html += %Q{
-      <a href="#{ self.show_path }" data-name="#{model.name}">
+    _html += %(
+      <a href="#{ show_path }" data-name="#{model.name}">
         #{model.name} <span class="badge">#{model.posts.size}</span>
       </a>
-    }
+        )
 
     _html += '<ul>'
     model.children.each do |_child|
@@ -46,5 +46,4 @@ class TagDecorator < Draper::Decorator
 
     _html.html_safe
   end
-
 end

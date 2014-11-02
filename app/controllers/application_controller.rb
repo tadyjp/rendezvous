@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  add_breadcrumb("Rendezvous", '/')
+  add_breadcrumb('Rendezvous', '/')
 
   before_action :redirect_unless_signed_in
 

@@ -27,8 +27,8 @@ class Post < ActiveRecord::Base
   has_many :comments
   has_many :footprints
 
-  has_many :watches, :as => :watchable, :dependent => :destroy
-  has_many :watchers, :through => :watches
+  has_many :watches, as: :watchable, dependent: :destroy
+  has_many :watchers, through: :watches
 
   ######################################################################
   # Validations
@@ -88,9 +88,8 @@ class Post < ActiveRecord::Base
 
   # generate forked post (not saved)
   def generate_fork(user)
-
     # `id`以外をコピーする
-    _forked_post = Post.new(self.attributes.except('id'))
+    _forked_post = Post.new(attributes.except('id'))
 
     # `%name`をユーザー名に置換
     _forked_post.title = _forked_post.title.gsub(/%name/, user.name)
@@ -98,7 +97,7 @@ class Post < ActiveRecord::Base
     _forked_post.title = Time.now.strftime(_forked_post.title) # TODO
     _forked_post.title = _forked_post.title
 
-    _forked_post.tag_ids = self.tag_ids
+    _forked_post.tag_ids = tag_ids
     _forked_post.author = user
     _forked_post.specified_date = Date.today
 
@@ -107,7 +106,7 @@ class Post < ActiveRecord::Base
 
   # slideshow用のbody
   def body_for_slideshow
-    self.body.gsub(/^#/, "---\n\n#")
+    body.gsub(/^#/, "---\n\n#")
   end
 
   def visited_user_count

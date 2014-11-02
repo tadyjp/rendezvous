@@ -2,7 +2,7 @@ class CreateWatches < ActiveRecord::Migration
   def change
     create_table :watches do |t|
       t.integer :watcher_id, null: false
-      t.string  :watchable_type, null: false
+      t.string :watchable_type, null: false
       t.integer :watchable_id, null: false
 
       t.timestamps

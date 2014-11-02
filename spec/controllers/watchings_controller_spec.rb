@@ -1,16 +1,16 @@
 require 'rails_helper'
 
-RSpec.describe WatchingsController, :type => :controller do
+RSpec.describe WatchingsController, type: :controller do
 
   describe "GET 'show' without login" do
-    it "returns http redirect" do
+    it 'returns http redirect' do
       get 'show'
       expect(response).to redirect_to('/')
     end
   end
 
   describe "GET 'show' with login" do
-    it "returns http success" do
+    it 'returns http success' do
       sign_in FactoryGirl.create(:alice)
 
       get 'show'

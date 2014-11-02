@@ -21,33 +21,29 @@ class Tag < ActiveRecord::Base
   # for versioning
   has_paper_trail
 
-  default_scope { order(:updated_at => :desc) }
+  default_scope { order(updated_at: :desc) }
 
   scope :posts_exist, lambda {
-    select('tags.*, count(posts.id) as posts_count').
-    joins(:posts).
-    group('tags.id').
-    having('posts_count > 0')
+    select('tags.*, count(posts.id) as posts_count')
+      .joins(:posts)
+      .group('tags.id')
+      .having('posts_count > 0')
   }
 
   class << self
-
     # 最近投稿されたTagを取得
-    def recent(limit=10)
-      Post.recent(20).map do |post|
-        post.tags
-      end.flatten.compact.uniq.take(limit)
+    def recent(limit = 10)
+      Post.recent(20).map(&:tags).flatten.compact.uniq.take(limit)
     end
-
   end
 
   def recent_posts(limit = 30)
-    self.posts.recent(limit)
+    posts.recent(limit)
   end
 
   # 自分のタグに紐づくPostをすべて`other_tag`へ移動する
   def move_all_posts_to!(other_tag)
-    self.posts.each do |_post|
+    posts.each do |_post|
       _post.tags.delete(self)
       _post.tags << other_tag unless _post.tags.include?(other_tag)
     end

@@ -52,7 +52,7 @@ class TagsController < ApplicationController
   #   すべてのPostを移動先のタグに移動し
   #   このタグを削除する
   def merge_to
-    @merge_to_tag = Tag.find_by(name: params[:merge_to_name]) or raise ActiveRecord::RecordNotFound
+    @merge_to_tag = Tag.find_by(name: params[:merge_to_name]) or fail ActiveRecord::RecordNotFound
 
     @tag.move_all_posts_to!(@merge_to_tag)
     @tag.delete
@@ -64,7 +64,7 @@ class TagsController < ApplicationController
 
   # このタグを他のタグの下に移動
   def move_to
-    @move_to_tag = Tag.find_by(name: params[:move_to_name]) or raise ActiveRecord::RecordNotFound
+    @move_to_tag = Tag.find_by(name: params[:move_to_name]) or fail ActiveRecord::RecordNotFound
 
     @tag.set_parent!(@move_to_tag)
 
@@ -76,12 +76,11 @@ class TagsController < ApplicationController
   private
 
   def set_tag
-    tag = Tag.find_by(name: params[:name]) or raise ActiveRecord::RecordNotFound
+    tag = Tag.find_by(name: params[:name]) or fail ActiveRecord::RecordNotFound
     @tag = tag.decorate
   end
 
   def tag_params
     params.require(:tag).permit(:name, :body).to_hash
   end
-
 end

@@ -82,6 +82,8 @@ group :development do
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-rbenv', '~> 2.0'
   gem 'capistrano3-unicorn'
+
+  gem 'travis'
 end
 
 group :development, :test do
@@ -139,12 +141,11 @@ gem 'breadcrumble'
 
 gem 'slim'
 
-gem 'annotate', ">=2.6.0"
+gem 'annotate', '>=2.6.0'
 
 gem 'kaminari', github: 'amatsuda/kaminari'
 
 gem 'jwt', '0.1.11'
-
 
 # Optional
 
@@ -152,8 +153,7 @@ gem 'jwt', '0.1.11'
 gem 'hipchat'
 
 # For PDF upload
-gem 'rmagick', :require => 'RMagick'
-
+gem 'rmagick', require: 'RMagick'
 
 # for heroku
 gem 'rails_12factor', group: :production

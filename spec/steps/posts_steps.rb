@@ -37,8 +37,8 @@ step 'create post :title' do |title|
 end
 
 step 'search by :query' do |query|
-  within("#app-search-form") do
-    fill_in 'q', :with => query
+  within('#app-search-form') do
+    fill_in 'q', with: query
   end
   first(:css, "#app-search-form button[type='submit']").click
 end

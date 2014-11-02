@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe MarkdownRenderer, :type => :model do
-  it "tests #render" do
+RSpec.describe MarkdownRenderer, type: :model do
+  it 'tests #render' do
     renderer = MarkdownRenderer.new(<<EOS)
 # title
 
@@ -18,7 +18,7 @@ EOS
 EOS
   end
 
-  it "tests #render with slides" do
+  it 'tests #render with slides' do
     renderer = MarkdownRenderer.new(<<EOS)
 !slide!(http://test.com/slide-1.pdf)
 !slide!(http://test.com/slide-2.pdf)

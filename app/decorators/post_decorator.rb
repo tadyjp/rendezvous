@@ -46,5 +46,4 @@ class PostDecorator < Draper::Decorator
       ''
     end
   end
-
 end
