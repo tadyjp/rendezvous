@@ -1,10 +1,13 @@
 module HipchatIntegration
   # Call Hipchat API
   def notify_hipchat!
+    require 'uri'
+
     return if is_draft
 
     client = HipChat::Client.new(Settings.hipchat.token)
-    client[Settings.hipchat.room].send('Rendezvous', notify_hipchat_body, message_format: 'text', notify: 1)
+    room = URI.unescape(Settings.hipchat.room)
+    client[room].send('Rendezvous', notify_hipchat_body, message_format: 'text', notify: 1)
   end
 
   # @return [String] notification body
