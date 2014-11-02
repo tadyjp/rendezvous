@@ -10,8 +10,8 @@ class PostsController < ApplicationController
   def show
     current_user.visit_post!(@post)
 
-    @post.tags.each do |_tag|
-      add_breadcrumb("##{_tag.name}", _tag.decorate.show_path)
+    @post.tags.each do |tag|
+      add_breadcrumb("##{tag.name}", tag.decorate.show_path)
     end
     add_breadcrumb(@post.title)
   end
@@ -131,17 +131,17 @@ class PostsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
     @post_params ||= begin
-      _param_hash = params.require(:post).permit(:title, :body, :tags, :is_draft, :specified_date).to_hash
+      param_hash = params.require(:post).permit(:title, :body, :tags, :is_draft, :specified_date).to_hash
 
       # tags_text == 'Javascript,Ruby'
-      tags_text = _param_hash.delete('tags')
+      tags_text = param_hash.delete('tags')
 
-      tags = tags_text.split(',').map do |_tag_name|
-        Tag.find_or_create_by(name: _tag_name)
+      tags = tags_text.split(',').map do |tag_name|
+        Tag.find_or_create_by(name: tag_name)
       end
-      _param_hash['tag_ids'] = tags.map(&:id)
+      param_hash['tag_ids'] = tags.map(&:id)
 
-      _param_hash
+      param_hash
     end
   end
 

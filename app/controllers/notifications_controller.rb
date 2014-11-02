@@ -11,5 +11,4 @@ class NotificationsController < ApplicationController
   def set_notification
     @notification = Notification.find(params[:id])
   end
-
 end

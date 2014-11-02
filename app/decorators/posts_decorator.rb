@@ -1,18 +1,11 @@
 class PostsDecorator < Draper::CollectionDecorator
-
   def related_tags
-    _tags = self.map do |_post|
-      _post.tags
-    end.flatten.uniq
+    tags = map(&:tags).flatten.uniq
 
-    TagDecorator.decorate_collection(_tags)
+    TagDecorator.decorate_collection(tags)
   end
 
   def related_authors
-    self.map do |_post|
-      _post.author
-    end.flatten.uniq.map do |_author|
-      _author.decorate
-    end
+    map(&:author).flatten.uniq.map(&:decorate)
   end
 end

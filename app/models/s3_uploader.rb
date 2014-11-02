@@ -6,7 +6,7 @@ class S3Uploader
   # @param [String] bucket: uploading backet name.
   def initialize(access_key_id: Settings.s3.access_key_id,
     secret_access_key: Settings.s3.secret_access_key,
-    region: "ap-northeast-1",
+    region: 'ap-northeast-1',
     bucket:)
     @s3 = AWS::S3.new(access_key_id: access_key_id,
                       secret_access_key: secret_access_key,

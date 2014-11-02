@@ -14,10 +14,10 @@ module RV::Mailer
     html_body = generate_html_mail(post)
 
     mail = Mail.new do
-      from     opts[:user].email
-      to       opts[:to]
-      subject  post.title
-      body     post.body
+      from opts[:user].email
+      to opts[:to]
+      subject post.title
+      body post.body
 
       html_part do
         content_type 'text/html; charset=UTF-8'
@@ -40,10 +40,10 @@ module RV::Mailer
     template = File.open(path).read
 
     html_body = template
-      .sub('__POST_URL__', Settings.rendezvous.app_host + post.decorate.show_path)
-      .sub('__HTML_TITLE__', MarkdownRenderer.new(post.title).render)
-      .sub('__HTML_BODY__', MarkdownRenderer.new(post.body).render)
-      .sub('__RV_URL__', Settings.rendezvous.app_host + '/')
+                .sub('__POST_URL__', Settings.rendezvous.app_host + post.decorate.show_path)
+                .sub('__HTML_TITLE__', MarkdownRenderer.new(post.title).render)
+                .sub('__HTML_BODY__', MarkdownRenderer.new(post.body).render)
+                .sub('__RV_URL__', Settings.rendezvous.app_host + '/')
 
     premailer = Premailer.new(html_body, with_html_string: true, adapter: :nokogiri)
     premailer.to_inline_css

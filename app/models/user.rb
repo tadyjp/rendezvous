@@ -41,19 +41,18 @@ class User < ActiveRecord::Base
   has_many :footprints
 
   has_many :watchings, class_name: 'Watch', foreign_key: 'watcher_id'
-  has_many :watching_posts, :through => :watchings, :source => :watchable, :source_type => "Post"
+  has_many :watching_posts, through: :watchings, source: :watchable, source_type: 'Post'
 
   ######################################################################
   # scope
   ######################################################################
-  scope :post_recently, -> {
+  scope :post_recently, (lambda do
     User.joins(:posts).group('id').order('posts.updated_at desc')
-  }
-
-  scope :search, (lambda do |_query|
-    where('name LIKE ? OR nickname LIKE ?', "%#{_query}%", "%#{_query}%")
   end)
 
+  scope :search, (lambda do |query|
+    where('name LIKE ? OR nickname LIKE ?', "%#{query}%", "%#{query}%")
+  end)
 
   ######################################################################
   # Validations
@@ -66,13 +65,12 @@ class User < ActiveRecord::Base
   validates :nickname, uniqueness: true
 
   # Device
-  def self.find_for_google_oauth2(access_token, signed_in_resource = nil)
-
-    user = self.where(email: access_token.info['email']).first_or_create do |_user|
-      _user.name = access_token.info['name']
-      _user.image_url = access_token.info['image']
-      _user.password = Devise.friendly_token[0, 20]
-      _user.nickname = (("a".."z").to_a + ("A".."Z").to_a + (0..9).to_a).shuffle[0..4].join
+  def self.find_for_google_oauth2(access_token, _signed_in_resource = nil)
+    user = where(email: access_token.info['email']).first_or_create do |u|
+      u.name = access_token.info['name']
+      u.image_url = access_token.info['image']
+      u.password = Devise.friendly_token[0, 20]
+      u.nickname = (('a'..'z').to_a + ('A'..'Z').to_a + (0..9).to_a).shuffle[0..4].join
     end
 
     user.update(
@@ -96,8 +94,8 @@ class User < ActiveRecord::Base
   # refresh google oauth token
   def google_oauth_token_refresh!
     conn = Faraday.new(url: 'https://accounts.google.com') do |builder|
-      builder.request  :url_encoded
-      builder.adapter  :net_http
+      builder.request :url_encoded
+      builder.adapter :net_http
     end
     response = conn.post '/o/oauth2/token',
                          client_id: Settings.google_api.client_id,
@@ -115,9 +113,9 @@ class User < ActiveRecord::Base
 
   # push通知を追加
   def push_notification(detail_path, body)
-    unless notifications.where(detail_path: detail_path).unread.exists?
-      notifications.create(detail_path: detail_path, body: body, is_read: false)
-    end
+    return if notifications.where(detail_path: detail_path).unread.exists?
+
+    notifications.create(detail_path: detail_path, body: body, is_read: false)
   end
 
   # record footprint
@@ -129,11 +127,11 @@ class User < ActiveRecord::Base
     if hash[:post]
       watching_posts << hash[:post] unless watching_posts.include?(hash[:post])
     elsif hash[:tag]
-      raise 'Not Implemented.'
+      fail 'Not Implemented.'
     elsif hash[:user]
-      raise 'Not Implemented.'
+      fail 'Not Implemented.'
     else
-      raise 'No hash argument set.'
+      fail 'No hash argument set.'
     end
   end
 
@@ -141,11 +139,11 @@ class User < ActiveRecord::Base
     if hash[:post]
       hash[:post].watches.where(watcher: self).destroy_all
     elsif hash[:tag]
-      raise 'Not Implemented.'
+      fail 'Not Implemented.'
     elsif hash[:user]
-      raise 'Not Implemented.'
+      fail 'Not Implemented.'
     else
-      raise 'No hash argument set.'
+      fail 'No hash argument set.'
     end
   end
 
@@ -155,11 +153,11 @@ class User < ActiveRecord::Base
     if hash[:post]
       hash[:post].watches.where(watcher: self).exists?
     elsif hash[:tag]
-      raise 'Not Implemented.'
+      fail 'Not Implemented.'
     elsif hash[:user]
-      raise 'Not Implemented.'
+      fail 'Not Implemented.'
     else
-      raise 'No hash argument set.'
+      fail 'No hash argument set.'
     end
   end
 

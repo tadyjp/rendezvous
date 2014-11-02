@@ -24,7 +24,7 @@ _tag_tree = [
   ['OS', 'CentOS'],
   ['OS', 'Ubuntu'],
   ['OS', 'MacOS'],
-  ['OS', 'Windows'],
+  ['OS', 'Windows']
 ]
 
 tags = []

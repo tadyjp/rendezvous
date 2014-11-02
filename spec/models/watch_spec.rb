@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Watch, :type => :model do
+RSpec.describe Watch, type: :model do
   # describe "validations" do
   #   let(:alice) { create(:alice) }
   #   let(:post) { create(:post) }

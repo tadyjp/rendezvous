@@ -23,7 +23,7 @@ gem 'therubyracer', platforms: :ruby
 # gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder'
+# gem 'jbuilder'
 
 gem 'i18n_generators'
 
@@ -69,8 +69,6 @@ group :development do
   # profiler
   gem 'rack-mini-profiler'
 
-  # rubocop
-  gem 'rubocop'
   gem 'guard-rspec', require: false
   gem 'guard-rubocop'
   # gem 'guard-spring'
@@ -82,6 +80,8 @@ group :development do
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-rbenv', '~> 2.0'
   gem 'capistrano3-unicorn'
+
+  gem 'travis'
 end
 
 group :development, :test do
@@ -95,6 +95,8 @@ group :development, :test do
   gem 'byebug'
 
   gem 'dotenv-rails'
+
+  gem 'rubocop'
 end
 
 group :test do
@@ -139,12 +141,11 @@ gem 'breadcrumble'
 
 gem 'slim'
 
-gem 'annotate', ">=2.6.0"
+gem 'annotate', '>=2.6.0'
 
 gem 'kaminari', github: 'amatsuda/kaminari'
 
 gem 'jwt', '0.1.11'
-
 
 # Optional
 
@@ -152,12 +153,11 @@ gem 'jwt', '0.1.11'
 gem 'hipchat'
 
 # For PDF upload
-gem 'rmagick', :require => 'RMagick'
-
+gem 'rmagick', require: 'RMagick'
 
 # for heroku
 gem 'rails_12factor', group: :production
-gem 'mysql'
+# gem 'mysql'
 
 # for IP restriction
 gem 'rack-contrib', require: 'rack/contrib'
