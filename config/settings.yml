@@ -1,0 +1,37 @@
+defaults: &defaults
+  rendezvous:
+
+    # For amil body
+    app_host: <%= ENV['RV_RENDEZVOUS_APP_HOST'] %>
+
+  # For login
+  google_api:
+    client_id: <%= ENV['RV_GOOGLE_API_CLIENT_ID'] %>
+    secret: <%= ENV['RV_GOOGLE_API_SECRET'] %>
+
+  # For file upload
+  s3:
+    access_key_id: <%= ENV['RV_S3_ASSESS_KEY_ID'] %>
+    secret_access_key: <%= ENV['RV_S3_SECRET_ACCESS_KEY'] %>
+    bucket_name: <%= ENV['RV_S3_BACKET_NAME'] %>
+
+  # optional
+  # hipchat:
+  #   token: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+  #   room: 'xxxxxxxxxxx'
+
+  # optional
+  # google_analytics:
+
+  # optional
+  pdf_uploading: <%= ENV['RV_PDF_UPLOADING'].present? %>
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+

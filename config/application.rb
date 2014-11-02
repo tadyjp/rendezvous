@@ -32,6 +32,11 @@ module Rendezvous
       # oauth2_token: 'FIXME',
       # account:      'FIXME'
     }
+
+    # IP restriction.
+    if Rails.env.production? && ENV['RV_ALLOW_IPS']
+      config.middleware.use Rack::Access, { "/" => ENV['RV_ALLOW_IPS'].split(/,/) }
+    end
   end
 
 end

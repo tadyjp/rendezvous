@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.1.4'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.1'
 
@@ -91,6 +93,8 @@ group :development, :test do
   gem 'teaspoon'
   gem 'guard-teaspoon'
   gem 'byebug'
+
+  gem 'dotenv-rails'
 end
 
 group :test do
@@ -149,3 +153,11 @@ gem 'hipchat'
 
 # For PDF upload
 gem 'rmagick', :require => 'RMagick'
+
+
+# for heroku
+gem 'rails_12factor', group: :production
+gem 'mysql'
+
+# for IP restriction
+gem 'rack-contrib', require: 'rack/contrib'
