@@ -23,7 +23,7 @@ gem 'therubyracer', platforms: :ruby
 # gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder'
+# gem 'jbuilder'
 
 gem 'i18n_generators'
 
@@ -69,8 +69,6 @@ group :development do
   # profiler
   gem 'rack-mini-profiler'
 
-  # rubocop
-  gem 'rubocop'
   gem 'guard-rspec', require: false
   gem 'guard-rubocop'
   # gem 'guard-spring'
@@ -97,6 +95,8 @@ group :development, :test do
   gem 'byebug'
 
   gem 'dotenv-rails'
+
+  gem 'rubocop'
 end
 
 group :test do
@@ -157,7 +157,7 @@ gem 'rmagick', require: 'RMagick'
 
 # for heroku
 gem 'rails_12factor', group: :production
-gem 'mysql'
+# gem 'mysql'
 
 # for IP restriction
 gem 'rack-contrib', require: 'rack/contrib'
