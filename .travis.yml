@@ -12,6 +12,7 @@ env:
   - AWS_S3_BUCKET="rendezvous-travis-bundler"
   - RAILS_ENV=test
   - RV_RENDEZVOUS_APP_HOST=example.com
+  - RV_HIPCHAT_ROOM=Rendezvousテスト
   - secure: A72vqUWQiRal8fCMlobXhYrGVDImUXmrCQGuUc382glay7WdJ4ZsIiVvO1gp8mj7X4HUeejmgY4AUVJy6FmCL4LNxDhdRuOirQ+kOcdsuQKDlMPcbGdoYk23ZBlxeq1tqW9Qs8mNjZYHGx3BFf/qtNhgvTLMr+/wQMZi+110e3g=
 services:
 - mysql

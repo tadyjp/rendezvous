@@ -24,7 +24,7 @@ defaults: &defaults
   google_analytics: <%= ENV['RV_GOOGLE_ANALYTICS_ID'] %>
 
   # optional
-  pdf_uploading: <%= ENV['RV_PDF_UPLOADING'].present? %>
+  enable_pdf_uploading: <%= ENV['RV_PDF_UPLOADING'].present? %>
 
 development:
   <<: *defaults

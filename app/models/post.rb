@@ -41,7 +41,7 @@ class Post < ActiveRecord::Base
   ######################################################################
   after_save :set_watcher!
   after_save :notify_watchers!
-  after_create :notify_hipchat! if Settings.respond_to?(:hipchat)
+  after_create :notify_hipchat! if Settings.hipchat.token.present? && Settings.hipchat.room.present?
 
   ######################################################################
   # Named scope
