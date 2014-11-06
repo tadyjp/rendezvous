@@ -33,7 +33,7 @@
   }
   .btn-toolbar {
     > .btn-group > .btn {
-      color: $main-color; 
+      color: $main-color;
       background-color: #fff;
       box-shadow: 0 0 0 #fff;
     }
@@ -61,6 +61,14 @@
   }
   #save_button {
     margin-bottom: 10px;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  td {
+    width: 50%;
   }
 }
 

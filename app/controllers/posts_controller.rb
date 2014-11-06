@@ -19,12 +19,13 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new(title: '新しい投稿')
+    render layout: 'edit'
   end
 
   def fork
     @post = set_post.generate_fork(current_user)
     @post.tags.destroy Tag.find_by(name: 'template')
-    render action: 'new'
+    render layout: 'edit', action: 'new'
   end
 
   def mail
@@ -43,6 +44,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    render layout: 'edit'
   end
 
   # POST /posts
