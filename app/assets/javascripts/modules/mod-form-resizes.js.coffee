@@ -15,7 +15,7 @@ $.extend
 
     $window = $(window)
     editor_height = 0
-    settings.$preview.css('overflow-y', 'scroll')
+    settings.$preview.css('overflow', 'scroll')
 
     # Set editor & preview height
     adjustHeight = ->
