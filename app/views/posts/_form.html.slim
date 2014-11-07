@@ -22,19 +22,17 @@
             = hidden_field :post, :tags, class: 'mod-mdEditor-tags', style: 'width:300px', value: @post.tags.map{ |_tag| _tag.name }.join(',')
 
       .col-xs-3
-
-    br/
-
-    .row
-      #progress-wrapper.alert.alert-warning.fade.in style="display:none;"
-        span.progress-title
-          | Uploading files...
-        #progress style="height:20px;"
-          .progress-bar.progress-bar-success.progress-bar-striped.active role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"
-            | 0%
+        p.actions
+          = f.submit class: 'btn btn-lg js-disable-confirm-unload', id: 'save_button'
+        p.actions
+          = f.check_box :is_draft
+          = f.label :is_draft, "&nbsp;下書き保存".html_safe
+        p.actions
+          = f.date_select :specified_date
 
     .row
-      .col-xs-6
+
+      .col-xs-6.editor-panel
         .panel.panel-default
           .panel-heading
             .btn-toolbar role="toolbar"
@@ -57,30 +55,49 @@
               .btn-group.btn-group-xs
                 button#uploadButton.btn.btn-default type="button" title="Upload"
                   | Upload
+              .btn-group.btn-group-xs.pull-right.mode-editor
+                button#uploadButton.btn.btn-default type="button"
+                  i.fa.fa-angle-right
+              .btn-group.btn-group-xs.pull-right.mode-split style="display:none"
+                button#uploadButton.btn.btn-default type="button"
+                  i.fa.fa-angle-left
 
-          .panel-body.panel-body-nopadding
-            = f.text_area :body, class: 'mod-mdEditor-textarea', placehoder: 'type your text....'
-        p.actions
-          = f.submit class: 'btn btn-lg js-disable-confirm-unload', id: 'save_button'
-        p.actions
-          = f.check_box :is_draft
-          = f.label :is_draft, "下書き保存"
-        p.actions
-          = f.date_select :specified_date
+          .panel-body.panel-body-nopadding style="position:relative"
+            = f.text_area :body, class: 'mod-mdEditor-textarea mod-form-resizer-editor', placehoder: 'type your text....'
 
-      .col-xs-6
+            #progress-wrapper style="display:none;position:absolute;bottom:0;z-index:1000;width:100%"
+              .alert.alert-warning.fade.in style="margin-bottom:0"
+                span.progress-title
+                  | Uploading files...
+                #progress style="height:20px;"
+                  .progress-bar.progress-bar-success.progress-bar-striped.active role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"
+                    | 0%
+
+      .col-xs-6.preview-panel
         .panel.preview-wrapper
           .panel-heading
-            h5 Preview - 入力した内容がここに表示されます
-          .panel-body
-            .box-text
-            .text-box.body.viewer.github.mod-mdEditor-preview
+            span Preview
+
+          .panel-body.text-box.body.viewer.github.mod-mdEditor-preview.mod-form-resizer-preview
 
 input#fileupload data-url="/apis/file_receiver" multiple="" name="files[]" style="display:none" type="file" /
 
 - content_for :footer_js do
   javascript:
+    // Bounce confirm.
     $.setConfirmUnload();
+
+    // Mode change
+    $('.mode-editor button').on('click', function(){
+      $('.mode-editor').hide();
+      $('.mode-split').show();
+      $('.editor-panel').addClass('col-xs-12').removeClass('col-xs-6'); $('.preview-panel').hide();
+    })
+    $('.mode-split button').on('click', function(){
+      $('.mode-split').hide();
+      $('.mode-editor').show();
+      $('.editor-panel').addClass('col-xs-6').removeClass('col-xs-12'); $('.preview-panel').show();
+    })
 
     $('#post-form').mod_mdEditor({end_point: '/apis/markdown_preview'});
 
@@ -90,6 +107,13 @@ input#fileupload data-url="/apis/file_receiver" multiple="" name="files[]" style
       $progressWrapper: $('#progress-wrapper'),
       $progressBar: $('#progress .progress-bar')
     });
+
+    // フォームサイズ調整
+    $.mod_form_resizer({
+      $editor: $('.mod-form-resizer-editor'),
+      $preview: $('.mod-form-resizer-preview'),
+      height_offset: 250
+    })
 
     // Display upload dialog.
     $('#uploadButton').on('click', function(){
@@ -147,3 +171,4 @@ input#fileupload data-url="/apis/file_receiver" multiple="" name="files[]" style
     .textcomplete-wrapper {
       width: 100%;
     }
+
