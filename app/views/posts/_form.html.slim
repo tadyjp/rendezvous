@@ -30,11 +30,9 @@
         p.actions
           = f.date_select :specified_date
 
-    br/
-
     table
       tr
-        td
+        td.editor-panel
           .panel.panel-default
             .panel-heading
               .btn-toolbar role="toolbar"
@@ -57,31 +55,49 @@
                 .btn-group.btn-group-xs
                   button#uploadButton.btn.btn-default type="button" title="Upload"
                     | Upload
+                .btn-group.btn-group-xs.pull-right.mode-editor
+                  button#uploadButton.btn.btn-default type="button"
+                    i.fa.fa-angle-right
+                .btn-group.btn-group-xs.pull-right.mode-split style="display:none"
+                  button#uploadButton.btn.btn-default type="button"
+                    i.fa.fa-angle-left
 
-            .panel-body.panel-body-nopadding
-              = f.text_area :body, class: 'mod-mdEditor-textarea editor-box', placehoder: 'type your text....'
+            .panel-body.panel-body-nopadding style="position:relative"
+              = f.text_area :body, class: 'mod-mdEditor-textarea mod-form-resizer-editor', placehoder: 'type your text....'
 
-        td
+              #progress-wrapper style="display:none;position:absolute;bottom:0;z-index:1000;width:100%"
+                .alert.alert-warning.fade.in style="margin-bottom:0"
+                  span.progress-title
+                    | Uploading files...
+                  #progress style="height:20px;"
+                    .progress-bar.progress-bar-success.progress-bar-striped.active role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"
+                      | 0%
+
+        td.preview-panel
           .panel.preview-wrapper
             .panel-heading
-              span Preview - 入力した内容がここに表示されます
-            .panel-body.preview-box
-              .box-text
-              .text-box.body.viewer.github.mod-mdEditor-preview
+              span Preview
 
-    .row
-      #progress-wrapper.alert.alert-warning.fade.in style="display:none;"
-        span.progress-title
-          | Uploading files...
-        #progress style="height:20px;"
-          .progress-bar.progress-bar-success.progress-bar-striped.active role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"
-            | 0%
+            .panel-body.text-box.body.viewer.github.mod-mdEditor-preview.mod-form-resizer-preview
 
 input#fileupload data-url="/apis/file_receiver" multiple="" name="files[]" style="display:none" type="file" /
 
 - content_for :footer_js do
   javascript:
+    // Bounce confirm.
     $.setConfirmUnload();
+
+    // Mode change
+    $('.mode-editor button').on('click', function(){
+      $('.mode-editor').hide();
+      $('.mode-split').show();
+      $('.editor-panel').css('width', '100%'); $('.editor-panel').show(); $('.preview-panel').hide();
+    })
+    $('.mode-split button').on('click', function(){
+      $('.mode-split').hide();
+      $('.mode-editor').show();
+      $('.editor-panel').css('width', '50%'); $('.preview-panel').css('width', '50%'); $('.editor-panel').show(); $('.preview-panel').show();
+    })
 
     $('#post-form').mod_mdEditor({end_point: '/apis/markdown_preview'});
 
@@ -94,8 +110,8 @@ input#fileupload data-url="/apis/file_receiver" multiple="" name="files[]" style
 
     // フォームサイズ調整
     $.mod_form_resizer({
-      $editor: $('.editor-box'),
-      $preview: $('.preview-box'),
+      $editor: $('.mod-form-resizer-editor'),
+      $preview: $('.mod-form-resizer-preview'),
       height_offset: 250
     })
 
