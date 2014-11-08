@@ -1,0 +1,71 @@
+@import 'modules/settings';
+
+.navbar {
+  background-color: $theme-color-main;
+  font-size: 1.2em;
+  font-weight: 500;
+
+  a {
+    color: $theme-color-light;
+    font-family: $text-deco-font;
+  }
+
+  a.btn-default {
+    background: $theme-color-light;
+    color: $theme-color-main;
+    border: none;
+  }
+
+  .badge {
+    background-color: transparent;
+    color: $theme-color-light;
+    border: 1px solid $theme-color-light;
+  }
+
+  .dropdown-menu {
+    .badge {
+      color: $theme-color-dark;
+      border-color: $theme-color-dark;
+    }
+  }
+}
+
+.nav {
+  li {
+    a {
+      &:hover, &:focus {
+        @include transition;
+      }
+    }
+  }
+}
+
+.nav-icon {
+  position: relative;
+  padding-left: 25px!important;
+  text-indent: 5px;
+
+  &:before {
+    position: absolute;
+    left: 6px;
+    background-size: 20px 20px;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    content:" ";
+  }
+
+  &.flow:before {
+    background-image: image-url('flow.png');
+  }
+
+  &.stock:before {
+    background-image: image-url('stock.png');
+  }
+
+  &.template:before {
+    background-image: image-url('template.png');
+  }
+}
+
+

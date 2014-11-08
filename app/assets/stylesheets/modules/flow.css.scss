@@ -1,8 +1,8 @@
-// @import 'values';
+// @import 'modules/settings';
 // .panel {
-//   border: 1px solid $main-color;
+//   border: 1px solid $theme-color-main;
 //   .panel-heading {
-//     background-color: $main-color;
+//     background-color: $theme-color-main;
 //     color: #fff;
 //   }
 //   .panel-body {
@@ -32,7 +32,7 @@
 //     color: #333!important;
 //   }
 //   .posted-name {
-//     color: $main-color;
+//     color: $theme-color-main;
 //     font-size: 12px;
 //   }
 
@@ -92,17 +92,17 @@
 // .watch-btn,
 // .btn-watched {
 //   @include border_radius;
-//   color: $main-color;
-//   border: 1px solid $main-color;
+//   color: $theme-color-main;
+//   border: 1px solid $theme-color-main;
 //   &:hover {
 //     @include transition;
 //     background-color: #eee;
 //   }
 //   a {
-//     color: $main-color;
+//     color: $theme-color-main;
 //   }
 //   .dropdown-toggle {
-//     background-color: $main-color;
+//     background-color: $theme-color-main;
 //     @include border_radius(0px);
 //     color: #fff;
 //     background-image: none!important;
@@ -118,9 +118,9 @@
 // }
 
 // .btn-watched {
-//   background-color: $main-color;
+//   background-color: $theme-color-main;
 //   color: #fff;
-//   border: 2px solid $main-color;
+//   border: 2px solid $theme-color-main;
 // }
 
 // .detail-wrapper {
@@ -162,31 +162,31 @@
 //     -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 //     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 //     &:focus {
-//       border: 1px solid $main-color;
-//       box-shadow: 0px 0px 0px $main-color;
+//       border: 1px solid $theme-color-main;
+//       box-shadow: 0px 0px 0px $theme-color-main;
 //       background-color: #f8f8f8;
 //     }
 //   }
 //   .comment-btn {
 //     background-color: transparent;
-//     color: $main-color;
-//     border: 1px solid $main-color;
+//     color: $theme-color-main;
+//     border: 1px solid $theme-color-main;
 //     &:hover {
 //       color: #fff;
-//       background-color: $main-color;
+//       background-color: $theme-color-main;
 //       @include transition;
 //     }
 //     &:focus {
 //       background-color: #f8f8f8;
 //       @include transition;
-//       box-shadow: 0px 0px 0px $main-color;
+//       box-shadow: 0px 0px 0px $theme-color-main;
 //     }
 //   }
 // }
 
 // .panel-default {
 //   .panel-heading {
-//     background-color: $main-color;
+//     background-color: $theme-color-main;
 //     color: #fff;
 //     background-image: none;
 //   }
@@ -195,18 +195,18 @@
 // .btn {
 //   background-color: transparent;
 //   background-image: none;
-//   color: $main-color;
-//   border: 1px solid $main-color;
+//   color: $theme-color-main;
+//   border: 1px solid $theme-color-main;
 //   &:hover {
 //     color: #fff;
-//     background-color: $main-color;
+//     background-color: $theme-color-main;
 //     @include transition;
-//     border: 1px solid $main-color;
+//     border: 1px solid $theme-color-main;
 //   }
 //   &:focus {
 //     background-color: #f8f8f8;
 //     @include transition;
-//     box-shadow: 0px 0px 0px $main-color;
+//     box-shadow: 0px 0px 0px $theme-color-main;
 //   }
 // }
 

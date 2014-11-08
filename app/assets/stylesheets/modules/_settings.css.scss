@@ -1,0 +1,34 @@
+@import url(https://fonts.googleapis.com/css?family=Flamenco:300,400);
+@import url(https://fonts.googleapis.com/css?family=Quicksand:300,400,700);
+$set_prefix: -webkit-, -moz-, -ms-, -o-, '';
+
+$theme-color-dark: #3C5866;
+$theme-color-light: #F6FCFF;
+$theme-color-main: #86C6E5;
+// $theme-color4: #f0f0f0;
+// $theme-color5: #669CAE;
+$theme-text-color: #ffffff;
+
+$theme-font-base: Verdana, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+
+// $theme-color-main: #75b3c8;
+$bg-base-color: #f0f0f0;
+$bg-main-color: #f0f0f0;
+$text-deco-font: 'Quicksand', sans-serif;
+
+@mixin background_color($bg_value: $theme-color-main) {
+  background-color: $bg_value;
+  color: #fff;
+}
+
+@mixin border_radius($br_value: 4px) {
+  @each $prefix in $set_prefix {
+    #{$prefix}border-radius: $br_value
+  }
+}
+
+@mixin transition($transition_value: 0.1s, $move_type: ease-in-out) {
+  @each $prefix in $set_prefix {
+    #{$prefix}transition: all $transition_value $move_type
+  }
+}

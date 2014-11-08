@@ -1,0 +1,58 @@
+@import 'modules/settings';
+@import url(https://fonts.googleapis.com/css?family=Flamenco:300,400);
+@import url(https://fonts.googleapis.com/css?family=Quicksand:300,400,700);
+p, h1, h2, h3, h4, h5, h6, span {
+  // font-family: 'メイリオ', 'meiryo', hiragino kaku go;
+  // letter-spacing: 2pt;
+  // line-height: 150%;
+  // margin: 0;
+  // padding: 0;
+}
+
+.badge.badge-transparent {
+  background-color: transparent;
+  color: $theme-color-main;
+  // font-family: 'Quicksand';
+  letter-spacing: 0;
+  border: 1.5px solid $theme-color-main;
+  padding: 4px 6px;
+}
+
+.text-shadow {
+  color: #999999;
+}
+
+a .text-link {
+  color: #1e0fbe;
+}
+
+a:visited .text-link {
+  color: #609;
+}
+
+.popover {
+  max-width: 400px;
+}
+
+.navbar-default .navbar-brand {
+  background-color: #428bca;
+  color: #fff;
+}
+
+.navbar-default .navbar-brand,
+.label a {
+  // color: white;
+}
+
+/* #app-search-form {
+   width: 200px;
+ }
+*/
+
+.container-main{
+  min-height: 400px;
+}
+
+.body-padding {
+  padding-top: 70px;
+}

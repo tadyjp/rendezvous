@@ -1,0 +1,35 @@
+$set_prefix: -webkit-, -moz-, -ms-, -o-, '';
+$theme-color-main: #75b3c8;
+
+@mixin background_color($bg_value: $theme-color-main) {
+  background-color: $bg_value;
+  color: #fff;
+}
+
+@mixin border_radius($br_value: 4px) {
+  @each $prefix in $set_prefix {
+    #{$prefix}border-radius: $br_value
+  }
+}
+
+@mixin transition($transition_value: 0.3s, $move_type: ease-in-out) {
+  @each $prefix in $set_prefix {
+    #{$prefix}transition: all $transition_value $move_type
+  }
+}
+
+@import url(https://fonts.googleapis.com/css?family=Flamenco:300,400);
+@import url(https://fonts.googleapis.com/css?family=Quicksand:300,400,700);
+.btn-original {
+  background: transparent!important;
+  border: 1px solid #fff;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  letter-spacing: 0em;
+  &:hover {
+    border: 1px solid #75b3c8;
+    background-color: #75b3c8!important;
+    @include transition;
+  }
+}
