@@ -1,0 +1,14 @@
+@import 'modules/settings';
+
+// .text-shadow {
+//   color: #999999;
+// }
+
+a {
+  // color: $theme-color-main;
+
+  &:visited {
+    color: $theme-color-dark;
+  }
+}
+

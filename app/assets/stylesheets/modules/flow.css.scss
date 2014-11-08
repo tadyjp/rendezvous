@@ -1,4 +1,5 @@
-// @import 'modules/settings';
+@import 'modules/settings';
+
 // .panel {
 //   border: 1px solid $theme-color-main;
 //   .panel-heading {
@@ -53,16 +54,19 @@
 // }
 
 .numbers-wrapper {
-  height: 100px;
+  height: 120px;
   text-align: center;
-  font-family: 'Quicksand';
+  font-family: $text-deco-font;
+  color: $theme-color-dark;
+
   .large {
     font-size: 3em;
     font-weight: 300;
-    color: #ec0160;
+    color: $theme-key-color;
   }
+
   label {
-    border-top: 5px solid #ec0160;
+    border-top: 5px solid $theme-key-color;
     font-weight: 500;
   }
 }

@@ -1,4 +1,4 @@
-nav.navbar.navbar-fixed-top role="navigation"
+nav.navbar.navbar-default.navbar-fixed-top role="navigation"
   .container-fluid
 
     .navbar-header
@@ -15,13 +15,13 @@ nav.navbar.navbar-fixed-top role="navigation"
           input.form-control name="q" placeholder="Search" type="text" value=params[:q] /
 
       ul.nav.navbar-nav
-        li class=('active' if current_page?(flow_path))
+        li
           a.nav-icon.flow href=flow_path title="Flow"
             | Flow
-        li class=('active' if current_page?(stock_path))
+        li
           a.nav-icon.stock href=stock_path title="Stock"
             | Stock
-        li class=('active' if current_page?(templates_path))
+        li
           a.nav-icon.template href=templates_path title="Templates"
             | Templates
 

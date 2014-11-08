@@ -27,20 +27,21 @@
   .col-xs-12.col-md-8 role="navigation"
     .panel
       .panel-heading
-        h1
-          = image_tag 'flow.png'
+        h2.panel-title
           | Flow
           small  - 最近投稿された記事
 
-      .panel-body.list-group
-        - @posts.each do |_post|
-          = render partial: 'posts/large_item', locals: { post: _post }
+      .panel-body
+        ul.list-group
+          - @posts.each do |_post|
+            li.list-group-item
+              = render partial: 'posts/large_item', locals: { post: _post }
     = paginate(@posts)
 
   .col-xs-12.col-md-4
     .panel
       .panel-heading
-        h2.panel-title この1週間で閲覧の多かった投稿
+        h3.panel-title この1週間で閲覧の多かった投稿
       .panel-body.list-group
         - Post.most_pv_in_this_week(5).each do |(post, footprints_count)|
           a.list-group-item.post-list href=post_path(post)
@@ -49,7 +50,7 @@
 
     .panel
       .panel-heading
-        h2.panel-title 最近あなたが投稿した記事
+        h3.panel-title 最近あなたが投稿した記事
       .panel-body.list-group
         - current_user.posts.recent(10).each do |post|
           = render partial: 'posts/small_item', locals: { post: post.decorate }
@@ -57,7 +58,7 @@
 
     .panel
       .panel-heading
-        h2.panel-title 最近投稿されたタグ
+        h3.panel-title 最近投稿されたタグ
       .panel-body.list-group
         - Tag.recent(10).each_with_index do |tag, i|
           a.list-group-item data-tag-id=tag.id href=search_path(q: "##{tag.name}")

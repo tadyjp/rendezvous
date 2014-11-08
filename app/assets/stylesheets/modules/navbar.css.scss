@@ -1,19 +1,22 @@
 @import 'modules/settings';
 
-.navbar {
+.navbar.navbar-default {
   background-color: $theme-color-main;
+  background-image: none;
   font-size: 1.2em;
   font-weight: 500;
 
-  a {
-    color: $theme-color-light;
-    font-family: $text-deco-font;
+  .navbar-brand {
+    background: none;
   }
 
-  a.btn-default {
-    background: $theme-color-light;
-    color: $theme-color-main;
-    border: none;
+  a {
+    font-family: $text-deco-font;
+    color: $theme-color-light;
+
+    &:visited {
+      color: $theme-color-light;
+    }
   }
 
   .badge {
@@ -22,12 +25,39 @@
     border: 1px solid $theme-color-light;
   }
 
-  .dropdown-menu {
-    .badge {
-      color: $theme-color-dark;
-      border-color: $theme-color-dark;
-    }
+  .navbar-toggle {
+    border-color: $theme-color-dark;
   }
+  .navbar-toggle:hover, .navbar-toggle:focus {
+    background-color: $theme-color-middle-light;
+  }
+
+  .navbar-toggle .icon-bar {
+    background-color: $theme-color-dark;
+  }
+
+  .navbar-nav li {
+    a {
+      color: $theme-color-light;
+
+      &.btn-default {
+        background: $theme-color-light;
+        color: $theme-color-main;
+        border: none;
+      }
+    }
+    .dropdown-menu {
+      a {
+        color: $theme-color-dark;
+      }
+      .badge {
+        color: $theme-color-dark;
+        border-color: $theme-color-dark;
+      }
+    }
+
+  }
+
 }
 
 .nav {
