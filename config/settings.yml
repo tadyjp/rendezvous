@@ -4,6 +4,8 @@ defaults: &defaults
     # For amil body
     app_host: <%= ENV['RV_RENDEZVOUS_APP_HOST'] %>
 
+  permited_login_domain: <%= ENV['RV_PERMITTED_LOGIN_DOMAIN'] %>
+
   # For login
   google_api:
     client_id: <%= ENV['RV_GOOGLE_API_CLIENT_ID'] %>
