@@ -175,6 +175,7 @@ GEM
     github-markdown (0.6.7)
     gmail_xoauth (0.4.1)
       oauth (>= 0.3.6)
+    gritter (1.1.0)
     guard (2.8.1)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -482,6 +483,7 @@ DEPENDENCIES
   factory_girl_rails
   faraday
   github-markdown
+  gritter (= 1.1.0)
   guard-rspec
   guard-rubocop
   guard-teaspoon

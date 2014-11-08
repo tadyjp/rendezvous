@@ -165,3 +165,7 @@ gem 'rails_12factor', group: :production
 gem 'rack-contrib', require: 'rack/contrib'
 
 gem 'meta-tags'
+
+# Growl-like Notification
+# https://github.com/RobinBrouwer/gritter
+gem 'gritter', '1.1.0'

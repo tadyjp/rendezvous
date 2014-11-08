@@ -16,6 +16,7 @@ html lang="ja"
     = render_style
     = csrf_meta_tags
   body class="rails-#{params[:controller]}-#{params[:action]}"
+    = gflash
     .container-fluid.container-main#yield
       = yield
 

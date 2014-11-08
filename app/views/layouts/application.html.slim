@@ -17,8 +17,8 @@ html lang="ja"
     = csrf_meta_tags
 
   body class="rails-#{params[:controller]}-#{params[:action]}"
+    = gflash
     .body-padding
-        = render partial: 'partials/header_notifications'
         - if params[:controller] != 'welcome'
           = render partial: 'partials/app_header'
         .container-fluid.container-main#yield

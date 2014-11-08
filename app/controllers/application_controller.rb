@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   def redirect_unless_signed_in
     return if user_signed_in?
 
-    flash[:alert] = 'You need Login!'
+    gflash alert: 'You need Login!'
     session[:login_redirect_to] = request.url
     redirect_to root_path
   end
