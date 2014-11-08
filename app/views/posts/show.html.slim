@@ -38,10 +38,13 @@
 
     .well.detail-wrapper style="margin-top:20px"
       dl
-        dt 作成者
+        dt 最終編集者
         dd
           a href=(search_path(q: "@#{@post.author.nickname}"))
-           | @#{@post.author.name}
+           = @post.author.name
+
+        dt 最終編集者
+        dd 調整中
 
         dt タグ
         dd

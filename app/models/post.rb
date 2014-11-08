@@ -18,6 +18,9 @@ require 'date'
 class Post < ActiveRecord::Base
   include HipchatIntegration if Settings.respond_to?(:hipchat)
 
+  # for versioning
+  has_paper_trail
+
   ######################################################################
   # Associations
   ######################################################################
