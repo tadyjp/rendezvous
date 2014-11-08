@@ -45,7 +45,7 @@ class PostsController < ApplicationController
     gflash error: 'Gmail authentication expired.'
     redirect_to root_path(id: @post.id)
   rescue ArgumentError => err
-    gflash error: "Mail format is invalid: #{err.to_s}"
+    gflash error: "Mail format is invalid: #{err}"
     redirect_to root_path(id: @post.id)
   end
 

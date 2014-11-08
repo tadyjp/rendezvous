@@ -58,7 +58,6 @@ class User < ActiveRecord::Base
 
   scope :now_viewing, -> { joins(:footprints).where('footprints.updated_at > ?', 10.minutes.ago) }
 
-
   ######################################################################
   # Validations
   ######################################################################

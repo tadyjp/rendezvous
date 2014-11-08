@@ -60,7 +60,7 @@ class TagsController < ApplicationController
     @tag.move_all_posts_to!(@merge_to_tag)
     @tag.delete
 
-   gflash success: "「#{@tag.name}」は「#{@merge_to_tag.name}」にmergeされました"
+    gflash success: "「#{@tag.name}」は「#{@merge_to_tag.name}」にmergeされました"
 
     render json: { status: 'OK' }
   end

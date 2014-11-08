@@ -91,13 +91,13 @@ class Post < ActiveRecord::Base
   # Class method
   ######################################################################
   def self.most_pv_in_this_week(limit)
-    posts_with_footprints = where(arel_table[:created_at].gt 1.week.ago).
-      select("posts.id, count(footprints.id) AS footprints_count").
-      joins(:footprints).
-      group("posts.id").
-      order("footprints_count DESC").
-      limit(limit)
-    posts = self.find(posts_with_footprints.map(&:id))
+    posts_with_footprints = where(arel_table[:created_at].gt 1.week.ago)
+                            .select('posts.id, count(footprints.id) AS footprints_count')
+                            .joins(:footprints)
+                            .group('posts.id')
+                            .order('footprints_count DESC')
+                            .limit(limit)
+    posts = find(posts_with_footprints.map(&:id))
     posts.to_a.zip posts_with_footprints.map(&:footprints_count)
   end
 
