@@ -163,3 +163,5 @@ gem 'rails_12factor', group: :production
 
 # for IP restriction
 gem 'rack-contrib', require: 'rack/contrib'
+
+gem 'meta-tags'

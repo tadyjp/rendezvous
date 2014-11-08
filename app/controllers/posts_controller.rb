@@ -8,6 +8,8 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    set_meta_tags title: @post.title
+
     current_user.visit_post!(@post)
 
     @post.tags.each do |tag|
@@ -18,6 +20,8 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
+    set_meta_tags title: '新しい投稿'
+
     @post = Post.new(title: '新しい投稿')
     render layout: 'edit'
   end
@@ -44,6 +48,8 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    set_meta_tags title: @post.title
+
     render layout: 'edit'
   end
 
