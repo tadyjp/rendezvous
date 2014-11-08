@@ -1,16 +1,30 @@
 /! view:flow/show
 .row.flow-wrapper
-  .numbers-wrapper
-    .col-xs-4
-      label.numbers Stocks
-      p = Post.count
-    .col-xs-4
-      label.numbers Users
-      p = User.count
-    .col-xs-4
-      label.numbers Tags
-      p = Tag.count
-  .col-xs-8 role="navigation"
+  .col-xs-3
+    .numbers-wrapper
+      div
+        span.large = Post.today.count
+        span = "/ #{Post.count}"
+      label.numbers Today's Stocks
+  .col-xs-3
+    .numbers-wrapper
+      div
+        span.large = User.post_today.count
+        span = "/ #{User.count}"
+      label.numbers Today's Writers
+  .col-xs-3
+    .numbers-wrapper
+      div
+        span.large = Footprint.today.count
+        span = "/ #{Footprint.count}"
+      label.numbers Today's PVs
+  .col-xs-3
+    .numbers-wrapper
+      div
+        span.large = User.now_viewing.count
+      label.numbers Now Viewing
+
+  .col-xs-12.col-md-8 role="navigation"
     .panel
       .panel-heading
         h1
@@ -23,13 +37,23 @@
           = render partial: 'posts/large_item', locals: { post: _post }
     = paginate(@posts)
 
-  .col-xs-4
-    / .panel.panel-default
-    /   .panel-heading
-    /     h2.panel-title この1週間で閲覧の多かった投稿(調整中)
-    /   .panel-body.list-group
-    /     - Post.limit(5).each do |_post|
-    /       = render partial: 'posts/small_item', locals: { post: _post }
+  .col-xs-12.col-md-4
+    .panel
+      .panel-heading
+        h2.panel-title この1週間で閲覧の多かった投稿
+      .panel-body.list-group
+        - Post.most_pv_in_this_week(5).each do |(post, footprints_count)|
+          a.list-group-item.post-list href=post_path(post)
+            span.label.label-default.pull-right = "#{footprints_count} PV"
+            = post.title
+
+    .panel
+      .panel-heading
+        h2.panel-title 最近あなたが投稿した記事
+      .panel-body.list-group
+        - current_user.posts.recent(10).each do |post|
+          = render partial: 'posts/small_item', locals: { post: post.decorate }
+        a.list-group-item href=search_path(q: "@#{current_user.nickname}") もっと見る
 
     .panel
       .panel-heading

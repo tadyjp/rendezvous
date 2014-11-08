@@ -82,6 +82,22 @@ class Post < ActiveRecord::Base
     order(updated_at: :desc).limit(limit)
   end)
 
+  scope :today, -> { where(arel_table[:updated_at].gt 1.day.ago) }
+
+  ######################################################################
+  # Class method
+  ######################################################################
+  def self.most_pv_in_this_week(limit)
+    posts_with_footprints = where(arel_table[:created_at].gt 1.week.ago).
+      select("posts.id, count(footprints.id) AS footprints_count").
+      joins(:footprints).
+      group("posts.id").
+      order("footprints_count DESC").
+      limit(limit)
+    posts = self.find(posts_with_footprints.map(&:id))
+    posts.to_a.zip posts_with_footprints.map(&:footprints_count)
+  end
+
   ######################################################################
   # Instance method
   ######################################################################

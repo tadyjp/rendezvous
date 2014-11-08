@@ -54,6 +54,11 @@ class User < ActiveRecord::Base
     where('name LIKE ? OR nickname LIKE ?', "%#{query}%", "%#{query}%")
   end)
 
+  scope :post_today, -> { joins(:posts).where('posts.updated_at > ?', 1.day.ago) }
+
+  scope :now_viewing, -> { joins(:footprints).where('footprints.updated_at > ?', 10.minutes.ago) }
+
+
   ######################################################################
   # Validations
   ######################################################################
