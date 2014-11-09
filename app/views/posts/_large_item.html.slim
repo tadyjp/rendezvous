@@ -8,16 +8,15 @@
       h4
         a href=post_path(post) = post.title
     .col-xs-3
-      span.label.label-danger.label-date = post.display_specified_date if post.specified_date
-      small.pull-right ##{post.id}
+      span.label.label-date.pull-right = post.display_specified_date if post.specified_date
   .row
     .col-xs-8
       small.text-success.posted-name
         | #{post.author.name} posted&nbsp;
         abbr.js-time-ago data-time-ago-at=post.updated_at
         |.&nbsp;&nbsp;
-        - post.tags.each do |tag|
-          a.label.label-tag href=tag.decorate.show_path = tag.name
+        - post.tags.map(&:decorate).each do |tag|
+          a.label.label-tag href=tag.show_path = tag.structured_name
           | &nbsp;
     .col-xs-4
       small.pull-right

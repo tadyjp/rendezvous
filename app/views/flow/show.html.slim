@@ -31,7 +31,7 @@
         h2.panel-title
           i.fa.fa-rss
           | &nbsp;Flow
-          span.small - 最近投稿された記事
+          span.small &nbsp;- 最近投稿された記事
 
       ul.list-group.panel-body
         - @posts.each do |post|
@@ -73,4 +73,4 @@
         - Tag.recent(10).each_with_index do |tag, i|
           a.list-group-item data-tag-id=tag.id href=search_path(q: "##{tag.name}")
             = tag.name
-            span.badge.badge-transparent = tag.posts_count
+            span.badge = tag.posts_count

@@ -12,8 +12,6 @@
 #
 
 class Tag < ActiveRecord::Base
-  has_many :post_tags
-  has_many :posts, through: :post_tags
 
   # for tree structure
   has_ancestry
@@ -21,6 +19,15 @@ class Tag < ActiveRecord::Base
   # for versioning
   has_paper_trail
 
+  ######################################################################
+  # Associations
+  ######################################################################
+  has_many :post_tags
+  has_many :posts, through: :post_tags
+
+  ######################################################################
+  # Named scope
+  ######################################################################
   default_scope { order(updated_at: :desc) }
 
   scope :posts_exist, lambda {
@@ -30,12 +37,49 @@ class Tag < ActiveRecord::Base
       .having('posts_count > 0')
   }
 
+  scope :recently_created, (lambda do |limit = 10|
+    order(created_at: :desc).limit(limit)
+  end)
+
+
+  ######################################################################
+  # Class method
+  ######################################################################
   class << self
     # 最近投稿されたTagを取得
     def recent(limit = 10)
       Post.recent(20).map(&:tags).flatten.compact.uniq.take(limit)
     end
+
+    # TODO: cache
+    def monthly_popular(limit = 10)
+      tags_this_month = Hash.new { |h, k| h[k] = 0 } # { <tag.id> => <count> }
+      tags_last_month = Hash.new { |h, k| h[k] = 0 } # { <tag.id> => <count> }
+
+      Post.this_month.each do |post|
+        post.tags.each { |tag| tags_this_month[tag.id] += 1 }
+      end
+
+      Post.last_month.each do |post|
+        post.tags.each { |tag| tags_last_month[tag.id] += 1 }
+      end
+
+      tags_this_month_with_score = {}
+      tags_this_month.each do |tag_id, this_month_count|
+        next if this_month_count <= 3
+        tags_this_month_with_score[tag_id] = this_month_count.to_f / (tags_last_month[tag_id] + 1)
+      end
+
+      sorted = tags_this_month_with_score.sort_by { |k, v| -v }.take(limit).to_h
+
+      Tag.find(sorted.keys).to_a.zip(sorted.values).to_h
+    end
   end
+
+  ######################################################################
+  # Instance method
+  ######################################################################
+
 
   def recent_posts(limit = 30)
     posts.recent(limit)

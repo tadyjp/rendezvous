@@ -80,12 +80,13 @@ class Post < ActiveRecord::Base
     where_list
   end)
 
-  # 最新のPostを取得
   scope :recent, (lambda do |limit = 10|
     order(updated_at: :desc).limit(limit)
   end)
 
   scope :today, -> { where(arel_table[:updated_at].gt 1.day.ago) }
+  scope :this_month, -> { where(arel_table[:updated_at].gt 1.month.ago) }
+  scope :last_month, -> { where(arel_table[:updated_at].gt 2.month.ago).where(arel_table[:updated_at].lt 1.month.ago) }
 
   ######################################################################
   # Class method
