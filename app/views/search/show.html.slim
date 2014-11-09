@@ -1,7 +1,6 @@
 /! view:search/show
 
 .row
-
   .col-xs-12.col-md-8 role="navigation"
     .panel.panel-main
       .panel-heading
@@ -18,7 +17,7 @@
     = paginate(@posts)
 
   .col-xs-12.col-md-4
-    .panel
+    .panel.panel-default
       .panel-heading
         h3.panel-title
           i.fa.fa-tags
@@ -27,7 +26,7 @@
         - @posts.related_tags.each do |tag|
           a.list-group-item href=search_path(q: "##{tag.name}") = tag.name
 
-    .panel
+    .panel.panel-default
       .panel-heading
         h3.panel-title
           i.fa.fa-users
@@ -35,32 +34,3 @@
       .panel-body.list-group
         - @posts.related_authors.each do |author|
           a.list-group-item href=search_path(q: "@#{author.nickname}") = author.name
-
-
-
-
-  / h1
-  /   span "#{params[:q]}"
-  /   span.small - 検索結果
-  /   span.small #{@count}件
-
-  / .col-xs-8 role="navigation"
-  /   .list-group
-  /     - @posts.each do |post|
-  /       = render partial: 'posts/large_item', locals: { post: post }
-  /   = paginate(@posts)
-
-  / .col-xs-4
-  /   .panel.panel-default
-  /     .panel-heading
-  /       h2.panel-title "#{params[:q]}"に関連するタグ
-  /     .panel-body.list-group
-  /       - @posts.related_tags.each do |_tag|
-  /         a.list-group-item href=search_path(q: "##{_tag.name}") = _tag.name
-
-  /   .panel.panel-default
-  /     .panel-heading
-  /       h2.panel-title "#{params[:q]}"に関連するユーザー
-  /     .panel-body.list-group
-  /       - @posts.related_authors.each do |_author|
-  /         a.list-group-item href=search_path(q: "@#{_author.nickname}") = _author.name

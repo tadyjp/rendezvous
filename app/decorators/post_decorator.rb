@@ -46,4 +46,10 @@ class PostDecorator < Draper::Decorator
       ''
     end
   end
+
+  def thumbnail_url
+    if model.body =~ /!\[.+?\]\((.+?)\)/
+      return $1
+    end
+  end
 end

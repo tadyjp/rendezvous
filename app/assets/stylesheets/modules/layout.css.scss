@@ -7,7 +7,9 @@ html, body {
 body {
   padding-top: 80px;
 
-  &.rails-posts-edit, &.rails-posts-fork {
+  &.rails-posts-new,
+  &.rails-posts-edit,
+  &.rails-posts-fork {
     padding-top: 20px;
   }
 }
