@@ -1,23 +1,24 @@
 /! view:templates/show
+
 .row
+  .col-xs-12
+    .panel.panel-default
+      .panel-heading テンプレートの使い方
+      .panel-body
+        ul
+          li 「template」 というタグをつけた投稿はこのページに現れます
+          li 「このテンプレートを利用する」ことで同じフォーマットの文章が簡単に書けます
 
-  h1
-    | Templates
-    small - テンプレートから作成
+    .panel.panel-main
+      .panel-heading
+        h3.panel-title
+          i.fa.fa-copy
+          | &nbsp;テンプレート
+      .panel-body.list-group
+        - if template_tag = Tag.find_by(name: 'template')
+          - template_tag.posts.decorate.each do |post|
+            = render partial: 'post', locals: { post: post }
+        - else
+          | テンプレートが存在しません
 
-  .panel.template-wrapper
-    .panel-heading
-      span.glyphicon.glyphicon-info-sign
-      | テンプレートの使い方
 
-    .panel-body
-      ul
-        li 「template」 というタグをつけた投稿はこのページに現れます
-        li コピーすることで同じフォーマットの文章が簡単に書けます
-
-  .list-group
-    - if template_tag = Tag.find_by(name: 'template')
-      - template_tag.posts.decorate.each do |_post|
-        = render partial: 'post', locals: { post: _post }
-    - else
-      | テンプレートが存在しません

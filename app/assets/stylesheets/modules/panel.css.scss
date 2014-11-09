@@ -1,16 +1,5 @@
 @import 'modules/settings';
 
-.panel-main {
-  .panel-heading {
-    background-color: $theme-color-dark;
-    color: $theme-color-light;
-
-    .small {
-      color: $theme-color-main;
-    }
-  }
-}
-
 .panel-default {
   .panel-heading {
     background-image: none;
@@ -30,5 +19,16 @@
     letter-spacing: 0;
     border: 1px solid $theme-color-main;
     padding: 4px 6px;
+  }
+}
+
+.panel-main {
+  .panel-heading {
+    background-color: $theme-color-dark;
+    color: $theme-color-light;
+
+    .small {
+      color: $theme-color-main;
+    }
   }
 }

@@ -1,6 +1,6 @@
 /! view:flow/show
 
-.row.
+.row
   .col-xs-3
     .numbers-wrapper
       div
@@ -41,7 +41,7 @@
     = paginate(@posts)
 
   .col-xs-12.col-md-4
-    .panel
+    .panel.panel-default
       .panel-heading
         h3.panel-title
           i.fa.fa-history
@@ -52,7 +52,7 @@
             span.badge.pull-right = "#{footprints_count} PV"
             = post.title
 
-    .panel
+    .panel.panel-default
       .panel-heading
         h3.panel-title
           i.fa.fa-smile-o
@@ -64,7 +64,7 @@
           i.fa.fa-plus-square
           | もっと見る
 
-    .panel
+    .panel.panel-default
       .panel-heading
         h3.panel-title
           i.fa.fa-tags

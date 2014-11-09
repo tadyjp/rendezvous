@@ -20,8 +20,11 @@
       .col-xs-4
         span.pull-right.label.label-danger = post.display_specified_date if post.specified_date
 
-      .btn-group.mod-hover-hidden
-        a.btn.btn-info.mod-hover-hidden-item href=fork_post_path(post)
-          | このテンプレートを利用する
-        a.btn.btn-default.mod-hover-hidden-item href=edit_post_path(post)
-          | このテンプレートを編集する
+    .row
+      .col-xs-12
+        .mod-hover-hidden
+          a.btn.btn-default href=fork_post_path(post)
+            | このテンプレートを利用する
+          | &nbsp;
+          a.btn.btn-default href=edit_post_path(post)
+            | 編集する
