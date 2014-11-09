@@ -1,38 +1,31 @@
 @import 'modules/settings';
 
-.badge.badge-transparent {
-  background-color: transparent;
-  color: $theme-color-main;
-  // font-family: 'Quicksand';
-  letter-spacing: 0;
-  border: 1.5px solid $theme-color-main;
-  padding: 4px 6px;
-}
+
 
 
 .popover {
   max-width: 400px;
 }
 
-.navbar-default .navbar-brand {
-  background-color: #428bca;
-  color: #fff;
-}
+// .navbar-default .navbar-brand {
+//   background-color: #428bca;
+//   color: #fff;
+// }
 
-.navbar-default .navbar-brand,
-.label a {
-  // color: white;
-}
+// .navbar-default .navbar-brand,
+// .label a {
+//   // color: white;
+// }
 
-/* #app-search-form {
-   width: 200px;
- }
-*/
+// /* #app-search-form {
+//    width: 200px;
+//  }
+// */
 
-.container-main{
-  min-height: 400px;
-}
+// .container-main{
+//   min-height: 400px;
+// }
 
-.body-padding {
-  padding-top: 70px;
-}
+// .body-padding {
+//   padding-top: 70px;
+// }

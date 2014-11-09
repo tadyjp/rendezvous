@@ -17,7 +17,7 @@
         abbr.js-time-ago data-time-ago-at=post.updated_at
         |.&nbsp;&nbsp;
         - post.tags.each do |tag|
-          span.label.label-tag #{tag.name}
+          a.label.label-tag href=tag.decorate.show_path = tag.name
           | &nbsp;
     .col-xs-4
       small.pull-right
@@ -33,4 +33,4 @@
   .row
     .col-xs-12
       small.text-shadow
-        = truncate post.body, length: 240
+        = truncate post.body, length: 140

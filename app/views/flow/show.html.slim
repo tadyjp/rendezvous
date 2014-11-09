@@ -1,5 +1,6 @@
 /! view:flow/show
-.row.flow-wrapper
+
+.row.
   .col-xs-3
     .numbers-wrapper
       div
@@ -25,40 +26,49 @@
       label.numbers Now Viewing
 
   .col-xs-12.col-md-8 role="navigation"
-    .panel
+    .panel.panem-main
       .panel-heading
         h2.panel-title
-          | Flow
-          small  - 最近投稿された記事
+          i.fa.fa-rss
+          | &nbsp;Flow
+          span.small - 最近投稿された記事
 
-      .panel-body
-        ul.list-group
-          - @posts.each do |_post|
-            li.list-group-item
-              = render partial: 'posts/large_item', locals: { post: _post }
+      ul.list-group.panel-body
+        - @posts.each do |post|
+          li.list-group-item
+            = render partial: 'posts/large_item', locals: { post: post }
+
     = paginate(@posts)
 
   .col-xs-12.col-md-4
     .panel
       .panel-heading
-        h3.panel-title この1週間で閲覧の多かった投稿
+        h3.panel-title
+          i.fa.fa-history
+          | &nbsp;この1週間で閲覧の多かった投稿
       .panel-body.list-group
         - Post.most_pv_in_this_week(5).each do |(post, footprints_count)|
           a.list-group-item.post-list href=post_path(post)
-            span.label.label-default.pull-right = "#{footprints_count} PV"
+            span.badge.pull-right = "#{footprints_count} PV"
             = post.title
 
     .panel
       .panel-heading
-        h3.panel-title 最近あなたが投稿した記事
+        h3.panel-title
+          i.fa.fa-smile-o
+          | &nbsp;最近あなたが投稿した記事
       .panel-body.list-group
         - current_user.posts.recent(10).each do |post|
           = render partial: 'posts/small_item', locals: { post: post.decorate }
-        a.list-group-item href=search_path(q: "@#{current_user.nickname}") もっと見る
+        a.list-group-item href=search_path(q: "@#{current_user.nickname}")
+          i.fa.fa-plus-square
+          | もっと見る
 
     .panel
       .panel-heading
-        h3.panel-title 最近投稿されたタグ
+        h3.panel-title
+          i.fa.fa-tags
+          | &nbsp;最近投稿されたタグ
       .panel-body.list-group
         - Tag.recent(10).each_with_index do |tag, i|
           a.list-group-item data-tag-id=tag.id href=search_path(q: "##{tag.name}")

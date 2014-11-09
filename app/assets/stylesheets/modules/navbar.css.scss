@@ -1,7 +1,7 @@
 @import 'modules/settings';
 
 .navbar.navbar-default {
-  background-color: $theme-color-main;
+  background-color: $theme-color-middle-light;
   background-image: none;
   font-size: 1.2em;
   font-weight: 500;
@@ -12,17 +12,17 @@
 
   a {
     font-family: $text-deco-font;
-    color: $theme-color-light;
+    color: $theme-color-dark;
 
-    &:visited {
-      color: $theme-color-light;
-    }
+    // &:visited {
+    //   color: $theme-color-light;
+    // }
   }
 
   .badge {
     background-color: transparent;
-    color: $theme-color-light;
-    border: 1px solid $theme-color-light;
+    color: $theme-color-dark;
+    border: 1px solid $theme-color-dark;
   }
 
   .navbar-toggle {
@@ -38,11 +38,12 @@
 
   .navbar-nav li {
     a {
-      color: $theme-color-light;
+      color: $theme-color-dark;
 
-      &.btn-default {
-        background: $theme-color-light;
-        color: $theme-color-main;
+      &.btn {
+        text-shadow: none;
+        background: $theme-color-main;
+        color: $theme-color-light;
         border: none;
       }
     }
@@ -70,32 +71,32 @@
   }
 }
 
-.nav-icon {
-  position: relative;
-  padding-left: 25px!important;
-  text-indent: 5px;
+// .nav-icon {
+//   position: relative;
+//   padding-left: 25px!important;
+//   text-indent: 5px;
 
-  &:before {
-    position: absolute;
-    left: 6px;
-    background-size: 20px 20px;
-    display: inline-block;
-    height: 20px;
-    width: 20px;
-    content:" ";
-  }
+//   &:before {
+//     position: absolute;
+//     left: 6px;
+//     background-size: 20px 20px;
+//     display: inline-block;
+//     height: 20px;
+//     width: 20px;
+//     content:" ";
+//   }
 
-  &.flow:before {
-    background-image: image-url('flow.png');
-  }
+//   &.flow:before {
+//     background-image: image-url('flow.png');
+//   }
 
-  &.stock:before {
-    background-image: image-url('stock.png');
-  }
+//   &.stock:before {
+//     background-image: image-url('stock.png');
+//   }
 
-  &.template:before {
-    background-image: image-url('template.png');
-  }
-}
+//   &.template:before {
+//     background-image: image-url('template.png');
+//   }
+// }
 
 
