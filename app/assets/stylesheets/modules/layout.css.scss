@@ -1,5 +1,13 @@
 @import 'modules/settings';
 
+html, body {
+  height: 100%;
+}
+
 body {
-  padding-top: 60px;
+  padding-top: 80px;
+
+  &.rails-posts-edit {
+    padding-top: 20px;
+  }
 }

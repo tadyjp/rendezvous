@@ -1,11 +1,6 @@
 @import 'modules/settings';
 
-.panel-heading {
-  background-color: $theme-color-main;
-  color: $theme-color-light;
-}
-
-.panem-main {
+.panel-main {
   .panel-heading {
     background-color: $theme-color-dark;
     color: $theme-color-light;
@@ -16,7 +11,13 @@
   }
 }
 
-.panel {
+.panel-default {
+  .panel-heading {
+    background-image: none;
+    background-color: $theme-color-main;
+    color: $theme-color-light;
+  }
+
   .label {
     background-color: transparent;
     color: $theme-color-dark;

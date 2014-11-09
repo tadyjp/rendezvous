@@ -1,6 +1,6 @@
 doctype html
-= render partial: 'partials/rendezvous'
 html lang="ja"
+  / = render partial: 'partials/rendezvous'
   head
     = display_meta_tags site: 'Rendezvous', reverse: true
     meta content="width=device-width, initial-scale=1.0" name="viewport" /
@@ -28,6 +28,5 @@ html lang="ja"
     javascript:
       window.RV = window.RV || {};
       window.RV.AllTags = JSON.parse('#{raw Tag.all.pluck(:name).to_json}');
-    hr/
     = javascript_include_tag "application"
     = yield :footer_js
