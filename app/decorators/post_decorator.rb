@@ -48,8 +48,6 @@ class PostDecorator < Draper::Decorator
   end
 
   def thumbnail_url
-    if model.body =~ /!\[.+?\]\((.+?)\)/
-      return $1
-    end
+    return Regexp.last_match[1] if model.body =~ /!\[.+?\]\((.+?)\)/
   end
 end

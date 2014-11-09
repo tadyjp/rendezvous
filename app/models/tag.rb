@@ -12,7 +12,6 @@
 #
 
 class Tag < ActiveRecord::Base
-
   # for tree structure
   has_ancestry
 
@@ -40,7 +39,6 @@ class Tag < ActiveRecord::Base
   scope :recently_created, (lambda do |limit = 10|
     order(created_at: :desc).limit(limit)
   end)
-
 
   ######################################################################
   # Class method
@@ -70,7 +68,7 @@ class Tag < ActiveRecord::Base
         tags_this_month_with_score[tag_id] = this_month_count.to_f / (tags_last_month[tag_id] + 1)
       end
 
-      sorted = tags_this_month_with_score.sort_by { |k, v| -v }.take(limit).to_h
+      sorted = tags_this_month_with_score.sort_by { |_k, v| -v }.take(limit).to_h
 
       Tag.find(sorted.keys).to_a.zip(sorted.values).to_h
     end
@@ -79,7 +77,6 @@ class Tag < ActiveRecord::Base
   ######################################################################
   # Instance method
   ######################################################################
-
 
   def recent_posts(limit = 30)
     posts.recent(limit)
