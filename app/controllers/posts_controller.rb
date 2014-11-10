@@ -109,7 +109,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @comment.save
         gflash success: 'Comment was successfully created.'
-        format.html { redirect_to post_path(id: @post.id) }
+        format.html { redirect_to post_path(id: @post.id, anchor: 'comments_anchor') }
         format.json { render json: { status: 'ok', comment: @comment }, status: :created }
       else
         gflash error: 'Comment is not saved.'
