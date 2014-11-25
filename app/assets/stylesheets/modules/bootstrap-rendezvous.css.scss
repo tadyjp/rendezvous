@@ -1,7 +1,7 @@
 $set_prefix: -webkit-, -moz-, -ms-, -o-, '';
-$main-color: #75b3c8;
+$theme-color-main: #75b3c8;
 
-@mixin background_color($bg_value: $main-color) {
+@mixin background_color($bg_value: $theme-color-main) {
   background-color: $bg_value;
   color: #fff;
 }
@@ -17,6 +17,7 @@ $main-color: #75b3c8;
     #{$prefix}transition: all $transition_value $move_type
   }
 }
+
 @import url(https://fonts.googleapis.com/css?family=Flamenco:300,400);
 @import url(https://fonts.googleapis.com/css?family=Quicksand:300,400,700);
 .btn-original {

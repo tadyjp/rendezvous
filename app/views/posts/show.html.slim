@@ -1,100 +1,117 @@
-.row.post-show-wrapper
-  .col-xs-9
-    .panel
+/! view:post/show
+
+.row
+  .col-xs-12.col-md-8
+    .panel.panel-main
       .panel-heading
-        h3.panel-title
-          a href=post_path(@post) = @post.title
+        h2.panel-title = @post.title
       .panel-body.viewer.github.mod-image-style
         = MarkdownRenderer.new(@post.body).render
 
-  .col-xs-3
-    .btn-group.post-edit-btn
-      a.btn href=edit_post_path(@post)
-        | 編集&nbsp;
-        span.glyphicon.glyphicon-pencil
-      button.btn.btn-default.dropdown-toggle data-toggle="dropdown" type="button"
-        span.caret
-        span.sr-only Toggle Dropdown
-      ul.dropdown-menu role="menu"
-        li
-          a href=slideshow_post_path(@post) target="_blank"  Slideshow
-        li
-          a.small href="https://github.com/gnab/remark" target="_blank"  What is Slideshow?
-        li.divider
-        li
-          a href=fork_post_path(@post) Fork
-        li
-          a data-target="#myModal" data-toggle="modal" href="#"  Mail to...
-        li.divider
-        li= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' }
+  .col-xs-12.col-md-4
 
-    | &nbsp;
+    .margin-wrapper
+      .btn-group
+        a.btn.btn-default href=edit_post_path(@post)
+          | 編集&nbsp;
+          span.glyphicon.glyphicon-pencil
+        button.btn.btn-default.dropdown-toggle data-toggle="dropdown" type="button"
+          span.caret
+          span.sr-only Toggle Dropdown
+        ul.dropdown-menu role="menu"
+          li
+            a href=slideshow_post_path(@post) target="_blank"  Slideshow
+          li
+            a.small href="https://github.com/gnab/remark" target="_blank"  What is Slideshow?
+          li.divider
+          li
+            a href=fork_post_path(@post) Fork
+          li
+            a data-target="#myModal" data-toggle="modal" href="#"  Mail to...
+          li.divider
+          li= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' }
 
-    .btn-group
-      - if current_user.watching?(post: @post)
-        = link_to 'Watching <span class="glyphicon glyphicon-eye-open"></span>'.html_safe, watch_post_path, :remote => true, :'data-type' => :html, :class => 'btn ajax_link btn-watched'
-      - else
-        = link_to 'Watch <span class="glyphicon glyphicon-eye-open"></span>'.html_safe, watch_post_path, :remote => true, :'data-type' => :html, :class => 'btn ajax_link watch-btn'
+      | &nbsp;
 
-    .well.detail-wrapper style="margin-top:20px"
-      dl
-        dt 作成者
-        dd
-          a href=(search_path(q: "@#{@post.author.nickname}"))
-           | @#{@post.author.name}
+      .btn-group
+        - if current_user.watching?(post: @post)
+          = link_to 'Watching <span class="glyphicon glyphicon-eye-open"></span>'.html_safe, watch_post_path, :remote => true, :'data-type' => :html, :class => 'btn btn-default ajax_link btn-watched'
+        - else
+          = link_to 'Watch <span class="glyphicon glyphicon-eye-open"></span>'.html_safe, watch_post_path, :remote => true, :'data-type' => :html, :class => 'btn btn-default ajax_link watch-btn'
 
-        dt タグ
-        dd
-          - @post.tags.each do |tag|
-            span.label.label-tag
-              a href=tag.decorate.show_path
-                | #{tag.name}
-            | &nbsp;
 
-        dt 指定日
-        dd
-          a href=(search_path(q: "date:#{@post.display_date}")) = @post.display_date
-
-        dt 作成日
-        dd
-          = @post.created_date
-
-        dt 最終更新日
-        dd
-          = @post.updated_date
-
-        dt 閲覧者数
-        dd
-          = @post.visited_user_count
-
-        dt コメント数
-        dd
-          = @post.comments.count
-
-.row
-  .col-md-12
-    .panel.comment-wrapper
+    .panel.panel-default
       .panel-heading
         h3.panel-title
-          = image_tag 'comment_w.png'
-          | Comments
+          i.fa.fa-info
+          | &nbsp; 情報
+      .panel-body
+        dl
+          dt 最終編集者
+          dd
+            a href=(search_path(q: "@#{@post.author.nickname}"))
+             = @post.author.name
+
+          dt 作成者
+          dd (調整中)
+
+          dt 編集履歴
+          dd (調整中)
+
+          dt タグ
+          dd
+            - @post.tags.map(&:decorate).each do |tag|
+              span.label.label-tag
+                a href=tag.show_path
+                  | #{tag.structured_name}
+              | &nbsp;
+
+          dt 指定日
+          dd
+            a href=(search_path(q: "date:#{@post.display_date}")) = @post.display_date
+
+          dt 作成日
+          dd
+            = @post.created_date
+
+          dt 最終更新日
+          dd
+            = @post.updated_date
+
+          dt 閲覧者数
+          dd
+            = @post.visited_user_count
+
+          dt コメント数
+          dd
+            = @post.comments.count
+
+
+.row
+  .col-xs-12
+    .panel.panel-comment.panel-default
+      .panel-heading
+        h3.panel-title
+          i.fa.fa-comments
+          | &nbsp;Comments
       .panel-body
         ul.media-list
           - @post.comments.each do |comment|
             li.media
-              a.pull-left href="#"
-                img.media-object src=comment.author.decorate.image_url /
+              a.media-left href="#"
+                img.media-object src=comment.author.decorate.image_url height="25px" width="25px"
               .media-body
                 h4.media-heading= comment.author.name
                 = MarkdownRenderer.new(comment.body).render
+
           = form_tag(comment_post_path, method: :post, data: { 'form-id' => "comment_#{@post.id}" }) do
             li.media
-              a.pull-left href="#"
-                img.media-object src=current_user.image_url /
+              a.media-left href="#"
+                img.media-object src=current_user.image_url height="25px" width="25px"
               .media-body
                 h4.media-heading= current_user.name
-                = text_area :comment, :body, class: 'form-control', placeholder: 'コメントする...'
-                = submit_tag "Comment", class: 'btn comment-btn', data: { 'disable-with' => '...' }
+                = text_area :comment, :body, id: 'comments_anchor', class: 'form-control', placeholder: 'コメントする...'
+                = submit_tag "Comment", class: 'btn btn-comment', data: { 'disable-with' => '...' }
         javascript:
           $("form[data-form-id='comment_#{@post.id}']").on('ajax:success', function(event, data, xhr) {
 

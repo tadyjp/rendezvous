@@ -26,6 +26,15 @@ class TagDecorator < Draper::Decorator
     h.event_tag_path(name: model.name)
   end
 
+  # TODO: module
+  def created_date
+    model.created_at.strftime('%Y-%m-%d')
+  end
+
+  def structured_name
+    [model.ancestors.map(&:name), model.name].flatten.join('/')
+  end
+
   # tagをtree viewで表示する
   def tree_view_node
     html = ''

@@ -1,47 +1,52 @@
-nav.navbar.navbar-fixed-top.navbar-original role="navigation"
-  .container
+nav.navbar.navbar-default.navbar-fixed-top role="navigation"
+  .container-fluid
 
     .navbar-header
+      button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
       a.navbar-brand href=root_path Rendezvous
 
-    .collapse.navbar-collapse
+    .collapse.navbar-collapse#bs-example-navbar-collapse-1
       form#app-search-form.navbar-form.navbar-left action=search_path role="search"
-        .input-group
+        .form-group
           input.form-control name="q" placeholder="Search" type="text" value=params[:q] /
-          span.input-group-btn
-            button.btn data-disable-with="Searching..." type="submit"
-              = image_tag 'search.png', class: 'search'
+
       ul.nav.navbar-nav
-        li.stock class=('active' if current_page?(stock_path))
+        li
+          a href=flow_path title="Flow"
+            i.fa.fa-rss
+            | &nbsp;Flow
+        li
           a href=stock_path title="Stock"
-            = image_tag "stock.png", class: 'nav-icon stock'
-            | Stock
-        li.flow class=('active' if current_page?(flow_path))
-          a href=flow_path title="Frow"
-            = image_tag "flow.png", class: 'nav-icon'
-            | Flow
-        li.template class=('active' if current_page?(templates_path))
+            i.fa.fa-stack-overflow
+            | &nbsp;Stock
+        li
           a href=templates_path title="Templates"
-            = image_tag "template.png", class: 'nav-icon'
-            | Templates
+            i.fa.fa-copy
+            | &nbsp;Templates
 
       ul.nav.navbar-nav.navbar-right
         li
           a#notifications data-container="body" data-toggle="popover" data-placement="bottom"
             span.glyphicon.glyphicon-flag
+            | &nbsp;
             - if current_user.notifications.unread.any?
               span.badge = current_user.notifications.unread.recent.count
 
         - unless params[:action] == 'new' && params[:controller] == 'posts'
           li.new-post-btn
             form
-              a.btn.navbar-btn href=new_post_path
+              a.btn.btn-default.navbar-btn href=new_post_path
                 | 投稿する
-                = image_tag 'write.png', class: "write"
+                / = image_tag 'write.png', class: "write"
 
         li.dropdown
           a.dropdown-toggle data-toggle="dropdown"
             = current_user.name
+            | &nbsp;
             span.badge = current_user.decorate.draft_count
             b.caret
           ul.dropdown-menu
@@ -55,7 +60,7 @@ nav.navbar.navbar-fixed-top.navbar-original role="navigation"
               a href=watching_path Watchings
             li.divider
             li
-              a href=destroy_user_session_path data-method="delete" rel="nofollow" SignOut
+              a href=destroy_user_session_path data-method="delete" rel="nofollow" Log Out
 
 script#notification-content type="text/template"
   - if current_user.notifications.unread.recent.any?

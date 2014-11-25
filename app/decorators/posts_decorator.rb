@@ -1,6 +1,6 @@
 class PostsDecorator < Draper::CollectionDecorator
   def related_tags
-    tags = map(&:tags).flatten.uniq
+    tags = map(&:tags).flatten.uniq.take(10)
 
     TagDecorator.decorate_collection(tags)
   end

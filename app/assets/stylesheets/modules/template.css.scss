@@ -1,0 +1,114 @@
+// Place all the styles related to the templates controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// /*************************************************************************
+// * app_header
+// *************************************************************************/
+// @import 'modules/settings';
+// @import url(https://fonts.googleapis.com/css?family=Flamenco:300,400);
+// @import url(https://fonts.googleapis.com/css?family=Quicksand:300,400,700);
+
+// $theme-color-main: #75b3c8;
+
+// .template-wrapper {
+//   margin-top: 15px;
+// }
+
+
+// .navbar-original {
+//   background-color: $theme-color-main!important;
+//   background-image: none!important;
+//   li:hover {
+//     cursor: pointer;
+//     // a {
+//     //   color: $theme-color-main;
+//     // }
+//   }
+//   li.new-post-btn:hover {
+//     background-color: $theme-color-main;
+//     a {
+//       color: #fff;
+//     }
+//   }
+//   a {
+//     color: #fff;
+//     font-family: 'Quciksand', 'meiryo', 'メイリオ','sans-serif';
+//     letter-spacing: .1em;
+//     font-weight: 300;
+//     @include transition;
+//   }
+//   .input-group {
+//     input {
+//       border: 1px solid transparent;
+//       box-shadow: none;
+//     }
+//     button {
+//       background-color: #fff;
+//       border: 1px solid #fff;
+//       .search {
+//         width: 20px;
+//         &:hover {
+//           opacity: .7;
+//           @include transition;
+//         }
+//       }
+//     }
+//   }
+//   .nav-icon {
+//     width: 20px;
+//     margin-right: 5px;
+//   }
+//   li.stock img {
+//     width: 25px;
+//     position: relative;
+//     bottom: 2px;
+//   }
+//   li.flow {
+//     a {
+//       position: relative;
+//       top: 2px;
+//     }
+//     img {
+//       position: relative;
+//       bottom: 2px;
+//     }
+//   }
+//   .navbar-right {
+//     .new-post-btn {
+//       .btn {
+//         position: relative;
+//         background-color: #fafafa;
+//         color: $theme-color-main;
+//         vertical-align: middle;
+//         &:hover {
+//           background-color: #ddd;
+//           @include transition;
+//         }
+//       }
+//       .write {
+//         width: 17px;
+//         vertical-align: middle;
+//         position: relative;
+//         bottom: 1px;
+//       }
+//     }
+//   }
+//   .badge {
+//     background-color: transparent;
+//     color: #fff;
+//     letter-spacing: 0;
+//     border: 1px solid #fff;
+//     padding: 4px 4px;
+//     margin-left: 5px;
+//     min-width: 20px;
+//     min-height: 20px;
+//   }
+//   .dropdown-menu {
+//     background-color: $theme-color-main;
+
+//     a {
+//       color: #fff;
+//     }
+//   }
+// }

@@ -1,8 +1,8 @@
 doctype html
-= render partial: 'partials/rendezvous'
 html lang="ja"
+  / = render partial: 'partials/rendezvous'
   head
-    title Rendezvous
+    = display_meta_tags site: 'Rendezvous', reverse: true
     meta content="width=device-width, initial-scale=1.0" name="viewport" /
     link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" /
     link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" rel="stylesheet" /
@@ -16,6 +16,7 @@ html lang="ja"
     = render_style
     = csrf_meta_tags
   body class="rails-#{params[:controller]}-#{params[:action]}"
+    = gflash
     .container-fluid.container-main#yield
       = yield
 
@@ -27,6 +28,5 @@ html lang="ja"
     javascript:
       window.RV = window.RV || {};
       window.RV.AllTags = JSON.parse('#{raw Tag.all.pluck(:name).to_json}');
-    hr/
     = javascript_include_tag "application"
     = yield :footer_js

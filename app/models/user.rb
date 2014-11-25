@@ -54,6 +54,10 @@ class User < ActiveRecord::Base
     where('name LIKE ? OR nickname LIKE ?', "%#{query}%", "%#{query}%")
   end)
 
+  scope :post_today, -> { joins(:posts).where('posts.updated_at > ?', 1.day.ago) }
+
+  scope :now_viewing, -> { select(:id).joins(:footprints).where('footprints.updated_at > ?', 10.minutes.ago).uniq }
+
   ######################################################################
   # Validations
   ######################################################################
@@ -73,11 +77,10 @@ class User < ActiveRecord::Base
       u.nickname = (('a'..'z').to_a + ('A'..'Z').to_a + (0..9).to_a).shuffle[0..4].join
     end
 
-    user.update(
-      google_auth_token: access_token.credentials['token'],
-      google_refresh_token: access_token.credentials['refresh_token'],
-      google_token_expires_at: Time.at(access_token.credentials['expires_at'])
-    )
+    user.google_auth_token = access_token.credentials['token'] if access_token.credentials['token']
+    user.google_refresh_token = access_token.credentials['refresh_token'] if access_token.credentials['refresh_token']
+    user.google_token_expires_at = Time.at(access_token.credentials['expires_at']) if access_token.credentials['expires_at']
+    user.save!
 
     user
   end

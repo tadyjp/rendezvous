@@ -18,6 +18,9 @@ require 'date'
 class Post < ActiveRecord::Base
   include HipchatIntegration if Settings.respond_to?(:hipchat)
 
+  # for versioning
+  has_paper_trail
+
   ######################################################################
   # Associations
   ######################################################################
@@ -77,10 +80,27 @@ class Post < ActiveRecord::Base
     where_list
   end)
 
-  # 最新のPostを取得
   scope :recent, (lambda do |limit = 10|
     order(updated_at: :desc).limit(limit)
   end)
+
+  scope :today, -> { where(arel_table[:updated_at].gt 1.day.ago) }
+  scope :this_month, -> { where(arel_table[:updated_at].gt 1.month.ago) }
+  scope :last_month, -> { where(arel_table[:updated_at].gt 2.month.ago).where(arel_table[:updated_at].lt 1.month.ago) }
+
+  ######################################################################
+  # Class method
+  ######################################################################
+  def self.most_pv_in_this_week(limit)
+    posts_with_footprints = where(arel_table[:created_at].gt 1.week.ago)
+                            .select('posts.id, count(footprints.id) AS footprints_count')
+                            .joins(:footprints)
+                            .group('posts.id')
+                            .order('footprints_count DESC')
+                            .limit(limit)
+    posts = find(posts_with_footprints.map(&:id))
+    posts.to_a.zip posts_with_footprints.map(&:footprints_count)
+  end
 
   ######################################################################
   # Instance method

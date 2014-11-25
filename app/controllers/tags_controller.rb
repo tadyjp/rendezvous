@@ -19,7 +19,8 @@ class TagsController < ApplicationController
 
     respond_to do |format|
       if @tag.save
-        format.html { redirect_to @tag.show_path, flash: { notice: 'Tag was successfully created.' } }
+        gflash success: 'Tag was successfully created.'
+        format.html { redirect_to @tag.show_path }
         format.json { render action: 'show', status: :created, location: @tag }
       else
         format.html { render action: 'new' }
@@ -31,7 +32,8 @@ class TagsController < ApplicationController
   def update
     respond_to do |format|
       if @tag.update(tag_params)
-        format.html { redirect_to @tag.show_path, flash: { notice: 'Tag was successfully updated.' } }
+        gflash success: 'Tag was successfully updated.'
+        format.html { redirect_to @tag.show_path }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -43,7 +45,8 @@ class TagsController < ApplicationController
   def destroy
     @tag.destroy
     respond_to do |format|
-      format.html { redirect_to flow_url, flash: { success: 'Tag successfully deleted.' } }
+      gflash success: 'Tag successfully deleted.'
+      format.html { redirect_to flow_url }
       format.json { head :no_content }
     end
   end
@@ -57,7 +60,7 @@ class TagsController < ApplicationController
     @tag.move_all_posts_to!(@merge_to_tag)
     @tag.delete
 
-    flash[:notice] = "「#{@tag.name}」は「#{@merge_to_tag.name}」にmergeされました"
+    gflash success: "「#{@tag.name}」は「#{@merge_to_tag.name}」にmergeされました"
 
     render json: { status: 'OK' }
   end
@@ -68,7 +71,7 @@ class TagsController < ApplicationController
 
     @tag.parent_tag = @move_to_tag
 
-    flash[:notice] = "「#{@tag.name}」は「#{@move_to_tag.name}」の下に移動しました"
+    gflash success: "「#{@tag.name}」は「#{@move_to_tag.name}」の下に移動しました"
 
     render json: { status: 'OK' }
   end

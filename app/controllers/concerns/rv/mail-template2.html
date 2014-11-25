@@ -1,0 +1,547 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!-- If you delete this meta tag, Half Life 3 will never be released. -->
+<meta name="viewport" content="width=device-width" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Rendezvous</title>
+
+<style type="text/css">
+/* -------------------------------------
+    GLOBAL
+------------------------------------- */
+* {
+  margin:0;
+  padding:0;
+}
+* { font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
+
+img {
+  max-width: 100%;
+}
+.collapse {
+  margin:0;
+  padding:0;
+}
+body {
+  -webkit-font-smoothing:antialiased;
+  -webkit-text-size-adjust:none;
+  width: 100%!important;
+  height: 100%;
+}
+
+
+/* -------------------------------------
+    ELEMENTS
+------------------------------------- */
+a { color: #2BA6CB;}
+
+.btn {
+  text-decoration:none;
+  color: #FFF;
+  background-color: #666;
+  padding:10px 16px;
+  font-weight:bold;
+  margin-right:10px;
+  text-align:center;
+  cursor:pointer;
+  display: inline-block;
+}
+
+p.callout {
+  padding:15px;
+  background-color:#ECF8FF;
+  margin-bottom: 15px;
+}
+.callout a {
+  font-weight:bold;
+  color: #2BA6CB;
+}
+
+table.social {
+/*  padding:15px; */
+  background-color: #ebebeb;
+
+}
+.social .soc-btn {
+  padding: 3px 7px;
+  font-size:12px;
+  margin-bottom:10px;
+  text-decoration:none;
+  color: #FFF;font-weight:bold;
+  display:block;
+  text-align:center;
+}
+a.fb { background-color: #3B5998!important; }
+a.tw { background-color: #1daced!important; }
+a.gp { background-color: #DB4A39!important; }
+a.ms { background-color: #000!important; }
+
+.sidebar .soc-btn {
+  display:block;
+  width:100%;
+}
+
+/* -------------------------------------
+    HEADER
+------------------------------------- */
+table.head-wrap { width: 100%;}
+
+.header.container table td.logo { padding: 15px; }
+.header.container table td.label { padding: 15px; padding-left:0px;}
+
+
+/* -------------------------------------
+    BODY
+------------------------------------- */
+table.body-wrap { width: 100%;}
+
+
+/* -------------------------------------
+    FOOTER
+------------------------------------- */
+table.footer-wrap { width: 100%;  clear:both!important;
+}
+.footer-wrap .container td.content  p { border-top: 1px solid rgb(215,215,215); padding-top:15px;}
+.footer-wrap .container td.content p {
+  font-size:10px;
+  font-weight: bold;
+
+}
+
+
+/* -------------------------------------
+    TYPOGRAPHY
+------------------------------------- */
+h1,h2,h3,h4,h5,h6 {
+font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; line-height: 1.1; margin-bottom:15px; color:#000;
+}
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small { font-size: 60%; color: #6f6f6f; line-height: 0; text-transform: none; }
+
+h1 { font-weight:200; font-size: 44px;}
+h2 { font-weight:200; font-size: 37px;}
+h3 { font-weight:500; font-size: 27px;}
+h4 { font-weight:500; font-size: 23px;}
+h5 { font-weight:900; font-size: 17px;}
+h6 { font-weight:900; font-size: 14px; text-transform: uppercase; color:#444;}
+
+.collapse { margin:0!important;}
+
+p, ul {
+  margin-bottom: 10px;
+  font-weight: normal;
+  font-size:14px;
+  line-height:1.6;
+}
+p.lead { font-size:17px; }
+p.last { margin-bottom:0px;}
+
+ul li {
+  margin-left:5px;
+  list-style-position: inside;
+}
+
+/* -------------------------------------
+    SIDEBAR
+------------------------------------- */
+ul.sidebar {
+  background:#ebebeb;
+  display:block;
+  list-style-type: none;
+}
+ul.sidebar li { display: block; margin:0;}
+ul.sidebar li a {
+  text-decoration:none;
+  color: #666;
+  padding:10px 16px;
+/*  font-weight:bold; */
+  margin-right:10px;
+/*  text-align:center; */
+  cursor:pointer;
+  border-bottom: 1px solid #777777;
+  border-top: 1px solid #FFFFFF;
+  display:block;
+  margin:0;
+}
+ul.sidebar li a.last { border-bottom-width:0px;}
+ul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.sidebar li a h5,ul.sidebar li a h6,ul.sidebar li a p { margin-bottom:0!important;}
+
+
+
+/* ---------------------------------------------------
+    RESPONSIVENESS
+    Nuke it from orbit. It's the only way to be sure.
+------------------------------------------------------ */
+
+/* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
+.container {
+  display:block!important;
+  max-width:600px!important;
+  margin:0 auto!important; /* makes it centered */
+  clear:both!important;
+}
+
+/* This should also be a block element, so that it will fill 100% of the .container */
+.content {
+  padding:15px;
+  max-width:600px;
+  margin:0 auto;
+  display:block;
+}
+
+/* Let's make sure tables in the content area are 100% wide */
+.content table { width: 100%; }
+
+
+/* Odds and ends */
+.column {
+  width: 300px;
+  float:left;
+}
+.column tr td { padding: 15px; }
+.column-wrap {
+  padding:0!important;
+  margin:0 auto;
+  max-width:600px!important;
+}
+.column table { width:100%;}
+.social .column {
+  width: 280px;
+  min-width: 279px;
+  float:left;
+}
+
+/* Be sure to place a .clear element after each set of columns, just to be safe */
+.clear { display: block; clear: both; }
+
+
+/* -------------------------------------------
+    PHONE
+    For clients that support media queries.
+    Nothing fancy.
+-------------------------------------------- */
+@media only screen and (max-width: 600px) {
+
+  a[class="btn"] { display:block!important; margin-bottom:10px!important; background-image:none!important; margin-right:0!important;}
+
+  div[class="column"] { width: auto!important; float:none!important;}
+
+  table.social div[class="column"] {
+    width:auto!important;
+  }
+
+}
+
+/* custom */
+
+.github a {
+  color: #4183C4; }
+.github a.absent {
+  color: #cc0000; }
+.github a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+.github h1, .github h2, .github h3, .github h4, .github h5, .github h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+.github h1:hover a.anchor, .github h2:hover a.anchor, .github h3:hover a.anchor, .github h4:hover a.anchor, .github h5:hover a.anchor, .github h6:hover a.anchor {
+  background: url("../../images/modules/styleguide/para.png") no-repeat 10px center;
+  text-decoration: none; }
+.github h1 tt, .github h1 code {
+  font-size: inherit; }
+.github h2 tt, .github h2 code {
+  font-size: inherit; }
+.github h3 tt, .github h3 code {
+  font-size: inherit; }
+.github h4 tt, .github h4 code {
+  font-size: inherit; }
+.github h5 tt, .github h5 code {
+  font-size: inherit; }
+.github h6 tt, .github h6 code {
+  font-size: inherit; }
+.github h1 {
+  font-size: 28px;
+  color: black; }
+.github h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+.github h3 {
+  font-size: 18px; }
+.github h4 {
+  font-size: 16px; }
+.github h5 {
+  font-size: 14px; }
+.github h6 {
+  color: #777777;
+  font-size: 14px; }
+.github p, .github blockquote, .github ul, .github ol, .github dl, .github li, .github table, .github pre {
+  margin: 15px 0; }
+.github hr {
+  background: transparent url("../../images/modules/pulls/dirty-shade.png") repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0; }
+.github body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+.github body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+.github body > h1:first-child + h2 {
+  margin-top: 0;
+  padding-top: 0; }
+.github body > h3:first-child, .github body > h4:first-child, .github body > h5:first-child, .github body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+.github a:first-child h1, .github a:first-child h2, .github a:first-child h3, .github a:first-child h4, .github a:first-child h5, .github a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+.github h1 p, .github h2 p, .github h3 p, .github h4 p, .github h5 p, .github h6 p {
+  margin-top: 0; }
+.github li p.first {
+  display: inline-block; }
+.github ul, .github ol {
+  padding-left: 30px; }
+.github ul :first-child, .github ol :first-child {
+  margin-top: 0; }
+.github ul :last-child, .github ol :last-child {
+  margin-bottom: 0; }
+.github dl {
+  padding: 0; }
+.github dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px; }
+.github dl dt:first-child {
+  padding: 0; }
+.github dl dt > :first-child {
+  margin-top: 0; }
+.github dl dt > :last-child {
+  margin-bottom: 0; }
+.github dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px; }
+.github dl dd > :first-child {
+  margin-top: 0; }
+.github dl dd > :last-child {
+  margin-bottom: 0; }
+.github blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+.github blockquote > :first-child {
+  margin-top: 0; }
+.github blockquote > :last-child {
+  margin-bottom: 0; }
+.github table {
+  padding: 0; }
+.github table tr {
+  border-top: 1px solid #cccccc;
+  background-color: white;
+  margin: 0;
+  padding: 0; }
+.github table tr:nth-child(2n) {
+  background-color: #f8f8f8; }
+.github table tr th {
+  font-weight: bold;
+  border: 1px solid #cccccc;
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px; }
+.github table tr td {
+  border: 1px solid #cccccc;
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px; }
+.github table tr th :first-child, .github table tr td :first-child {
+  margin-top: 0; }
+.github table tr th :last-child, .github table tr td :last-child {
+  margin-bottom: 0; }
+.github img {
+  max-width: 100%; }
+.github span.frame {
+  display: block;
+  overflow: hidden; }
+.github span.frame > span {
+  border: 1px solid #dddddd;
+  display: block;
+  float: left;
+  overflow: hidden;
+  margin: 13px 0 0;
+  padding: 7px;
+  width: auto; }
+.github span.frame span img {
+  display: block;
+  float: left; }
+.github span.frame span span {
+  clear: both;
+  color: #333333;
+  display: block;
+  padding: 5px 0 0; }
+.github span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+.github span.align-center > span {
+  display: block;
+  overflow: hidden;
+  margin: 13px auto 0;
+  text-align: center; }
+.github span.align-center span img {
+  margin: 0 auto;
+  text-align: center; }
+.github span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+.github span.align-right > span {
+  display: block;
+  overflow: hidden;
+  margin: 13px 0 0;
+  text-align: right; }
+.github span.align-right span img {
+  margin: 0;
+  text-align: right; }
+.github span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+.github span.float-left span {
+  margin: 13px 0 0; }
+.github span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+.github span.float-right > span {
+  display: block;
+  overflow: hidden;
+  margin: 13px auto 0;
+  text-align: right; }
+.github code, .github tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+.github pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+.github .highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+.github pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+.github pre code, .github pre tt {
+  background-color: transparent;
+  border: none; }
+
+</style>
+
+</head>
+
+<body bgcolor="#f0f0f0">
+
+<!-- HEADER -->
+<table class="head-wrap" bgcolor="#E4F3FF">
+  <tr>
+    <td></td>
+    <td class="header container" >
+
+        <div class="content">
+        <table>
+          <tr>
+            <td><h6 class="collapse">Rendezvous</h6> - <a href="__POST_URL__" target="_blank">__HTML_TITLE__</a></td>
+          </tr>
+        </table>
+        </div>
+
+    </td>
+    <td></td>
+  </tr>
+</table><!-- /HEADER -->
+
+
+<!-- BODY -->
+<table class="body-wrap">
+  <tr>
+    <td></td>
+    <td class="container" bgcolor="#FFFFFF">
+
+      <div class="content">
+      <table>
+        <tr>
+          <td>
+            <div class="github">
+              __HTML_BODY__
+            </div>
+            <p class="callout">
+              コメントは<a href="__POST_URL__" target="_blank">こちら</a>から
+            </p><!-- /Callout Panel -->
+          </td>
+        </tr>
+      </table>
+      </div><!-- /content -->
+
+    </td>
+    <td></td>
+  </tr>
+</table><!-- /BODY -->
+
+<!-- FOOTER -->
+<table class="footer-wrap">
+  <tr>
+    <td></td>
+    <td class="container">
+
+        <!-- content -->
+        <div class="content">
+        <table>
+        <tr>
+          <td align="center">
+            <p>
+              <a href="__RV_URL__">Rendezvous</a>
+            </p>
+          </td>
+        </tr>
+      </table>
+        </div><!-- /content -->
+
+    </td>
+    <td></td>
+  </tr>
+</table><!-- /FOOTER -->
+
+</body>
+</html>

@@ -4,9 +4,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
     email = request.env['omniauth.auth'].info['email']
 
-    # reject if email is not zigexn nor ventura.
-    if email !~ /@zigexn\.co\.jp$/ && email !~ /@zigexn\.vn$/
-      redirect_to root_path, flash: { alert: 'Your email address is not permitted.' }
+    # reject if email is not permited.
+    unless Settings.permited_login_domain.split(/,/).include?(email.split(/@/)[1])
+      gflash error: 'Your email address is not permitted.'
+      redirect_to root_path
       return
     end
 
@@ -14,7 +15,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.find_for_google_oauth2(request.env['omniauth.auth'], current_user)
 
     if @user.persisted?
-      flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Google'
+      gflash success: "You've successfully authenticated"
+      # flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Google'
       sign_in_and_redirect @user, event: :authentication
     else
       session['devise.google_data'] = request.env['omniauth.auth']

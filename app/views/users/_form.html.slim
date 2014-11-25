@@ -14,20 +14,20 @@
 
         .form-group
           = f.label :name, '名前', class: 'col-sm-2 control-label'
-          .col-sm-10
+          .col-sm-6
             = f.text_field :name, class: 'form-control', readonly: true
 
         .form-group
           = f.label :email, 'メールアドレス', class: 'col-sm-2 control-label'
-          .col-sm-10
+          .col-sm-6
             = f.text_field :email, class: 'form-control', readonly: true
 
         .form-group
           = f.label :nickname, 'ニックネーム', class: 'col-sm-2 control-label'
-          .col-sm-10
+          .col-sm-6
             = f.text_field :nickname, class: 'form-control'
 
         .form-group
-          .col-sm-offset-2.col-sm-10
+          .col-sm-offset-2.col-sm-6
             button.btn.btn-success type="submit" 保存
 

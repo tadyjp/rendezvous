@@ -41,5 +41,5 @@ $.extend
 
       console.log([editor_scrollTop, preview_scrollHeight, editor_height, editor_scrollHeight, preview_scrollTop])
 
-    settings.$editor.on 'scroll', _.throttle(adjustPreviewScroll, 1000 / 30)
+    settings.$editor.on 'scroll', _.throttle(adjustPreviewScroll, 1000 / 60)
 

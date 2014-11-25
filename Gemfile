@@ -23,7 +23,7 @@ gem 'therubyracer', platforms: :ruby
 # gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder'
+gem 'jbuilder'
 
 gem 'i18n_generators'
 
@@ -97,6 +97,8 @@ group :development, :test do
   gem 'dotenv-rails'
 
   gem 'rubocop'
+
+  gem 'quiet_assets'
 end
 
 group :test do
@@ -161,3 +163,9 @@ gem 'rails_12factor', group: :production
 
 # for IP restriction
 gem 'rack-contrib', require: 'rack/contrib'
+
+gem 'meta-tags'
+
+# Growl-like Notification
+# https://github.com/RobinBrouwer/gritter
+gem 'gritter', '1.1.0'

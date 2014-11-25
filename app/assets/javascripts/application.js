@@ -14,6 +14,7 @@
 // require jquery
 //= require jquery_ujs
 // require turbolinks
+//= require gritter
 //= require ./lib/jquery.ui.widget
 //= require_tree ./lib
 //= require_tree ./modules

@@ -4,7 +4,7 @@
       #error_explanation
         h2
           = pluralize(@post.errors.count, "error")
-          | prohibited this post from being saved:
+          | &nbsp;prohibited this post from being saved:
         ul
           - @post.errors.full_messages.each do |msg|
             li= msg
@@ -19,19 +19,16 @@
         .field
           .input-group
             span.input-group-addon= f.label :tags
-            = hidden_field :post, :tags, class: 'mod-mdEditor-tags', style: 'width:300px', value: @post.tags.map{ |_tag| _tag.name }.join(',')
+            = hidden_field :post, :tags, class: 'mod-mdEditor-tags', style: 'width:90%', value: @post.tags.map{ |_tag| _tag.name }.join(',')
 
       .col-xs-3
-        p.actions
-          = f.submit class: 'btn btn-lg js-disable-confirm-unload', id: 'save_button'
-        p.actions
+        p = f.submit class: 'btn btn-default js-disable-confirm-unload', id: 'save_button'
+        p
           = f.check_box :is_draft
           = f.label :is_draft, "&nbsp;下書き保存".html_safe
-        p.actions
-          = f.date_select :specified_date
+        p = f.date_select :specified_date
 
     .row
-
       .col-xs-6.editor-panel
         .panel.panel-default
           .panel-heading
@@ -74,7 +71,7 @@
                     | 0%
 
       .col-xs-6.preview-panel
-        .panel.preview-wrapper
+        .panel.panel-default.preview-wrapper
           .panel-heading
             span Preview
 
@@ -112,7 +109,7 @@ input#fileupload data-url="/apis/file_receiver" multiple="" name="files[]" style
     $.mod_form_resizer({
       $editor: $('.mod-form-resizer-editor'),
       $preview: $('.mod-form-resizer-preview'),
-      height_offset: 250
+      height_offset: 210
     })
 
     // Display upload dialog.
