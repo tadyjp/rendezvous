@@ -102,7 +102,7 @@ RSpec.configure do |config|
   OmniAuth.config.add_mock(:google_oauth2,
                            'uid' => '12345',
                            'provider' => 'google_oauth2',
-                           'info' => { 'name' => 'Taro Yamada', 'email' => 'taro@zigexn.co.jp' },
+                           'info' => { 'name' => 'Taro Yamada', 'email' => 'taro@example.com' },
                            'credentials' => { 'token' => 'aaaaa', 'refresh_token' => 'bbbbb', 'expires_at' => 9_999_999_999 }
   )
 
