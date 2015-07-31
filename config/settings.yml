@@ -23,6 +23,9 @@ defaults: &defaults
     room: <%= ENV['RV_HIPCHAT_ROOM'] %>
 
   # optional
+  slack:
+    webhook_url: <%= ENV['RV_SLACK_WEBHOOK_URL'] %>
+
   google_analytics: <%= ENV['RV_GOOGLE_ANALYTICS_ID'] %>
 
   # optional

@@ -17,6 +17,7 @@ require 'date'
 
 class Post < ActiveRecord::Base
   include HipchatIntegration if Settings.respond_to?(:hipchat)
+  include SlackIntegration if Settings.respond_to?(:slack)
 
   # for versioning
   has_paper_trail

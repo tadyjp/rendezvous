@@ -153,6 +153,7 @@ gem 'jwt', '0.1.11'
 
 # For notifing to HipChat
 gem 'hipchat'
+gem 'slack-notifier', require: false
 
 # For PDF upload
 gem 'rmagick', require: 'RMagick'
