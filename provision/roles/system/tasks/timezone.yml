@@ -1,0 +1,8 @@
+---
+
+- name: set timezone
+  lineinfile:
+    dest=/etc/sysconfig/clock regexp=^ZONE line=ZONE=\"Asia/Tokyo\"
+  notify:
+    - update tzdate
+    - restart crond

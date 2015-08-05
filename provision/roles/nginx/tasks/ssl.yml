@@ -1,0 +1,10 @@
+---
+
+- name: mkdir /etc/nginx/ssl
+  file: path=/etc/nginx/ssl state=directory owner=nginx group=nginx mode=0700
+
+- name: prepare ssl certificate and key
+  copy: src={{item}} dest=/etc/nginx/ssl/{{item}} mode=0600 owner=nginx group=nginx
+  with_items:
+    - aiming-inc.biz.crt
+    - aiming-inc.biz.key

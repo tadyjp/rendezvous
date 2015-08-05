@@ -1,0 +1,7 @@
+---
+
+- name: update tzdate
+  shell: /usr/sbin/tzdata-update
+
+- name: restart crond
+  service: name=crond state=restarted enabled=yes

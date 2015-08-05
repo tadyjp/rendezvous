@@ -1,0 +1,8 @@
+---
+
+- name: install bash
+  yum: name=bash state=latest
+
+- name: update bashrc
+  template: src=bashrc.j2 dest=~/.bashrc
+  become_user: "{{ user }}"

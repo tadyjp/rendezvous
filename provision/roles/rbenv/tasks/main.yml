@@ -1,0 +1,31 @@
+---
+
+- include: requirements.yml
+
+- name: install rbenv
+  git: repo=https://github.com/sstephenson/rbenv.git dest=~/.rbenv
+  become_user: "{{ user }}"
+
+- name: install ruby-build
+  git: repo=https://github.com/sstephenson/ruby-build.git dest=~/.rbenv/plugins/ruby-build
+  become_user: "{{ user }}"
+
+- name: install rbenv-default-gems
+  git: repo=https://github.com/sstephenson/rbenv-default-gems.git dest=~/.rbenv/plugins/rbenv-default-gems
+  become_user: "{{ user }}"
+
+- name: execute rbenv
+  shell: source ~/.bash_profile
+  become_user: "{{ user }}"
+
+- name: prepare default-gems
+  copy: src=default-gems dest=~/.rbenv/default-gems
+  become_user: "{{ user }}"
+
+- name: install ruby
+  shell: bash -lc "rbenv install {{ruby_version}}" creates=~/.rbenv/versions/{{ruby_version}} chdir=~/.
+  become_user: "{{ user }}"
+
+- name: set rbenv global
+  shell: bash -lc "rbenv global {{ruby_version}}" chdir=~/.
+  become_user: "{{ user }}"

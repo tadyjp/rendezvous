@@ -1,0 +1,10 @@
+---
+
+- name: remove all lines contain %wheel from /etc/sudoers
+  lineinfile: dest=/etc/sudoers state=absent regexp="%wheel"
+
+- name: users in wheel group can sudo without password
+  lineinfile: "dest=/etc/sudoers state=present insertbefore=BOF line='%wheel ALL=(ALL) NOPASSWD: ALL'"
+
+- name: users in ansible group can sudo without password
+  lineinfile: "dest=/etc/sudoers state=present insertbefore=BOF line='%ansible ALL=(ALL) NOPASSWD: ALL'"

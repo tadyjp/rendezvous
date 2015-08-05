@@ -1,0 +1,20 @@
+---
+
+- name: install ruby dependencies
+  yum: name={{ item }} state=latest
+  with_items:
+    - patch
+    - gcc
+    - gcc-c++
+    - zlib-devel
+    - readline-devel
+    - openssl-devel
+    - libxml2-devel
+    - libxslt-devel
+    - libffi-devel
+    - make
+    - bzip2
+    - autoconf
+    - automake
+    - bison
+    - libtool

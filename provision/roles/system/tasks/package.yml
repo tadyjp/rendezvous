@@ -1,0 +1,25 @@
+---
+
+- name: upgrade all packages
+  yum: name=* state=latest
+
+- name: enable repositories
+  yum: name={{ item }} state=latest
+  with_items:
+    - epel-release
+
+- name: install required packages
+  yum: name={{ item }} state=latest
+  with_items:
+    - bash
+    - git
+    - curl
+    - ntp
+    - bind-utils
+    - gcc
+    - gcc-c++
+    - vim
+    - emacs-nox
+    - ruby-devel
+    - libselinux-python
+    - libsemanage-python

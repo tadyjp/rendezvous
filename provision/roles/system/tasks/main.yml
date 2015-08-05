@@ -1,0 +1,7 @@
+---
+
+- include: package.yml
+- include: timezone.yml
+- include: selinux.yml
+- include: iptables.yml
+- include: sysctl.yml

@@ -1,0 +1,17 @@
+---
+
+- include: wheel.yml
+
+- name: useradd
+  user: name={{user}} password=$1$scibload$fsAByxA/G6EHEMXkadCLZ/ generate_ssh_key=yes state=present append=yes groups=wheel
+
+- name: chmod 755 $HOME
+  file: path=/home/{{user}} mode=0755
+
+- name: authorized_key
+  authorized_key: user={{user}} key="{{ item }}"
+  with_items:
+    - https://github.com/ttanimichi.keys
+    - https://github.com/holysugar.keys
+    - https://github.com/ckazu.keys
+    - https://github.com/takesato.keys

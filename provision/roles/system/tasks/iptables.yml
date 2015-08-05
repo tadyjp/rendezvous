@@ -1,0 +1,10 @@
+---
+
+- name: Update iptables
+  template: src=iptables.j2 dest=/etc/sysconfig/iptables mode=0600
+
+- name: Enable iptables
+  service: name=iptables state=started enabled=yes
+
+- name: Disable ip6tables
+  service: name=ip6tables state=stopped enabled=no

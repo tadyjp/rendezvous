@@ -1,0 +1,17 @@
+---
+
+- name: install nginx
+  yum: name=nginx state=latest
+
+- name: delete default conf files
+  file: path=/etc/nginx/conf.d state=absent
+
+- name: nginx.conf
+  template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
+  notify: enable and restart nginx
+
+- name: app.conf
+  template: src=app.conf.j2 dest=/etc/nginx/app.conf
+  notify: enable and restart nginx
+
+- include: ssl.yml

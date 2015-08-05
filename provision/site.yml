@@ -1,0 +1,12 @@
+---
+
+- hosts: all
+  remote_user: ansible
+  become: yes
+  roles:
+    - system
+    - user
+    - bash
+    - nginx
+    - mysql-client
+    - rbenv

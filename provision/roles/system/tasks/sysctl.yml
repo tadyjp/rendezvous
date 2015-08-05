@@ -1,0 +1,7 @@
+---
+
+- name: sysctl.d directory create
+  file: path=/etc/sysctl.d state=directory owner=root group=root mode=0755
+
+- name: update sysctl.conf
+  sysctl: name=net.ipv4.tcp_keepalive_time value=60 sysctl_file=/etc/sysctl.d/link.conf

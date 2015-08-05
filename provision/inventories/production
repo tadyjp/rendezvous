@@ -1,0 +1,8 @@
+[app]
+rendezvous.aiming-inc.biz
+
+[app:vars]
+app_name=rendezvous
+user=rendezvous
+ruby_version=2.2.2
+host=rendezvous.aiming-inc.biz
