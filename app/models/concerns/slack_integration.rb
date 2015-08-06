@@ -6,9 +6,9 @@ module SlackIntegration
     after_update :notify_update! if Settings.slack.webhook_url.present?
   end
 
-  def notigy_create!
+  def notify_create!
     return if is_draft
-    send_to_slack("#{author.name}が「<#{decorate.show_url}|#{title}>」を投稿しました。", notify_slack_body)
+    send_to_slack(summary, notify_slack_body)
   end
 
   def notify_update!
@@ -26,6 +26,10 @@ module SlackIntegration
     else
       client.ping message
     end
+  end
+
+  def summary
+    "#{author.name}が「<#{decorate.show_url}|#{title}>」を投稿しました。"
   end
 
   def notify_slack_body
