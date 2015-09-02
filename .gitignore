@@ -27,7 +27,6 @@
 /script/backup.sh
 
 .rbenv-gemsets
-.ruby-version
 
 .env
 !.env.sample
