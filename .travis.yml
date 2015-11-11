@@ -9,9 +9,6 @@ env:
   - DB_TEST_DATABASE=rendezvous_test DB_TEST_USER=travis
   global:
   - secure: iCVObmVUWglzaPBvhJ/oCg/0LXFffDyGii/ws2YanPxXs9QsFhVDDj0WtKikK1ZsvZQBADRUJlQwDeTj2VD8rTGsq0Wu9Tjjz82vm+BJ6wb67QMr8HAdi096QeushLKmuVni1HEZcfStltSbmxkZpeRNf2XH9hkjb98g/2x4mzg=
-  - BUNDLE_ARCHIVE="rendezvous-travis-bundler"
-  - AWS_S3_REGION="us-east-1"
-  - AWS_S3_BUCKET="rendezvous-travis-bundler"
   - RAILS_ENV=test
   - RV_RENDEZVOUS_APP_HOST=example.com
   - RV_HIPCHAT_ROOM=Rendezvous%E3%83%86%E3%82%B9%E3%83%88
@@ -20,7 +17,6 @@ services:
 - mysql
 before_install:
 - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
-- gem install bundler fog
 before_script:
 - mysql -e 'CREATE DATABASE rendezvous_test;'
 script:
