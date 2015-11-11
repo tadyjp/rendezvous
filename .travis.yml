@@ -1,5 +1,7 @@
-bundler_args: "--without development --path=~/.bundle"
+sudo: false
+bundler_args: "--without development --deployment"
 language: ruby
+cache: bundler
 rvm:
 - 2.1.4
 env:
@@ -19,11 +21,8 @@ services:
 before_install:
 - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
 - gem install bundler fog
-- sh ./script/travis/bundle_install.sh
 before_script:
 - mysql -e 'CREATE DATABASE rendezvous_test;'
-after_script:
-- ruby script/travis/bundle_cache.rb
 script:
 - bundle exec rake db:create db:test:load spec
 - bundle exec rubocop
