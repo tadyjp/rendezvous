@@ -1,30 +1,14 @@
 source 'https://rubygems.org'
 
-ruby '2.1.4'
+ruby '2.2.3'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.1'
-
-# Use SCSS for stylesheets
-gem 'sass-rails', github: 'rails/sass-rails'
-
-# Use Uglifier as compressor for JavaScript assets
+gem 'rails', '4.2.0'
+gem 'sass-rails'
 gem 'uglifier'
-
-# Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails'
-
 gem 'jquery-rails'
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
-
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-# gem 'turbolinks'
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder'
-
+# gem 'jbuilder'
 gem 'i18n_generators'
 
 gem 'unicorn'
@@ -34,45 +18,20 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
-# gem 'bootstrap-sass-rails'
-
-gem 'mysql2'
-
+gem 'mysql2', '~> 0.3.20'
 gem 'devise'
-
 gem 'omniauth-google-oauth2'
 
-# Markdown
 gem 'github-markdown'
-
-# Syntax Highlight
 gem 'coderay'
 
 group :development do
-  # Use sqlite3 as the database for Active Record
   gem 'better_errors'
   gem 'binding_of_caller'
-
-  gem 'thin'
-
   gem 'pry-rails'
-
-  # profiler
   gem 'rack-mini-profiler'
-
   gem 'guard-rspec', require: false
   gem 'guard-rubocop'
-  # gem 'guard-spring'
-  # gem 'spring'
 
   # Use Capistrano for deployment
   gem 'capistrano', '~> 3.1'
@@ -86,18 +45,14 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
-
   # gem 'database_cleaner'
   gem 'database_rewinder'
-
   gem 'teaspoon'
+  gem 'teaspoon-mocha'
   gem 'guard-teaspoon'
   gem 'byebug'
-
   gem 'dotenv-rails'
-
   gem 'rubocop'
-
   gem 'quiet_assets'
 end
 
@@ -118,15 +73,10 @@ gem 'ancestry'
 gem 'mail'
 gem 'action-gmailer', github: 'popgiro/action-gmailer'
 
-# compose html mail
 gem 'nokogiri'
 gem 'premailer'
-
 gem 'faraday'
-
 gem 'settingslogic'
-
-# Check mail format
 gem 'validates_email_format_of'
 
 # Presentaion layer
@@ -145,7 +95,7 @@ gem 'slim'
 
 gem 'annotate', '>=2.6.0'
 
-gem 'kaminari', github: 'amatsuda/kaminari'
+gem 'kaminari'
 
 gem 'jwt', '0.1.11'
 
@@ -154,12 +104,11 @@ gem 'jwt', '0.1.11'
 # For notifing to HipChat
 gem 'hipchat'
 
-# For PDF upload
+# for PDF upload
 gem 'rmagick', require: 'RMagick'
 
 # for heroku
 gem 'rails_12factor', group: :production
-# gem 'mysql'
 
 # for IP restriction
 gem 'rack-contrib', require: 'rack/contrib'
