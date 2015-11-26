@@ -73,7 +73,6 @@ $ (bundle exec) rake db:seed
 And have fun with your team !
 
 
-
 # Test
 
 Before you run test, please setup test environment.
@@ -88,6 +87,7 @@ And run
 ```
 $ (bundle exec) rspec
 ```
+
 
 Rendezvous uses travis-ci for test.
 
