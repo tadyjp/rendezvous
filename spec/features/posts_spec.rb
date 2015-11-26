@@ -4,7 +4,6 @@ include Warden::Test::Helpers
 Warden.test_mode!
 
 describe 'Request via js', js: true do
-
   let(:user) { FactoryGirl.create(:login_user_1) }
 
   before do
@@ -27,5 +26,4 @@ describe 'Request via js', js: true do
     page.driver.reset!
     Warden.test_reset!
   end
-
 end

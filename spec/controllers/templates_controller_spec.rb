@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe TemplatesController, type: :controller do
-
   describe "GET 'show' without template" do
     it 'returns http success' do
       sign_in FactoryGirl.create(:alice)
@@ -19,5 +18,4 @@ RSpec.describe TemplatesController, type: :controller do
       expect(response).to be_success
     end
   end
-
 end

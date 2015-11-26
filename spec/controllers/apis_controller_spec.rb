@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe ApisController, type: :controller do
-
   describe "GET 'markdown_preview'" do
     it 'returns http redirect' do
       get 'markdown_preview'
@@ -17,5 +16,4 @@ describe ApisController, type: :controller do
       expect(response).to be_success
     end
   end
-
 end

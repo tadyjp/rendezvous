@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe WelcomeController, type: :controller do
-
   describe "GET 'top'" do
     it 'should be successful' do
       get :top
@@ -11,11 +10,9 @@ describe WelcomeController, type: :controller do
   end
 
   describe 'Login' do
-
     let(:user) { FactoryGirl.create(:alice) }
 
     describe "GET 'top'" do
-
       it 'should be successful' do
         sign_in FactoryGirl.create(:alice)
 
@@ -30,8 +27,6 @@ describe WelcomeController, type: :controller do
         get :top
         expect(assigns(:current_user)).to eq(user)
       end
-
     end
   end
-
 end

@@ -24,7 +24,7 @@ class Notification < ActiveRecord::Base
   end)
 
   scope :recent, (lambda do
-    where(arel_table[:created_at].gt 7.day.ago)
+    where(arel_table[:created_at].gt 7.days.ago)
   end)
 
   ######################################################################

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe UsersController, type: :controller do
-
   describe "GET 'edit'" do
     it 'returns http success' do
       sign_in FactoryGirl.create(:alice)
@@ -19,5 +18,4 @@ describe UsersController, type: :controller do
       expect(response).to redirect_to('/user/edit')
     end
   end
-
 end

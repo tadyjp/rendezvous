@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
       u.name = access_token.info['name']
       u.image_url = access_token.info['image']
       u.password = Devise.friendly_token[0, 20]
-      u.nickname = (('a'..'z').to_a + ('A'..'Z').to_a + (0..9).to_a).shuffle[0..4].join
+      u.nickname = (('a'..'z').to_a + ('A'..'Z').to_a + (0..9).to_a).sample(5).join
     end
 
     user.google_auth_token = access_token.credentials['token'] if access_token.credentials['token']

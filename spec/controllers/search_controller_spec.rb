@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe SearchController, type: :controller do
-
   describe "GET 'show' without login" do
     it 'returns http redirect' do
       get 'show'
@@ -17,5 +16,4 @@ describe SearchController, type: :controller do
       expect(response).to be_success
     end
   end
-
 end

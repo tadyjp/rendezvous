@@ -26,9 +26,7 @@
 require 'rails_helper'
 
 describe User do
-
   describe 'Instance method' do
-
     let(:bob) { create(:bob) }
     let(:alice) { create(:alice) }
     let(:post) { create(:post) }
@@ -117,7 +115,6 @@ describe User do
     end
 
     describe 'passwords' do
-
       before(:each) do
         @user = User.new(@attr)
       end
@@ -132,7 +129,6 @@ describe User do
     end
 
     describe 'password validations' do
-
       it 'should require a password' do
         expect(User.new(@attr.merge(password: '', password_confirmation: ''))).not_to be_valid
       end
@@ -146,11 +142,9 @@ describe User do
         hash = @attr.merge(password: short, password_confirmation: short)
         expect(User.new(hash)).not_to be_valid
       end
-
     end
 
     describe 'password encryption' do
-
       before(:each) do
         @user = User.create!(@attr)
       end
@@ -162,12 +156,10 @@ describe User do
       it 'should set the encrypted password attribute' do
         expect(@user.encrypted_password).not_to be_blank
       end
-
     end
   end
 
   describe 'draft' do
     pending 'draft'
   end
-
 end

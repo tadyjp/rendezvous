@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe PostsController, type: :controller do
-
   let(:post) { FactoryGirl.create(:post) }
 
   describe "GET 'show' without login" do
@@ -12,7 +11,6 @@ describe PostsController, type: :controller do
   end
 
   describe "GET 'show' with login" do
-
     let(:alice) { FactoryGirl.create(:alice) }
 
     it 'returns http success' do
@@ -29,5 +27,4 @@ describe PostsController, type: :controller do
       expect(Footprint.where(user_id: alice.id, post_id: post.id)).to exist
     end
   end
-
 end
