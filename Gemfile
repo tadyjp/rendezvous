@@ -11,8 +11,6 @@ gem 'therubyracer', platforms: :ruby
 # gem 'jbuilder'
 gem 'i18n_generators'
 
-gem 'unicorn'
-
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -38,7 +36,6 @@ group :development do
   gem 'capistrano-bundler', '~> 1.1.2'
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-rbenv', '~> 2.0'
-  gem 'capistrano3-unicorn'
 
   gem 'travis'
 end
@@ -107,8 +104,11 @@ gem 'hipchat'
 # for PDF upload
 gem 'rmagick', require: 'RMagick'
 
-# for heroku
-gem 'rails_12factor', group: :production
+group :production do
+  # for heroku
+  gem 'rails_12factor'
+  gem 'puma'
+end
 
 # for IP restriction
 gem 'rack-contrib', require: 'rack/contrib'
