@@ -16,7 +16,6 @@ require 'rails_helper'
 
 describe Notification do
   describe 'Instance method' do
-
     before :each do
       @alice = create(:alice)
       @bob = create(:bob)

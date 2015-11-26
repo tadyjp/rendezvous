@@ -1,26 +1,17 @@
-development:
+default: &default
   adapter: mysql2
   encoding: utf8
-  reconnect: false
   pool: 5
+  username:
+  password:
+  host: localhost
+
+development:
   url: <%= ENV['DATABASE_URL'] %>
 
 test:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
-  pool: 5
-  host: localhost
-  database: rendezvous_test
-  username: travis
-  password:
+  url: <%= ENV['DATABASE_URL'] %>
 
 production:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
-  pool: 5
-  host: rendezvous.production
-  database: rendezvous
-  username: xxxxxxxxxxxxxx
-  password: xxxxxxxxxxxxxx
+  url: <%= ENV['DATABASE_URL'] %>
+

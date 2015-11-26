@@ -11,15 +11,28 @@ A simple markdown-based blog & wiki system for team.
 
 # Supported versions
 
-- Ruby 2.1.4
+- Ruby 2.2.3
 
 # How to install and use.
+
+## Install dependencies
+
+```
+# for PDF processing.
+$ brew install imagemagick ghostscript
+
+# for JS test
+$ npm install phantomjs -g
+$ phantomjs -v
+```
+
 
 ## Get code and install gems.
 
 ```
 $ git clone git@github.com:tadyjp/rendezvous.git
 $ cd rendezvous
+
 $ bundle install
 ```
 
@@ -38,10 +51,17 @@ and get
 6. Write your Client ID & Secret in config/settings.yml
 7. Input form
   -`rendevous` in [Project name] in Consent screen
+8. Make sure `Google+ API` and `Gmail API` enabled.
 
 
 ## Dotenv
 
+Fill in your environment in `.env.development`
+
+```
+$ cp .env .env.development
+$ vim .env.development
+```
 
 ## Setup DB
 
@@ -49,24 +69,25 @@ and get
 $ (bundle exec) rake db:migrate
 $ (bundle exec) rake db:seed
 ```
+
 And have fun with your team !
-
-
-# Optional features
-
-## PDF uploading
-
-```
-brew install imagemagick ghostscript
-```
-
 
 
 # Test
 
+Before you run test, please setup test environment.
+
+```
+$ cp .env .env.test
+$ vim .env.test
+```
+
+And run
+
+```
+$ (bundle exec) rspec
+```
+
+
 Rendezvous uses travis-ci for test.
-
-To speet up `bundle install` in travis-ci, Rendezvous use AWS S3 backet for storing gems.
-
-see also: http://randomerrata.com/post/45827813818/travis-s3
 

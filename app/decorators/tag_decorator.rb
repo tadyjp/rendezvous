@@ -40,7 +40,7 @@ class TagDecorator < Draper::Decorator
     html = ''
 
     html += %(
-      <a href="#{ show_path }" data-name="#{model.name}">
+      <a href="#{show_path}" data-name="#{model.name}">
         #{model.name} <span class="badge">#{model.posts.size}</span>
       </a>
         )

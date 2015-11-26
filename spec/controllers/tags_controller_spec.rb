@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe TagsController, type: :controller do
-
   let(:tag) { FactoryGirl.create(:tag_ruby) }
 
   describe "GET 'show' without login" do
@@ -19,5 +18,4 @@ describe TagsController, type: :controller do
       expect(response).to be_success
     end
   end
-
 end

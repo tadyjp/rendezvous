@@ -86,7 +86,7 @@ class Post < ActiveRecord::Base
 
   scope :today, -> { where(arel_table[:updated_at].gt 1.day.ago) }
   scope :this_month, -> { where(arel_table[:updated_at].gt 1.month.ago) }
-  scope :last_month, -> { where(arel_table[:updated_at].gt 2.month.ago).where(arel_table[:updated_at].lt 1.month.ago) }
+  scope :last_month, -> { where(arel_table[:updated_at].gt 2.months.ago).where(arel_table[:updated_at].lt 1.month.ago) }
 
   ######################################################################
   # Class method
