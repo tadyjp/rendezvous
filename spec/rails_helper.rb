@@ -26,7 +26,7 @@ def register_poltergeist(_config)
   # Capybara.run_server = true
   # Capybara.default_driver = :poltergeist
   Capybara.javascript_driver = :poltergeist
-  Capybara.default_wait_time = 10
+  Capybara.default_max_wait_time = 10
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
