@@ -102,7 +102,7 @@ gem 'jwt', '0.1.11'
 gem 'hipchat'
 
 # for PDF upload
-gem 'rmagick', require: 'RMagick'
+gem 'rmagick'
 
 group :production do
   # for heroku
