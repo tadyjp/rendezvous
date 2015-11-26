@@ -3,7 +3,7 @@ bundler_args: "--without development --deployment"
 language: ruby
 cache: bundler
 rvm:
-- 2.1.4
+- 2.2.3
 env:
   matrix:
   - DB_TEST_DATABASE=rendezvous_test DB_TEST_USER=travis
