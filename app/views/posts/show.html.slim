@@ -85,7 +85,8 @@
               a.pull-left href="#"
                 img.media-object src=comment.author.image_url /
               .media-body
-                h4.media-heading= comment.author.name
+                author.media-heading= comment.author.name
+                commented_at.small= comment.created_at
                 = comment.body
           = form_tag(comment_post_path, method: :post, data: { 'form-id' => "comment_#{@post.id}" }) do
             li.media
