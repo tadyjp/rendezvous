@@ -1,0 +1,23 @@
+@import 'values';
+$red:#ec0160;
+$yellow:#ffc105;
+$blue:#36b1c0;
+$green:#00e0ae;
+
+.z-nav {
+  position: fixed;
+  top: 0;
+  padding: 10px 0px;
+  text-align: center;
+  font-size: 32px;
+  font-family: 'Quicksand';
+  a {
+    color: #000;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  p {
+    font-size: 12px;
+  }
+}
