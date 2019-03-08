@@ -468,7 +468,7 @@ DEPENDENCIES
   mysql2
   newrelic_rpm
   nokogiri
-  omniauth-google-oauth2
+  omniauth-google-oauth2 (~> 0.6.0)
   paper_trail (~> 3.0.0)
   poltergeist
   premailer
@@ -492,4 +492,4 @@ DEPENDENCIES
   validates_email_format_of
 
 BUNDLED WITH
-   1.16.1
+   1.15.2
