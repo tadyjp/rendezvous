@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 4.1'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', github: 'rails/sass-rails'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
@@ -89,6 +89,7 @@ group :development, :test do
   gem 'database_rewinder'
 
   gem 'teaspoon'
+  gem 'teaspoon-mocha'
   gem 'guard-teaspoon'
   gem 'byebug'
 end
@@ -108,7 +109,7 @@ gem 'ancestry'
 # Send mail via gmail oauth
 # ref. https://github.com/popgiro/action-gmailer
 gem 'mail'
-gem 'action-gmailer', github: 'popgiro/action-gmailer'
+gem 'action-gmailer'
 
 # compose html mail
 gem 'nokogiri'
@@ -137,9 +138,9 @@ gem 'slim'
 
 gem 'annotate', ">=2.6.0"
 
-gem 'kaminari', github: 'amatsuda/kaminari'
+gem 'kaminari'
 
-gem 'jwt', '0.1.11'
+gem 'jwt', '>= 2.0'
 
 
 # Optional
