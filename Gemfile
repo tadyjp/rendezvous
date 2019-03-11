@@ -151,3 +151,5 @@ gem 'hipchat', '~> 1.2.0'
 
 # For PDF upload
 gem 'rmagick', '~> 2.13.3', :require => 'RMagick'
+
+gem 'rb-inotify', '~> 0.9.5'
