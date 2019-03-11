@@ -26,8 +26,6 @@
 /db/*.sql
 
 # secret files
-/config/database.yml
-/config/settings.yml
 
 /backup
 /script/backup.sh
