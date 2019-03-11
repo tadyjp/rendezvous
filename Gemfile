@@ -47,6 +47,7 @@ gem 'mysql2', '~> 0.3.16'
 
 gem 'devise', '~> 3.2.4'
 
+gem 'omniauth', '~> 1.4.3'
 gem 'omniauth-google-oauth2', '~> 0.6.0'
 
 # Markdown
