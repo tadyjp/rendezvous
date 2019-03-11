@@ -58,20 +58,20 @@ gem 'coderay', '~> 1.1.0'
 
 group :development do
   # Use sqlite3 as the database for Active Record
-  gem 'better_errors'
-  gem 'binding_of_caller'
+  gem 'better_errors', '~> 1.1.0'
+  gem 'binding_of_caller', '~> 0.7.2'
 
-  gem 'thin'
+  gem 'thin', '~> 1.6.2'
 
-  gem 'pry-rails'
+  gem 'pry-rails', '~> 0.3.2'
 
   # profiler
-  gem 'rack-mini-profiler'
+  gem 'rack-mini-profiler', '~> 0.9.2'
 
   # rubocop
-  gem 'rubocop'
-  gem 'guard-rspec', require: false
-  gem 'guard-rubocop'
+  gem 'rubocop', '~> 0.24.1'
+  gem 'guard-rspec', '~> 4.3.1', require: false
+  gem 'guard-rubocop', '~> 1.1.0'
   # gem 'guard-spring'
   # gem 'spring'
 
@@ -80,19 +80,18 @@ group :development do
   gem 'capistrano-bundler', '~> 1.1.2'
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-rbenv', '~> 2.0'
-  gem 'capistrano3-unicorn'
+  gem 'capistrano3-unicorn', '~> 0.2.1'
 end
 
 group :development, :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.0.2'
 
   # gem 'database_cleaner'
-  gem 'database_rewinder'
+  gem 'database_rewinder', '~> 0.2.0'
 
-  gem 'teaspoon'
-  gem 'teaspoon-mocha'
-  gem 'guard-teaspoon'
-  gem 'byebug'
+  gem 'teaspoon', '~> 0.8.0'
+  gem 'guard-teaspoon', '~> 0.8.0'
+  gem 'byebug', '~> 3.1.2'
 end
 
 group :test do
@@ -153,3 +152,4 @@ gem 'hipchat', '~> 1.2.0'
 gem 'rmagick', '~> 2.13.3', :require => 'RMagick'
 
 gem 'rb-inotify', '~> 0.9.5'
+gem 'rdoc', '~> 4.1.1'
