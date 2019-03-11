@@ -1,24 +1,59 @@
+inherit_from: .rubocop_todo.yml
 
-LineLength:
-  Max: 159
+AllCops:
 
-NumericLiterals:
+  # Rails特有のチェックを実行
+  RunRailsCops: true
+
+  # チェック対象外ディレクトリ
+  Exclude:
+      - 'db/**/*'
+      - 'config/**/*'
+      - 'script/**/*'
+      - 'bin/**/*'
+      - 'vendor/**/*'
+      - 'Guardfile'
+
+# Ascii文字以外のコメントを許容
+Style/AsciiComments:
   Enabled: false
 
-Documentation:
+# 1行の最大文字列長を緩和
+Metrics/LineLength:
+  Max: 160
+
+# メソッド定義の行数を緩和
+Metrics/MethodLength:
+  Max: 50
+
+# Classの最大長制限
+Metrics/ClassLength:
+  Max: 300
+
+# top-classでのコメントを任意に
+Style/Documentation:
   Enabled: false
 
-WordArray:
+# 1行if文を使用可に
+Style/IfUnlessModifier:
   Enabled: false
 
-MethodLength:
-  Max: 30
-
-IfUnlessModifier:
+# nestしたclass/moduleを許容
+Style/ClassAndModuleChildren:
   Enabled: false
 
-CyclomaticComplexity:
-  Max: 10
+# 後置rescueを許容
+Style/RescueModifier:
+  Enabled: false
 
-RaiseArgs:
+# and/orを許容
+Style/AndOr:
+  Enabled: false
+
+# ABCチェックを無効
+Metrics/AbcSize:
+  Enabled: false
+
+# ???
+Style/RaiseArgs:
   Enabled: false

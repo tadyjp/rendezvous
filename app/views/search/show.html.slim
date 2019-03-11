@@ -1,30 +1,36 @@
 /! view:search/show
+
 .row
+  .col-xs-12.col-md-8 role="navigation"
+    .panel.panel-main
+      .panel-heading
+        h2.panel-title
+          i.fa.fa-search
+          | &nbsp; "#{params[:q]}"
+          span.small - 検索結果#{@count}件
 
-  h1
-    span "#{params[:q]}"
-    span.small - 検索結果
-    span.small #{@count}件
+      ul.list-group.panel-body
+        - @posts.each do |post|
+          li.list-group-item
+            = render partial: 'posts/large_item', locals: { post: post }
 
-  .col-xs-8 role="navigation"
-    .list-group
-      - @posts.each do |_post|
-        = render partial: 'posts/large_item', locals: { post: _post }
     = paginate(@posts)
 
-  .col-xs-4
+  .col-xs-12.col-md-4
     .panel.panel-default
       .panel-heading
-        h2.panel-title "#{params[:q]}"に関連するタグ
+        h3.panel-title
+          i.fa.fa-tags
+          | &nbsp;"#{params[:q]}"に関連する他のタグ
       .panel-body.list-group
-        - @posts.related_tags.each do |_tag|
-          a.list-group-item href=search_path(q: "##{_tag.name}") = _tag.name
+        - @posts.related_tags.each do |tag|
+          a.list-group-item href=search_path(q: "##{tag.name}") = tag.name
 
     .panel.panel-default
       .panel-heading
-        h2.panel-title "#{params[:q]}"に関連するユーザー
+        h3.panel-title
+          i.fa.fa-users
+          | &nbsp;"#{params[:q]}"に貢献しているユーザー
       .panel-body.list-group
-        - @posts.related_authors.each do |_author|
-          a.list-group-item href=search_path(q: "@#{_author.nickname}") = _author.name
-
-
+        - @posts.related_authors.each do |author|
+          a.list-group-item href=search_path(q: "@#{author.nickname}") = author.name

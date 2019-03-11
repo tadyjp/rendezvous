@@ -19,13 +19,13 @@ class Notification < ActiveRecord::Base
   # Named scope
   ######################################################################
 
-  scope :unread, -> {
+  scope :unread, (lambda do
     where(is_read: false)
-  }
+  end)
 
-  scope :recent, -> {
-    where(arel_table[:created_at].gt 7.day.ago)
-  }
+  scope :recent, (lambda do
+    where(arel_table[:created_at].gt 7.days.ago)
+  end)
 
   ######################################################################
   # Instance method

@@ -1,5 +1,4 @@
 class SearchController < ApplicationController
-
   def show
     if params[:q].present?
       scope = Post.search(params[:q])

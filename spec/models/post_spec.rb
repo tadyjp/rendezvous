@@ -16,7 +16,6 @@ require 'rails_helper'
 require 'date'
 
 describe Post do
-
   describe 'Instance method' do
     before :each do
       @post = create(:post)
@@ -26,7 +25,6 @@ describe Post do
     end
 
     describe 'Fork' do
-
       it 'duplicated' do
         expect(@new_post.id).not_to eq(@post.id)
       end
@@ -50,7 +48,6 @@ describe Post do
       it 'valid specified_date' do
         expect(@new_post.specified_date).to eq(Date.today)
       end
-
     end
   end
 

@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20140719145016) do
   create_table "notifications", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
     t.datetime "read_at"
-    t.boolean  "is_read",                   default: false, null: false
+    t.boolean  "is_read",     limit: 1,     default: false, null: false
     t.string   "detail_path", limit: 255
     t.text     "body",        limit: 65535
     t.datetime "created_at"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20140719145016) do
     t.integer  "author_id",      limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_draft",                     default: false
+    t.boolean  "is_draft",       limit: 1,     default: false
     t.date     "specified_date"
   end
 

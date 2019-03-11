@@ -1,0 +1,20 @@
+{
+  "Version": "2012-10-17",
+  "Id": "Rendezvous IP policy",
+  "Statement": [
+    {
+      "Sid": "IPAllow",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::rendezvous-uploads/*",
+      "Condition": {
+        "IpAddress": {
+          "aws:SourceIp": [
+            "111.111.111.111/32"
+          ]
+        }
+      }
+    }
+  ]
+}

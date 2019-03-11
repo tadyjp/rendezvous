@@ -12,49 +12,86 @@
 #
 
 class Tag < ActiveRecord::Base
-  has_many :post_tags
-  has_many :posts, through: :post_tags
-
   # for tree structure
   has_ancestry
 
   # for versioning
   has_paper_trail
 
-  default_scope { order(:updated_at => :desc) }
+  ######################################################################
+  # Associations
+  ######################################################################
+  has_many :post_tags
+  has_many :posts, through: :post_tags
+
+  ######################################################################
+  # Named scope
+  ######################################################################
+  default_scope { order(updated_at: :desc) }
 
   scope :posts_exist, lambda {
-    select('tags.*, count(posts.id) as posts_count').
-    joins(:posts).
-    group('tags.id').
-    having('posts_count > 0')
+    select('tags.*, count(posts.id) as posts_count')
+      .joins(:posts)
+      .group('tags.id')
+      .having('posts_count > 0')
   }
 
-  class << self
+  scope :recently_created, (lambda do |limit = 10|
+    order(created_at: :desc).limit(limit)
+  end)
 
+  ######################################################################
+  # Class method
+  ######################################################################
+  class << self
     # 最近投稿されたTagを取得
-    def recent(limit=10)
-      Post.recent(20).map do |post|
-        post.tags
-      end.flatten.compact.uniq.take(limit)
+    def recent(limit = 10)
+      Post.recent(20).map(&:tags).flatten.compact.uniq.take(limit)
     end
 
+    # TODO: cache
+    def monthly_popular(limit = 10)
+      tags_this_month = Hash.new { |h, k| h[k] = 0 } # { <tag.id> => <count> }
+      tags_last_month = Hash.new { |h, k| h[k] = 0 } # { <tag.id> => <count> }
+
+      Post.this_month.each do |post|
+        post.tags.each { |tag| tags_this_month[tag.id] += 1 }
+      end
+
+      Post.last_month.each do |post|
+        post.tags.each { |tag| tags_last_month[tag.id] += 1 }
+      end
+
+      tags_this_month_with_score = {}
+      tags_this_month.each do |tag_id, this_month_count|
+        next if this_month_count <= 3
+        tags_this_month_with_score[tag_id] = this_month_count.to_f / (tags_last_month[tag_id] + 1)
+      end
+
+      sorted = tags_this_month_with_score.sort_by { |_k, v| -v }.take(limit).to_h
+
+      Tag.find(sorted.keys).to_a.zip(sorted.values).to_h
+    end
   end
 
+  ######################################################################
+  # Instance method
+  ######################################################################
+
   def recent_posts(limit = 30)
-    self.posts.recent(limit)
+    posts.recent(limit)
   end
 
   # 自分のタグに紐づくPostをすべて`other_tag`へ移動する
   def move_all_posts_to!(other_tag)
-    self.posts.each do |_post|
-      _post.tags.delete(self)
-      _post.tags << other_tag unless _post.tags.include?(other_tag)
+    posts.each do |moving_post|
+      moving_post.tags.delete(self)
+      moving_post.tags << other_tag unless moving_post.tags.include?(other_tag)
     end
   end
 
   # 親タグを設定する
-  def set_parent!(other_tag)
+  def parent_tag=(other_tag)
     self.parent = other_tag
     self.save!
   end

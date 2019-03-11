@@ -8,41 +8,52 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    set_meta_tags title: @post.title
+
     current_user.visit_post!(@post)
 
-    @post.tags.each do |_tag|
-      add_breadcrumb("##{_tag.name}", _tag.decorate.show_path)
+    @post.tags.each do |tag|
+      add_breadcrumb("##{tag.name}", tag.decorate.show_path)
     end
     add_breadcrumb(@post.title)
   end
 
   # GET /posts/new
   def new
+    set_meta_tags title: '新しい投稿'
+
     @post = Post.new(title: '新しい投稿')
+    render layout: 'edit'
   end
 
   def fork
     @post = set_post.generate_fork(current_user)
     @post.tags.destroy Tag.find_by(name: 'template')
-    render action: 'new'
+    render layout: 'edit', action: 'new'
   end
 
   def mail
     @post = set_post
 
     # refresh google oauth token if expired
-    current_user.google_oauth_token_refresh! if current_user.google_oauth_token_expired?
+    # current_user.google_oauth_token_refresh! if current_user.google_oauth_token_expired?
 
     compose_mail(@post, user: current_user, to: mail_params[:to]).deliver
-    redirect_to root_path(id: @post.id), flash: { success: 'Mail has sent!' }
+    gflash success: 'Mail has been sent!'
+    redirect_to root_path(id: @post.id)
   rescue ActionGmailer::DeliveryError
-    redirect_to root_path(id: @post.id), flash: { notice: 'Gmail authentication expired.' }
+    gflash error: 'Gmail authentication expired.'
+    redirect_to root_path(id: @post.id)
   rescue ArgumentError => err
-    redirect_to root_path(id: @post.id), flash: { alert: 'Mail format is invalid: ' + err.to_s }
+    gflash error: "Mail format is invalid: #{err}"
+    redirect_to root_path(id: @post.id)
   end
 
   # GET /posts/1/edit
   def edit
+    set_meta_tags title: @post.title
+
+    render layout: 'edit'
   end
 
   # POST /posts
@@ -53,7 +64,8 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to post_path(id: @post.id), flash: { notice: 'Post was successfully created.' } }
+        gflash success: 'Post was successfully created.'
+        format.html { redirect_to post_path(id: @post.id) }
         format.json { render action: 'show', status: :created, location: @post }
       else
         format.html { render action: 'new' }
@@ -69,7 +81,8 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to post_path(id: @post.id), flash: { notice: 'Post was successfully updated.' } }
+        gflash success: 'Post was successfully updated.'
+        format.html { redirect_to post_path(id: @post.id) }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -83,7 +96,8 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to flow_url, flash: { success: 'Post successfully deleted.' } }
+      gflash success: 'Post was successfully deleted.'
+      format.html { redirect_to flow_url }
       format.json { head :no_content }
     end
   end
@@ -94,10 +108,12 @@ class PostsController < ApplicationController
     @comment = @post.comments.build(comment_params.merge(author: current_user))
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to post_path(id: @post.id) }
+        gflash success: 'Comment was successfully created.'
+        format.html { redirect_to post_path(id: @post.id, anchor: 'comments_anchor') }
         format.json { render json: { status: 'ok', comment: @comment }, status: :created }
       else
-        format.html { redirect_to post_path(id: @post.id), flash: { alert: 'Comment is not saved.' } }
+        gflash error: 'Comment is not saved.'
+        format.html { redirect_to post_path(id: @post.id) }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -131,17 +147,17 @@ class PostsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
     @post_params ||= begin
-      _param_hash = params.require(:post).permit(:title, :body, :tags, :is_draft, :specified_date).to_hash
+      param_hash = params.require(:post).permit(:title, :body, :tags, :is_draft, :specified_date).to_hash
 
       # tags_text == 'Javascript,Ruby'
-      tags_text = _param_hash.delete('tags')
+      tags_text = param_hash.delete('tags')
 
-      tags = tags_text.split(',').map do |_tag_name|
-        Tag.find_or_create_by(name: _tag_name)
+      tags = tags_text.split(',').map do |tag_name|
+        Tag.find_or_create_by(name: tag_name)
       end
-      _param_hash['tag_ids'] = tags.map(&:id)
+      param_hash['tag_ids'] = tags.map(&:id)
 
-      _param_hash
+      param_hash
     end
   end
 

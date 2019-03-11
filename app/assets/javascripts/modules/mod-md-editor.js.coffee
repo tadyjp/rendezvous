@@ -29,7 +29,7 @@ $.fn.extend
       $textarea = $root.find('.mod-mdEditor-textarea')
 
       # textareのサイズ調整
-      $textarea.autosize();
+      # $textarea.autosize();
 
       # textareaのtabキー制御,indent維持
       $textarea.on 'keydown', (e) ->
@@ -87,7 +87,7 @@ $.fn.extend
           # TODO
           prettyPrint()
 
-      $textarea.on('keyup mouseup change', generatePreview)
+      $textarea.on('keyup mouseup change', _.debounce(generatePreview, 200))
 
       generatePreview()
 

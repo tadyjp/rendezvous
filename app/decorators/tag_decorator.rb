@@ -26,25 +26,33 @@ class TagDecorator < Draper::Decorator
     h.event_tag_path(name: model.name)
   end
 
-  # tagをtree viewで表示する
-  def tree_view_node
-    _html = ''
-
-    _html += %Q{
-      <a href="#{ self.show_path }" data-name="#{model.name}">
-        #{model.name} <span class="badge">#{model.posts.size}</span>
-      </a>
-    }
-
-    _html += '<ul>'
-    model.children.each do |_child|
-      _html += '<li>'
-      _html << _child.decorate.tree_view_node
-      _html += '</li>'
-    end
-    _html += '</ul>'
-
-    _html.html_safe
+  # TODO: module
+  def created_date
+    model.created_at.strftime('%Y-%m-%d')
   end
 
+  def structured_name
+    [model.ancestors.map(&:name), model.name].flatten.join('/')
+  end
+
+  # tagをtree viewで表示する
+  def tree_view_node
+    html = ''
+
+    html += %(
+      <a href="#{show_path}" data-name="#{model.name}">
+        #{model.name} <span class="badge">#{model.posts.size}</span>
+      </a>
+        )
+
+    html += '<ul>'
+    model.children.each do |child|
+      html += '<li>'
+      html << child.decorate.tree_view_node
+      html += '</li>'
+    end
+    html += '</ul>'
+
+    html.html_safe
+  end
 end

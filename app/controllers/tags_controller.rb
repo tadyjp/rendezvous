@@ -19,7 +19,8 @@ class TagsController < ApplicationController
 
     respond_to do |format|
       if @tag.save
-        format.html { redirect_to @tag.show_path, flash: { notice: 'Tag was successfully created.' } }
+        gflash success: 'Tag was successfully created.'
+        format.html { redirect_to @tag.show_path }
         format.json { render action: 'show', status: :created, location: @tag }
       else
         format.html { render action: 'new' }
@@ -31,7 +32,8 @@ class TagsController < ApplicationController
   def update
     respond_to do |format|
       if @tag.update(tag_params)
-        format.html { redirect_to @tag.show_path, flash: { notice: 'Tag was successfully updated.' } }
+        gflash success: 'Tag was successfully updated.'
+        format.html { redirect_to @tag.show_path }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -43,7 +45,8 @@ class TagsController < ApplicationController
   def destroy
     @tag.destroy
     respond_to do |format|
-      format.html { redirect_to flow_url, flash: { success: 'Tag successfully deleted.' } }
+      gflash success: 'Tag successfully deleted.'
+      format.html { redirect_to flow_url }
       format.json { head :no_content }
     end
   end
@@ -52,23 +55,23 @@ class TagsController < ApplicationController
   #   すべてのPostを移動先のタグに移動し
   #   このタグを削除する
   def merge_to
-    @merge_to_tag = Tag.find_by(name: params[:merge_to_name]) or raise ActiveRecord::RecordNotFound
+    @merge_to_tag = Tag.find_by(name: params[:merge_to_name]) or fail ActiveRecord::RecordNotFound
 
     @tag.move_all_posts_to!(@merge_to_tag)
     @tag.delete
 
-    flash[:notice] = "「#{@tag.name}」は「#{@merge_to_tag.name}」にmergeされました"
+    gflash success: "「#{@tag.name}」は「#{@merge_to_tag.name}」にmergeされました"
 
     render json: { status: 'OK' }
   end
 
   # このタグを他のタグの下に移動
   def move_to
-    @move_to_tag = Tag.find_by(name: params[:move_to_name]) or raise ActiveRecord::RecordNotFound
+    @move_to_tag = Tag.find_by(name: params[:move_to_name]) or fail ActiveRecord::RecordNotFound
 
-    @tag.set_parent!(@move_to_tag)
+    @tag.parent_tag = @move_to_tag
 
-    flash[:notice] = "「#{@tag.name}」は「#{@move_to_tag.name}」の下に移動しました"
+    gflash success: "「#{@tag.name}」は「#{@move_to_tag.name}」の下に移動しました"
 
     render json: { status: 'OK' }
   end
@@ -76,12 +79,11 @@ class TagsController < ApplicationController
   private
 
   def set_tag
-    tag = Tag.find_by(name: params[:name]) or raise ActiveRecord::RecordNotFound
+    tag = Tag.find_by(name: params[:name]) or fail ActiveRecord::RecordNotFound
     @tag = tag.decorate
   end
 
   def tag_params
     params.require(:tag).permit(:name, :body).to_hash
   end
-
 end

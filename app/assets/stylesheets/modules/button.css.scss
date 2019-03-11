@@ -1,0 +1,33 @@
+@import 'modules/settings';
+
+.btn-default {
+
+  text-shadow: none;
+  background: $theme-color-main;
+  color: $theme-color-light;
+  border: none;
+
+  // @include border_radius;
+  // color: $theme-color-main;
+  // border: 1px solid $theme-color-main;
+
+  // &:hover {
+  //   @include transition;
+  //   background-color: #eee;
+  // }
+
+  // a {
+  //   color: $theme-color-main;
+  // }
+
+  // .dropdown-toggle {
+  //   background-color: $theme-color-main;
+  //   @include border_radius(0px);
+  //   color: #fff;
+  //   background-image: none!important;
+  //   border: 1px solid transparent;
+  //   .caret {
+  //     font-size: 20px;
+  //   }
+  // }
+}

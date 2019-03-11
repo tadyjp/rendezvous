@@ -4,7 +4,6 @@ include Warden::Test::Helpers
 Warden.test_mode!
 
 describe 'Request via js', js: true do
-
   let(:user) { FactoryGirl.create(:login_user_1) }
 
   before do
@@ -20,12 +19,11 @@ describe 'Request via js', js: true do
 
   it 'show first post' do
     page.save_screenshot(Rails.root.join('tmp', 'screenshots', "a-#{Time.now.strftime('%Y-%m-%d %H%M%S')}.png"))
-    expect(page.find('.post-list:first-child h4').text).to include('java java')
+    expect(page.find('.panel-main .list-group-item:first-child h4').text).to include('java java')
   end
 
   after :each do
     page.driver.reset!
     Warden.test_reset!
   end
-
 end

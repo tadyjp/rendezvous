@@ -1,0 +1,7 @@
+@import 'modules/settings';
+
+.label-default {
+  background-color: transparent;
+  color: $theme-color-dark;
+  border: 1px solid $theme-color-dark;
+}
