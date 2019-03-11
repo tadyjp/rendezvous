@@ -6,27 +6,28 @@ Coveralls.wear!
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 
-Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
+Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
 
 require 'rspec/rails'
-# require 'rspec/autorun'
+require 'rspec/autorun'
 # require 'email_spec'
 require 'factory_girl'
 
 require 'capybara'
 require 'capybara/rspec'
 
+
 ## Setting for polterguist.
 require 'capybara/poltergeist'
 
-def register_poltergeist(_config)
+def register_poltergeist(config)
   Capybara.register_driver :poltergeist do |app|
     Capybara::Poltergeist::Driver.new(app, timeout: 60, js_errors: false)
   end
   # Capybara.run_server = true
   # Capybara.default_driver = :poltergeist
   Capybara.javascript_driver = :poltergeist
-  Capybara.default_max_wait_time = 10
+  Capybara.default_wait_time = 10
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -37,8 +38,9 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
+
 # Setting for turnip.
-Dir.glob('spec/steps/**/*steps.rb') { |f| load f, true }
+Dir.glob("spec/steps/**/*steps.rb") { |f| load f, true }
 require 'turnip'
 require 'turnip/capybara'
 
@@ -92,17 +94,18 @@ RSpec.configure do |config|
     DatabaseRewinder.clean
   end
 
-  config.include Devise::TestHelpers, type: :controller
+  config.include Devise::TestHelpers, :type => :controller
   # config.extend ControllerMacros, :type => :controller
 
   # Capybara.app_host = "http://127.0.0.1/"
   register_poltergeist(config)
 
   OmniAuth.config.test_mode = true
-  OmniAuth.config.add_mock(:google_oauth2,
-                           'uid' => '12345',
-                           'provider' => 'google_oauth2',
-                           'info' => { 'name' => 'Taro Yamada', 'email' => 'taro@example.com' },
-                           'credentials' => { 'token' => 'aaaaa', 'refresh_token' => 'bbbbb', 'expires_at' => 9_999_999_999 }
-                          )
+  OmniAuth.config.add_mock(:google_oauth2, {
+    'uid' => '12345',
+    'provider' => 'google_oauth2',
+    'info' => {'name' => 'Taro Yamada', 'email' => 'taro@zigexn.co.jp'},
+    'credentials' => {'token' => 'aaaaa', 'refresh_token' => 'bbbbb', 'expires_at' => 9999999999}
+  })
+
 end

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   before_action :set_user, only: [:edit, :update]
 
   def edit
@@ -7,8 +8,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        gflash success: 'Post was successfully updated.'
-        format.html { redirect_to edit_user_path }
+        format.html { redirect_to edit_user_path, flash: { notice: 'Post was successfully updated.' } }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

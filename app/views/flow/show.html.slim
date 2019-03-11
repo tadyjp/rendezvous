@@ -1,74 +1,39 @@
 /! view:flow/show
-
-.row
-  .col-xs-3
-    .numbers-wrapper
-      div
-        span.large = Post.today.count
-        span = "/ #{Post.count}"
-      label.numbers Today's Stocks
-  .col-xs-3
-    .numbers-wrapper
-      div
-        span.large = User.post_today.count
-        span = "/ #{User.count}"
-      label.numbers Today's Writers
-  .col-xs-3
-    .numbers-wrapper
-      div
-        span.large = Footprint.today.count
-        span = "/ #{Footprint.count}"
-      label.numbers Today's PVs
-  .col-xs-3
-    .numbers-wrapper
-      div
-        span.large = User.now_viewing.count
-      label.numbers Now Viewing
-
-  .col-xs-12.col-md-8 role="navigation"
-    .panel.panel-main
+.row.flow-wrapper
+  .numbers-wrapper
+    .col-xs-4
+      label.numbers Stocks
+      p = Post.count
+    .col-xs-4
+      label.numbers Users
+      p = User.count
+    .col-xs-4
+      label.numbers Tags
+      p = Tag.count
+  .col-xs-8 role="navigation"
+    .panel
       .panel-heading
-        h2.panel-title
-          i.fa.fa-rss
-          | &nbsp;Flow
-          span.small &nbsp;- 最近投稿された記事
+        h1
+          = image_tag 'flow.png'
+          | Flow
+          small  - 最近投稿された記事
 
-      ul.list-group.panel-body
-        - @posts.each do |post|
-          li.list-group-item
-            = render partial: 'posts/large_item', locals: { post: post }
-
+      .panel-body.list-group
+        - @posts.each do |_post|
+          = render partial: 'posts/large_item', locals: { post: _post }
     = paginate(@posts)
 
-  .col-xs-12.col-md-4
-    .panel.panel-default
-      .panel-heading
-        h3.panel-title
-          i.fa.fa-history
-          | &nbsp;この1週間で閲覧の多かった投稿
-      .panel-body.list-group
-        - Post.most_pv_in_this_week(5).each do |(post, footprints_count)|
-          a.list-group-item.post-list href=post_path(post)
-            span.badge.pull-right = "#{footprints_count} PV"
-            = post.title
+  .col-xs-4
+    / .panel.panel-default
+    /   .panel-heading
+    /     h2.panel-title この1週間で閲覧の多かった投稿(調整中)
+    /   .panel-body.list-group
+    /     - Post.limit(5).each do |_post|
+    /       = render partial: 'posts/small_item', locals: { post: _post }
 
-    .panel.panel-default
+    .panel
       .panel-heading
-        h3.panel-title
-          i.fa.fa-smile-o
-          | &nbsp;最近あなたが投稿した記事
-      .panel-body.list-group
-        - current_user.posts.recent(10).each do |post|
-          = render partial: 'posts/small_item', locals: { post: post.decorate }
-        a.list-group-item href=search_path(q: "@#{current_user.nickname}")
-          i.fa.fa-plus-square
-          | もっと見る
-
-    .panel.panel-default
-      .panel-heading
-        h3.panel-title
-          i.fa.fa-tags
-          | &nbsp;最近投稿されたタグ
+        h2.panel-title 最近投稿されたタグ
       .panel-body.list-group
         - Tag.recent(10).each_with_index do |tag, i|
           a.list-group-item data-tag-id=tag.id href=search_path(q: "##{tag.name}")

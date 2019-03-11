@@ -1,20 +1,22 @@
 class TagsDecorator < Draper::CollectionDecorator
+
   # tagをtree viewで表示する
   def tree_view
-    html = ''
-    html += %(
+    _html = ''
+    _html += %Q{
       <ul class="mod-tag-tree">
         <input type="search" class="mod-tag-tree-filter form-control" placeholder="filter...">
-        )
-    each do |node|
-      html += %(
+    }
+    self.each do |_node|
+      _html += %Q{
         <li>
-          #{node.decorate.tree_view_node}
+          #{_node.decorate.tree_view_node}
         </li>
-            )
+      }
     end
-    html += '</ul>'
+    _html += "</ul>"
 
-    html.html_safe
+    _html.html_safe
   end
+
 end

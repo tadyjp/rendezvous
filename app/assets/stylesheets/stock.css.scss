@@ -1,11 +1,11 @@
-@import 'modules/settings';
+@import 'values';
 
 .mod-tag-tree {
   .mod-tag-tree-filter {
     margin-bottom: 20px;
     width: 400px!important;
     &:focus {
-      border: 1px solid $theme-color-main;
+      border: 1px solid $main-color;
       box-shadow: 0 0 0 #fff!important;
       background-color: #f8f8f8;
       @include transition;
@@ -21,19 +21,19 @@
   }
 }
 
-// .stock-wrapper {
-//   margin-top: 15px;
-//   .odometer {
-//     position: relative;
-//     bottom: 2px;
-//   }
-//   h1 {
-//     color: #fff;
-//     small {
-//       color: #f8f8f8;
-//     }
-//   }
-//   .list-group {
-//     box-shadow: 0 0 0 #fff;
-//   }
-// }
+.stock-wrapper {
+  margin-top: 15px;
+  .odometer {
+    position: relative;
+    bottom: 2px;
+  }
+  h1 {
+    color: #fff;
+    small {
+      color: #f8f8f8;
+    }
+  }
+  .list-group {
+    box-shadow: 0 0 0 #fff;
+  }
+}

@@ -1,39 +1,14 @@
 /! view:stock/show
-
 .row
-
-  .col-xs-12.col-md-8 role="navigation"
-    .panel.panel-main
+  .col-md-12
+    .panel.stock-wrapper
       .panel-heading
-        h2.panel-title
-          i.fa.fa-stack-overflow
-          | &nbsp;Stock
-          span.small &nbsp;- 保存・蓄積された記事
-
-      .panel-body.list-group
-        #tab-tree
-          = Tag.posts_exist.decorate.tree_view
-
-
-  .col-xs-12.col-md-4
-    .panel
-      .panel-heading
-        h3.panel-title
-          i.fa.fa-star
-          | &nbsp;今月のホットタグ
-      .panel-body.list-group
-        - Tag.monthly_popular(10).each do |tag, score|
-          a.list-group-item href=search_path(q: "##{tag.name}")
-            = tag.name
-            span.badge #{score.round(2)} pt.
-
-    .panel
-      .panel-heading
-        h3.panel-title
-          i.fa.fa-tags
-          | &nbsp;最近作成されたタグ
-      .panel-body.list-group
-        - Tag.recently_created(10).each do |tag|
-          a.list-group-item href=search_path(q: "##{tag.name}")
-            = tag.name
-            span.label.pull-right = tag.decorate.created_date
+        h1
+          | &nbsp;Stocks
+          small  - 保存・蓄積された記事
+      .panel-body
+        #sidebar role="navigation"
+          #tab-tree.tab-pane
+            - cache('tag-tree', :expires_in => 1.hour) do
+              .list-group
+                = Tag.posts_exist.decorate.tree_view

@@ -1,22 +1,27 @@
-sudo: false
-bundler_args: "--without development --deployment"
+bundler_args: "--without development --path=~/.bundle"
 language: ruby
-cache: bundler
 rvm:
-- 2.2.3
+- 2.1.2
 env:
   matrix:
   - DB_TEST_DATABASE=rendezvous_test DB_TEST_USER=travis
   global:
-  - DATABASE_URL=mysql2://travis@localhost/rendezvous_test
+  - secure: iCVObmVUWglzaPBvhJ/oCg/0LXFffDyGii/ws2YanPxXs9QsFhVDDj0WtKikK1ZsvZQBADRUJlQwDeTj2VD8rTGsq0Wu9Tjjz82vm+BJ6wb67QMr8HAdi096QeushLKmuVni1HEZcfStltSbmxkZpeRNf2XH9hkjb98g/2x4mzg=
+  - BUNDLE_ARCHIVE="rendezvous-travis-bundler"
+  - AWS_S3_REGION="us-east-1"
+  - AWS_S3_BUCKET="rendezvous-travis-bundler"
   - RAILS_ENV=test
-  - RV_RENDEZVOUS_APP_HOST=example.com
+  - secure: A72vqUWQiRal8fCMlobXhYrGVDImUXmrCQGuUc382glay7WdJ4ZsIiVvO1gp8mj7X4HUeejmgY4AUVJy6FmCL4LNxDhdRuOirQ+kOcdsuQKDlMPcbGdoYk23ZBlxeq1tqW9Qs8mNjZYHGx3BFf/qtNhgvTLMr+/wQMZi+110e3g=
 services:
 - mysql
 before_install:
 - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
+- gem install bundler fog
+- sh ./script/travis/bundle_install.sh
 before_script:
 - mysql -e 'CREATE DATABASE rendezvous_test;'
-script:
-- bundle exec rake db:create db:test:load spec
-- bundle exec rubocop
+- cp config/database.yml.example config/database.yml
+- cp config/settings.yml.example config/settings.yml
+after_script:
+- ruby script/travis/bundle_cache.rb
+script: bundle exec rake db:create db:test:load spec teaspoon

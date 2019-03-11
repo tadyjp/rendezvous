@@ -33,7 +33,7 @@ describe Tag do
     end
   end
 
-  describe '#parent_tag=' do
+  describe '#set_parent!' do
     before :each do
       @tag_ruby = Tag.create(name: 'ruby')
       @tag_lang = Tag.create(name: 'lang')
@@ -42,7 +42,7 @@ describe Tag do
     it 'successfully moved' do
       expect(@tag_ruby.parent).not_to eq(@tag_lang)
       expect(@tag_lang.children).not_to include(@tag_ruby)
-      @tag_ruby.parent_tag = @tag_lang
+      @tag_ruby.set_parent!(@tag_lang)
       expect(@tag_ruby.parent).to eq(@tag_lang)
       expect(@tag_lang.children).to include(@tag_ruby)
     end

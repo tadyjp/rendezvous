@@ -1,9 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '2.2.3'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.4'
+gem 'rails', '~> 4.1'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0.0'
@@ -47,7 +45,7 @@ end
 
 gem 'mysql2', '~> 0.3.16'
 
-gem 'devise', '~> 3.4.0'
+gem 'devise', '~> 3.2.4'
 
 gem 'omniauth', '~> 1.4.3'
 gem 'omniauth-google-oauth2', '~> 0.6.0'
@@ -132,7 +130,7 @@ gem 'paper_trail', '~> 3.0.0'
 
 gem 'aws-sdk', '1.39.0'
 
-gem 'newrelic_rpm', '~> 3.14.0'
+gem 'newrelic_rpm', '~> 3.9.1.236'
 
 gem 'breadcrumble', '~> 4.1.0'
 
@@ -153,13 +151,5 @@ gem 'hipchat', '~> 1.2.0'
 # For PDF upload
 gem 'rmagick', '~> 2.13.3', :require => 'RMagick'
 
-group :production do
-  # for heroku
-  gem 'rails_12factor'
-  gem 'puma'
-end
-
-gem 'meta-tags'
-
-gem 'gritter', '1.1.0'
-
+gem 'rb-inotify', '~> 0.9.5'
+gem 'rdoc', '~> 4.1.1'

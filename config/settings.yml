@@ -30,10 +30,6 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  permited_login_domain: zigexn.co.jp
-  google_api:
-    client_id: 454885606648-8qtnhip8leu2hc87qb3del06c800j1ct.apps.googleusercontent.com
-    secret: apLReRWGCVWyYV65HAhduraq
 
 test:
   <<: *defaults

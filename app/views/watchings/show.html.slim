@@ -1,17 +1,12 @@
 /! view:flow/show
-
 .row
-  .col-xs-12
-    .panel.panel-main
-      .panel-heading
-        h3.panel-title
-          span.glyphicon.glyphicon-eye-open
-          | &nbsp;Watchings
-          span.small - ウォッチ中の項目
 
-      ul.list-group.panel-body
-        - @posts.each do |post|
-          li.list-group-item
-            = render partial: 'posts/large_item', locals: { post: post }
-      = paginate(@posts)
+  h1
+    | Watchings
+    small - ウォッチ中の項目
 
+  .col-xs-8 role="navigation"
+    .list-group
+      - @posts.each do |_post|
+        = render partial: 'posts/large_item', locals: { post: _post }
+    = paginate(@posts)

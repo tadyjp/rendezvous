@@ -1,4 +1,5 @@
 class Watch < ActiveRecord::Base
+
   ######################################################################
   # Associations
   ######################################################################
@@ -9,4 +10,5 @@ class Watch < ActiveRecord::Base
   # Validations
   ######################################################################
   validates :watcher_id, uniqueness: { scope: [:watchable_type, :watchable_id] }
+
 end

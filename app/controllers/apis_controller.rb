@@ -1,6 +1,7 @@
 require 'digest/md5'
 
 class ApisController < ApplicationController
+
   # TODO: not to use
   include ApplicationHelper
 
@@ -25,15 +26,15 @@ class ApisController < ApplicationController
       # Skip uploading if file ext is not listed.
       next unless file.original_filename =~ /\.(jpe?g|png|gif|pdf)\Z/
 
-      object_file_name = "#{Digest::MD5.file(file.path)}#{File.extname(file.original_filename)}"
+      object_file_name = "#{Digest::MD5.file(file.path).to_s}#{File.extname(file.original_filename)}"
       res = s3_uploader.upload!(file: file.path, name: object_file_name)
 
       case file.original_filename
       when /\.(jpe?g|png|gif)\Z/
         s3_files << { type: 'image', name: file.original_filename, image: res.public_url.to_s }
       when /\.pdf\Z/
-        if Settings.enable_pdf_uploading
-          cover_image_name = "#{Digest::MD5.file(file.path)}-cover.png"
+        if Settings.respond_to?(:pdf_uploading) && Settings.pdf_uploading
+          cover_image_name = "#{Digest::MD5.file(file.path).to_s}-cover.png"
           pdf = Magick::ImageList.new(file.path + '[0]')
           cover_tmp = Rails.root.join('tmp', cover_image_name)
           pdf[0].write(cover_tmp)
@@ -48,7 +49,7 @@ class ApisController < ApplicationController
   end
 
   def user_mention
-    name_list = User.search(params[:q]).map { |user| "#{user.nickname}[#{user.name}]" }
+    name_list = User.search(params[:q]).map{ |_user| "#{_user.nickname}[#{_user.name}]" }
 
     render json: name_list
   end

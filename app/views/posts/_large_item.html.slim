@@ -1,48 +1,35 @@
 / locals:
 /   post {Post}
 
-/ a.list-group-item.post-list.mod-hover-hidden data-post-id=post.id href=post_path(post)
-.row
-  .col-xs-8
-    h4
-      a href=post_path(post) = post.title
+a.list-group-item.post-list.mod-hover-hidden data-post-id=post.id href=post_path(post)
+  .container-fluid
+    .row
+      .col-xs-9
+        h4.text-link #{post.title}
+      .col-xs-3
+        span.label.label-danger.label-date = post.display_specified_date if post.specified_date
+        small.pull-right ##{post.id}
+    .row
+      .col-xs-8
+        small.text-success.posted-name
+          | #{post.author.name} posted&nbsp;
+          abbr.js-time-ago data-time-ago-at=post.updated_at
+          |.&nbsp;&nbsp;
+          - post.tags.each do |tag|
+            span.label.label-success.label-tag #{tag.name}
+            | &nbsp;
+      .col-xs-4
+        small.pull-right
+          span.glyphicon.glyphicon-time title="読了時間"
+          | &nbsp;#{post.read_time}&nbsp;&nbsp;
 
-    p.small
-      span.label.label-default.label-date = post.display_specified_date if post.specified_date
-      | &nbsp;
-      - post.tags.map(&:decorate).each do |tag|
-        a.label.label-default.label-tag href=tag.show_path = tag.structured_name
-        | &nbsp;
+          span.glyphicon.glyphicon-comment title="コメント"
+          | &nbsp;#{post.comments.count}&nbsp;&nbsp;
 
-  .col-xs-4
-    p.small.text-success.posted-name
-      span
-        | #{post.author.name} posted&nbsp;
-        abbr.js-time-ago data-time-ago-at=post.updated_at
-        | &nbsp;&nbsp;
+          span.glyphicon.glyphicon-eye-open title="閲覧者数"
+          | &nbsp;#{post.visited_user_count}&nbsp;&nbsp;
 
-    p
-      .small
-        span.glyphicon.glyphicon-time title="読了時間"
-        | &nbsp;#{post.read_time}&nbsp;&nbsp;
-
-        span.glyphicon.glyphicon-comment title="コメント"
-        | &nbsp;#{post.comments.count}&nbsp;&nbsp;
-
-        span.glyphicon.glyphicon-eye-open title="閲覧者数"
-        | &nbsp;#{post.visited_user_count}&nbsp;&nbsp;
-
-
-.row
-  - if post.thumbnail_url
-    .col-xs-8
-      p.small.text-shadow
-        = truncate post.body, length: 200
-    .col-xs-4
-      p
-        image.img-thumbnail.large-item-image src=asset_path(post.thumbnail_url)
-
-  - else
-    .col-xs-12
-      p.small.text-shadow
-        = truncate post.body, length: 200
+    .row
+      .col-xs-12
+        small.text-shadow
+          = truncate post.body, length: 240

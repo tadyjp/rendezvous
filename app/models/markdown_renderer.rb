@@ -3,7 +3,28 @@ class MarkdownRenderer
     @text = text || ''
   end
 
+  # pdf viewerの変換
+  # !slide!(file-url) -> %%slide:0%% -> <iframe>...</iframe>
   def render
-    GitHub::Markdown.render_gfm(@text).html_safe
+
+    # slideのurlを一時保管
+    slide_urls = []
+    text = @text.gsub(/!slide!\(([^\)]+)\)/) do |_|
+      slide_urls << %Q{
+        <div class="embed-responsive embed-responsive-4by3">
+          <iframe style="text-align:center;" src="/ViewerJS/##{$1}" width="400" height="300" allowfullscreen="true" webkitallowfullscreen="true"></iframe>
+        </div>
+      }
+      "%%slide:#{slide_urls.size - 1}%%"
+    end
+
+    text = GitHub::Markdown.render_gfm(text)
+
+    # 保管したslide urlを取り出す
+    text = text.gsub(/%%slide:(\d+)%%/) do |_|
+      slide_urls[$1.to_i]
+    end
+
+    text.html_safe
   end
 end

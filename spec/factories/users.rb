@@ -45,7 +45,7 @@ FactoryGirl.define do
     email 'author@mail.com'
     nickname 'author'
     password Devise.friendly_token[0, 20]
-    google_token_expires_at Time.now - 30.hours
+    google_token_expires_at Time.now - 30.hour
   end
 
   factory :login_user_1, class: User do
