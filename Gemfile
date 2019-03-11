@@ -136,7 +136,7 @@ gem 'breadcrumble', '~> 4.1.0'
 
 gem 'slim', '~> 2.0.3'
 
-gem 'annotate', ">=2.6.0"
+gem 'annotate', "~> 2.6.5"
 
 gem 'kaminari', '~> 1.0.0.alpha'
 
